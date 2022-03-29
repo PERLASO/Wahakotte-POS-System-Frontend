@@ -3,6 +3,7 @@ import AnchorTag from "../../components/Anchortag";
 import InputFormGroup from "../../components/input/InputFormGroup";
 import SelectFormGroup from "../../components/input/SelectFormGroup";
 import Table from "../../components/table/Table";
+import { getProductList } from "../../context/Customer";
 
 
 class EmployeeList extends Component{
@@ -20,6 +21,18 @@ class EmployeeList extends Component{
             {"id": 2, "name": "Sales"},
             {"id": 3, "name": "Editor"}
         ]
+
+        this.state = {
+            data: []
+          }
+    }
+
+    componentDidMount(){
+        getProductList().then(c=>{
+          //  this.setState({data:c.data})
+            console.log(c.data)
+        })
+        
     }
 
     render(){
