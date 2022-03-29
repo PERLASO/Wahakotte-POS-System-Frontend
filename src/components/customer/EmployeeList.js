@@ -5,6 +5,7 @@ import SelectFormGroup from "../../components/input/SelectFormGroup";
 import Table from "../../components/table/Table";
 
 
+
 class EmployeeList extends Component{
     constructor(props){
         super(props);
@@ -20,7 +21,11 @@ class EmployeeList extends Component{
             {"id": 2, "name": "Sales"},
             {"id": 3, "name": "Editor"}
         ]
+
+        
     }
+
+    
 
     render(){
         return (

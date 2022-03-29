@@ -3,7 +3,7 @@ import AnchorTag from "../../components/Anchortag";
 import Table from "../../components/table/Table";
 import InputFormGroup from "../../components/input/InputFormGroup";
 import SelectFormGroup from "../../components/input/SelectFormGroup";
-
+import { getProductList } from "../../context/Customer";
 
 class ProductList extends Component{
     constructor(props){
@@ -12,6 +12,18 @@ class ProductList extends Component{
         this.tableData = [
             {"id": 1, "name": "KP", "category": "කපුරු පෙති", "price": "238.00", "stock": 20},
         ]
+
+        this.state = {
+            data: []
+          }
+    }
+
+    componentDidMount(){
+        getProductList().then(c=>{
+          //  this.setState({data:c.data})
+            console.log(c.data)
+        })
+        
     }
 
     render(){

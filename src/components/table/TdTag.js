@@ -4,7 +4,7 @@ import AnchorTag from "../Anchortag";
 class TdTag extends Component{
     constructor(props){
         super(props);
-        console.log(this.props)
+ //       console.log(this.props)
     }
 
 
