@@ -6,8 +6,8 @@ class PasswordResetForm extends Component{
 
     render(){
         return (
-            <div className="auth mx-auto">
-                <form className="">
+            <div className="FormPage justify-content-center">
+                <form className="Form">
                     <div className="form-group">
                         <h3 className="text-center pb-3">Password Reset</h3>
                     </div>
@@ -20,8 +20,11 @@ class PasswordResetForm extends Component{
                         <input type="password" className="form-control"/>
                     </div>
                     <div className="form-group">
-                        <button className="btn btn-warning w-100 mt-2">Reset Password</button>
+                        <button className="btn btn-info w-100 mt-2">Reset Password</button>
                     </div>
+                    <div className="secBreak mb-0">
+                <hr className="FormHr" />
+              </div>
                     <div>
                         <p>Back to Login. <Link to="/login">Login</Link></p>
                     </div>

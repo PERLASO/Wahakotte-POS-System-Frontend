@@ -5,7 +5,8 @@ import NavLiTag from "../navigation/NavListTag";
 class HeaderNavBar extends Component{
     constructor(props){
         super(props);
-        this.userRole = "admin";
+        //this.userRole = "admin";
+        this.userRole = "customer";
         var navbarText = "";
         if(this.userRole == "admin"){
             this.navbarText = "Wijerathne Marketing Service (Admin Portal)"
