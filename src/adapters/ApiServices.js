@@ -5,7 +5,7 @@ import { getAccessToken, removeTokens, setTokens } from './LocalStorage';
 
 const handleResponse = (response) => {
 
-    if (response.status === 401) {
+    if (response.data.status === 401) {
         removeTokens();
         // history.push('/v1');
         // window.location.reload();
@@ -45,10 +45,11 @@ export const loginpost = async function (url, body) {
 
 
 export const get = async function (url, params = {}) {
-    console.log(url)
+    console.log(env_var.BASE_URL +url)
     let header = await getHeaderInfo();
     try {
-        let resp = await axios.get( env_var.BASE_URL +url);
+        let resp = await axios.get( env_var.BASE_URL +url, { ...header });
+        
         return handleResponse(resp);
     } catch (err) {
       //  throw handleResponse(err.response)

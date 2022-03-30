@@ -8,7 +8,7 @@ import { getProductList } from "../../context/Customer";
 class ProductList extends Component{
     constructor(props){
         super(props);
-        this.columnList = ["S/N","Item", "Description", "Price", "QTY", "Action"];
+        this.columnList = ["S/N","ItemCode", "Name", "Description", "QTY", "Selling Price(LKR)", "Val. of QTY(LKR)"];
         this.tableData = [
             {"id": 1, "name": "KP", "category": "කපුරු පෙති", "price": "238.00", "stock": 20},
         ]
@@ -19,10 +19,11 @@ class ProductList extends Component{
     }
 
     componentDidMount(){
-        getProductList().then(c=>{
-          //  this.setState({data:c.data})
-            console.log(c.data)
-        })
+        getProductList().then(c =>{
+            if(c != undefined){
+                this.setState({data:c.data})
+            }
+        });
         
     }
 
@@ -46,7 +47,7 @@ class ProductList extends Component{
                         </div>
                     </div>
                 </div>
-                <Table className="table table-striped" columnList={this.columnList} tableData={this.tableData} actionLinkPrefix=""></Table>
+                <Table className="table table-striped" columnList={this.columnList} tableData={this.state.data} actionLinkPrefix=""></Table>
             </div>
         ) 
     }
