@@ -4,23 +4,73 @@ import InputFormGroup from "../input/InputFormGroup";
 import TextAreaFormGroup from "../input/TextAreaFormGroup";
 import SelectFormGroup from "../input/SelectFormGroup";
 import InputNumberGroup from "../input/InputNumberGroup";
+import { setProduct } from "../../context/Customer";
 
 class ProductForm extends Component {
     constructor(props) {
         super(props);
-        
+        this.state = {
+            name: '',
+            itemcode: "",
+            description: '',
+            sellingprice: 0,
+            qty: 0,
+            buyingprice: 0,
+            measurement: ''
 
-        this.handleChange = this.handleChange.bind(this);
+        };
+
+        this.handleChangeName = this.handleChangeName.bind(this);
+        this.handleChangeItemCode = this.handleChangeItemCode.bind(this);
+        this.handleChangeDescription = this.handleChangeDescription.bind(this);
+        this.handleChangeSellingPrice = this.handleChangeSellingPrice.bind(this);
+        this.handleChangeQty = this.handleChangeQty.bind(this);
+        this.handleChangeBuyingprice = this.handleChangeBuyingprice.bind(this);
+        this.handleChangeMeasurement = this.handleChangeMeasurement.bind(this);
+
         this.handleSubmit = this.handleSubmit.bind(this);
 
     }
-    handleChange(event) {
-        this.setState({ value: event.target.value });
+    handleChangeName(event) {
+        this.setState({ name: event.target.value });
     }
-
+    handleChangeItemCode(event) {
+        this.setState({ itemcode: event.target.value });
+    }
+    handleChangeDescription(event) {
+        this.setState({ description: event.target.value });
+    }
+    handleChangeSellingPrice(event) {
+        this.setState({ sellingprice: event.target.value });
+    }
+    handleChangeQty(event) {
+        this.setState({ qty: event.target.value });
+    }
+    handleChangeBuyingprice(event) {
+        this.setState({ buyingprice: event.target.value });
+    }
+    handleChangeMeasurement(event) {
+        this.setState({ measurement: event.target.value });
+    }
     handleSubmit(event) {
-        alert('A name was submitted: ');
         event.preventDefault();
+        let stock= this.state.buyingprice*this.state.qty;
+        console.log(stock)
+        let data = {
+            name: this.state.name,
+            itemCode: this.state.itemcode,
+            description: this.state.description,
+            sellingPrice: this.state.sellingprice,
+            qty: this.state.qty,
+            buyingPrice: this.state.buyingprice,
+            stockValue: stock,
+            measurement: this.state.measurement,
+            isDeleted: false
+            
+        }
+        
+        console.log(data)
+       // setProduct(data);
     }
 
     render() {
@@ -35,26 +85,26 @@ class ProductForm extends Component {
                         <div className="container-fluid">
                             <div className="row">
                                 <div className="col-12">
-                                    <InputFormGroup labelClassName="mb-2" inputClassName="form-control" label="Name" />
+                                    <InputFormGroup labelClassName="mb-2" onChange={this.handleChangeName} inputClassName="form-control" label="Name" />
                                 </div>
                                 <div className="col-12">
-                                    <InputFormGroup labelClassName="mb-2" inputClassName="form-control" label="Item Code" />
+                                    <InputFormGroup labelClassName="mb-2" onChange={this.handleChangeItemCode} inputClassName="form-control" label="Item Code" />
                                 </div>
                                 <div className="col-12">
-                                    <TextAreaFormGroup label="Description" rows="2" />
+                                    <TextAreaFormGroup label="Description" onChange={this.handleChangeDescription} rows="2" />
                                 </div>
                                 <div className="col-6">
-                                    <InputNumberGroup labelClassName="mb-2" inputClassName="form-control" label="Selling Price(LKR)" />
+                                    <InputNumberGroup labelClassName="mb-2" onChange={this.handleChangeSellingPrice} inputClassName="form-control" label="Selling Price(LKR)" />
                                 </div>
 
                                 <div className="col-6">
-                                    <InputNumberGroup labelClassName="mb-2" label="Qty." />
+                                    <InputNumberGroup labelClassName="mb-2" onChange={this.handleChangeQty} label="Qty." />
                                 </div>
                                 <div className="col-6">
-                                    <InputNumberGroup labelClassName="mb-2" label="Buying Price(LKR)" />
+                                    <InputNumberGroup labelClassName="mb-2" onChange={this.handleChangeBuyingprice} label="Buying Price(LKR)" />
                                 </div>
                                 <div className="col-6">
-                                    <InputFormGroup labelClassName="mb-2" label="Measurement" />
+                                    <InputFormGroup labelClassName="mb-2" onChange={this.handleChangeMeasurement} label="Measurement" />
                                 </div>
 
                                 {/* <div className="col-12">

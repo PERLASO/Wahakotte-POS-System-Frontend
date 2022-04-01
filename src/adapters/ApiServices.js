@@ -45,7 +45,7 @@ export const loginpost = async function (url, body) {
 
 
 export const get = async function (url, params = {}) {
-    console.log(env_var.BASE_URL +url)
+    
     let header = await getHeaderInfo();
     try {
         let resp = await axios.get( env_var.BASE_URL +url, { ...header });
