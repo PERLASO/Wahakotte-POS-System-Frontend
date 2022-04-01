@@ -62,13 +62,13 @@ class ProductView extends Component{
                                 </div>
                                 <div className="col-6">
                                     <div className="form-group">
-                                        <label className="mb-2">Buying Price</label>
+                                        <label className="mb-2">Buying Price(LKR)</label>
                                         <input type="text" className="form-control" value={this.state.data.buyingPrice} readOnly/>
                                     </div>
                                 </div>
                                 <div className="col-6">
                                     <div className="form-group">
-                                        <label className="mb-2">Selling Price</label>
+                                        <label className="mb-2">Selling Price(LKR)</label>
                                         <input type="text" className="form-control" value={this.state.data.sellingPrice} readOnly/>
                                     </div>
                                 </div>
@@ -81,7 +81,7 @@ class ProductView extends Component{
 
                                 <div className="col-6">
                                     <div className="form-group">
-                                        <label className="mb-2">Stock Value</label>
+                                        <label className="mb-2">Stock Value(LKR)</label>
                                         <input type="text" className="form-control" value={this.state.data.stockValue} readOnly/>
                                     </div>
                                 </div>
