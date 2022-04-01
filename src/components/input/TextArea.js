@@ -8,7 +8,7 @@ class TextArea extends Component{
 
 
     render(){
-        return <textarea className="form-control" rows={this.props.rows} cols={this.props.cols}></textarea>
+        return <textarea className="form-control" onChange={this.props.onChange} rows={this.props.rows} cols={this.props.cols}></textarea>
     }
 }
 

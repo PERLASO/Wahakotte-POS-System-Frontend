@@ -7,7 +7,7 @@ class HeaderNavBar extends Component{
         super(props);
         this.userRole = "admin";
         var navbarText = "";
-        if(this.userRole == "admin"){
+        if(this.userRole === "admin"){
             this.navbarText = "Wijerathne Marketing Service (Admin Portal)"
         }
         else{
