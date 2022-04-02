@@ -5,18 +5,18 @@ import TextAreaFormGroup from "../input/TextAreaFormGroup";
 import SelectFormGroup from "../input/SelectFormGroup";
 import InputNumberGroup from "../input/InputNumberGroup";
 import { setProduct } from "../../context/Customer";
-import { getSingleProduct } from "../../context/Customer";
+import { getSingleProduct, updateProduct } from "../../context/Customer";
 
 class ProductEdit extends Component {
     constructor(props) {
         super(props);
         this.state = {
             name: '',
-            itemcode: "",
+            itemcode: '',
             description: '',
-            sellingprice: 0,
-            qty: 0,
-            buyingprice: 0,
+            sellingprice: null,
+            qty: null,
+            buyingprice: null,
             measurement: ''
 
         };
@@ -56,31 +56,45 @@ class ProductEdit extends Component {
     handleSubmit(event) {
         event.preventDefault();
         let stock= this.state.buyingprice*this.state.qty;
-        console.log(this.state.name)
-        // let data = {
-        //     name: this.state.name,
-        //     itemCode: this.state.itemcode,
-        //     description: this.state.description,
-        //     sellingPrice: this.state.sellingprice,
-        //     qty: this.state.qty,
-        //     buyingPrice: this.state.buyingprice,
-        //     stockValue: stock,
-        //     measurement: this.state.measurement,
-        //     isDeleted: false
+        console.log(this.state)
+        let data = {
+            id:this.props.match.params.productId,
+            name: this.state.name,
+            itemCode: this.state.itemcode,
+            description: this.state.description,
+            sellingPrice: this.state.sellingprice,
+            qty: this.state.qty,
+            buyingPrice: this.state.buyingprice,
+            stockValue: stock,
+            measurement: this.state.measurement,
+            isDeleted: false
             
-        // }
+        }
         
       //  console.log(data)
-       // setProduct(data);
+        updateProduct(data).then(c=>{
+            if(c.data === true){
+                alert("Success !");
+                this.props.history.push(`${this.props.match.path}/product/list`);
+            }else{
+                alert("Update failed !");
+            }
+        })
     }
     componentDidMount(){
-        console.log(this.props.match.params.productId)
+        
         getSingleProduct(this.props.match.params.productId).then(c =>{
             if(c != undefined){
-                this.setState({name:c.data.name})
-            //    console.log(this.state.data)
-            }
+                this.setState({name:c.data.name,});
+                this.setState({itemcode:c.data.itemCode})
+                this.setState({description:c.data.description})
+                this.setState({sellingprice:c.data.sellingPrice})
+                this.setState({qty:c.data.qty})
+                this.setState({buyingprice:c.data.buyingPrice})
+                this.setState({measurement:c.data.measurement})
             
+            }
+       
         });
         
     }
@@ -100,23 +114,23 @@ class ProductEdit extends Component {
                                     <InputFormGroup labelClassName="mb-2" onChange={this.handleChangeName} value={this.state.name} inputClassName="form-control" label="Name" />
                                 </div>
                                 <div className="col-12">
-                                    <InputFormGroup labelClassName="mb-2" onChange={this.handleChangeItemCode} inputClassName="form-control" label="Item Code" />
+                                    <InputFormGroup labelClassName="mb-2" onChange={this.handleChangeItemCode} value={this.state.itemcode} inputClassName="form-control" label="Item Code" />
                                 </div>
                                 <div className="col-12">
-                                    <TextAreaFormGroup label="Description" onChange={this.handleChangeDescription} rows="2" />
+                                    <TextAreaFormGroup label="Description" onChange={this.handleChangeDescription} value={this.state.description} rows="2" />
                                 </div>
                                 <div className="col-6">
-                                    <InputNumberGroup labelClassName="mb-2" onChange={this.handleChangeSellingPrice} inputClassName="form-control" label="Selling Price(LKR)" />
+                                    <InputNumberGroup labelClassName="mb-2" onChange={this.handleChangeSellingPrice} value={this.state.sellingprice} inputClassName="form-control" label="Selling Price(LKR)" />
                                 </div>
 
                                 <div className="col-6">
-                                    <InputNumberGroup labelClassName="mb-2" onChange={this.handleChangeQty} label="Qty." />
+                                    <InputNumberGroup labelClassName="mb-2" onChange={this.handleChangeQty} value={this.state.qty} label="Qty." />
                                 </div>
                                 <div className="col-6">
-                                    <InputNumberGroup labelClassName="mb-2" onChange={this.handleChangeBuyingprice} label="Buying Price(LKR)" />
+                                    <InputNumberGroup labelClassName="mb-2" onChange={this.handleChangeBuyingprice} value={this.state.buyingprice} label="Buying Price(LKR)" />
                                 </div>
                                 <div className="col-6">
-                                    <InputFormGroup labelClassName="mb-2" onChange={this.handleChangeMeasurement} label="Measurement" />
+                                    <InputFormGroup labelClassName="mb-2" onChange={this.handleChangeMeasurement} value={this.state.measurement} label="Measurement" />
                                 </div>
 
                                 {/* <div className="col-12">
