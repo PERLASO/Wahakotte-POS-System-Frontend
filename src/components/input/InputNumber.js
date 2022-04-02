@@ -8,7 +8,7 @@ class InputText extends Component{
 
 
     render(){
-        return <input type="number" onChange={this.props.onChange} className={this.props.className} placeholder={this.props.placeholder} defaultValue={this.props.value} ref={this.props.ref}/>
+        return <input type="number" required={this.props.required} onChange={this.props.onChange} className={this.props.className} placeholder={this.props.placeholder} defaultValue={this.props.value} ref={this.props.ref}/>
     }
 }
 

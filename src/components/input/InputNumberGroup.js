@@ -22,7 +22,7 @@ class InputNumberGroup extends Component{
             return <input type="Number" className={this.props.inputClassName} placeholder={this.props.placeholder} defaultValue={this.props.value} readOnly/>
         }
         else{
-            return <InputNumber className={this.props.inputClassName} onChange={this.props.onChange} placeholder={this.props.placeholder} value={this.props.value} ref={this.props.ref}/>
+            return <InputNumber className={this.props.inputClassName} required={this.props.required} onChange={this.props.onChange} placeholder={this.props.placeholder} value={this.props.value} ref={this.props.ref}/>
         }
     }
 

@@ -71,7 +71,12 @@ class ProductForm extends Component {
         
         console.log(data)
         setProduct(data).then(c=>{
-            console.log(c)
+            if(c.data === true){
+                alert("Product Added!");
+                this.props.history.push(`/app/shop/product/list`);
+            }else{
+                alert("failed !");
+            }
         });;
     }
 
@@ -87,26 +92,26 @@ class ProductForm extends Component {
                         <div className="container-fluid">
                             <div className="row">
                                 <div className="col-12">
-                                    <InputFormGroup labelClassName="mb-2" onChange={this.handleChangeName} inputClassName="form-control" label="Name" />
+                                    <InputFormGroup labelClassName="mb-2" required={true} onChange={this.handleChangeName} inputClassName="form-control" label="Name" />
                                 </div>
                                 <div className="col-12">
-                                    <InputFormGroup labelClassName="mb-2" onChange={this.handleChangeItemCode} inputClassName="form-control" label="Item Code" />
+                                    <InputFormGroup labelClassName="mb-2" required={true} onChange={this.handleChangeItemCode} inputClassName="form-control" label="Item Code" />
                                 </div>
                                 <div className="col-12">
-                                    <TextAreaFormGroup label="Description" onChange={this.handleChangeDescription} rows="2" />
+                                    <TextAreaFormGroup label="Description" required={true} onChange={this.handleChangeDescription} rows="2" />
                                 </div>
                                 <div className="col-6">
-                                    <InputNumberGroup labelClassName="mb-2" onChange={this.handleChangeSellingPrice} inputClassName="form-control" label="Selling Price(LKR)" />
+                                    <InputNumberGroup labelClassName="mb-2" required={true} onChange={this.handleChangeSellingPrice} inputClassName="form-control" label="Selling Price(LKR)" />
                                 </div>
 
                                 <div className="col-6">
-                                    <InputNumberGroup labelClassName="mb-2" onChange={this.handleChangeQty} label="Qty." />
+                                    <InputNumberGroup labelClassName="mb-2" required={true} onChange={this.handleChangeQty} label="Qty." />
                                 </div>
                                 <div className="col-6">
-                                    <InputNumberGroup labelClassName="mb-2" onChange={this.handleChangeBuyingprice} label="Buying Price(LKR)" />
+                                    <InputNumberGroup labelClassName="mb-2" required={true} onChange={this.handleChangeBuyingprice} label="Buying Price(LKR)" />
                                 </div>
                                 <div className="col-6">
-                                    <InputFormGroup labelClassName="mb-2" onChange={this.handleChangeMeasurement} label="Measurement" />
+                                    <InputFormGroup labelClassName="mb-2" required={true} onChange={this.handleChangeMeasurement} label="Measurement" />
                                 </div>
 
                                 {/* <div className="col-12">
