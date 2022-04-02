@@ -15,14 +15,12 @@ export default function LoginForm(props) {
     const history = useHistory();
    
     const handleSubmit = (e) => {
-        console.log(username, pass)
         e.preventDefault();
         if(name ==username && password==pass){
             history.push("/app");
         }else{
             seterror("User Name or Password is incorrect")
         }
-        console.log(name,password)
     }
 
   return (
