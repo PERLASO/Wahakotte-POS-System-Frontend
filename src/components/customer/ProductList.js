@@ -14,6 +14,7 @@ class ProductList extends Component{
         ]
 
         this.state = {
+            isLoading:true,
             data: []
           }
     }
@@ -21,6 +22,7 @@ class ProductList extends Component{
     componentDidMount(){
         getProductList().then(c =>{
             if(c != undefined){
+                this.setState({isLoading:false})
                 this.setState({data:c.data})
             }
         });
@@ -28,6 +30,13 @@ class ProductList extends Component{
     }
 
     render(){
+        if(this.state.isLoading===true){
+            return(
+                <div>
+                    Loding ...
+                </div>
+            )
+        }
         return (
             <div className="admin-content mx-auto">
                 <div className="w-100 mb-5">

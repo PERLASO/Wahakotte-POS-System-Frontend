@@ -77,7 +77,7 @@ export const get = async function (url, params = {}) {
          
 // };
 
-export const put = async function (body, url) {
+export const put = async function (url,body) {
     let header = await getHeaderInfo();
 
     try {

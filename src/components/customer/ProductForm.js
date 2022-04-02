@@ -70,7 +70,9 @@ class ProductForm extends Component {
         }
         
         console.log(data)
-       // setProduct(data);
+        setProduct(data).then(c=>{
+            console.log(c)
+        });;
     }
 
     render() {
