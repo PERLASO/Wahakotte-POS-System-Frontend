@@ -20,7 +20,7 @@ export default function LoginForm(props) {
         if(name ==username && password==pass){
             history.push("/app");
         }else{
-            seterror("User Name or Passowrd is incorrect")
+            seterror("User Name or Password is incorrect")
         }
         console.log(name,password)
     }
