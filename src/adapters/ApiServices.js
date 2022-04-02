@@ -89,7 +89,7 @@ export const put = async function (url,body) {
     }
 };
 
-export const deleteApi = async function (url) {
+export const deleteApi = async function (url,params = {}) {
     let header = await getHeaderInfo();
 
     try {

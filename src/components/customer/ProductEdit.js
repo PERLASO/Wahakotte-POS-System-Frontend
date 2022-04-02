@@ -7,6 +7,7 @@ import InputNumberGroup from "../input/InputNumberGroup";
 import { setProduct } from "../../context/Customer";
 import { getSingleProduct, updateProduct } from "../../context/Customer";
 
+
 class ProductEdit extends Component {
     constructor(props) {
         super(props);
@@ -55,10 +56,10 @@ class ProductEdit extends Component {
     }
     handleSubmit(event) {
         event.preventDefault();
-        let stock= this.state.buyingprice*this.state.qty;
-        console.log(this.state)
+        let stock = this.state.buyingprice * this.state.qty;
+       
         let data = {
-            id:this.props.match.params.productId,
+            id: this.props.match.params.productId,
             name: this.state.name,
             itemCode: this.state.itemcode,
             description: this.state.description,
@@ -68,36 +69,37 @@ class ProductEdit extends Component {
             stockValue: stock,
             measurement: this.state.measurement,
             isDeleted: false
-            
+
         }
-        
-      //  console.log(data)
-        updateProduct(data).then(c=>{
-            if(c.data === true){
+
+        //  console.log(data)
+        updateProduct(data).then(c => {
+            if (c.data === true) {
                 alert("Success !");
-                this.props.history.push(`${this.props.match.path}/product/list`);
-            }else{
+                this.props.history.push(`/app/shop/product/list`);
+            } else {
                 alert("Update failed !");
             }
         })
     }
-    componentDidMount(){
-        
-        getSingleProduct(this.props.match.params.productId).then(c =>{
-            if(c != undefined){
-                this.setState({name:c.data.name,});
-                this.setState({itemcode:c.data.itemCode})
-                this.setState({description:c.data.description})
-                this.setState({sellingprice:c.data.sellingPrice})
-                this.setState({qty:c.data.qty})
-                this.setState({buyingprice:c.data.buyingPrice})
-                this.setState({measurement:c.data.measurement})
-            
+    componentDidMount() {
+
+        getSingleProduct(this.props.match.params.productId).then(c => {
+            if (c != undefined) {
+                this.setState({ name: c.data.name, });
+                this.setState({ itemcode: c.data.itemCode })
+                this.setState({ description: c.data.description })
+                this.setState({ sellingprice: c.data.sellingPrice })
+                this.setState({ qty: c.data.qty })
+                this.setState({ buyingprice: c.data.buyingPrice })
+                this.setState({ measurement: c.data.measurement })
+
             }
-       
+
         });
-        
+
     }
+    
 
     render() {
         return (
@@ -150,6 +152,7 @@ class ProductEdit extends Component {
                         </div>
 
                     </form>
+                    
                 </div>
 
             </div>
