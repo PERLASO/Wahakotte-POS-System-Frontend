@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import AnchorTag from "../../components/Anchortag";
 import { deleteProduct, getSingleProduct } from "../../context/Customer";
 import moment from 'moment/moment.js';
-import  Button  from "../../components/Button";
+import Button from "../../components/Button";
 
 class ProductView extends Component {
     constructor(props) {
@@ -10,35 +10,37 @@ class ProductView extends Component {
         this.productDetails = "PERFECT GIFT IDEA: Works on wet, dry, Long, short, thick, curly, and straight hair. Perfect gift for Valentines Day, Mother's Day, Thanksgiving, Christmas, Anniversary and Birthday to your girlfriend, wife, mom, sister and friends. NOTE: Paddle brush is designed to have one missing pin on the bottom of the cushion. This is to help with air circulation and is not a product defect."
 
         this.state = {
-            productId:null,
+            productId: null,
             data: []
         }
     }
 
     componentDidMount() {
-        
+
         getSingleProduct(this.props.match.params.productId).then(c => {
             if (c !== undefined) {
                 this.setState({ data: c.data })
-                
-                
+
+
             }
 
         });
 
     }
-    handledelete=()=>{
-        alert("Confirm ")
-        // deleteProduct(this.props.match.params.productId).then(c=>{
-        //     if(c.data === true){
-        //         alert("Product deleted!");
-        //         this.props.history.push(`/app/shop/product/list`);
-        //     }else{
-        //         alert("failed !");
-        //     }
+    handledelete = () => {
 
-        // })
-        console.log("deleted")
+        deleteProduct(this.props.match.params.productId).then(c => {
+            if (c.data === true) {
+                // alert("Product deleted!");
+                this.props.history.push(`/app/shop/product/list`);
+            } else {
+                alert("failed !");
+            }
+
+        })
+        // console.log("deleted")
+        // this.props.history.push(`/app/shop/product/list`);
+
     }
 
     render() {
@@ -123,11 +125,31 @@ class ProductView extends Component {
 
                     </form>
 
-                    <div className="col-6 mt-4">
-                        <div className="">
-                            <Button className="btn btn-danger" text="Product Delete" onClick={this.handledelete} />
-                        </div>
 
+
+                    <div className="col-6 mt-4">
+
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
+                            Product delete
+                        </button>
+
+                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Confirm ?</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                                        <button type="button" class="btn btn-primary" data-dismiss="modal" onClick={this.handledelete}>Yes</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
                     </div>
                 </div>
