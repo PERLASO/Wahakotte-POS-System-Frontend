@@ -1,11 +1,10 @@
 import React, { useState, useEffect} from "react";
-import { useHistory, useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useHistory,  Link } from "react-router-dom";
 import { setGlobalState } from "../../GlobalState";
-import LoginForm from "./LoginForm";
 
 
-export default function PasswordResetForm({data}) {
+
+export default function PasswordResetForm() {
 
     const [newPassword, setnewPassword] = useState('');
     const [confirmPassword, setconfirmPassword] = useState("");
