@@ -4,7 +4,7 @@ import "../../style/admin.css";
 import HeaderNavBar from "../../components/navigation/HeaderNavbar";
 import AnchorTag from "../../components/Anchortag";
 import DashboardPage from "../../pages/customer/Dashboard";
-import CustomerShopPage from "../customer/shop/CustomerShopePage";
+import CustomerShopPage from "../customer/shop/CustomerShopPage";
 import ProfileBasePage from "../customer/profile/ProfileBasePage";
 
 

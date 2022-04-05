@@ -4,7 +4,7 @@ import InputFormGroup from "../input/InputFormGroup";
 import TextAreaFormGroup from "../input/TextAreaFormGroup";
 import SelectFormGroup from "../input/SelectFormGroup";
 import InputNumberGroup from "../input/InputNumberGroup";
-import { setProduct } from "../../context/Customer";
+import { setProduct } from "../../context/Product";
 
 class ProductForm extends Component {
     constructor(props) {

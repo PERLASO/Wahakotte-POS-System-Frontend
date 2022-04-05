@@ -3,7 +3,7 @@ import AnchorTag from "../../components/Anchortag";
 import Table from "../../components/table/Table";
 import InputFormGroup from "../../components/input/InputFormGroup";
 import SelectFormGroup from "../../components/input/SelectFormGroup";
-import { getProductList } from "../../context/Customer";
+import { getProductList } from "../../context/Product";
 
 class ProductList extends Component{
     constructor(props){

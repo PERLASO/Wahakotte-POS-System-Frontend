@@ -4,8 +4,8 @@ import InputFormGroup from "../input/InputFormGroup";
 import TextAreaFormGroup from "../input/TextAreaFormGroup";
 import SelectFormGroup from "../input/SelectFormGroup";
 import InputNumberGroup from "../input/InputNumberGroup";
-import { setProduct } from "../../context/Customer";
-import { getSingleProduct, updateProduct } from "../../context/Customer";
+import { setProduct } from "../../context/Product";
+import { getSingleProduct, updateProduct } from "../../context/Product";
 
 
 class ProductEdit extends Component {

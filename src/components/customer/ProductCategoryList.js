@@ -1,6 +1,6 @@
 import React, {Component} from "react";
-import AnchorTag from "../../components/Anchortag";
-import Table from "../../components/table/Table";
+import AnchorTag from "../Anchortag";
+import Table from "../table/Table";
 
 
 class ProductCategoryList extends Component{

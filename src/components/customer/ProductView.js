@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import AnchorTag from "../../components/Anchortag";
-import { deleteProduct, getSingleProduct } from "../../context/Customer";
+import { deleteProduct, getSingleProduct } from "../../context/Product";
 import moment from 'moment/moment.js';
 import Button from "../../components/Button";
 

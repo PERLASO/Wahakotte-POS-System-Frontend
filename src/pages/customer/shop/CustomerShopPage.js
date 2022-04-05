@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import { Route, Switch } from "react-router-dom";
 import ShopView from "../../../components/customer/ShopView";
 import ShopEdit from "../../../components/customer/ShopEdit";
-import ProductCategoryList from "../../../components/customer/PeoductCategoryList";
+import ProductCategoryList from "../../../components/customer/ProductCategoryList";
 import ProductCategoryForm from "../../../components/customer/ProductCategoryForm";
 import ProductCategoryView from "../../../components/customer/ProductCategoryView";
 import ProductList from "../../../components/customer/ProductList";
@@ -37,7 +37,7 @@ class CustomerShopPage extends Component{
                 <Route exact path={`${this.props.match.path}/product/edit/:productId`} component={ProductEdit}/>
                 <Route exact path={`${this.props.match.path}/employee/list`} component={EmployeeList}/>
                 <Route exact path={`${this.props.match.path}/employee/create`} component={EmployeeForm}/>
-                <Route exact path={`${this.props.match.path}/employee/view/:emoloyeeId`} component={EmployeeView}/>
+                <Route exact path={`${this.props.match.path}/employee/view/:employeeId`} component={EmployeeView}/>
                 <Route exact path={`${this.props.match.path}/invoice/list`} component={InvoiceList}/>
                 <Route exact path={`${this.props.match.path}/invoice/create`} component={InvoiceForm}/>
             </Switch>

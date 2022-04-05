@@ -1,20 +1,21 @@
-import React, {Component} from "react";
+import React, {Component, useEffect} from "react";
+import { getAllCustomers } from "../../context/Customer";
 import AnchorTag from "../../components/Anchortag";
 import InputFormGroup from "../../components/input/InputFormGroup";
 import SelectFormGroup from "../../components/input/SelectFormGroup";
 import Table from "../../components/table/Table";
 
 
-
 class EmployeeList extends Component{
+
+
+
     constructor(props){
         super(props);
-        this.columnList = ["ID", "Name", "Email", "Role", "Status", "Joined At", "Action"];
-        this.tableData = [
-            {"id": 1, "name": "Farhan Chowdhury", "email": "farhan.chowdhury@gmail.com", "role": "Sales", "status": "Active", "joined_at": "20th August, 2021"},
-            {"id": 2, "name": "David Moree", "email": "david.moree.987@gmail.com", "role": "Sales", "status": "Active", "joined_at": "30th August, 2021"},
-            {"id": 2, "name": "David Moree", "email": "david.moree.987@gmail.com", "role": "Sales", "status": "Active", "joined_at": "30th August, 2021"},
-        ]
+        this.state = {
+            customers : []
+        }
+        this.columnList = ["ID", "Name", "Short Name", "Address", "Area", "Phone Number", "Action"];
 
         this.roleData = [
             {"id": 1, "name": "Admin"},
@@ -22,8 +23,18 @@ class EmployeeList extends Component{
             {"id": 3, "name": "Editor"}
         ]
 
-        
+                
     }
+
+    componentDidMount(){
+        getAllCustomers().then( (res) => {
+            console.log(res.data)
+            this.setState({customers: res.data})
+        })
+    }
+
+
+    
 
     
 
@@ -54,7 +65,7 @@ class EmployeeList extends Component{
                         </div>
                     </div>
                 </div>
-                <Table className="table table-striped" columnList={this.columnList} tableData={this.tableData} actionLinkPrefix=""></Table>
+                <Table className="table table-striped" columnList={this.columnList} tableData={this.state.customers} actionLinkPrefix=""></Table>
             </div>
         ) 
     }
