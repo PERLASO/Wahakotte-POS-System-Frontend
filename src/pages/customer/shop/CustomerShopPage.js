@@ -14,6 +14,7 @@ import EmployeeView from "../../../components/customer/EmployeeView";
 import InvoiceList from "../../../components/customer/InvoiceList";
 import InvoiceForm from "../../../components/customer/InvoiceForm";
 import ProductEdit from "../../../components/customer/ProductEdit";
+import EmployeeEdit from "../../../components/customer/EmployeeEdit";
 
 
 class CustomerShopPage extends Component{
@@ -38,6 +39,7 @@ class CustomerShopPage extends Component{
                 <Route exact path={`${this.props.match.path}/employee/list`} component={EmployeeList}/>
                 <Route exact path={`${this.props.match.path}/employee/create`} component={EmployeeForm}/>
                 <Route exact path={`${this.props.match.path}/employee/view/:employeeId`} component={EmployeeView}/>
+                <Route exact path={`${this.props.match.path}/employee/edit/:employeeId`} component={EmployeeEdit} />
                 <Route exact path={`${this.props.match.path}/invoice/list`} component={InvoiceList}/>
                 <Route exact path={`${this.props.match.path}/invoice/create`} component={InvoiceForm}/>
             </Switch>
