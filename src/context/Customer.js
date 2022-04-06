@@ -16,3 +16,7 @@ export const updateCustomer = async function(data){
 export const setCustomer = async function (data){
     return await post(`Customer`, data)
 }
+
+export const deleteCustomer = async function(data){
+    return await deleteApi(`Customer/${data}`)
+}
