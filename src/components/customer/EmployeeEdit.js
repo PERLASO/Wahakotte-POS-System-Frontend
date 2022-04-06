@@ -112,7 +112,7 @@ class EmployeeEdit extends Component {
 
                                 <div className="col-12 mt-3">
                                     <div className="form-group">
-                                        <AnchorTag className="btn btn-warning" itemValue="Back" link="/app/shop/employee/list" />
+                                        <AnchorTag className="btn btn-warning" itemValue="Cancel" link="/app/shop/employee/list" />
                                         <input type="submit" className="btn btn-success ml-3" value="Submit" />
                                     </div>
                                 </div>

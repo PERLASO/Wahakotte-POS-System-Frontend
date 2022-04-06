@@ -12,3 +12,7 @@ export const getCustomer = async function (data) {
 export const updateCustomer = async function(data){
     return await put(`Customer`, data);
 }
+
+export const setCustomer = async function (data){
+    return await post(`Customer`, data)
+}
