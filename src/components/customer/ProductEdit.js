@@ -54,7 +54,7 @@ class ProductEdit extends Component {
     handleChangeMeasurement(event) {
         this.setState({ measurement: event.target.value });
     }
-    handleSubmit(event) {
+    handleSubmit = (event) => {
         event.preventDefault();
         let stock = this.state.buyingprice * this.state.qty;
        

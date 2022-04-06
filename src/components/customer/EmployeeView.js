@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import AnchorTag from "../../components/Anchortag";
-import { getCustomer } from "../../context/Customer";
+import { deleteCustomer, getCustomer } from "../../context/Customer";
 
 
 class EmployeeView extends Component{
@@ -22,6 +22,17 @@ class EmployeeView extends Component{
 
         });
 
+    }
+
+    handleDelete = () => {
+        deleteCustomer(this.props.match.params.employeeId).then( res => {
+            if (res.data === true) {
+                alert("Employee has been deleted successfully!");
+                this.props.history.push(`/app/shop/employee/list`);
+            } else {
+                alert("failed !");
+            }
+        })
     }
 
     render(){
@@ -46,7 +57,7 @@ class EmployeeView extends Component{
                                         <input type="text" className="form-control" value={this.state.data.shortCode} readOnly/>
                                     </div>
                                 </div>
-                                <div className="col-6">
+                                <div className="col-12">
                                     <div className="form-group">
                                         <label className="mb-2">Address</label>
                                         <input type="text" className="form-control" value={this.state.data.address} readOnly/>
@@ -71,15 +82,41 @@ class EmployeeView extends Component{
                                     </div>
                                 </div> */}
 
-                                <div className="col-12 mt-4">
+                                <div className="col-6 mt-4">
                                     <div className="form-group">
                                         <AnchorTag className="btn btn-warning" itemValue="Back to List" link="/app/shop/employee/list"/>
                                     </div>
                                 </div>
+                                <div className="col-6 mt-4">
+
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
+                             Delete Employee
+                        </button>
+
+                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to delete this Employee ?</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                                        <button type="button" class="btn btn-primary" data-dismiss="modal" onClick={this.handleDelete}>Yes</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
                             </div>
                         </div>
                         
                     </form>
+
                 </div>
                 
             </div>
