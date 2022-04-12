@@ -9,14 +9,14 @@ class EmployeeForm extends Component{
     constructor(props){
         super(props);
         this.state = {
-            name: '',
+            empName: '',
             shortCode: '',
             address: '',
             area : '',
             phoneNumber: '',
         };
 
-        this.handleChaneName = this.handleChangeName.bind(this);
+        this.handleChangeEmpName = this.handleChangeEmpName.bind(this);
         this.handleChangeShortCode = this.handleChangeShortCode.bind(this);
         this.handleChangeAddress = this.handleChangeAddress.bind(this);
         this.handleChangeArea = this.handleChangeArea.bind(this);
@@ -24,8 +24,8 @@ class EmployeeForm extends Component{
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleChangeName(e){
-        this.setState({name:e.target.value})
+    handleChangeEmpName(e){
+        this.setState({empName:e.target.value})
     }
 
     handleChangeShortCode(e){
@@ -46,7 +46,7 @@ class EmployeeForm extends Component{
     handleSubmit (event){
         event.preventDefault();
         let data = {
-            name: this.state.name,
+            name: this.state.empName,
             shortCode: this.state.shortCode,
             address: this.state.address,
             area : this.state.area,
@@ -80,7 +80,7 @@ class EmployeeForm extends Component{
                         <div className="container-fluid">
                             <div className="row">
                                 <div className="col-12">
-                                    <InputFormGroup labelClassName="mb-2" onChange={this.handleChangeName} required={true}  inputClassName="form-control" label="Name" />
+                                    <InputFormGroup labelClassName="mb-2" onChange={this.handleChangeEmpName} required={true}  inputClassName="form-control" label="Name" />
                                 </div>
                                 <div className="col-12">
                                     <InputFormGroup  labelClassName="mb-2" onChange={this.handleChangeShortCode} required={true}  inputClassName="form-control" label="Short Name"  />

@@ -1,5 +1,5 @@
 import React, {Component, useEffect} from "react";
-import { getAllCustomers } from "../../context/Customer";
+import { getAllCustomers, getCustomer } from "../../context/Customer";
 import AnchorTag from "../../components/Anchortag";
 import InputFormGroup from "../../components/input/InputFormGroup";
 import SelectFormGroup from "../../components/input/SelectFormGroup";
@@ -8,60 +8,75 @@ import Table from "../../components/table/Table";
 
 class EmployeeList extends Component{
 
-
-
     constructor(props){
         super(props);
         this.state = {
-            customers : []
+            customers : [],
+            searchNameKey: '',
+            searchAreaKey: '',
+            isLoading:true
         }
         this.columnList = ["ID", "Name", "Short Name", "Address", "Area", "Phone Number", "Action"];
+        this.handleChangeSearchNameKey = this.handleChangeSearchNameKey.bind(this);
+        this.handleChangeSearchAreaKey = this.handleChangeSearchAreaKey.bind(this);
 
-        this.roleData = [
-            {"id": 1, "name": "Admin"},
-            {"id": 2, "name": "Sales"},
-            {"id": 3, "name": "Editor"}
-        ]
+
 
                 
     }
 
+    handleChangeSearchNameKey(e){
+        this.setState({searchNameKey: e.target.value})
+    }
+
+    handleChangeSearchAreaKey(e){
+        this.setState({searchAreaKey: e.target.value})
+    }
+
     componentDidMount(){
+        document.addEventListener('mousedown', this.onSearchClick )
         getAllCustomers().then( (res) => {
-            console.log(res.data)
+            this.setState({isLoading : false})
             this.setState({customers: res.data})
+            console.log(this.state.customers)
         })
     }
 
+    componentWillUnmount(){
+        document.removeEventListener('mousedown', this.onSearchClick)
+    }
 
-    
+    // onSearchClick =(e) => {
+    //     console.log(this.state.searchNameKey)
+    //     getCustomer(this.state.searchNameKey).then(res => {
+    //         this.setState({customers: [res.data]})
+    //         console.log(this.state.customers)
+    //     })
 
-    
+    // }
+
+
 
     render(){
         return (
             <div className="admin-content mx-auto">
                 <div className="w-100 mb-5">
-                    <AnchorTag link="/app/shop/employee/create" className="btn btn-sm btn-warning float-right" itemValue="Create Employee"></AnchorTag>
+                    <AnchorTag link="/app/shop/employee/create" className="btn btn-sm btn-warning float-right" itemValue="Create Customer"></AnchorTag>
                     <h4>Customer List</h4>
                 </div>
                 <div className="row mb-5">
-                    <div className="col-12">
-                        <p><b>Search Box</b></p>
+                    <div className="col-4">
+                        <p><b>Search a Customer</b></p>
                     </div>
-                    <div className="col-2">
-                        <InputFormGroup labelClassName="mb-2" label="" inputClassName="form-control form-control-sm" placeholder="Employee Email"/>
+                    <div className="col-4">
+                        <InputFormGroup labelClassName="mb-2" label="" inputClassName="form-control form-control-sm"  onChange={this.handleChangeSearchNameKey} placeholder="Customer Name"/>
                     </div>
-                    <div className="col-2">
-                        <InputFormGroup labelClassName="mb-2" label="" inputClassName="form-control form-control-sm" placeholder="Employee Name"/>
-                    </div>
-                    <div className="col-2">
-                        <SelectFormGroup selectClassName="custom-select custom-select-sm" selectData={this.roleData}/>
-                    </div>
-                    
+                    <div className="col-4">
+                        <InputFormGroup labelClassName="mb-2" label="" inputClassName="form-control form-control-sm" onChange={this.handleChangeSearchAreaKey} placeholder="Area"/>
+                    </div>                   
                     <div className="col-2">
                         <div className="form-group">
-                            <input type="submit" className="btn btn-sm btn-success" value="Search"/>
+                            <input type="submit" className="btn btn-sm btn-success" value="Search" onClick={this.onSearchClick}/>
                         </div>
                     </div>
                 </div>
