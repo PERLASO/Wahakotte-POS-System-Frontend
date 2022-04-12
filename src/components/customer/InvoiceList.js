@@ -18,6 +18,13 @@ class InvoiceList extends Component{
 
 
     render(){
+        if(this.state.isLoading===true){
+            return(
+                <div>
+                    Loding ...
+                </div>
+            )
+        }
         return (
             <div className="admin-content mx-auto">
                 <div className="w-100 mb-5">
