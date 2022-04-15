@@ -58,7 +58,7 @@ class ShopEdit extends Component{
                                 <p><b>Shop Information</b></p>
                             </div>
                             <div className="col-6">
-                                <TextFormGroup labelClassName="mb-2" onChange={this.handleOnChange} inputClassName="form-control" label="Shop Name" value="Digital Camera Shop"/>
+                                <TextFormGroup labelClassName="mb-2" onChange={this.handleOnChange} inputclassname="form-control" label="Shop Name" value="Digital Camera Shop"/>
                             </div>
 
                             <div className="col-12 mt-4">

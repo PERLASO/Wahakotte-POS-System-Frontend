@@ -94,20 +94,20 @@ class EmployeeEdit extends Component {
                         <div className="container-fluid">
                             <div className="row">
                                 <div className="col-12">
-                                    <InputFormGroup labelClassName="mb-2" onChange={this.handleChangeName} value={this.state.name} inputClassName="form-control" label="Name" />
+                                    <InputFormGroup labelClassName="mb-2" onChange={this.handleChangeName} value={this.state.name} inputclassname="form-control" label="Name" />
                                 </div>
                                 <div className="col-12">
-                                    <InputFormGroup  labelClassName="mb-2" onChange={this.handleChangeShortCode} value={this.state.shortCode} inputClassName="form-control" label="Short Name"  />
+                                    <InputFormGroup  labelClassName="mb-2" onChange={this.handleChangeShortCode} value={this.state.shortCode} inputclassname="form-control" label="Short Name"  />
                                 </div>
                                 <div className="col-12">
-                                    <InputFormGroup  labelClassName="mb-2" onChange={this.handleChangeAddress} value={this.state.address} inputClassName="form-control" label="Address" />
+                                    <InputFormGroup  labelClassName="mb-2" onChange={this.handleChangeAddress} value={this.state.address} inputclassname="form-control" label="Address" />
                                 </div>
 
                                 <div className="col-6">
-                                    <InputFormGroup  labelClassName="mb-2" onChange={this.handleChangeArea} value={this.state.area} inputClassName="form-control" label="Area" />
+                                    <InputFormGroup  labelClassName="mb-2" onChange={this.handleChangeArea} value={this.state.area} inputclassname="form-control" label="Area" />
                                 </div>
                                 <div className="col-6">
-                                    <InputFormGroup p labelClassName="mb-2" onChange={this.handleChangePhoneNumber} value={this.state.phoneNumber} inputClassName="form-control" label="Phone Number" />
+                                    <InputFormGroup p labelClassName="mb-2" onChange={this.handleChangePhoneNumber} value={this.state.phoneNumber} inputclassname="form-control" label="Phone Number" />
                                 </div>
 
                                 <div className="col-12 mt-3">

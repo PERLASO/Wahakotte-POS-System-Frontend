@@ -69,10 +69,10 @@ class EmployeeList extends Component{
                         <p><b>Search a Customer</b></p>
                     </div>
                     <div className="col-4">
-                        <InputFormGroup labelClassName="mb-2" label="" inputClassName="form-control form-control-sm"  onChange={this.handleChangeSearchNameKey} placeholder="Customer Name"/>
+                        <InputFormGroup labelClassName="mb-2" label="" inputclassname="form-control form-control-sm"  onChange={this.handleChangeSearchNameKey} placeholder="Customer Name"/>
                     </div>
                     <div className="col-4">
-                        <InputFormGroup labelClassName="mb-2" label="" inputClassName="form-control form-control-sm" onChange={this.handleChangeSearchAreaKey} placeholder="Area"/>
+                        <InputFormGroup labelClassName="mb-2" label="" inputclassname="form-control form-control-sm" onChange={this.handleChangeSearchAreaKey} placeholder="Area"/>
                     </div>                   
                     <div className="col-2">
                         <div className="form-group">

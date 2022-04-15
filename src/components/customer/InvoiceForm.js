@@ -16,12 +16,7 @@ class InvoiceForm extends Component{
         this.columnList = ["S/N","ItemCode", "Name", "Description", "QTY", "Selling Price(LKR)", "Val. of QTY(LKR)", "Select Quantity"];
 
         this.invoiceColumnList = ["S/N","ItemCode", "Name", "Description", "QTY",'Price', "Total"];
-        this.invoiceTableData = [
-            {"id": 1, "name": "USB 2.0 to Sata 7+15 Pin 2.5 Converter ..", "quantity": 1, "price": "238.00", "subtotal": 2000},
-            {"id": 2, "name": "FANTECH VX7 CRYPTO GAMING MOUSE ..", "quantity": 2, "price": "980.00", "subtotal": 2000},
-            {"id": 3, "name": "Cake decoration turntable - 28cm and 3 pieces set ..", "quantity": 1, "price": "305.00", "subtotal": 2000},
-            {"id": 4, "name": "Stylish White Sunglasses ..", "quantity": 4, "price": "139.00", "subtotal": 2000},
-        ]
+        this.invoiceTableData = []
 
         this.state = {
             isLoading:true,
@@ -98,7 +93,7 @@ class InvoiceForm extends Component{
                     <AnchorTag link="/app/shop/invoice/list" className="btn btn-sm btn-primary float-right" itemValue="Back to Invoice List"></AnchorTag>
                     <h4>Create Invoice</h4>
                 </div>
-                <div className="w-75">
+                <div className="w-100">
                     <div className="container-fluid">
                         <div className="row">
                         <div className="col-12">
@@ -130,6 +125,10 @@ class InvoiceForm extends Component{
                                 </div>
                             </div>
 
+                            <div className="col-12">
+                               <hr/>
+                            </div>
+
                             <div className="col-6">
                                 <div className="form-group">
                                     <Button className="btn btn-sm btn-success w-100" text="Add Item" dataToggle="modal" dataTarget="#exampleModalCenter"/>
@@ -137,8 +136,8 @@ class InvoiceForm extends Component{
                             </div>
                         
                             <div className="col-12 mt-4">
-                                <Table className="table table-striped" allowAction={false} columnList={this.invoiceColumnList} tableData={this.invoiceTableData} actionLinkPrefix=""></Table>
-                                <table className="table table-striped w-25 float-right mt-4">
+                                <Table className="table table-stripped" allowAction={false} columnList={this.invoiceColumnList} tableData={this.state.item} actionLinkPrefix=""></Table>
+                                <table className="table table-dark w-25 float-right mt-4">
                                     <tbody>
                                         <tr>
                                             <td>Total</td>
@@ -170,10 +169,10 @@ class InvoiceForm extends Component{
                                                 <p><b>Search Box</b></p>
                                             </div>
                                             <div className="col-3">
-                                                <InputFormGroup labelClassName="sr-only" inputClassName="form-control form-control-sm" placeholder="Product Name"/>
+                                                <InputFormGroup labelClassName="sr-only" inputclassname="form-control form-control-sm" placeholder="Product Name"/>
                                             </div>
                                             <div className="col-3">
-                                                <InputFormGroup labelClassName="sr-only" inputClassName="form-control  form-control-sm" placeholder="Product Code"/>
+                                                <InputFormGroup labelClassName="sr-only" inputclassname="form-control  form-control-sm" placeholder="Product Code"/>
                                             </div>
                                             {/* <div className="col-3">
                                                 <SelectFormGroup labelClassName="sr-only" placeholder="Category" selectClassName="custom-select custom-select-sm mr-sm-2" selectData={this.productCategory}/>
@@ -187,19 +186,21 @@ class InvoiceForm extends Component{
                                             {/* <SearchDataTable className="table table-sm search-tb-font table-striped" columnList={this.columnList} tableData={this.state.data} actionLinkPrefix=""/> */}
                                             <table className="table">
                                             <thead className="thead-dark">
+                                                <tr>
                                                 {this.columnList.map((value, index) => {
                                                     return (       
                                                             <th  key={index}>{value}</th>   
                                                     )
                                                 })}
                                                  <th></th>
+                                                 </tr>
                                                  </thead>
                                              
                                                 {this.state.data.map((data,index) => {
                                                     return (
-                                                        <tbody>
-                                                            <tr key={index}>                                   
-                                                                <td>{data.id}</td>
+                                                        <tbody  key={index}>
+                                                            <tr>                                   
+                                                            <td>{data.id}</td>
                                                             <td>{data.itemCode}</td>
                                                             <td>{data.name}</td>
                                                             <td>{data.description}</td>
@@ -208,7 +209,7 @@ class InvoiceForm extends Component{
                                                             <td>{data.stockValue}</td>
                                                             <td> 
                                                                 <form onSubmit={this.handleSubmit} >
-                                                                <input type='number' placeholder='1' inputClassName="form-control" onChange={() => {
+                                                                <input type='number' placeholder='1' inputclassname="form-control" onChange={() => {
                                                                     this.handleChangeCount;
                                                                     this.setState({item: [data]})
                                                                  }}/>

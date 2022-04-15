@@ -7,7 +7,7 @@ class TextFormGroup extends Component{
     static propType = {
         inputType: PropTypes.string,
         id: PropTypes.string,
-        inputClassName : PropTypes.string,
+        inputclassname : PropTypes.string,
         placeholder: PropTypes.string,
         value: PropTypes.string,
         onChange: PropTypes.func,
@@ -18,7 +18,7 @@ class TextFormGroup extends Component{
     static defaultProps = {
         inputType: "text",
         id: "",
-        inputClassName: "form-control",
+        inputclassname: "form-control",
         placeholder: "",
         value: "",
         onChange: () => {},
@@ -27,12 +27,12 @@ class TextFormGroup extends Component{
     }
 
     render(){
-        const {inputType, id, inputClassName, placeholder, value, onChange, label, labelClassName}  = this.props;
+        const {inputType, id, inputclassname, placeholder, value, onChange, label, labelClassName}  = this.props;
 
         return (
             <div className="form-group">
                 {label && <label className={labelClassName}>{label}</label>}
-                <TextField inputType={inputType} id={id} className={inputClassName} onChange={onChange} placeholder={placeholder} value={value}/>
+                <TextField inputType={inputType} id={id} className={inputclassname} onChange={onChange} placeholder={placeholder} value={value}/>
             </div>
         )
     }

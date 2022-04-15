@@ -12,14 +12,14 @@ class InputPasswordGroup extends Component{
         return (
             <div className="form-group">
                 <label className={this.props.labelClassName}>{this.props.label}</label>
-                <InputPassword className={this.props.inputClassName} placeholder={this.props.placeholder}/>
+                <InputPassword className={this.props.inputclassname} placeholder={this.props.placeholder}/>
             </div>
         )
     }
 }
 
 InputPasswordGroup.defaultProps = {
-    inputClassName: "form-control",
+    inputclassname: "form-control",
     placeholder: "",
     label: ""
 }

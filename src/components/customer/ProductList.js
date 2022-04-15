@@ -48,7 +48,7 @@ class ProductList extends Component{
                         <p><b>Search Box</b></p>
                     </div>
                     <div className="col-2">
-                        <InputFormGroup labelClassName="mb-2" label="" inputClassName="form-control form-control-sm" placeholder="Product Name"/>
+                        <InputFormGroup labelClassName="mb-2" label="" inputclassname="form-control form-control-sm" placeholder="Product Name"/>
                     </div>
                     <div className="col-2">
                         <div className="form-group">

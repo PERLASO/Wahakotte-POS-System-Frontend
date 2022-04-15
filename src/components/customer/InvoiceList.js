@@ -45,10 +45,10 @@ class InvoiceList extends Component{
                         <p><b>Search Invoice</b></p>
                     </div>
                     <div className="col-2">
-                        <InputFormGroup labelClassName="sr-only" inputClassName="form-control form-control-sm" placeholder="Customer Name"/>
+                        <InputFormGroup labelClassName="sr-only" inputclassname="form-control form-control-sm" placeholder="Customer Name"/>
                     </div>
                     <div className="col-2">
-                        <InputFormGroup labelClassName="sr-only" inputClassName="form-control form-control-sm" placeholder="Invoice ID"/>
+                        <InputFormGroup labelClassName="sr-only" inputclassname="form-control form-control-sm" placeholder="Invoice ID"/>
                     </div>
                     <div className="col-2">
                         <div className="form-group">
