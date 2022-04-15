@@ -24,7 +24,7 @@ class SearchDataTable extends Component{
                                         return <TdTag key={index} value={data[key]} isLinked="false"></TdTag>
                                     })
                                 }
-                                <SearchActionTd value={data["id"]} isLinked="true" linkPrefix={this.props.actionLinkPrefix}></SearchActionTd>
+                              <SearchActionTd value={data["id"]} isLinked="true" linkPrefix={this.props.actionLinkPrefix}></SearchActionTd>
                             </tr>
                             )
                         })

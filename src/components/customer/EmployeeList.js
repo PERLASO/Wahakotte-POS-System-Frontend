@@ -34,7 +34,7 @@ class EmployeeList extends Component{
     }
 
     componentDidMount(){
-        document.addEventListener('mousedown', this.onSearchClick )
+        //document.addEventListener('mousedown', this.onSearchClick )
         getAllCustomers().then( (res) => {
             this.setState({isLoading : false})
             this.setState({customers: res.data})
@@ -43,17 +43,17 @@ class EmployeeList extends Component{
     }
 
     componentWillUnmount(){
-        document.removeEventListener('mousedown', this.onSearchClick)
+        //document.removeEventListener('mousedown', this.onSearchClick)
     }
 
-    // onSearchClick =(e) => {
-    //     console.log(this.state.searchNameKey)
-    //     getCustomer(this.state.searchNameKey).then(res => {
-    //         this.setState({customers: [res.data]})
-    //         console.log(this.state.customers)
-    //     })
+    onSearchClick =(e) => {
+        console.log(this.state.searchNameKey)
+        getCustomer(this.state.searchNameKey).then(res => {
+            this.setState({customers: [res.data]})
+            console.log(this.state.customers)
+        })
 
-    // }
+    }
 
 
 

@@ -4,27 +4,36 @@ import Table from "../../components/table/Table";
 import InputFormGroup from "../input/InputFormGroup";
 
 
+
 class InvoiceList extends Component{
     constructor(props){
         super(props);
         this.columnList = ["ID", "Customer", "Invoice ID", "Total", "Paid", "Date", "Action"];
+        
         this.tableData = [
             {"id": 1, "customer": "Md Nazmul Hasan", "invoice_id": "201256", "total": "238.00", "is_paid": "Yes", "date": "20th July, 2021"},
             {"id": 2, "customer": "Farzana Yesmin", "invoice_id": "201256", "total": "980.00", "is_paid": "Yes", "date": "8th July, 2021"},
             {"id": 3, "customer": "Amit Shah", "invoice_id": "201256", "total": "305.00", "is_paid": "Yes", "date": "11th May, 2021"},
             {"id": 4, "customer": "Md Farhan Kabir", "invoice_id": "201256", "total": "139.00", "is_paid": "No", "date": "1st April, 2021"},
         ]
+
+        this.state = {
+            isLoading:true,
+            data: []
+          }
     }
+
+    
 
 
     render(){
-        if(this.state.isLoading===true){
-            return(
-                <div>
-                    Loding ...
-                </div>
-            )
-        }
+        // if(this.state.isLoading===true){
+        //     return(
+        //         <div>
+        //             Loading ...
+        //         </div>
+        //     )
+        // }
         return (
             <div className="admin-content mx-auto">
                 <div className="w-100 mb-5">
