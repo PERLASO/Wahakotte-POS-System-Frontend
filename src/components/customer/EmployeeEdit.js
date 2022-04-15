@@ -14,7 +14,7 @@ class EmployeeEdit extends Component {
             area : '',
             phoneNumber: '',
         };
-        this.handleChaneName = this.handleChangeName.bind(this);
+        this.handleChangeName = this.handleChangeName.bind(this);
         this.handleChangeShortCode = this.handleChangeShortCode.bind(this);
         this.handleChangeAddress = this.handleChangeAddress.bind(this);
         this.handleChangeArea = this.handleChangeArea.bind(this);
