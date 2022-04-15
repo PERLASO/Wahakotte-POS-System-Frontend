@@ -12,7 +12,7 @@ class TextAreaFormGroup extends Component{
         return (
             <div className="form-group">
                 <label className={this.props.labelClassName}>{this.props.label}</label>
-                <TextArea className={this.props.inputClassName} required={this.props.required} onChange={this.props.onChange} value={this.props.value} rows={this.props.rows} cols={this.props.cols}/>
+                <TextArea className={this.props.inputclassname} required={this.props.required} onChange={this.props.onChange} value={this.props.value} rows={this.props.rows} cols={this.props.cols}/>
             </div>
         )
     }

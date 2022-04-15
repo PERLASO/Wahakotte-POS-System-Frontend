@@ -18,15 +18,15 @@ class PasswordResetForm extends Component{
                         <div className="container-fluid">
                             <div className="row">
                                 <div className="col-4">
-                                    <InputPasswordGroup inputClassName="form-control form-control-sm" labelClassName="mb-2" label="Old Password"/>
+                                    <InputPasswordGroup inputclassname="form-control form-control-sm" labelClassName="mb-2" label="Old Password"/>
                                 </div>
                                 <div className="col-4">
-                                    <InputPasswordGroup inputClassName="form-control form-control-sm" labelClassName="mb-2" label="New Password"/>
+                                    <InputPasswordGroup inputclassname="form-control form-control-sm" labelClassName="mb-2" label="New Password"/>
                                 </div>
                             </div>
                             <div className="row">
                                 <div className="col-4">
-                                    <InputPasswordGroup inputClassName="form-control form-control-sm" labelClassName="mb-2" label="Confirm Password"/>
+                                    <InputPasswordGroup inputclassname="form-control form-control-sm" labelClassName="mb-2" label="Confirm Password"/>
                                 </div>
                             </div>
                             <div className="row">

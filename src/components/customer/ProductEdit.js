@@ -113,16 +113,16 @@ class ProductEdit extends Component {
                         <div className="container-fluid">
                             <div className="row">
                                 <div className="col-12">
-                                    <InputFormGroup labelClassName="mb-2" onChange={this.handleChangeName} value={this.state.name} inputClassName="form-control" label="Name" />
+                                    <InputFormGroup labelClassName="mb-2" onChange={this.handleChangeName} value={this.state.name} inputclassname="form-control" label="Name" />
                                 </div>
                                 <div className="col-12">
-                                    <InputFormGroup labelClassName="mb-2" onChange={this.handleChangeItemCode} value={this.state.itemcode} inputClassName="form-control" label="Item Code" />
+                                    <InputFormGroup labelClassName="mb-2" onChange={this.handleChangeItemCode} value={this.state.itemcode} inputclassname="form-control" label="Item Code" />
                                 </div>
                                 <div className="col-12">
                                     <TextAreaFormGroup label="Description" onChange={this.handleChangeDescription} value={this.state.description} rows="2" />
                                 </div>
                                 <div className="col-6">
-                                    <InputNumberGroup labelClassName="mb-2" onChange={this.handleChangeSellingPrice} value={this.state.sellingprice} inputClassName="form-control" label="Selling Price(LKR)" />
+                                    <InputNumberGroup labelClassName="mb-2" onChange={this.handleChangeSellingPrice} value={this.state.sellingprice} inputclassname="form-control" label="Selling Price(LKR)" />
                                 </div>
 
                                 <div className="col-6">

@@ -80,20 +80,20 @@ class EmployeeForm extends Component{
                         <div className="container-fluid">
                             <div className="row">
                                 <div className="col-12">
-                                    <InputFormGroup labelClassName="mb-2" onChange={this.handleChangeEmpName} required={true}  inputClassName="form-control" label="Name" />
+                                    <InputFormGroup labelClassName="mb-2" onChange={this.handleChangeEmpName} required={true}  inputclassname="form-control" label="Name" />
                                 </div>
                                 <div className="col-12">
-                                    <InputFormGroup  labelClassName="mb-2" onChange={this.handleChangeShortCode} required={true}  inputClassName="form-control" label="Short Name"  />
+                                    <InputFormGroup  labelClassName="mb-2" onChange={this.handleChangeShortCode} required={true}  inputclassname="form-control" label="Short Name"  />
                                 </div>
                                 <div className="col-12">
-                                    <InputFormGroup  labelClassName="mb-2" onChange={this.handleChangeAddress}  required={true}  inputClassName="form-control" label="Address" />
+                                    <InputFormGroup  labelClassName="mb-2" onChange={this.handleChangeAddress}  required={true}  inputclassname="form-control" label="Address" />
                                 </div>
 
                                 <div className="col-6">
-                                    <InputFormGroup  labelClassName="mb-2" onChange={this.handleChangeArea} required={true}  inputClassName="form-control" label="Area" />
+                                    <InputFormGroup  labelClassName="mb-2" onChange={this.handleChangeArea} required={true}  inputclassname="form-control" label="Area" />
                                 </div>
                                 <div className="col-6">
-                                    <InputFormGroup p labelClassName="mb-2" onChange={this.handleChangePhoneNumber}  required={true}  inputClassName="form-control" label="Phone Number" />
+                                    <InputFormGroup p labelClassName="mb-2" onChange={this.handleChangePhoneNumber}  required={true}  inputclassname="form-control" label="Phone Number" />
                                 </div>
 
                                 <div className="col-12 mt-3">

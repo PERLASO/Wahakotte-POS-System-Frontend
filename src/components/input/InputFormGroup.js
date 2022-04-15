@@ -19,10 +19,10 @@ class InputFormGroup extends Component{
 
     renderInputText(){
         if(this.props.isReadOnly == true){
-            return <input type="text" className={this.props.inputClassName} placeholder={this.props.placeholder} defaultValue={this.props.value} readOnly/>
+            return <input type="text" className={this.props.inputclassname} placeholder={this.props.placeholder} defaultValue={this.props.value} readOnly/>
         }
         else{
-            return <InputText required={this.props.required} className={this.props.inputClassName} onChange={this.props.onChange} placeholder={this.props.placeholder} value={this.props.value} ref={this.props.ref}/>
+            return <InputText required={this.props.required} className={this.props.inputclassname} onChange={this.props.onChange} placeholder={this.props.placeholder} value={this.props.value} ref={this.props.ref}/>
         }
     }
 
@@ -39,7 +39,7 @@ class InputFormGroup extends Component{
 }
 
 InputFormGroup.defaultProps = {
-    inputClassName: "form-control",
+    inputclassname: "form-control",
     placeholder: "",
     label: "",
     value: "",
