@@ -97,6 +97,7 @@ class InvoiceForm extends Component{
                     <div className="container-fluid">
                         <div className="row">
                         <div className="col-12">
+                            <h6 className="text-center">Set Customer Details</h6>
                                 <div className="form">
                                     <label className='mb-2'>Select Customer ID</label>
                                     <select onChange={this.handleCustomerId}>
@@ -128,8 +129,13 @@ class InvoiceForm extends Component{
                             <div className="col-12">
                                <hr/>
                             </div>
+                            </div>
+                            <div className='row'>
+                                <div className="col-12">
+                                <h6 className="text-center">Set Products Details </h6>
+                                </div>
 
-                            <div className="col-6">
+                            <div className="col-3">
                                 <div className="form-group">
                                     <Button className="btn btn-sm btn-success w-100" text="Add Item" dataToggle="modal" dataTarget="#exampleModalCenter"/>
                                 </div>
