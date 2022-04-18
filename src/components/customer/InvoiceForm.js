@@ -2,8 +2,6 @@ import React, {Component} from "react";
 import AnchorTag from "../../components/Anchortag";
 import Button from "../Button";
 import InputFormGroup from "../input/InputFormGroup";
-import SelectFormGroup from "../input/SelectFormGroup";
-import SearchDataTable from "../table/SearchDataTable";
 import Table from "../table/Table";
 import { getProductList } from "../../context/Product";
 import { getAllCustomers, getCustomer } from "../../context/Customer";
