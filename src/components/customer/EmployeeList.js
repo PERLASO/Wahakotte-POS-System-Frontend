@@ -1,8 +1,8 @@
-import React, {Component, useEffect} from "react";
+import React, {Component} from "react";
 import { getAllCustomers, getCustomer } from "../../context/Customer";
 import AnchorTag from "../../components/Anchortag";
 import InputFormGroup from "../../components/input/InputFormGroup";
-import SelectFormGroup from "../../components/input/SelectFormGroup";
+
 import Table from "../../components/table/Table";
 
 
@@ -17,11 +17,7 @@ class EmployeeList extends Component{
             isLoading:true
         }
         this.columnList = ["ID", "Name", "Short Name", "Address", "Area", "Phone Number", "Action"];
-        this.handleChangeSearchNameKey = this.handleChangeSearchNameKey.bind(this);
-
-
-
-                
+        this.handleChangeSearchNameKey = this.handleChangeSearchNameKey.bind(this);            
     }
 
     handleChangeSearchNameKey(e){
@@ -41,16 +37,13 @@ class EmployeeList extends Component{
     }
 
 
-
     onSearchClick = () => {
-        console.log(this.state.searchNameKey)
         getCustomer(this.state.searchNameKey).then(res => {
             try {
                 if(res.data.isDeleted){
                     this.setState({searchKey: true})
                 }else{
                     this.setState({customers: [res.data]})
-                console.log(this.state.customers)
                 }
                 
             } catch (error) {
@@ -77,10 +70,7 @@ class EmployeeList extends Component{
                     </div>
                     <div className="col-4">
                         <InputFormGroup labelClassName="mb-2" label="" inputclassname="form-control form-control-sm"  onChange={this.handleChangeSearchNameKey} placeholder="Customer ID"/>
-                    </div>
-                    {/* <div className="col-4">
-                        <InputFormGroup labelClassName="mb-2" label="" inputclassname="form-control form-control-sm" onChange={this.handleChangeSearchAreaKey} placeholder="Area"/>
-                    </div>                    */}
+                    </div>       
                     <div className="col-2">
                         <div className="form-group">
                             <input type="submit" className="btn btn-sm btn-success" value="Search" onClick={this.onSearchClick}/>
