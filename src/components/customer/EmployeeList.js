@@ -13,12 +13,11 @@ class EmployeeList extends Component{
         this.state = {
             customers : [],
             searchNameKey: '',
-            searchAreaKey: '',
+            searchKey: false,
             isLoading:true
         }
         this.columnList = ["ID", "Name", "Short Name", "Address", "Area", "Phone Number", "Action"];
         this.handleChangeSearchNameKey = this.handleChangeSearchNameKey.bind(this);
-        this.handleChangeSearchAreaKey = this.handleChangeSearchAreaKey.bind(this);
 
 
 
@@ -26,6 +25,7 @@ class EmployeeList extends Component{
     }
 
     handleChangeSearchNameKey(e){
+        this.setState({searchKey: false})
         this.setState({searchNameKey: e.target.value})
     }
 
@@ -34,23 +34,30 @@ class EmployeeList extends Component{
     }
 
     componentDidMount(){
-        //document.addEventListener('mousedown', this.onSearchClick )
         getAllCustomers().then( (res) => {
             this.setState({isLoading : false})
             this.setState({customers: res.data})
-            console.log(this.state.customers)
         })
     }
 
-    componentWillUnmount(){
-        //document.removeEventListener('mousedown', this.onSearchClick)
-    }
 
-    onSearchClick =(e) => {
+
+    onSearchClick = () => {
         console.log(this.state.searchNameKey)
         getCustomer(this.state.searchNameKey).then(res => {
-            this.setState({customers: [res.data]})
-            console.log(this.state.customers)
+            try {
+                if(res.data.isDeleted){
+                    this.setState({searchKey: true})
+                }else{
+                    this.setState({customers: [res.data]})
+                console.log(this.state.customers)
+                }
+                
+            } catch (error) {
+                this.setState({searchKey: true})
+            }
+            
+            
         })
 
     }
@@ -69,15 +76,18 @@ class EmployeeList extends Component{
                         <p><b>Search a Customer</b></p>
                     </div>
                     <div className="col-4">
-                        <InputFormGroup labelClassName="mb-2" label="" inputclassname="form-control form-control-sm"  onChange={this.handleChangeSearchNameKey} placeholder="Customer Name"/>
+                        <InputFormGroup labelClassName="mb-2" label="" inputclassname="form-control form-control-sm"  onChange={this.handleChangeSearchNameKey} placeholder="Customer ID"/>
                     </div>
-                    <div className="col-4">
+                    {/* <div className="col-4">
                         <InputFormGroup labelClassName="mb-2" label="" inputclassname="form-control form-control-sm" onChange={this.handleChangeSearchAreaKey} placeholder="Area"/>
-                    </div>                   
+                    </div>                    */}
                     <div className="col-2">
                         <div className="form-group">
                             <input type="submit" className="btn btn-sm btn-success" value="Search" onClick={this.onSearchClick}/>
                         </div>
+                    </div>
+                    <div className="col-8">
+                    {this.state.searchKey && <div><h6 className="text-danger">User Not Found!</h6></div>}
                     </div>
                 </div>
                 <Table className="table table-striped" columnList={this.columnList} tableData={this.state.customers} actionLinkPrefix=""></Table>
