@@ -20,18 +20,27 @@ class InvoiceForm extends Component {
             count: 1,
             item: [],
             customerID: '1',
-            customers:[],
+            customers: [],
             customerName: 'Customer Name',
             customerArea: 'Area',
             searchNameKey: '',
-            searchProductKey:'',
+            searchProductKey: '',
+            searchCustomerKey: false,
             searchKey: false,
+            sn:'',
+            itemCode:'',
+            name:'',
+            description:'',
+            qty:0,
+            price:0,
+            total:0
+
         }
 
         this.handleChangeCount = this.handleChangeCount.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleChangeSearchNameKey = this.handleChangeSearchNameKey.bind(this);  
-        this.handleChangeSearchProductKey = this.handleChangeSearchProductKey.bind(this);   
+        this.handleChangeSearchNameKey = this.handleChangeSearchNameKey.bind(this);
+        this.handleChangeSearchProductKey = this.handleChangeSearchProductKey.bind(this);
     }
 
     handleChangeCount(e) {
@@ -40,14 +49,14 @@ class InvoiceForm extends Component {
 
 
 
-    handleChangeSearchNameKey(e){
-        this.setState({searchKey: false})
-        this.setState({searchNameKey: e.target.value})
+    handleChangeSearchNameKey(e) {
+        this.setState({ searchCustomerKey: false })
+        this.setState({ searchNameKey: e.target.value })
     }
 
-    handleChangeSearchProductKey(e){
-        this.setState({searchKey: false})
-        this.setState({searchProductKey: e.target.value})
+    handleChangeSearchProductKey(e) {
+        this.setState({ searchKey: false })
+        this.setState({ searchProductKey: e.target.value })
 
     }
 
@@ -58,7 +67,6 @@ class InvoiceForm extends Component {
             if (c != undefined) {
                 this.setState({ isLoading: false })
                 this.setState({ data: c.data })
-                console.log(this.state.data)
             }
         });
         getAllCustomers().then(c => {
@@ -68,31 +76,35 @@ class InvoiceForm extends Component {
                 //console.log(this.state.customerData)
             }
         })
-
-
-
     }
 
-    handleSubmit() {
-        console.log(this.state.item)
-        console.log(this.state.count)
+    handleSubmit(data) {
+        return e =>{
+            e.preventDefault();
+            console.log(data);
+            console.log(this.state.count)
+            this.state.item.push(data)
+            this.setState({item: this.state.item})
+            console.log(this.state.item)
+            
+        }
     }
 
     onSearchCustomerClick = () => {
         getCustomer(this.state.searchNameKey).then(res => {
             try {
-                if(res.data.isDeleted){
-                    this.setState({searchKey: true})
-                }else{
-                    this.setState({customers: [res.data]})
-                    this.setState({customerName:this.state.customers[0].name})
-                    this.setState({customerArea:this.state.customers[0].area})
-                }          
+                if (res.data.isDeleted) {
+                    this.setState({ searchCustomerKey: true })
+                } else {
+                    this.setState({ customers: [res.data] })
+                    this.setState({ customerName: this.state.customers[0].name })
+                    this.setState({ customerArea: this.state.customers[0].area })
+                }
             } catch (error) {
-                this.setState({searchKey: true})
+                this.setState({ searchCustomerKey: true })
             }
-            
-            
+
+
         })
 
     }
@@ -100,17 +112,31 @@ class InvoiceForm extends Component {
     onSearchProductClick = () => {
         getSingleProduct(this.state.searchProductKey).then(res => {
             try {
-                if(res.data.isDeleted){
-                    this.setState({searchKey: true})
-                }else{
-                    this.setState({data: [res.data]})
+                if (res.data.isDeleted) {
+                    this.setState({ searchKey: true })
+                } else {
+                    this.setState({ data: [res.data] })
                     console.log(this.state.data)
-                }          
+                }
             } catch (error) {
-                this.setState({searchKey: true})
+                this.setState({ searchKey: true })
             }
         })
 
+    }
+
+    handleDecrement = () => {
+        if (this.state.count > 1) {
+            this.setState({ count: this.state.count - 1 });
+
+        }
+
+    }
+
+    handleIncreament = () => {
+        if (this.state.count < 5) {
+            this.setState({ count: this.state.count + 1 })
+        }
     }
 
 
@@ -118,8 +144,8 @@ class InvoiceForm extends Component {
 
 
     render() {
-        if(this.state.isLoading===true){
-            return(
+        if (this.state.isLoading === true) {
+            return (
                 <div>
                     Loading ...
                 </div>
@@ -150,7 +176,7 @@ class InvoiceForm extends Component {
                                         </div>
                                     </div>
                                     <div className="col-12">
-                                        {this.state.searchKey && <div><h6 className="text-danger">User Not Found!</h6></div>}
+                                        {this.state.searchCustomerKey && <div><h6 className="text-danger">User Not Found!</h6></div>}
                                     </div>
                                 </div>
                                 <div className="row">
@@ -166,7 +192,7 @@ class InvoiceForm extends Component {
                                             <input type="text" className="form-control" value={this.state.customerArea} readOnly />
                                         </div>
                                     </div>
-                                    
+
                                 </div>
                             </div>
                             <div className="col-6">
@@ -192,67 +218,75 @@ class InvoiceForm extends Component {
                             </div>
                         </div>
                         <div className='row'>
-                        <div className="col-12">
-                                        <hr />
-                                    </div>
+                            <div className="col-12">
+                                <hr />
                             </div>
+                        </div>
                         <div className="row">
-                                    <div className="col-12">
-                                        <h6 className="text-center"><b>Set Products Details</b></h6>
-                                    </div>
-                                </div>
-                                <div className="row">
-                                    <div className="col-3">
-                                        <InputFormGroup labelClassName="sr-only" inputclassname="form-control  form-control-sm" placeholder="Product Code" onChange={this.handleChangeSearchProductKey}/>
-                                    </div>
-                                    <div className="col-2">
-                                        <Button className="btn btn-sm btn-success w-75" text="Search" onClick={this.onSearchProductClick}/>
-                                    </div>
-                                </div>
-                                <div className="row">
-                                    <div className="table">
-                                        <div className="thead-dark">
-                                            <div className="tr">
-                                            {this.columnList.map((value, index) => {
-                                                        return (
-                                                            <th key={index}>{value}</th>
-                                                        )
-                                                    })}
-                                                    <th></th>
-                                            </div>
-                                        </div>
-                                        {this.state.data.map((data, index) => {
-                                                return (
-                                                    <tbody key={index}>
-                                                        <tr>
-                                                            <td>{data.id}</td>
-                                                            <td>{data.itemCode}</td>
-                                                            <td>{data.name}</td>
-                                                            <td>{data.description}</td>
-                                                            <td>{data.qty}</td>
-                                                            <td>{data.sellingPrice}</td>
-                                                            <td>{data.stockValue}</td>
-                                                            <td>
-                                                                <form onSubmit={this.handleSubmit} >
-                                                                    <input type='number' placeholder='1' inputclassname="form-control" onChange={() => {
-                                                                        this.handleChangeCount;
-                                                                        this.setState({ item: [data] })
-                                                                    }} />
-                                                                    <button type='submit' >Add</button>
-                                                                </form>
-                                                            </td>
-                                                            <td></td>
-                                                        </tr>
+                            <div className="col-12">
+                                <h6 className="text-center"><b>Set Products Details</b></h6>
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="col-3">
+                                <InputFormGroup labelClassName="sr-only" inputclassname="form-control  form-control-sm" placeholder="Product Code" onChange={this.handleChangeSearchProductKey} />
+                            </div>
+                            <div className="col-2">
+                                <Button className="btn btn-sm btn-success w-75" text="Search" onClick={this.onSearchProductClick} />
+                            </div>
+                            <div className="col-12">
+                                {this.state.searchKey && <div><h6 className="text-danger">Product Not Found!</h6></div>}
+                            </div>
+                        </div>
+                        <div className="row">
+                            <table className="table">
+                                <thead className="thead-dark">
+                                    <tr>
+                                        {this.columnList.map((value, index) => {
+                                            return (
+                                                <th key={index}>{value}</th>
+                                            )
+                                        })}
+                                    </tr>
+                                </thead>
+                                {this.state.data.map((data, index) => {
+                
+                                    return (
+                                        <tbody key={index}>
+                                            <tr>
+                                                <td>{data.id}</td>
+                                                <td>{data.itemCode}</td>
+                                                <td>{data.name}</td>
+                                                <td>{data.description}</td>
+                                                <td>{data.qty}</td>
+                                                <td>{data.sellingPrice}</td>
+                                                <td>{data.stockValue}</td>
+                                                <td>
+                                                <form onSubmit={this.handleSubmit(data)} >
+                                                
+                                                        <input className="sm" type='number' placeholder='1' inputclassname="form-control" onChange={this.handleChangeCount}/>
+                                                        {/* <button className='text-xs rounded' onClick={this.handleDecrement} >-</button>
+                                                        <label className='mx-6'>{this.state.count}</label>
+                                                        <button className='text-xs rounded' onClick={this.handleIncreament} >+</button> */}
+                                                        &nbsp;
+                                                        <button className="btn-info" type='submit' >Add</button>
+                                                        </form>
+                                                        
+                                                    
+                                                </td>
+                    
+                                                
+                                            </tr>
 
-                                                    </tbody>
+                                        </tbody>
 
-                                                )
-                                            })}
-                                    </div>                         
-                                </div>
+                                    )
+                                })}
+                            </table>
                         </div>
                     </div>
                 </div>
+            </div>
         )
     }
 }
