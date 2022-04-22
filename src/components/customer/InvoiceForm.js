@@ -19,6 +19,7 @@ class InvoiceForm extends Component {
             data: [],
             count: 1,
             item: [],
+            invoiceItems:[],
             customerID: '1',
             customers: [],
             customerName: 'Customer Name',
@@ -38,6 +39,7 @@ class InvoiceForm extends Component {
         }
 
         this.handleChangeCount = this.handleChangeCount.bind(this);
+        this.handleInvoiceItems = this.handleInvoiceItems.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChangeSearchNameKey = this.handleChangeSearchNameKey.bind(this);
         this.handleChangeSearchProductKey = this.handleChangeSearchProductKey.bind(this);
@@ -45,6 +47,10 @@ class InvoiceForm extends Component {
 
     handleChangeCount(e) {
         this.setState({ count: e.target.value })
+    }
+
+    handleInvoiceItems(){
+        {this.setState({invoiceItems:[]})}
     }
 
 
@@ -63,6 +69,10 @@ class InvoiceForm extends Component {
 
 
     componentDidMount() {
+        let session = JSON.parse(window.sessionStorage.getItem('InvoiceItems'));
+        if( session != null){
+            this.setState({invoiceItems: session })
+        }
         getProductList().then(c => {
             if (c != undefined) {
                 this.setState({ isLoading: false })
@@ -73,7 +83,6 @@ class InvoiceForm extends Component {
             if (c != undefined) {
                 this.setState({ isLoading: false })
                 this.setState({ customerData: c.data })
-                //console.log(this.state.customerData)
             }
         })
     }
@@ -81,12 +90,10 @@ class InvoiceForm extends Component {
     handleSubmit(data) {
         return e =>{
             e.preventDefault();
-            console.log(data);
-            console.log(this.state.count)
             this.state.item.push(data)
-            this.setState({item: this.state.item})
-            console.log(this.state.item)
-            
+            data['count'] = this.state.count;
+            window.sessionStorage.setItem("InvoiceItems", JSON.stringify(this.state.item))
+            this.setState({invoiceItems: JSON.parse(window.sessionStorage.getItem('InvoiceItems')) })    
         }
     }
 
@@ -125,26 +132,10 @@ class InvoiceForm extends Component {
 
     }
 
-    handleDecrement = () => {
-        if (this.state.count > 1) {
-            this.setState({ count: this.state.count - 1 });
-
-        }
-
-    }
-
-    handleIncreament = () => {
-        if (this.state.count < 5) {
-            this.setState({ count: this.state.count + 1 })
-        }
-    }
-
-
-
-
 
     render() {
         if (this.state.isLoading === true) {
+            
             return (
                 <div>
                     Loading ...
@@ -153,6 +144,7 @@ class InvoiceForm extends Component {
         }
         return (
             <div className="admin-content mx-auto">
+                {this.state.invoiceItems==null &&  this.handleInvoiceItems }
                 <div className="w-100 mb-5">
                     <AnchorTag link="/app/shop/invoice/list" className="btn btn-sm btn-primary float-right" itemValue="Back to Invoice List"></AnchorTag>
                     <h4>Create Invoice</h4>
@@ -198,7 +190,7 @@ class InvoiceForm extends Component {
                             <div className="col-6">
 
                                 <div className="col-12 mt-4">
-                                    <Table className="table table-stripped" allowAction={false} columnList={this.invoiceColumnList} tableData={this.state.item} actionLinkPrefix=""></Table>
+                                    <Table className="table table-stripped" allowAction={false} columnList={this.invoiceColumnList} tableData={this.state.invoiceItems} actionLinkPrefix=""></Table>
                                     <table className="table table-dark w-25 float-right mt-4">
                                         <tbody>
                                             <tr>
@@ -264,22 +256,13 @@ class InvoiceForm extends Component {
                                                 <td>
                                                 <form onSubmit={this.handleSubmit(data)} >
                                                 
-                                                        <input className="sm" type='number' placeholder='1' inputclassname="form-control" onChange={this.handleChangeCount}/>
-                                                        {/* <button className='text-xs rounded' onClick={this.handleDecrement} >-</button>
-                                                        <label className='mx-6'>{this.state.count}</label>
-                                                        <button className='text-xs rounded' onClick={this.handleIncreament} >+</button> */}
+                                                        <input className="sm" type='number' placeholder='1' inputclassname="form-control" min={1} max={data.qty} onChange={this.handleChangeCount}/>
                                                         &nbsp;
                                                         <button className="btn-info" type='submit' >Add</button>
-                                                        </form>
-                                                        
-                                                    
-                                                </td>
-                    
-                                                
+                                                        </form>                
+                                                </td>                                    
                                             </tr>
-
                                         </tbody>
-
                                     )
                                 })}
                             </table>
