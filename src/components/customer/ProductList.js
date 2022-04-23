@@ -34,7 +34,9 @@ class ProductList extends Component{
             return(
                 <div>
                     Loding ...
+                    
                 </div>
+                
             )
         }
         return (
