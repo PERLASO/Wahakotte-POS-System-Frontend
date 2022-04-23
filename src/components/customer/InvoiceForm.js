@@ -5,10 +5,12 @@ import InputFormGroup from "../input/InputFormGroup";
 import { getProductList, getSingleProduct } from "../../context/Product";
 import { getAllCustomers, getCustomer } from "../../context/Customer";
 import update from 'immutability-helper';
+import { withRouter } from 'react-router-dom';
+
 
 
 class InvoiceForm extends Component {
-    constructor(props) {
+    constructor(props) {   
         super(props);
         this.columnList = ["S/N", "ItemCode", "Name", "Description", "QTY", "Selling Price(LKR)", "Val. of QTY(LKR)", "Select Quantity"];
         this.invoiceColumnList = ["S/N", "ItemCode", "Name", "Description", "QTY", 'Price', "Total"];
@@ -21,6 +23,7 @@ class InvoiceForm extends Component {
             item: [],
             itemId:1,
             invoiceItems: [],
+            passData:[],
             itemcheck: false,
             itemcheckYes:false,
             customerCheck:false,
@@ -46,6 +49,8 @@ class InvoiceForm extends Component {
         this.handleYes = this.handleYes.bind(this);
     }
 
+    
+
     handleChangeCount(e) {
         this.setState({ count: e.target.value })
     }
@@ -69,7 +74,6 @@ class InvoiceForm extends Component {
     handleYes(){
         this.setState({itemcheck:false})
         this.setState({itemcheckYes:true})
-        console.log(this.state.invoiceItems)
         this.handleSubmit()
     }
 
@@ -100,12 +104,11 @@ class InvoiceForm extends Component {
 
     handleSubmit() {
         if(!this.state.itemcheck){
-            console.log(this.state.invoiceItems)
             if(this.state.itemcheckYes){
+                console.log('bbb')
                 const id = this.state.invoiceItems.findIndex((el) => el.id === this.state.itemId)
                 const updatedInvoiceItems = update(this.state.invoiceItems,{$splice:[[id,1,this.state.itemId]]})
                 this.setState({invoiceItems: updatedInvoiceItems})
-                console.log(this.state.invoiceItems)
                 this.setState({itemcheckYes:false})
             }else{
                 this.setState({ invoiceItems: this.state.item})
@@ -121,35 +124,37 @@ class InvoiceForm extends Component {
     checkItem(data){
         return e =>{
             e.preventDefault()
+            console.log('add clicked')
             data['count'] = parseInt(this.state.count) 
             this.setState({itemId:data.id})
             if (!this.isItemExist(data.id)) {
                 this.state.item.push(data)
                 this.setState({ total: this.state.total + (data.count * data.sellingPrice) })
-                // this.setState({ invoiceItems: this.state.item})
-                this.handleSubmit()
                          
             }else{
-                console.log('item exists')
-                this.setState({ itemcheck: true })
+                console.log('aaa')
+                this.setState({ itemcheckYes: true })
+               
             }
-            console.log(this.state.invoiceItems)
+            this.handleSubmit()
         }
     }
 
     isItemExist = (item) => {
-        console.log(item)
         return this.state.invoiceItems.some(function (el) {
             return el.id === item;
         });
     }
 
     saveInvoice = () =>{
-        console.log('invoice');
         if(this.state.customerCheck==false || this.state.invoiceItems.length==0){
             this.setState({ saveInvoiceCheck: true})
         }else{
-            
+           this.props.history.push({
+               pathname:'/app/shop/invoice/create/save',
+               state:[this.state.invoiceItems,this.state.total, this.state.customer]
+
+            }) 
         }
     }
 
@@ -163,7 +168,6 @@ class InvoiceForm extends Component {
                     this.setState({ searchCustomerKey: true })
                 } else {
                     this.setState({ customer: res.data })
-                    console.log(this.state.customer)
                     this.setState({ customerName: this.state.customer.name })
                     this.setState({ customerArea: this.state.customer.area })
                     this.setState({saveInvoiceCheck:false})
@@ -289,13 +293,14 @@ class InvoiceForm extends Component {
                                 <div className="col-6">
                                     <div className="form-group">
                                         <Button className="btn btn-sm btn-warning w-100" text="Save Invoice" onClick={this.saveInvoice}/>
-                                        {this.state.saveInvoiceCheck && 
-                                        <div className="text-danger">{this.state.saveInvoiceMessage}</div>
-                                        }
                                     </div>
                                 </div>
-
+                                {this.state.saveInvoiceCheck && 
+                                        <div className="text-danger">{this.state.saveInvoiceMessage}</div>
+                                        }
+                            
                             </div>
+                            
                         </div>
                         <div className='row'>
                             <div className="col-12">
@@ -380,4 +385,4 @@ class InvoiceForm extends Component {
     }
 }
 
-export default InvoiceForm;
+export default withRouter(InvoiceForm);
