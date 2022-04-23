@@ -1,5 +1,5 @@
 import './App.css';
-import React, {useState} from "react";
+import React, {useState, useCallback,useEffect} from "react";
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom"
 import HomePage from "./pages/HomePage";
 import NotFoundPage from "./pages/NotFound";
@@ -9,6 +9,24 @@ import CustomerRootPage from "./pages/customer/RootPage";
 
 
 function App() {
+
+  const handleKeyPress = useCallback((event) => {
+    if (event.shiftKey === true) {
+      console.log(`Key pressed: ${event.key}`);
+    }
+  }, []);
+
+  useEffect(() => {
+    // attach the event listener
+    document.addEventListener('keydown', handleKeyPress);
+
+    // remove the event listener
+    return () => {
+      document.removeEventListener('keydown', handleKeyPress);
+    };
+  }, [handleKeyPress]);
+
+
   return (
       <div className="App">
         <Router>
