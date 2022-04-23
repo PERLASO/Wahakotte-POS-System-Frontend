@@ -2,13 +2,15 @@ import React, { Component } from "react";
 import AnchorTag from "../../components/Anchortag";
 import Button from "../Button";
 import InputFormGroup from "../input/InputFormGroup";
-import Table from "../table/Table";
 import { getProductList, getSingleProduct } from "../../context/Product";
 import { getAllCustomers, getCustomer } from "../../context/Customer";
+import update from 'immutability-helper';
+import { withRouter } from 'react-router-dom';
+
 
 
 class InvoiceForm extends Component {
-    constructor(props) {
+    constructor(props) {   
         super(props);
         this.columnList = ["S/N", "ItemCode", "Name", "Description", "QTY", "Selling Price(LKR)", "Val. of QTY(LKR)", "Select Quantity"];
         this.invoiceColumnList = ["S/N", "ItemCode", "Name", "Description", "QTY", 'Price', "Total"];
@@ -19,34 +21,43 @@ class InvoiceForm extends Component {
             data: [],
             count: 1,
             item: [],
-            customerID: '1',
-            customers: [],
+            itemId:1,
+            invoiceItems: [],
+            passData:[],
+            itemcheck: false,
+            itemcheckYes:false,
+            customerCheck:false,
+            customer: {},
             customerName: 'Customer Name',
             customerArea: 'Area',
+            saveInvoiceCheck:false,
+            saveInvoiceMessage:'Please set both customer and product details to proceed',
             searchNameKey: '',
             searchProductKey: '',
             searchCustomerKey: false,
             searchKey: false,
-            sn:'',
-            itemCode:'',
-            name:'',
-            description:'',
-            qty:0,
-            price:0,
-            total:0
+            total: 0,
 
         }
 
         this.handleChangeCount = this.handleChangeCount.bind(this);
+        this.handleInvoiceItems = this.handleInvoiceItems.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.checkItem = this.checkItem.bind(this);
         this.handleChangeSearchNameKey = this.handleChangeSearchNameKey.bind(this);
         this.handleChangeSearchProductKey = this.handleChangeSearchProductKey.bind(this);
+        this.handleYes = this.handleYes.bind(this);
     }
+
+    
 
     handleChangeCount(e) {
         this.setState({ count: e.target.value })
     }
 
+    handleInvoiceItems() {
+        { this.setState({ invoiceItems: [] }) }
+    }
 
 
     handleChangeSearchNameKey(e) {
@@ -60,9 +71,21 @@ class InvoiceForm extends Component {
 
     }
 
+    handleYes(){
+        this.setState({itemcheck:false})
+        this.setState({itemcheckYes:true})
+        this.handleSubmit()
+    }
+
 
 
     componentDidMount() {
+        // let session = JSON.parse(window.sessionStorage.getItem('InvoiceItems'));
+        // let session2 = JSON.parse(window.sessionStorage.getItem("InvoiceTotal"))
+        // if (session != null && session2 != null) {
+        //     this.setState({ invoiceItems: session })
+        //     this.setState({ total: session2 })
+        // }
         getProductList().then(c => {
             if (c != undefined) {
                 this.setState({ isLoading: false })
@@ -73,32 +96,81 @@ class InvoiceForm extends Component {
             if (c != undefined) {
                 this.setState({ isLoading: false })
                 this.setState({ customerData: c.data })
-                //console.log(this.state.customerData)
             }
         })
     }
 
-    handleSubmit(data) {
+
+
+    handleSubmit() {
+        if(!this.state.itemcheck){
+            if(this.state.itemcheckYes){
+                console.log('bbb')
+                const id = this.state.invoiceItems.findIndex((el) => el.id === this.state.itemId)
+                const updatedInvoiceItems = update(this.state.invoiceItems,{$splice:[[id,1,this.state.itemId]]})
+                this.setState({invoiceItems: updatedInvoiceItems})
+                this.setState({itemcheckYes:false})
+            }else{
+                this.setState({ invoiceItems: this.state.item})
+            }
+            this.setState({saveInvoiceCheck:false})
+        }
+        
+            // window.sessionStorage.setItem("InvoiceItems", JSON.stringify(this.state.itemArray))
+            // window.sessionStorage.setItem("InvoiceTotal", this.state.total)
+            // this.setState({ invoiceItems: JSON.parse(window.sessionStorage.getItem('InvoiceItems'))})         
+    }
+
+    checkItem(data){
         return e =>{
-            e.preventDefault();
-            console.log(data);
-            console.log(this.state.count)
-            this.state.item.push(data)
-            this.setState({item: this.state.item})
-            console.log(this.state.item)
-            
+            e.preventDefault()
+            console.log('add clicked')
+            data['count'] = parseInt(this.state.count) 
+            this.setState({itemId:data.id})
+            if (!this.isItemExist(data.id)) {
+                this.state.item.push(data)
+                this.setState({ total: this.state.total + (data.count * data.sellingPrice) })
+                         
+            }else{
+                console.log('aaa')
+                this.setState({ itemcheckYes: true })
+               
+            }
+            this.handleSubmit()
         }
     }
 
+    isItemExist = (item) => {
+        return this.state.invoiceItems.some(function (el) {
+            return el.id === item;
+        });
+    }
+
+    saveInvoice = () =>{
+        if(this.state.customerCheck==false || this.state.invoiceItems.length==0){
+            this.setState({ saveInvoiceCheck: true})
+        }else{
+           this.props.history.push({
+               pathname:'/app/shop/invoice/create/save',
+               state:[this.state.invoiceItems,this.state.total, this.state.customer]
+
+            }) 
+        }
+    }
+
+
+
     onSearchCustomerClick = () => {
+        this.setState({customerCheck:true})
         getCustomer(this.state.searchNameKey).then(res => {
             try {
                 if (res.data.isDeleted) {
                     this.setState({ searchCustomerKey: true })
                 } else {
-                    this.setState({ customers: [res.data] })
-                    this.setState({ customerName: this.state.customers[0].name })
-                    this.setState({ customerArea: this.state.customers[0].area })
+                    this.setState({ customer: res.data })
+                    this.setState({ customerName: this.state.customer.name })
+                    this.setState({ customerArea: this.state.customer.area })
+                    this.setState({saveInvoiceCheck:false})
                 }
             } catch (error) {
                 this.setState({ searchCustomerKey: true })
@@ -125,26 +197,10 @@ class InvoiceForm extends Component {
 
     }
 
-    handleDecrement = () => {
-        if (this.state.count > 1) {
-            this.setState({ count: this.state.count - 1 });
-
-        }
-
-    }
-
-    handleIncreament = () => {
-        if (this.state.count < 5) {
-            this.setState({ count: this.state.count + 1 })
-        }
-    }
-
-
-
-
 
     render() {
         if (this.state.isLoading === true) {
+
             return (
                 <div>
                     Loading ...
@@ -153,6 +209,7 @@ class InvoiceForm extends Component {
         }
         return (
             <div className="admin-content mx-auto">
+                {this.state.invoiceItems == null && this.handleInvoiceItems}
                 <div className="w-100 mb-5">
                     <AnchorTag link="/app/shop/invoice/list" className="btn btn-sm btn-primary float-right" itemValue="Back to Invoice List"></AnchorTag>
                     <h4>Create Invoice</h4>
@@ -197,25 +254,53 @@ class InvoiceForm extends Component {
                             </div>
                             <div className="col-6">
 
-                                <div className="col-12 mt-4">
-                                    <Table className="table table-stripped" allowAction={false} columnList={this.invoiceColumnList} tableData={this.state.item} actionLinkPrefix=""></Table>
-                                    <table className="table table-dark w-25 float-right mt-4">
+                                <div className="col-12">
+                                    {/* <Table className="table table-stripped" allowAction={false} columnList={this.invoiceColumnList} tableData={this.state.invoiceItems} actionLinkPrefix=""></Table> */}
+                                    <table className="table">
+                                        <thead className="thead-dark">
+                                            <tr>
+                                                {this.invoiceColumnList.map((value, index) => {
+                                                    return (
+                                                        <th key={index}>{value}</th>
+                                                    )
+                                                })}
+                                            </tr>
+                                        </thead>
                                         <tbody>
+                                            {this.state.invoiceItems.map((invoiceItem, index) => {
+                                                return (
+
+                                                    <tr key={index}>
+                                                        <td>{invoiceItem.id}</td>
+                                                        <td>{invoiceItem.itemCode}</td>
+                                                        <td>{invoiceItem.name}</td>
+                                                        <td>{invoiceItem.description}</td>
+                                                        <td>{invoiceItem.count}</td>
+                                                        <td>{invoiceItem.sellingPrice}</td>
+                                                        <td>{invoiceItem.count * invoiceItem.sellingPrice}</td>
+                                                    </tr>
+                                                )
+                                            })}
                                             <tr>
                                                 <td>Total</td>
-                                                <td>25785.00</td>
+                                                <td>{this.state.total}</td>
                                             </tr>
                                         </tbody>
+
                                     </table>
                                 </div>
 
                                 <div className="col-6">
                                     <div className="form-group">
-                                        <Button className="btn btn-sm btn-warning w-100" text="Save Invoice" />
+                                        <Button className="btn btn-sm btn-warning w-100" text="Save Invoice" onClick={this.saveInvoice}/>
                                     </div>
                                 </div>
-
+                                {this.state.saveInvoiceCheck && 
+                                        <div className="text-danger">{this.state.saveInvoiceMessage}</div>
+                                        }
+                            
                             </div>
+                            
                         </div>
                         <div className='row'>
                             <div className="col-12">
@@ -238,6 +323,21 @@ class InvoiceForm extends Component {
                                 {this.state.searchKey && <div><h6 className="text-danger">Product Not Found!</h6></div>}
                             </div>
                         </div>
+
+                        {/* {this.state.itemcheck &&
+                            <div className="row">
+                                <div className="col-12">
+                                    <h6 className="text-danger"> Product is has been already added to the list. Do you want to change the quntity?</h6>
+                                </div>
+                                <div className="col-12">
+                                    <Button className="btn btn-sm btn-success" text="Yes" onClick={this.handleYes}/>     &nbsp;    &nbsp;
+                                    <Button className="btn btn-sm btn-secondary" text="No" />
+                                </div>
+
+
+                            </div>
+                        } */}
+
                         <div className="row">
                             <table className="table">
                                 <thead className="thead-dark">
@@ -250,7 +350,7 @@ class InvoiceForm extends Component {
                                     </tr>
                                 </thead>
                                 {this.state.data.map((data, index) => {
-                
+
                                     return (
                                         <tbody key={index}>
                                             <tr>
@@ -262,33 +362,27 @@ class InvoiceForm extends Component {
                                                 <td>{data.sellingPrice}</td>
                                                 <td>{data.stockValue}</td>
                                                 <td>
-                                                <form onSubmit={this.handleSubmit(data)} >
-                                                
-                                                        <input className="sm" type='number' placeholder='1' inputclassname="form-control" onChange={this.handleChangeCount}/>
-                                                        {/* <button className='text-xs rounded' onClick={this.handleDecrement} >-</button>
-                                                        <label className='mx-6'>{this.state.count}</label>
-                                                        <button className='text-xs rounded' onClick={this.handleIncreament} >+</button> */}
+                                                    <form onSubmit={this.checkItem(data)} >
+
+                                                        <input className="sm" type='number' placeholder='1' inputclassname="form-control" min={1} max={data.qty} onChange={this.handleChangeCount} />
                                                         &nbsp;
-                                                        <button className="btn-info" type='submit' >Add</button>
-                                                        </form>
-                                                        
-                                                    
+                                                        <button className="button-add btn-info" type='submit'  >Add</button>
+                                                    </form>
                                                 </td>
-                    
-                                                
                                             </tr>
 
                                         </tbody>
-
                                     )
                                 })}
                             </table>
+
                         </div>
                     </div>
                 </div>
+
             </div>
         )
     }
 }
 
-export default InvoiceForm;
+export default withRouter(InvoiceForm);
