@@ -63,11 +63,11 @@ class EmployeeList extends Component{
     render(){
         return (
             <div className="admin-content mx-auto">
-                <div className="w-100 mb-5">
+                <div className="w-100 mb-3">
                     <AnchorTag link="/app/shop/employee/create" className="btn btn-sm btn-warning float-right" itemValue="Create Customer"></AnchorTag>
                     <h4>Customer List</h4>
                 </div>
-                <div className="row mb-5">
+                <div className="row mb-2">
                     <div className="col-4">
                         <p><b>Search a Customer</b></p>
                     </div>
@@ -83,7 +83,7 @@ class EmployeeList extends Component{
                     {this.state.searchKey && <div><h6 className="text-danger">User Not Found!</h6></div>}
                     </div>
                 </div>
-                <Table className="table table-striped" columnList={this.columnList} tableData={this.state.customers} actionLinkPrefix=""></Table>
+                <Table className="table table-striped customer-list-table" columnList={this.columnList} tableData={this.state.customers} actionLinkPrefix=""></Table>
             </div>
         ) 
     }
