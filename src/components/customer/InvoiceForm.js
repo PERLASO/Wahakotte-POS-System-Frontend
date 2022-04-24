@@ -13,7 +13,7 @@ class InvoiceForm extends Component {
     constructor(props) {
         super(props);
         this.columnList = ["S/N", "ItemCode", "Name", "Description", "QTY", "Selling Price(LKR)", "Val. of QTY(LKR)", "Select Quantity"];
-        this.invoiceColumnList = ["S/N", "ItemCode", "Name", "Description", "QTY", 'Price', "Total"];
+        this.invoiceColumnList = ["S/N", "ItemCode", "Name", "Description", "QTY", 'Price(LKR)', "Total(LKR)"];
         this.invoiceTableData = []
 
         this.state = {
@@ -234,7 +234,7 @@ class InvoiceForm extends Component {
                                     <InputFormGroup labelClassName="mb-2" label="" inputclassname="form-control form-control-sm" onChange={this.handleChangeBillNo} placeholder="Enter Bill No" />
                                     </div>
                                 </div>
-                                <div className="row p-3">
+                                <div className="row p-1">
                                     <div className='col-12 '>
                                         <hr/>
                                     </div>
@@ -300,8 +300,8 @@ class InvoiceForm extends Component {
                                                         <td>{invoiceItem.name}</td>
                                                         <td>{invoiceItem.description}</td>
                                                         <td>{invoiceItem.count}</td>
-                                                        <td>{invoiceItem.sellingPrice}</td>
-                                                        <td>{invoiceItem.count * invoiceItem.sellingPrice}</td>
+                                                        <td>{invoiceItem.sellingPrice}.00</td>
+                                                        <td>{invoiceItem.count * invoiceItem.sellingPrice}.00</td>
                                                     </tr>
                                                 )
                                             })}
@@ -316,7 +316,7 @@ class InvoiceForm extends Component {
 
                                 <div className="col-6">
                                     <div className="form-group">
-                                        <Button className="btn btn-sm btn-warning w-100" text="Click to Proceed" onClick={this.saveInvoice} />
+                                        <Button className="btn btn-sm btn-warning w-100" text="Proceed" onClick={this.saveInvoice} />
                                     </div>
                                 </div>
                                 {this.state.saveInvoiceCheck &&
@@ -383,8 +383,8 @@ class InvoiceForm extends Component {
                                                 <td>{data.name}</td>
                                                 <td>{data.description}</td>
                                                 <td>{data.qty}</td>
-                                                <td>{data.sellingPrice}</td>
-                                                <td>{data.stockValue}</td>
+                                                <td>{data.sellingPrice}.00</td>
+                                                <td>{data.stockValue}.00</td>
                                                 <td>
                                                     <form onSubmit={this.checkItem(data)} >
 
