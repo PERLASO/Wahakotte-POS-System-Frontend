@@ -11,28 +11,22 @@ import NotFoundPage from "./pages/NotFound";
 import AuthPage from "./pages/AuthPage";
 import RootPage from "./pages/admin/RootPage";
 import CustomerRootPage from "./pages/customer/RootPage";
+import { shortcutKeys } from "./shortcutKeysConfig.js";
+import Mousetrap from "mousetrap";
 
 function App() {
-  const handleKeyPress = useCallback((event) => {
-    if (event.shiftKey === true) {
-      var element = document.getElementById("invoiceList-customer-name-input");
-      if (element != null) {
-        console.log("alkalkdsfa");
-      }
-
-      console.log(`Key pressed: ${event.key}`);
-    }
-  }, []);
-
   useEffect(() => {
-    // attach the event listener
-    document.addEventListener("keydown", handleKeyPress);
 
-    // remove the event listener
-    return () => {
-      document.removeEventListener("keydown", handleKeyPress);
-    };
-  }, [handleKeyPress]);
+    Mousetrap.bind(shortcutKeys.SK01, function (e) {
+      const input = document.getElementById("testref2");
+      if (typeof input != "undefined" && input != null) {
+        input.setSelectionRange(0, 0);
+        input.focus();
+      }
+      return false;
+    });
+
+  }, []);
 
   return (
     <div className="App">
