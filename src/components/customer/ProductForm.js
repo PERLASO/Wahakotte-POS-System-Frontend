@@ -55,7 +55,6 @@ class ProductForm extends Component {
     handleSubmit(event) {
         event.preventDefault();
         let stock= this.state.buyingprice*this.state.qty;
-        console.log(stock)
         let data = {
             name: this.state.name,
             itemCode: this.state.itemcode,
@@ -69,7 +68,6 @@ class ProductForm extends Component {
             
         }
         
-        console.log(data)
         setProduct(data).then(c=>{
             if(c.data === true){
                 alert("Product Added!");

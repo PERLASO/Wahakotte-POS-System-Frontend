@@ -34,7 +34,7 @@ class EmployeeList extends Component{
             this.setState({isLoading : false})
             console.log(res.data)
             this.setState({customers: res.data})
-            console.log(this.state.customers)
+    
         })
     }
 

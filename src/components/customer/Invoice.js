@@ -1,13 +1,29 @@
-import React, { useState } from 'react'
-import InputFormGroup from "../input/InputFormGroup";
+import React from 'react';
 
-export default function InvoiceSave(props) {
-    const [invoiceItems, setinvoiceItems] = useState(props.location.state[0]);
-    const [total, settotal] = useState(props.location.state[1])
-    const [customer, setcustomer] = useState(props.location.state[2])
 
-    return (
-        <div className='container'>
+class Invoice extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state ={
+            invoiceItems : props.props[0],
+            total:props.props[1],
+            customer: props.props[2],
+            billNo:props.props[3],
+            checkSaved:false
+
+        }
+
+        const current = new Date();
+        this.date = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
+      
+    }
+
+   
+
+
+    render() { 
+        return (  
+            <div className='container'>
             <h4 className='text-center pb-5'>Wijerathna Marketing Service</h4>
             <div className="container">
                 <div className="row">
@@ -17,7 +33,7 @@ export default function InvoiceSave(props) {
                                 Date
                             </div>
                             <div className='col'>
-                                <input type="text" className="form-control" value={'2022/02/22'} readOnly/>
+                                <input type="text" className="form-control" value={this.date} readOnly/>
                             </div>
                         </div>
                         <div className='row p-1'>
@@ -25,7 +41,7 @@ export default function InvoiceSave(props) {
                                 Bill No
                             </div>
                             <div className='col'>
-                            <input type="text" className="form-control" placeholder="Enter Bill No" />
+                            <input type="text" className="form-control" value={this.state.billNo} readOnly/>
                             </div>
                         </div>
                         <div className='row p-1'>
@@ -33,7 +49,7 @@ export default function InvoiceSave(props) {
                                 Customer ID
                             </div>
                             <div className='col'>
-                            <input type="text" className="form-control" value={customer.id} readOnly/>
+                            <input type="text" className="form-control" value={this.state.customer.id} readOnly/>
                             </div>
                         </div>
                     </div>
@@ -43,7 +59,7 @@ export default function InvoiceSave(props) {
                                 Customer Name
                             </div>
                             <div className='col'>
-                                <input type="text" className="form-control" value={customer.name} readOnly/>
+                                <input type="text" className="form-control" value={this.state.customer.name} readOnly/>
                             </div>
                         </div>
                         <div className='row p-1'>
@@ -51,7 +67,7 @@ export default function InvoiceSave(props) {
                                 Area
                             </div>
                             <div className='col'>
-                            <input type="text" className="form-control" value={customer.area} readOnly/>
+                            <input type="text" className="form-control" value={this.state.customer.area} readOnly/>
                             </div>
                         </div>
                         <div className='row p-1'>
@@ -59,7 +75,7 @@ export default function InvoiceSave(props) {
                                 T/N
                             </div>
                             <div className='col'>
-                            <input type="text" className="form-control" value={0} readOnly/>
+                            <input type="text" className="form-control" value={this.state.customer.phoneNumber} readOnly/>
                             </div>
                         </div>
                     </div>
@@ -80,7 +96,7 @@ export default function InvoiceSave(props) {
                     </tr>
                 </thead>
                 <tbody>
-                    {invoiceItems.map((invoiceItem, index) => {
+                    {this.state.invoiceItems.map((invoiceItem, index) => {
                         return (
 
                             <tr key={index}>
@@ -99,16 +115,16 @@ export default function InvoiceSave(props) {
                     <tr>
 
                     <td className='font-weight-bold '>Grand Total</td>
-                    <td className='font-weight-bold '>{total}</td>
+                    <td className='font-weight-bold '>{this.state.total}</td>
 
                     </tr>
-
-                   
-
                 </tbody>
             </table>
-            <button className='btn btn-success m-1'> Save & Print </button>
-            <button className='btn btn-primary m-1'> Save </button>
         </div>
-    )
+
+        );
+    }
 }
+
+ 
+export default Invoice;

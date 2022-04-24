@@ -72,7 +72,7 @@ class ProductEdit extends Component {
 
         }
 
-        //  console.log(data)
+    
         updateProduct(data).then(c => {
             if (c.data === true) {
                 alert("Success !");

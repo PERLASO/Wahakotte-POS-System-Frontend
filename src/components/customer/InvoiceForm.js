@@ -10,7 +10,7 @@ import { withRouter } from 'react-router-dom';
 
 
 class InvoiceForm extends Component {
-    constructor(props) {   
+    constructor(props) {
         super(props);
         this.columnList = ["S/N", "ItemCode", "Name", "Description", "QTY", "Selling Price(LKR)", "Val. of QTY(LKR)", "Select Quantity"];
         this.invoiceColumnList = ["S/N", "ItemCode", "Name", "Description", "QTY", 'Price', "Total"];
@@ -18,20 +18,22 @@ class InvoiceForm extends Component {
 
         this.state = {
             isLoading: true,
+            billNo:'',
+            billNoCheck:false,
             data: [],
             count: 1,
             item: [],
-            itemId:1,
+            itemId: 1,
             invoiceItems: [],
-            passData:[],
+            passData: [],
             itemcheck: false,
-            itemcheckYes:false,
-            customerCheck:false,
+            itemcheckYes: false,
+            customerCheck: false,
             customer: {},
             customerName: 'Customer Name',
             customerArea: 'Area',
-            saveInvoiceCheck:false,
-            saveInvoiceMessage:'Please set both customer and product details to proceed',
+            saveInvoiceCheck: false,
+            saveInvoiceMessage: 'Please set Customer Details, Products and Bill Number to proceed',
             searchNameKey: '',
             searchProductKey: '',
             searchCustomerKey: false,
@@ -41,6 +43,7 @@ class InvoiceForm extends Component {
         }
 
         this.handleChangeCount = this.handleChangeCount.bind(this);
+        this.handleChangeBillNo = this.handleChangeBillNo.bind(this);
         this.handleInvoiceItems = this.handleInvoiceItems.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.checkItem = this.checkItem.bind(this);
@@ -49,7 +52,7 @@ class InvoiceForm extends Component {
         this.handleYes = this.handleYes.bind(this);
     }
 
-    
+
 
     handleChangeCount(e) {
         this.setState({ count: e.target.value })
@@ -57,6 +60,12 @@ class InvoiceForm extends Component {
 
     handleInvoiceItems() {
         { this.setState({ invoiceItems: [] }) }
+    }
+
+    handleChangeBillNo(e){
+        this.setState({billNo: e.target.value})
+        this.setState({billNoCheck:true})
+        this.setState({saveInvoiceCheck:true})
     }
 
 
@@ -71,9 +80,9 @@ class InvoiceForm extends Component {
 
     }
 
-    handleYes(){
-        this.setState({itemcheck:false})
-        this.setState({itemcheckYes:true})
+    handleYes() {
+        this.setState({ itemcheck: false })
+        this.setState({ itemcheckYes: true })
         this.handleSubmit()
     }
 
@@ -103,38 +112,36 @@ class InvoiceForm extends Component {
 
 
     handleSubmit() {
-        if(!this.state.itemcheck){
-            if(this.state.itemcheckYes){
-                console.log('bbb')
+        if (!this.state.itemcheck) {
+            if (this.state.itemcheckYes) {
                 const id = this.state.invoiceItems.findIndex((el) => el.id === this.state.itemId)
-                const updatedInvoiceItems = update(this.state.invoiceItems,{$splice:[[id,1,this.state.itemId]]})
-                this.setState({invoiceItems: updatedInvoiceItems})
-                this.setState({itemcheckYes:false})
-            }else{
-                this.setState({ invoiceItems: this.state.item})
+                const updatedInvoiceItems = update(this.state.invoiceItems, { $splice: [[id, 1, this.state.itemId]] })
+                this.setState({ invoiceItems: updatedInvoiceItems })
+                this.setState({ itemcheckYes: false })
+            } else {
+                this.setState({ invoiceItems: this.state.item })
             }
-            this.setState({saveInvoiceCheck:false})
+            this.setState({ saveInvoiceCheck: false })
         }
-        
-            // window.sessionStorage.setItem("InvoiceItems", JSON.stringify(this.state.itemArray))
-            // window.sessionStorage.setItem("InvoiceTotal", this.state.total)
-            // this.setState({ invoiceItems: JSON.parse(window.sessionStorage.getItem('InvoiceItems'))})         
+
+        // window.sessionStorage.setItem("InvoiceItems", JSON.stringify(this.state.itemArray))
+        // window.sessionStorage.setItem("InvoiceTotal", this.state.total)
+        // this.setState({ invoiceItems: JSON.parse(window.sessionStorage.getItem('InvoiceItems'))})         
     }
 
-    checkItem(data){
-        return e =>{
+    checkItem(data) {
+        return e => {
             e.preventDefault()
-            console.log('add clicked')
-            data['count'] = parseInt(this.state.count) 
-            this.setState({itemId:data.id})
+            data['count'] = parseInt(this.state.count)
+            this.setState({ itemId: data.id })
             if (!this.isItemExist(data.id)) {
                 this.state.item.push(data)
                 this.setState({ total: this.state.total + (data.count * data.sellingPrice) })
-                         
-            }else{
-                console.log('aaa')
+
+            } else {
+                
                 this.setState({ itemcheckYes: true })
-               
+
             }
             this.handleSubmit()
         }
@@ -146,31 +153,32 @@ class InvoiceForm extends Component {
         });
     }
 
-    saveInvoice = () =>{
-        if(this.state.customerCheck==false || this.state.invoiceItems.length==0){
-            this.setState({ saveInvoiceCheck: true})
-        }else{
-           this.props.history.push({
-               pathname:'/app/shop/invoice/create/save',
-               state:[this.state.invoiceItems,this.state.total, this.state.customer]
+    saveInvoice = () => {
+        if (this.state.customerCheck === false || this.state.invoiceItems.length === 0 || this.state.billNoCheck===false) {
+            this.setState({ saveInvoiceCheck: true })
+        } else {
+            this.props.history.push({
+                pathname: '/app/shop/invoice/create/save/print',
+                state: [this.state.invoiceItems, this.state.total, this.state.customer, this.state.billNo]
 
-            }) 
+            })
         }
     }
 
 
 
     onSearchCustomerClick = () => {
-        this.setState({customerCheck:true})
         getCustomer(this.state.searchNameKey).then(res => {
             try {
                 if (res.data.isDeleted) {
                     this.setState({ searchCustomerKey: true })
                 } else {
+
                     this.setState({ customer: res.data })
                     this.setState({ customerName: this.state.customer.name })
                     this.setState({ customerArea: this.state.customer.area })
-                    this.setState({saveInvoiceCheck:false})
+                    this.setState({ saveInvoiceCheck: false })
+                    this.setState({ customerCheck: true })
                 }
             } catch (error) {
                 this.setState({ searchCustomerKey: true })
@@ -188,7 +196,7 @@ class InvoiceForm extends Component {
                     this.setState({ searchKey: true })
                 } else {
                     this.setState({ data: [res.data] })
-                    console.log(this.state.data)
+                   
                 }
             } catch (error) {
                 this.setState({ searchKey: true })
@@ -216,7 +224,23 @@ class InvoiceForm extends Component {
                 </div>
                 <div className="w-200">
                     <div className="container-fluid">
-                        <div className="row">
+                        <div className="row ">
+                            <div className="col-12">
+                                <div className="row">
+                                    <div className='col-2 '>
+                                        <h6>Bill No</h6>
+                                    </div>
+                                    <div className='col-4'>
+                                    <InputFormGroup labelClassName="mb-2" label="" inputclassname="form-control form-control-sm" onChange={this.handleChangeBillNo} placeholder="Enter Bill No" />
+                                    </div>
+                                </div>
+                                <div className="row p-3">
+                                    <div className='col-12 '>
+                                        <hr/>
+                                    </div>
+                                </div>
+
+                            </div>
                             <div className="col-6 border-right">
                                 <div className="row">
                                     <div className="col-12">
@@ -292,15 +316,15 @@ class InvoiceForm extends Component {
 
                                 <div className="col-6">
                                     <div className="form-group">
-                                        <Button className="btn btn-sm btn-warning w-100" text="Save Invoice" onClick={this.saveInvoice}/>
+                                        <Button className="btn btn-sm btn-warning w-100" text="Click to Proceed" onClick={this.saveInvoice} />
                                     </div>
                                 </div>
-                                {this.state.saveInvoiceCheck && 
-                                        <div className="text-danger">{this.state.saveInvoiceMessage}</div>
-                                        }
-                            
+                                {this.state.saveInvoiceCheck &&
+                                    <div className="text-danger">{this.state.saveInvoiceMessage}</div>
+                                }
+
                             </div>
-                            
+
                         </div>
                         <div className='row'>
                             <div className="col-12">
