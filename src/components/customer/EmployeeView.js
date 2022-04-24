@@ -15,7 +15,6 @@ class EmployeeView extends Component{
 
     componentDidMount() {
         getCustomer(this.props.match.params.employeeId).then(c => {
-            console.log(this.props.match.params.employeeId)
             if (c !== undefined) {
                 this.setState({ data: c.data })
             }

@@ -53,7 +53,6 @@ class EmployeeForm extends Component{
             phoneNumber:this.state.phoneNumber,
         }
 
-        console.log(data);
         setCustomer(data).then( res => {
             if(res.data == true){
                 alert("Employee Added");

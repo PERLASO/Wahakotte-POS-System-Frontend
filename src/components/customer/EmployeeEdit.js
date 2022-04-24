@@ -53,8 +53,7 @@ class EmployeeEdit extends Component {
                 this.setState({address: res.data.address});
                 this.setState({area: res.data.area});
                 this.setState({phoneNumber: res.data.phoneNumber})
-                console.log(this.state)
-                console.log(this.props.match.params.employeeId)
+
             }
         })
     }
@@ -70,7 +69,6 @@ class EmployeeEdit extends Component {
             phoneNumber:this.state.phoneNumber,
         }
 
-        console.log(data);
         updateCustomer(data).then(res => {
             if(res.data === true){
                 alert("Success!");
