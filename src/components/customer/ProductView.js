@@ -38,7 +38,6 @@ class ProductView extends Component {
             }
 
         })
-        // console.log("deleted")
         // this.props.history.push(`/app/shop/product/list`);
 
     }

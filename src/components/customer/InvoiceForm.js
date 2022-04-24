@@ -114,7 +114,6 @@ class InvoiceForm extends Component {
     handleSubmit() {
         if (!this.state.itemcheck) {
             if (this.state.itemcheckYes) {
-                console.log('bbb')
                 const id = this.state.invoiceItems.findIndex((el) => el.id === this.state.itemId)
                 const updatedInvoiceItems = update(this.state.invoiceItems, { $splice: [[id, 1, this.state.itemId]] })
                 this.setState({ invoiceItems: updatedInvoiceItems })
@@ -133,7 +132,6 @@ class InvoiceForm extends Component {
     checkItem(data) {
         return e => {
             e.preventDefault()
-            console.log('add clicked')
             data['count'] = parseInt(this.state.count)
             this.setState({ itemId: data.id })
             if (!this.isItemExist(data.id)) {
@@ -141,7 +139,7 @@ class InvoiceForm extends Component {
                 this.setState({ total: this.state.total + (data.count * data.sellingPrice) })
 
             } else {
-                console.log('aaa')
+                
                 this.setState({ itemcheckYes: true })
 
             }
@@ -198,7 +196,7 @@ class InvoiceForm extends Component {
                     this.setState({ searchKey: true })
                 } else {
                     this.setState({ data: [res.data] })
-                    console.log(this.state.data)
+                   
                 }
             } catch (error) {
                 this.setState({ searchKey: true })

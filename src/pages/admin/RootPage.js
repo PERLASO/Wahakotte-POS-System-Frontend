@@ -14,7 +14,6 @@ class AdminRootPage extends Component{
         this.userRole = "admin";
         
         let {path, url} = this.props.match;
-        console.log(this.props);
     }
 
 

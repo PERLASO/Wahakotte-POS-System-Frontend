@@ -33,7 +33,7 @@ class EmployeeList extends Component{
         getAllCustomers().then( (res) => {
             this.setState({isLoading : false})
             this.setState({customers: res.data})
-            console.log(this.state.customers)
+    
         })
     }
 
