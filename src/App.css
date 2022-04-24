@@ -1,14 +1,11 @@
-.product-list-table {
-  background-color: coral;
-}
-
-.customer-list-table {
+.list-table {
   display: block;
-  height: 30rem;
+  height: 28rem;
   overflow-y: scroll;
+  scrollbar-width: none;
 }
 
-.customer-list-table th{
+.list-table th {
     position: sticky;
     top: 0;
   }

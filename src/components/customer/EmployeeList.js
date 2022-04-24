@@ -83,7 +83,9 @@ class EmployeeList extends Component{
                     {this.state.searchKey && <div><h6 className="text-danger">User Not Found!</h6></div>}
                     </div>
                 </div>
-                <Table className="table table-striped customer-list-table" columnList={this.columnList} tableData={this.state.customers} actionLinkPrefix=""></Table>
+                <div className="list-table">
+                <Table className="table table-striped" columnList={this.columnList} tableData={this.state.customers} actionLinkPrefix=""></Table>
+           </div>
             </div>
         ) 
     }
