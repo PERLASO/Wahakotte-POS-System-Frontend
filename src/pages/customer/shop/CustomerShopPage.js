@@ -13,9 +13,10 @@ import EmployeeForm from "../../../components/customer/EmployeeForm";
 import EmployeeView from "../../../components/customer/EmployeeView";
 import InvoiceList from "../../../components/customer/InvoiceList";
 import InvoiceForm from "../../../components/customer/InvoiceForm";
-import InvoiceSave from '../../../components/customer/InvoiceSave';
 import ProductEdit from "../../../components/customer/ProductEdit";
 import EmployeeEdit from "../../../components/customer/EmployeeEdit";
+import InvoicePrint from "../../../components/customer/InvoicePrint";
+import Invoice from '../../../components/customer/Invoice'
 
 
 class CustomerShopPage extends Component{
@@ -43,7 +44,8 @@ class CustomerShopPage extends Component{
                 <Route exact path={`${this.props.match.path}/employee/edit/:employeeId`} component={EmployeeEdit} />
                 <Route exact path={`${this.props.match.path}/invoice/list`} component={InvoiceList}/>
                 <Route exact path={`${this.props.match.path}/invoice/create`} component={InvoiceForm}/>
-                <Route exact path={`${this.props.match.path}/invoice/create/save`} component={InvoiceSave}/>
+                <Route exact path={`${this.props.match.path}/invoice/create/save`} component={Invoice}/>
+                <Route exact path={`${this.props.match.path}/invoice/create/save/print`} component={InvoicePrint}/>
             </Switch>
             
         </div>
