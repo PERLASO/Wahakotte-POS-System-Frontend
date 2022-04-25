@@ -386,7 +386,7 @@ class InvoiceForm extends Component {
 
                                                         <input className="sm" type='number' placeholder='1' inputclassname="form-control" min={1} max={data.qty} onChange={this.handleChangeCount} />
                                                         &nbsp;
-                                                        <button className="button-add btn-info" type='submit'  >Add</button>
+                                                        <button className="button-add btn btn-info" type='submit'  >Add</button>
                                                     </form>
                                                 </td>
                                             </tr>
