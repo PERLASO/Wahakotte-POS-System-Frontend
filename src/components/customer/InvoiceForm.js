@@ -18,11 +18,11 @@ class InvoiceForm extends Component {
 
         this.state = {
             isLoading: true,
-            billNo:'',
-            billNoCheck:false,
+            billNo: '',
+            billNoCheck: false,
             data: [],
             count: 1,
-            item: [],
+            item: {},
             itemId: 1,
             invoiceItems: [],
             passData: [],
@@ -45,7 +45,6 @@ class InvoiceForm extends Component {
         this.handleChangeCount = this.handleChangeCount.bind(this);
         this.handleChangeBillNo = this.handleChangeBillNo.bind(this);
         this.handleInvoiceItems = this.handleInvoiceItems.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
         this.checkItem = this.checkItem.bind(this);
         this.handleChangeSearchNameKey = this.handleChangeSearchNameKey.bind(this);
         this.handleChangeSearchProductKey = this.handleChangeSearchProductKey.bind(this);
@@ -62,10 +61,10 @@ class InvoiceForm extends Component {
         { this.setState({ invoiceItems: [] }) }
     }
 
-    handleChangeBillNo(e){
-        this.setState({billNo: e.target.value})
-        this.setState({billNoCheck:true})
-        this.setState({saveInvoiceCheck:true})
+    handleChangeBillNo(e) {
+        this.setState({ billNo: e.target.value })
+        this.setState({ billNoCheck: true })
+        this.setState({ saveInvoiceCheck: true })
     }
 
 
@@ -83,7 +82,6 @@ class InvoiceForm extends Component {
     handleYes() {
         this.setState({ itemcheck: false })
         this.setState({ itemcheckYes: true })
-        this.handleSubmit()
     }
 
 
@@ -110,51 +108,49 @@ class InvoiceForm extends Component {
     }
 
 
-
-    handleSubmit() {
-        if (!this.state.itemcheck) {
-            if (this.state.itemcheckYes) {
-                const id = this.state.invoiceItems.findIndex((el) => el.id === this.state.itemId)
-                const updatedInvoiceItems = update(this.state.invoiceItems, { $splice: [[id, 1, this.state.itemId]] })
-                this.setState({ invoiceItems: updatedInvoiceItems })
-                this.setState({ itemcheckYes: false })
-            } else {
-                this.setState({ invoiceItems: this.state.item })
-            }
-            this.setState({ saveInvoiceCheck: false })
-        }
-
-        // window.sessionStorage.setItem("InvoiceItems", JSON.stringify(this.state.itemArray))
-        // window.sessionStorage.setItem("InvoiceTotal", this.state.total)
-        // this.setState({ invoiceItems: JSON.parse(window.sessionStorage.getItem('InvoiceItems'))})         
-    }
-
     checkItem(data) {
-        return e => {
-            e.preventDefault()
-            data['count'] = parseInt(this.state.count)
+        return async e => {
+            console.log(this.state.invoiceItems)
+            e.preventDefault();
             this.setState({ itemId: data.id })
-            if (!this.isItemExist(data.id)) {
-                this.state.item.push(data)
-                this.setState({ total: this.state.total + (data.count * data.sellingPrice) })
-
-            } else {
+            
+            if (this.isItemExist(data.id)) {
+                console.log('item exists') 
+                let total =0;
+                this.state.invoiceItems.find((el) => { if(el.id === data.id) {
+                    el['count'] = this.state.count;
+                        
+                }
+                total = total + el.count*el.sellingPrice 
                 
-                this.setState({ itemcheckYes: true })
+                this.setState({total : total })
+            })
+                console.log(this.state.invoiceItems)
+            } else {
+                data['count'] = parseInt(this.state.count)
+                await this.setState({ item: data })
+                this.state.invoiceItems.push(this.state.item)
+                console.log(this.state.invoiceItems)
+                this.setState({total : this.state.total +data.count*data.sellingPrice})
 
             }
-            this.handleSubmit()
+            
+            console.log(this.state.total)
+
         }
     }
 
-    isItemExist = (item) => {
-        return this.state.invoiceItems.some(function (el) {
-            return el.id === item;
-        });
+    isItemExist = (data) => {
+        return this.state.invoiceItems.find((el) => {
+            console.log(el.id === data)
+            return el.id === data
+        })
+
     }
+
 
     saveInvoice = () => {
-        if (this.state.customerCheck === false || this.state.invoiceItems.length === 0 || this.state.billNoCheck===false) {
+        if (this.state.customerCheck === false || this.state.invoiceItems.length === 0 || this.state.billNoCheck === false) {
             this.setState({ saveInvoiceCheck: true })
         } else {
             this.props.history.push({
@@ -196,7 +192,7 @@ class InvoiceForm extends Component {
                     this.setState({ searchKey: true })
                 } else {
                     this.setState({ data: [res.data] })
-                   
+
                 }
             } catch (error) {
                 this.setState({ searchKey: true })
@@ -231,12 +227,12 @@ class InvoiceForm extends Component {
                                         <h6>Bill No</h6>
                                     </div>
                                     <div className='col-4'>
-                                    <InputFormGroup labelClassName="mb-2" label="" inputclassname="form-control form-control-sm" onChange={this.handleChangeBillNo} placeholder="Enter Bill No" />
+                                        <InputFormGroup labelClassName="mb-2" label="" inputclassname="form-control form-control-sm" onChange={this.handleChangeBillNo} placeholder="Enter Bill No" />
                                     </div>
                                 </div>
                                 <div className="row p-1">
                                     <div className='col-12 '>
-                                        <hr/>
+                                        <hr />
                                     </div>
                                 </div>
 
