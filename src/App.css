@@ -29,3 +29,7 @@
   height:5rem;
   font-size: 15px;
 }
+
+.capitalize-input{
+  text-transform:uppercase;
+}
