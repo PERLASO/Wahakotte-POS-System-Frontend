@@ -12,7 +12,10 @@ export default function PrintComponent(props) {
   return (
       <div>
         {/* component to be printed */}
+        <div className="mb-5">
         <Invoice ref={(el) => (componentRef = el)} props={data}/>
+        </div>
+        
 
          {/* button to trigger printing of target component */}
          <ReactToPrint
