@@ -366,9 +366,9 @@ class InvoiceForm extends Component {
                             <table className="table">
                                 <thead className="thead-dark">
                                     <tr>
-                                        {this.columnList.map((value, index) => {
+                                        {this.columnList.map((field, index) => {
                                             return (
-                                                <th key={index}>{value}</th>
+                                                <th key={index}>{field}</th>
                                             )
                                         })}
                                     </tr>

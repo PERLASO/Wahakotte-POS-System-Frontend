@@ -1,0 +1,11 @@
+.list-table {
+  display: block;
+  height: 28rem;
+  overflow-y: scroll;
+  scrollbar-width: none;
+}
+
+.list-table th {
+    position: sticky;
+    top: 0;
+  }

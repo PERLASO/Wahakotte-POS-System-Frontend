@@ -38,6 +38,7 @@ class ProductView extends Component {
             }
 
         })
+        // console.log("deleted")
         // this.props.history.push(`/app/shop/product/list`);
 
     }
@@ -46,7 +47,7 @@ class ProductView extends Component {
 
         return (
             <div className="admin-content mx-auto">
-                <div className="w-100 mb-5">
+                <div className="w-100 mb-2">
                     <h4>Product Details</h4>
                 </div>
                 <div className="w-75">
@@ -112,11 +113,15 @@ class ProductView extends Component {
 
                                 <div className="col-6 mt-4">
                                     <div className="form-group">
-                                        <AnchorTag className="btn btn-warning" itemValue="Back to List" link="/app/shop/product/list" />
+                                        <AnchorTag className="btn btn-warning mr-5" itemValue="Back to List" link="/app/shop/product/list" />
+                                        
+                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
+                            Product delete
+                                       </button>
                                     </div>
 
-
                                 </div>
+                             
 
 
                             </div>
@@ -128,10 +133,6 @@ class ProductView extends Component {
 
                     <div className="col-6 mt-4">
 
-                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
-                            Product delete
-                        </button>
-
                         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
@@ -142,7 +143,7 @@ class ProductView extends Component {
                                         </button>
                                     </div>
 
-                                    <div class="modal-footer">
+                                    <div class="modal-footer d-flex">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
                                         <button type="button" class="btn btn-primary" data-dismiss="modal" onClick={this.handledelete}>Yes</button>
                                     </div>

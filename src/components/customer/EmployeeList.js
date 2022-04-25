@@ -32,6 +32,7 @@ class EmployeeList extends Component{
     componentDidMount(){
         getAllCustomers().then( (res) => {
             this.setState({isLoading : false})
+            console.log(res.data)
             this.setState({customers: res.data})
     
         })
@@ -62,11 +63,11 @@ class EmployeeList extends Component{
     render(){
         return (
             <div className="admin-content mx-auto">
-                <div className="w-100 mb-5">
+                <div className="w-100 mb-3">
                     <AnchorTag link="/app/shop/employee/create" className="btn btn-sm btn-warning float-right" itemValue="Create Customer"></AnchorTag>
                     <h4>Customer List</h4>
                 </div>
-                <div className="row mb-5">
+                <div className="row mb-2">
                     <div className="col-4">
                         <p><b>Search a Customer</b></p>
                     </div>
@@ -82,7 +83,9 @@ class EmployeeList extends Component{
                     {this.state.searchKey && <div><h6 className="text-danger">User Not Found!</h6></div>}
                     </div>
                 </div>
+                <div className="list-table">
                 <Table className="table table-striped" columnList={this.columnList} tableData={this.state.customers} actionLinkPrefix=""></Table>
+           </div>
             </div>
         ) 
     }

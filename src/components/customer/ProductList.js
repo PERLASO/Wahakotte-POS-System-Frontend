@@ -8,7 +8,7 @@ import { getProductList } from "../../context/Product";
 class ProductList extends Component{
     constructor(props){
         super(props);
-        this.columnList = ["S/N","ItemCode", "Name", "Description", "QTY", "Selling Price(LKR)", "Val. of QTY(LKR)"];
+        this.columnList = ["S/N","ItemCode", "Name", "Description", "QTY", "Selling Price(LKR)", "Val. of QTY(LKR)","Action"];
         this.tableData = [
             {"id": 1, "name": "KP", "category": "කපුරු පෙති", "price": "238.00", "stock": 20},
         ]
@@ -34,18 +34,20 @@ class ProductList extends Component{
             return(
                 <div>
                     Loding ...
+                    
                 </div>
+                
             )
         }
         return (
             <div className="admin-content mx-auto">
-                <div className="w-100 mb-5">
+                <div className="w-100 mb-3">
                     <AnchorTag link="/app/shop/product/create" className="btn btn-sm btn-warning float-right" itemValue="Create Product"></AnchorTag>
                     <h4>Product List</h4>
                 </div>
-                <div className="row mb-5">
-                    <div className="col-12">
-                        <p><b>Search Box</b></p>
+                <div className="row mb-2">
+                    <div className="ol-12">
+                        <p><b>Search Product</b></p>
                     </div>
                     <div className="col-2">
                         <InputFormGroup labelClassName="mb-2" label="" inputclassname="form-control form-control-sm" placeholder="Product Name"/>
@@ -56,7 +58,9 @@ class ProductList extends Component{
                         </div>
                     </div>
                 </div>
-                <Table className="table table-striped" columnList={this.columnList} tableData={this.state.data} actionLinkPrefix=""></Table>
+                <div className="list-table">
+                <Table className="table table-striped " columnList={this.columnList} tableData={this.state.data} actionLinkPrefix=""></Table>
+                </div>
             </div>
         ) 
     }

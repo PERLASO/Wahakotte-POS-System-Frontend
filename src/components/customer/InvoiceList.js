@@ -36,16 +36,16 @@ class InvoiceList extends Component{
         // }
         return (
             <div className="admin-content mx-auto">
-                <div className="w-100 mb-5">
+                <div className="w-100 mb-3">
                     <AnchorTag link="/app/shop/invoice/create" className="btn btn-sm btn-warning float-right" itemValue="Create Invocie"></AnchorTag>
                     <h4>Invoice List</h4>
                 </div>
-                <div className="row mb-5">
+                <div className="row mb-2">
                     <div className="col-12">
                         <p><b>Search Invoice</b></p>
                     </div>
                     <div className="col-2">
-                        <InputFormGroup labelClassName="sr-only" inputclassname="form-control form-control-sm" placeholder="Customer Name"/>
+                        <InputFormGroup id="invoiceList-customer-name-input" labelClassName="sr-only" inputclassname="form-control form-control-sm" placeholder="Customer Name"/>
                     </div>
                     <div className="col-2">
                         <InputFormGroup labelClassName="sr-only" inputclassname="form-control form-control-sm" placeholder="Invoice ID"/>
@@ -56,7 +56,9 @@ class InvoiceList extends Component{
                         </div>
                     </div>
                 </div>
-                <Table className="table table-striped" columnList={this.columnList} tableData={this.tableData} actionLinkPrefix=""></Table>
+                <div className="list-table">
+                <Table className="table table-striped " columnList={this.columnList} tableData={this.tableData} actionLinkPrefix=""></Table>
+                </div>
             </div>
         ) 
     }
