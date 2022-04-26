@@ -104,7 +104,6 @@ class InvoiceForm extends Component {
 
     checkItem(data) {
         return async e => {
-            console.log(this.state.invoiceItems)
             e.preventDefault();
             this.setState({ itemId: data.id })
             
@@ -119,17 +118,13 @@ class InvoiceForm extends Component {
                 
                 this.setState({total : total })
             })
-                console.log(this.state.invoiceItems)
             } else {
                 data['count'] = parseInt(this.state.count)
                 await this.setState({ item: data })
                 this.state.invoiceItems.push(this.state.item)
-                console.log(this.state.invoiceItems)
                 this.setState({total : this.state.total +data.count*data.sellingPrice})
 
             }
-            
-            console.log(this.state.total)
             this.setState({saveInvoiceCheck:false})
 
         }
@@ -137,15 +132,12 @@ class InvoiceForm extends Component {
 
     isItemExist = (data) => {
         return this.state.invoiceItems.find((el) => {
-            console.log(el.id === data)
             return el.id === data
         })
 
     }
 
     removeItem = (id) => {
-        console.log(this.state.invoiceItems)
-        console.log(id)
         let total=0;
         const items = this.state.invoiceItems.filter(el => el.id!== id)
         this.state.invoiceItems.find((el) => {
@@ -155,7 +147,6 @@ class InvoiceForm extends Component {
         })
         this.setState({invoiceItems: items})
         this.setState({total : this.state.total - total})
-        console.log(this.state.invoiceItems)
     }
 
 
