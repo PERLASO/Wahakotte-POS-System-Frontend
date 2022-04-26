@@ -143,10 +143,19 @@ class InvoiceForm extends Component {
 
     }
 
-    removeItem = () => {
+    removeItem = (id) => {
         console.log(this.state.invoiceItems)
-        // const items = this.state.invoiceItems.filter(el => el.id!== id)
-        // console.log(items)
+        console.log(id)
+        let total=0;
+        const items = this.state.invoiceItems.filter(el => el.id!== id)
+        this.state.invoiceItems.find((el) => {
+            if(el.id == id){
+                total = el.count*el.sellingPrice
+            }
+        })
+        this.setState({invoiceItems: items})
+        this.setState({total : this.state.total - total})
+        console.log(this.state.invoiceItems)
     }
 
 
@@ -319,7 +328,7 @@ class InvoiceForm extends Component {
                                                         <td>{invoiceItem.count}</td>
                                                         <td>{invoiceItem.sellingPrice}.00</td>
                                                         <td>{invoiceItem.count * invoiceItem.sellingPrice}.00</td>
-                                                        <td><button className="btn btn-danger" onClick={this.removeItem}> Remove</button></td>
+                                                        <td><button className="btn btn-danger" onClick={() => this.removeItem(invoiceItem.id)}> Remove</button></td>
                                                     </tr>
                                                 )
                                             })}
