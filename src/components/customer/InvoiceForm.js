@@ -4,7 +4,6 @@ import Button from "../Button";
 import InputFormGroup from "../input/InputFormGroup";
 import { getProductList, getSingleProduct } from "../../context/Product";
 import { getAllCustomers, getCustomer } from "../../context/Customer";
-import update from 'immutability-helper';
 import { withRouter } from 'react-router-dom';
 
 
@@ -20,7 +19,7 @@ class InvoiceForm extends Component {
             isLoading: true,
             billNo: '',
             data: [],
-            productData:[],
+            productData: [],
             count: 1,
             item: {},
             itemId: 1,
@@ -40,7 +39,7 @@ class InvoiceForm extends Component {
             searchProductKey: '',
             searchCustomerKey: false,
             searchKey: false,
-            searchProduct : false,
+            searchProduct: false,
             total: 0,
 
         }
@@ -53,8 +52,6 @@ class InvoiceForm extends Component {
         this.handleChangeSearchProductKey = this.handleChangeSearchProductKey.bind(this);
         this.handleYes = this.handleYes.bind(this);
     }
-
-
 
     handleChangeCount(e) {
         this.setState({ count: e.target.value })
@@ -69,7 +66,6 @@ class InvoiceForm extends Component {
         this.setState({ saveInvoiceBillNoCheck: true })
     }
 
-
     handleChangeSearchNameKey(e) {
         this.setState({ searchCustomerKey: false })
         this.setState({ searchNameKey: e.target.value })
@@ -78,16 +74,13 @@ class InvoiceForm extends Component {
     handleChangeSearchProductKey(e) {
         this.setState({ searchKey: false })
         this.setState({ searchProductKey: e.target.value })
-        this.setState({searchProduct:false})
-
+        this.setState({ searchProduct: false })
     }
 
     handleYes() {
         this.setState({ itemcheck: false })
         this.setState({ itemcheckYes: true })
     }
-
-
 
     componentDidMount() {
         getProductList().then(c => {
@@ -109,27 +102,26 @@ class InvoiceForm extends Component {
         return async e => {
             e.preventDefault();
             this.setState({ itemId: data.id })
-            
+
             if (this.isItemExist(data.id)) {
-                console.log('item exists') 
-                let total =0;
-                this.state.invoiceItems.find((el) => { if(el.id === data.id) {
-                    el['count'] = this.state.count;
-                        
-                }
-                total = total + el.count*el.sellingPrice 
-                
-                this.setState({total : total })
-            })
+                console.log('item exists')
+                let total = 0;
+                this.state.invoiceItems.find((el) => {
+                    if (el.id === data.id) {
+                        el['count'] = this.state.count;
+
+                    }
+                    total = total + el.count * el.sellingPrice
+
+                    this.setState({ total: total })
+                })
             } else {
                 data['count'] = parseInt(this.state.count)
                 await this.setState({ item: data })
                 this.state.invoiceItems.push(this.state.item)
-                this.setState({total : this.state.total +data.count*data.sellingPrice})
-
+                this.setState({ total: this.state.total + data.count * data.sellingPrice })
             }
-            this.setState({saveInvoiceCheck:false})
-
+            this.setState({ saveInvoiceCheck: false })
         }
     }
 
@@ -141,41 +133,41 @@ class InvoiceForm extends Component {
     }
 
     removeItem = (id) => {
-        let total=0;
-        const items = this.state.invoiceItems.filter(el => el.id!== id)
+        let total = 0;
+        const items = this.state.invoiceItems.filter(el => el.id !== id)
         this.state.invoiceItems.find((el) => {
-            if(el.id == id){
-                total = el.count*el.sellingPrice
+            if (el.id == id) {
+                total = el.count * el.sellingPrice
             }
         })
-        this.setState({invoiceItems: items})
-        this.setState({total : this.state.total - total})
+        this.setState({ invoiceItems: items })
+        this.setState({ total: this.state.total - total })
     }
 
 
     saveInvoice = () => {
-        if (this.state.saveInvoiceCustomerCheck === false && this.state.invoiceItems.length === 0 &&this.state.saveInvoiceBillNoCheck === false) {
+        if (this.state.saveInvoiceCustomerCheck === false && this.state.invoiceItems.length === 0 && this.state.saveInvoiceBillNoCheck === false) {
             this.setState({ saveInvoiceCheck: true })
             this.setState({ saveInvoiceMessage: "Please set Product Details, Customer, and Bill Number to proceed" })
-        } else if(this.state.saveInvoiceCustomerCheck === true && (this.state.invoiceItems.length === 0 && this.state.saveInvoiceBillNoCheck === false)){
+        } else if (this.state.saveInvoiceCustomerCheck === true && (this.state.invoiceItems.length === 0 && this.state.saveInvoiceBillNoCheck === false)) {
             this.setState({ saveInvoiceCheck: true })
             this.setState({ saveInvoiceMessage: "Please set Product Details and Bill Number to proceed" })
-        }else if(this.state.saveInvoiceBillNoCheck === true && (this.state.saveInvoiceCustomerCheck === false && this.state.invoiceItems.length === 0) ){
+        } else if (this.state.saveInvoiceBillNoCheck === true && (this.state.saveInvoiceCustomerCheck === false && this.state.invoiceItems.length === 0)) {
             this.setState({ saveInvoiceCheck: true })
             this.setState({ saveInvoiceMessage: "Please set Customer and Product Details to proceed" })
-        }else if(this.state.invoiceItems.length !== 0 &&  (this.state.saveInvoiceCustomerCheck === false && this.state.saveInvoiceBillNoCheck === false)){
+        } else if (this.state.invoiceItems.length !== 0 && (this.state.saveInvoiceCustomerCheck === false && this.state.saveInvoiceBillNoCheck === false)) {
             this.setState({ saveInvoiceCheck: true })
             this.setState({ saveInvoiceMessage: "Please set Customer Details and Bill Number to proceed" })
-        }else if((this.state.invoiceItems.length !== 0 &&  this.state.saveInvoiceCustomerCheck === true) && this.state.saveInvoiceBillNoCheck === false){
+        } else if ((this.state.invoiceItems.length !== 0 && this.state.saveInvoiceCustomerCheck === true) && this.state.saveInvoiceBillNoCheck === false) {
             this.setState({ saveInvoiceCheck: true })
             this.setState({ saveInvoiceMessage: "Please set Bill Number to proceed" })
-        }else if((this.state.saveInvoiceBillNoCheck === true &&  this.state.saveInvoiceCustomerCheck === true) && this.state.invoiceItems.length === 0){
+        } else if ((this.state.saveInvoiceBillNoCheck === true && this.state.saveInvoiceCustomerCheck === true) && this.state.invoiceItems.length === 0) {
             this.setState({ saveInvoiceCheck: true })
             this.setState({ saveInvoiceMessage: "Please set Product Details to proceed" })
-        }else if((this.state.saveInvoiceBillNoCheck === true &&  this.state.invoiceItems.length !== 0) && this.state.saveInvoiceCustomerCheck === false){
+        } else if ((this.state.saveInvoiceBillNoCheck === true && this.state.invoiceItems.length !== 0) && this.state.saveInvoiceCustomerCheck === false) {
             this.setState({ saveInvoiceCheck: true })
             this.setState({ saveInvoiceMessage: "Please set Customer Details to proceed" })
-        }else {
+        } else {
             this.props.history.push({
                 pathname: '/app/shop/invoice/create/save/print',
                 state: [this.state.invoiceItems, this.state.total, this.state.customer, this.state.billNo]
@@ -183,8 +175,6 @@ class InvoiceForm extends Component {
             })
         }
     }
-
-
 
     onSearchCustomerClick = () => {
         this.setState({ saveInvoiceCheck: false })
@@ -202,10 +192,7 @@ class InvoiceForm extends Component {
             } catch (error) {
                 this.setState({ searchCustomerKey: true })
             }
-
-
         })
-
     }
 
     onSearchProductClick = () => {
@@ -215,15 +202,13 @@ class InvoiceForm extends Component {
                     this.setState({ searchKey: true })
                 } else {
                     this.setState({ productData: [res.data] })
-                    this.setState({searchProduct: true})
+                    this.setState({ searchProduct: true })
                 }
             } catch (error) {
                 this.setState({ searchKey: true })
             }
         })
-
     }
-
 
     render() {
         if (this.state.isLoading === true) {
@@ -343,9 +328,7 @@ class InvoiceForm extends Component {
                                 {this.state.saveInvoiceCheck &&
                                     <div className="text-danger">{this.state.saveInvoiceMessage}</div>
                                 }
-
                             </div>
-
                         </div>
                         <div className='row'>
                             <div className="col-12">
@@ -368,21 +351,6 @@ class InvoiceForm extends Component {
                                 {this.state.searchKey && <div><h6 className="text-danger">Product Not Found!</h6></div>}
                             </div>
                         </div>
-
-                        {/* {this.state.itemcheck &&
-                            <div className="row">
-                                <div className="col-12">
-                                    <h6 className="text-danger"> Product is has been already added to the list. Do you want to change the quntity?</h6>
-                                </div>
-                                <div className="col-12">
-                                    <Button className="btn btn-sm btn-success" text="Yes" onClick={this.handleYes}/>     &nbsp;    &nbsp;
-                                    <Button className="btn btn-sm btn-secondary" text="No" />
-                                </div>
-
-
-                            </div>
-                        } */}
-
                         <div className="row">
                             <table className="table">
                                 <thead className="thead-dark">
@@ -394,36 +362,34 @@ class InvoiceForm extends Component {
                                         })}
                                     </tr>
                                 </thead>
-                                {this.state.searchProduct && 
-                                this.state.productData.map((data, index) => {
+                                {this.state.searchProduct &&
+                                    this.state.productData.map((data, index) => {
 
-                                    return (
-                                        <tbody key={index}>
-                                            <tr>
-                                                <td>{data.id}</td>
-                                                <td>{data.itemCode}</td>
-                                                <td>{data.name}</td>
-                                                <td>{data.description}</td>
-                                                <td>{data.qty}</td>
-                                                <td>{data.sellingPrice}.00</td>
-                                                <td>{data.stockValue}.00</td>
-                                                <td>
-                                                    <form onSubmit={this.checkItem(data)} >
+                                        return (
+                                            <tbody key={index}>
+                                                <tr>
+                                                    <td>{data.id}</td>
+                                                    <td>{data.itemCode}</td>
+                                                    <td>{data.name}</td>
+                                                    <td>{data.description}</td>
+                                                    <td>{data.qty}</td>
+                                                    <td>{data.sellingPrice}.00</td>
+                                                    <td>{data.stockValue}.00</td>
+                                                    <td>
+                                                        <form onSubmit={this.checkItem(data)} >
 
-                                                        <input className="sm" type='number' placeholder='1' inputclassname="form-control" min={1} max={data.qty} onChange={this.handleChangeCount} />
-                                                        &nbsp;
-                                                        <button className="button-add btn btn-info" type='submit'  >Add</button>
-                                                    </form>
-                                                </td>
-                                            </tr>
+                                                            <input className="sm" type='number' placeholder='1' inputclassname="form-control" min={1} max={data.qty} onChange={this.handleChangeCount} />
+                                                            &nbsp;
+                                                            <button className="button-add btn btn-info" type='submit'  >Add</button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
 
-                                        </tbody>
-                                    )
-                                })
-                                
-                                }
+                                            </tbody>
+                                        )
+                                    })}
+
                                 {!this.state.searchProduct && this.state.data.map((data, index) => {
-
                                     return (
                                         <tbody key={index}>
                                             <tr>
@@ -443,16 +409,13 @@ class InvoiceForm extends Component {
                                                     </form>
                                                 </td>
                                             </tr>
-
                                         </tbody>
                                     )
                                 })}
                             </table>
-
                         </div>
                     </div>
                 </div>
-
             </div>
         )
     }
