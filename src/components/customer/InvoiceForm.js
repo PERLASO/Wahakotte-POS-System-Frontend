@@ -19,7 +19,6 @@ class InvoiceForm extends Component {
         this.state = {
             isLoading: true,
             billNo: '',
-            billNoCheck: false,
             data: [],
             count: 1,
             item: {},
@@ -28,12 +27,14 @@ class InvoiceForm extends Component {
             passData: [],
             itemcheck: false,
             itemcheckYes: false,
-            customerCheck: false,
             customer: {},
             customerName: 'Customer Name',
             customerArea: 'Area',
             saveInvoiceCheck: false,
-            saveInvoiceMessage: 'Please set Customer Details, Products and Bill Number to proceed',
+            saveInvoiceCustomerCheck: false,
+            saveInvoiceProductCheck: false,
+            saveInvoiceBillNoCheck: false,
+            saveInvoiceMessage: '',
             searchNameKey: '',
             searchProductKey: '',
             searchCustomerKey: false,
@@ -63,8 +64,7 @@ class InvoiceForm extends Component {
 
     handleChangeBillNo(e) {
         this.setState({ billNo: e.target.value })
-        this.setState({ billNoCheck: true })
-        this.setState({ saveInvoiceCheck: true })
+        this.setState({ saveInvoiceBillNoCheck: true })
     }
 
 
@@ -87,12 +87,6 @@ class InvoiceForm extends Component {
 
 
     componentDidMount() {
-        // let session = JSON.parse(window.sessionStorage.getItem('InvoiceItems'));
-        // let session2 = JSON.parse(window.sessionStorage.getItem("InvoiceTotal"))
-        // if (session != null && session2 != null) {
-        //     this.setState({ invoiceItems: session })
-        //     this.setState({ total: session2 })
-        // }
         getProductList().then(c => {
             if (c != undefined) {
                 this.setState({ isLoading: false })
@@ -136,6 +130,7 @@ class InvoiceForm extends Component {
             }
             
             console.log(this.state.total)
+            this.setState({saveInvoiceCheck:false})
 
         }
     }
@@ -148,11 +143,45 @@ class InvoiceForm extends Component {
 
     }
 
+    removeItem = (id) => {
+        console.log(this.state.invoiceItems)
+        console.log(id)
+        let total=0;
+        const items = this.state.invoiceItems.filter(el => el.id!== id)
+        this.state.invoiceItems.find((el) => {
+            if(el.id == id){
+                total = el.count*el.sellingPrice
+            }
+        })
+        this.setState({invoiceItems: items})
+        this.setState({total : this.state.total - total})
+        console.log(this.state.invoiceItems)
+    }
+
 
     saveInvoice = () => {
-        if (this.state.customerCheck === false || this.state.invoiceItems.length === 0 || this.state.billNoCheck === false) {
+        if (this.state.saveInvoiceCustomerCheck === false && this.state.invoiceItems.length === 0 &&this.state.saveInvoiceBillNoCheck === false) {
             this.setState({ saveInvoiceCheck: true })
-        } else {
+            this.setState({ saveInvoiceMessage: "Please set Product Details, Customer, and Bill Number to proceed" })
+        } else if(this.state.saveInvoiceCustomerCheck === true && (this.state.invoiceItems.length === 0 && this.state.saveInvoiceBillNoCheck === false)){
+            this.setState({ saveInvoiceCheck: true })
+            this.setState({ saveInvoiceMessage: "Please set Product Details and Bill Number to proceed" })
+        }else if(this.state.saveInvoiceBillNoCheck === true && (this.state.saveInvoiceCustomerCheck === false && this.state.invoiceItems.length === 0) ){
+            this.setState({ saveInvoiceCheck: true })
+            this.setState({ saveInvoiceMessage: "Please set Customer and Product Details to proceed" })
+        }else if(this.state.invoiceItems.length !== 0 &&  (this.state.saveInvoiceCustomerCheck === false && this.state.saveInvoiceBillNoCheck === false)){
+            this.setState({ saveInvoiceCheck: true })
+            this.setState({ saveInvoiceMessage: "Please set Customer Details and Bill Number to proceed" })
+        }else if((this.state.invoiceItems.length !== 0 &&  this.state.saveInvoiceCustomerCheck === true) && this.state.saveInvoiceBillNoCheck === false){
+            this.setState({ saveInvoiceCheck: true })
+            this.setState({ saveInvoiceMessage: "Please set Bill Number to proceed" })
+        }else if((this.state.saveInvoiceBillNoCheck === true &&  this.state.saveInvoiceCustomerCheck === true) && this.state.invoiceItems.length === 0){
+            this.setState({ saveInvoiceCheck: true })
+            this.setState({ saveInvoiceMessage: "Please set Product Details to proceed" })
+        }else if((this.state.saveInvoiceBillNoCheck === true &&  this.state.invoiceItems.length !== 0) && this.state.saveInvoiceCustomerCheck === false){
+            this.setState({ saveInvoiceCheck: true })
+            this.setState({ saveInvoiceMessage: "Please set Customer Details to proceed" })
+        }else {
             this.props.history.push({
                 pathname: '/app/shop/invoice/create/save/print',
                 state: [this.state.invoiceItems, this.state.total, this.state.customer, this.state.billNo]
@@ -164,6 +193,7 @@ class InvoiceForm extends Component {
 
 
     onSearchCustomerClick = () => {
+        this.setState({ saveInvoiceCheck: false })
         getCustomer(this.state.searchNameKey).then(res => {
             try {
                 if (res.data.isDeleted) {
@@ -173,8 +203,7 @@ class InvoiceForm extends Component {
                     this.setState({ customer: res.data })
                     this.setState({ customerName: this.state.customer.name })
                     this.setState({ customerArea: this.state.customer.area })
-                    this.setState({ saveInvoiceCheck: false })
-                    this.setState({ customerCheck: true })
+                    this.setState({ saveInvoiceCustomerCheck: true })
                 }
             } catch (error) {
                 this.setState({ searchCustomerKey: true })
@@ -284,6 +313,7 @@ class InvoiceForm extends Component {
                                                         <th key={index}>{value}</th>
                                                     )
                                                 })}
+                                                <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -298,6 +328,7 @@ class InvoiceForm extends Component {
                                                         <td>{invoiceItem.count}</td>
                                                         <td>{invoiceItem.sellingPrice}.00</td>
                                                         <td>{invoiceItem.count * invoiceItem.sellingPrice}.00</td>
+                                                        <td><button className="btn btn-danger" onClick={() => this.removeItem(invoiceItem.id)}> Remove</button></td>
                                                     </tr>
                                                 )
                                             })}
