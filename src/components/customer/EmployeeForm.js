@@ -82,7 +82,7 @@ class EmployeeForm extends Component{
                                     <InputFormGroup labelClassName="mb-2" onChange={this.handleChangeEmpName} required={true}  inputclassname="form-control" label="Name" />
                                 </div>
                                 <div className="col-12">
-                                    <InputFormGroup  labelClassName="mb-2" onChange={this.handleChangeShortCode} required={true}  inputclassname="form-control" label="Short Name"  />
+                                    <InputFormGroup  labelClassName="mb-2" onChange={this.handleChangeShortCode} required={true}  inputclassname="form-control capitalize-input" label="Short Name"  />
                                 </div>
                                 <div className="col-12">
                                     <InputFormGroup  labelClassName="mb-2" onChange={this.handleChangeAddress}  required={true}  inputclassname="form-control" label="Address" />

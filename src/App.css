@@ -9,3 +9,27 @@
     position: sticky;
     top: 0;
   }
+
+.invoice{
+  width: 1500px;
+  height: 2480px;
+  padding: 40px;
+  position: relative;
+}
+
+.invoice-bottom{
+  position: absolute;
+  bottom: 100px;
+}
+.grand-total{
+  padding-right:60px;
+  font-weight: bold;
+}
+.invoice-print-btn{
+  height:5rem;
+  font-size: 15px;
+}
+
+.capitalize-input{
+  text-transform:uppercase;
+}
