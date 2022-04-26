@@ -2,13 +2,12 @@ import React, { useRef } from "react";
 import ReactToPrint from "react-to-print";
 import Invoice from "./Invoice";
 
-export default function PrintComponent(props) {
+export default function InvoicePrint(props) {
 
   let newDate = new Date()
 let date = newDate.getDate().toString();
 let month = newDate.getMonth().toString();
 let year = newDate.getFullYear().toString();
-let time = newDate.getTime().toString();
   let componentRef = useRef();
 
   let data = props.location.state;
