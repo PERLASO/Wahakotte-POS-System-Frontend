@@ -20,6 +20,7 @@ class InvoiceForm extends Component {
             isLoading: true,
             billNo: '',
             data: [],
+            productData:[],
             count: 1,
             item: {},
             itemId: 1,
@@ -39,6 +40,7 @@ class InvoiceForm extends Component {
             searchProductKey: '',
             searchCustomerKey: false,
             searchKey: false,
+            searchProduct : false,
             total: 0,
 
         }
@@ -76,6 +78,7 @@ class InvoiceForm extends Component {
     handleChangeSearchProductKey(e) {
         this.setState({ searchKey: false })
         this.setState({ searchProductKey: e.target.value })
+        this.setState({searchProduct:false})
 
     }
 
@@ -211,8 +214,8 @@ class InvoiceForm extends Component {
                 if (res.data.isDeleted) {
                     this.setState({ searchKey: true })
                 } else {
-                    this.setState({ data: [res.data] })
-
+                    this.setState({ productData: [res.data] })
+                    this.setState({searchProduct: true})
                 }
             } catch (error) {
                 this.setState({ searchKey: true })
@@ -391,7 +394,35 @@ class InvoiceForm extends Component {
                                         })}
                                     </tr>
                                 </thead>
-                                {this.state.data.map((data, index) => {
+                                {this.state.searchProduct && 
+                                this.state.productData.map((data, index) => {
+
+                                    return (
+                                        <tbody key={index}>
+                                            <tr>
+                                                <td>{data.id}</td>
+                                                <td>{data.itemCode}</td>
+                                                <td>{data.name}</td>
+                                                <td>{data.description}</td>
+                                                <td>{data.qty}</td>
+                                                <td>{data.sellingPrice}.00</td>
+                                                <td>{data.stockValue}.00</td>
+                                                <td>
+                                                    <form onSubmit={this.checkItem(data)} >
+
+                                                        <input className="sm" type='number' placeholder='1' inputclassname="form-control" min={1} max={data.qty} onChange={this.handleChangeCount} />
+                                                        &nbsp;
+                                                        <button className="button-add btn btn-info" type='submit'  >Add</button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    )
+                                })
+                                
+                                }
+                                {!this.state.searchProduct && this.state.data.map((data, index) => {
 
                                     return (
                                         <tbody key={index}>
