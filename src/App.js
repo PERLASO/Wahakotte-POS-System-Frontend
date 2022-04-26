@@ -1,12 +1,11 @@
 import "./App.css";
-import React, { useState, useCallback, useEffect } from "react";
+import React, {useEffect } from "react";
 import {
   BrowserRouter as Router,
   Route,
   Switch,
   Redirect,
 } from "react-router-dom";
-import HomePage from "./pages/HomePage";
 import NotFoundPage from "./pages/NotFound";
 import AuthPage from "./pages/AuthPage";
 import RootPage from "./pages/admin/RootPage";
@@ -17,7 +16,7 @@ import Mousetrap from "mousetrap";
 function App() {
   useEffect(() => {
 
-    Mousetrap.bind(shortcutKeys.SK01, function (e) {
+    Mousetrap.bind(shortcutKeys.SK01, function () {
       const input = document.getElementById("testref2");
       if (typeof input != "undefined" && input != null) {
         input.setSelectionRange(0, 0);
