@@ -61,6 +61,13 @@ class EmployeeList extends Component{
 
 
     render(){
+        if(this.state.isLoading===true){
+            return(
+                <div>
+                     <AnchorTag link="/app/shop/employee/create" className="btn btn-sm btn-warning" itemValue="Create Customer"></AnchorTag>   
+                </div>     
+            )
+        }
         return (
             <div className="admin-content mx-auto">
                 <div className="w-100 mb-3">

@@ -33,10 +33,8 @@ class ProductList extends Component{
         if(this.state.isLoading===true){
             return(
                 <div>
-                    Loding ...
-                    
-                </div>
-                
+                     <AnchorTag link="/app/shop/product/create" className="btn btn-sm btn-warning" itemValue="Create Product"></AnchorTag>    
+                </div>     
             )
         }
         return (

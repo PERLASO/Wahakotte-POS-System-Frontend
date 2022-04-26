@@ -30,7 +30,7 @@ class InvoiceList extends Component{
         // if(this.state.isLoading===true){
         //     return(
         //         <div>
-        //             Loading ...
+        //              <AnchorTag link="/app/shop/invoice/create" className="btn btn-sm btn-warning" itemValue="Create Invocie"></AnchorTag>
         //         </div>
         //     )
         // }
