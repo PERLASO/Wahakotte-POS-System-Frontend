@@ -143,6 +143,12 @@ class InvoiceForm extends Component {
 
     }
 
+    removeItem = () => {
+        console.log(this.state.invoiceItems)
+        // const items = this.state.invoiceItems.filter(el => el.id!== id)
+        // console.log(items)
+    }
+
 
     saveInvoice = () => {
         if (this.state.saveInvoiceCustomerCheck === false && this.state.invoiceItems.length === 0 &&this.state.saveInvoiceBillNoCheck === false) {
@@ -298,6 +304,7 @@ class InvoiceForm extends Component {
                                                         <th key={index}>{value}</th>
                                                     )
                                                 })}
+                                                <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -312,6 +319,7 @@ class InvoiceForm extends Component {
                                                         <td>{invoiceItem.count}</td>
                                                         <td>{invoiceItem.sellingPrice}.00</td>
                                                         <td>{invoiceItem.count * invoiceItem.sellingPrice}.00</td>
+                                                        <td><button className="btn btn-danger" onClick={this.removeItem}> Remove</button></td>
                                                     </tr>
                                                 )
                                             })}
