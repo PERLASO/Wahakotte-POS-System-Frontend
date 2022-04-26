@@ -96,7 +96,7 @@ class ProductForm extends Component {
                                     <InputFormGroup labelClassName="mb-2" required={true} onChange={this.handleChangeItemCode} inputclassname="form-control capitalize-input" label="Item Code" />
                                 </div>
                                 <div className="col-12">
-                                    <TextAreaFormGroup label="Description" required={true} onChange={this.handleChangeDescription} rows="2" />
+                                    <TextAreaFormGroup label="Description" required={false} onChange={this.handleChangeDescription} rows="2" />
                                 </div>
                                 <div className="col-6">
                                     <InputNumberGroup labelClassName="mb-2" required={true} onChange={this.handleChangeSellingPrice} inputclassname="form-control" label="Selling Price(LKR)" />
@@ -111,6 +111,7 @@ class ProductForm extends Component {
                                 <div className="col-6">
                                     <InputFormGroup labelClassName="mb-2" required={true} onChange={this.handleChangeMeasurement} label="Measurement" />
                                 </div>
+
 
                                 {/* <div className="col-12">
                                     <div className="form-group form-check">
