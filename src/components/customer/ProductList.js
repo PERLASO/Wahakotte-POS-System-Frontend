@@ -3,7 +3,7 @@ import AnchorTag from "../../components/Anchortag";
 import Table from "../../components/table/Table";
 import InputFormGroup from "../../components/input/InputFormGroup";
 import SelectFormGroup from "../../components/input/SelectFormGroup";
-import { getProductList } from "../../context/Product";
+import { getProductList, getSingleProductByShortcode } from "../../context/Product";
 
 class ProductList extends Component{
     constructor(props){
@@ -15,8 +15,21 @@ class ProductList extends Component{
 
         this.state = {
             isLoading:true,
-            data: []
+            data: [],
+            searchProductKey: '',
+            searchKey: false,
+            productData: [],
+            searchProduct: false,
           }
+
+          this.handleChangeSearchProductKey = this.handleChangeSearchProductKey.bind(this);
+
+    }
+
+    handleChangeSearchProductKey(e) {
+        this.setState({ searchKey: false })
+        this.setState({ searchProductKey: e.target.value })
+        this.setState({ searchProduct: false })
     }
 
     componentDidMount(){
@@ -27,6 +40,21 @@ class ProductList extends Component{
             }
         });
         
+    }
+
+    onSearchProductClick = () => {
+        getSingleProductByShortcode(this.state.searchProductKey).then(res => {
+            try {
+                if (res.data.isDeleted) {
+                    this.setState({ searchKey: true })
+                } else {
+                    this.setState({ productData: res.data })
+                    this.setState({ searchProduct: true })
+                }
+            } catch (error) {
+                this.setState({ searchKey: true })
+            }
+        })
     }
 
     render(){
@@ -48,16 +76,17 @@ class ProductList extends Component{
                         <p><b>Search Product</b></p>
                     </div>
                     <div className="col-2">
-                        <InputFormGroup labelClassName="mb-2" label="" inputclassname="form-control form-control-sm" placeholder="Product Name"/>
+                        <InputFormGroup labelClassName="mb-2" label="" inputclassname="form-control form-control-sm" placeholder="Product Code" onChange={this.handleChangeSearchProductKey}/>
                     </div>
                     <div className="col-2">
                         <div className="form-group">
-                            <input type="submit" className="w-100 btn btn-sm btn-success" value="Search"/>
+                            <input type="submit" className="w-100 btn btn-sm btn-success" value="Search" onClick={this.onSearchProductClick}/>
                         </div>
                     </div>
                 </div>
                 <div className="list-table">
-                <Table className="table table-striped " columnList={this.columnList} tableData={this.state.data} actionLinkPrefix=""></Table>
+                    {this.state.searchProduct && <Table className="table table-striped " columnList={this.columnList} tableData={this.state.productData} actionLinkPrefix=""></Table> }
+               {!this.state.searchProduct &&  <Table className="table table-striped " columnList={this.columnList} tableData={this.state.data} actionLinkPrefix=""></Table>}
                 </div>
             </div>
         ) 

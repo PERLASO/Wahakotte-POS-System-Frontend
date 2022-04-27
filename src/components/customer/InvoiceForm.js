@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import AnchorTag from "../../components/Anchortag";
 import Button from "../Button";
 import InputFormGroup from "../input/InputFormGroup";
-import { getProductList, getSingleProduct } from "../../context/Product";
+import { getProductList, getSingleProductByShortcode } from "../../context/Product";
 import { getAllCustomers, getCustomer } from "../../context/Customer";
 import { withRouter } from 'react-router-dom';
 
@@ -11,7 +11,7 @@ import { withRouter } from 'react-router-dom';
 class InvoiceForm extends Component {
     constructor(props) {
         super(props);
-        this.columnList = ["S/N", "ItemCode", "Name", "Description", "QTY", "Selling Price(LKR)", "Val. of QTY(LKR)", "Select Quantity"];
+        this.columnList = ["S/N", "ItemCode", "Name", "Description", "QTY", "Selling Price(LKR)", 'Measurement', "Select Quantity"];
         this.invoiceColumnList = ["S/N", "ItemCode", "Name", "Description", "QTY", 'Price(LKR)', "Total(LKR)"];
         this.invoiceTableData = []
 
@@ -196,13 +196,15 @@ class InvoiceForm extends Component {
     }
 
     onSearchProductClick = () => {
-        getSingleProduct(this.state.searchProductKey).then(res => {
+        getSingleProductByShortcode(this.state.searchProductKey).then(res => {
             try {
                 if (res.data.isDeleted) {
                     this.setState({ searchKey: true })
                 } else {
-                    this.setState({ productData: [res.data] })
+                    this.setState({ productData: res.data })
                     this.setState({ searchProduct: true })
+                    console.log(this.state.data);
+                    console.log(this.state.productData);
                 }
             } catch (error) {
                 this.setState({ searchKey: true })
@@ -364,7 +366,6 @@ class InvoiceForm extends Component {
                                 </thead>
                                 {this.state.searchProduct &&
                                     this.state.productData.map((data, index) => {
-
                                         return (
                                             <tbody key={index}>
                                                 <tr>
@@ -374,17 +375,17 @@ class InvoiceForm extends Component {
                                                     <td>{data.description}</td>
                                                     <td>{data.qty}</td>
                                                     <td>{data.sellingPrice}.00</td>
-                                                    <td>{data.stockValue}.00</td>
+                                                    <td>{data.measurement}</td>
+                                                  
                                                     <td>
                                                         <form onSubmit={this.checkItem(data)} >
-
+    
                                                             <input className="sm" type='number' placeholder='1' inputclassname="form-control" min={1} max={data.qty} onChange={this.handleChangeCount} />
                                                             &nbsp;
                                                             <button className="button-add btn btn-info" type='submit'  >Add</button>
                                                         </form>
                                                     </td>
                                                 </tr>
-
                                             </tbody>
                                         )
                                     })}
@@ -399,7 +400,8 @@ class InvoiceForm extends Component {
                                                 <td>{data.description}</td>
                                                 <td>{data.qty}</td>
                                                 <td>{data.sellingPrice}.00</td>
-                                                <td>{data.stockValue}.00</td>
+                                                <td>{data.measurement}</td>
+                                              
                                                 <td>
                                                     <form onSubmit={this.checkItem(data)} >
 
