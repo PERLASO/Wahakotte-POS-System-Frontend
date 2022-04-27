@@ -171,7 +171,7 @@ class InvoiceForm extends Component {
             this.setState({ saveInvoiceMessage: "Please set Customer Details to proceed" })
         } else {
             this.props.history.push({
-                pathname: '/app/shop/invoice/create/save/print',
+                pathname: '/app/shop/invoice/create/save',
                 state: [this.state.invoiceItems, this.state.total, this.state.customer, this.state.billNo]
 
             })
@@ -257,7 +257,7 @@ class InvoiceForm extends Component {
                                 </div>
                                 <div className="row">
                                     <div className="col-6">
-                                        <InputFormGroup labelClassName="mb-2" label="" inputclassname="form-control form-control-sm" onChange={this.handleChangeSearchNameKey} placeholder="Customer ID" />
+                                        <InputFormGroup labelClassName="mb-2" label="" inputclassname="form-control form-control-sm" onChange={this.handleChangeSearchNameKey} placeholder="Customer Short Name" />
                                     </div>
                                     <div className="col-6">
                                         <div className="form-group">
