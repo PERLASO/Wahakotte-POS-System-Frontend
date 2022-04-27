@@ -16,10 +16,10 @@ class ProductView extends Component {
     }
 
     componentDidMount() {
-
         getSingleProduct(this.props.match.params.productId).then(c => {
             if (c !== undefined) {
                 this.setState({ data: c.data })
+                console.log(this.state.data);
 
 
             }

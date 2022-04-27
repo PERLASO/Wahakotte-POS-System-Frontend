@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import AnchorTag from "../../components/Anchortag";
 import Button from "../Button";
 import InputFormGroup from "../input/InputFormGroup";
-import { getProductList, getSingleProduct } from "../../context/Product";
+import { getProductList, getSingleProductByShortcode } from "../../context/Product";
 import { getAllCustomers, getCustomer } from "../../context/Customer";
 import { withRouter } from 'react-router-dom';
 
@@ -196,7 +196,7 @@ class InvoiceForm extends Component {
     }
 
     onSearchProductClick = () => {
-        getSingleProduct(this.state.searchProductKey).then(res => {
+        getSingleProductByShortcode(this.state.searchProductKey).then(res => {
             try {
                 if (res.data.isDeleted) {
                     this.setState({ searchKey: true })

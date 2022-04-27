@@ -9,6 +9,11 @@ export const getSingleProduct = async function (data) {
     return await get(`Product/${data}`);
 };
 
+export const getSingleProductByShortcode = async function (data) {
+ 
+  return await get(`Product/GetSingleProductByshortcode/${data}`);
+};
+
 export const setProduct = async function (data) {
     
     return await post(`Product`,data);
@@ -22,3 +27,4 @@ export const setProduct = async function (data) {
     
     return await deleteApi(`Product/${data}`);
   }
+
