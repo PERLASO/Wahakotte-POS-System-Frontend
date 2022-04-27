@@ -17,7 +17,6 @@ class InvoiceForm extends Component {
 
         this.state = {
             isLoading: true,
-            billNo: '',
             data: [],
             productData: [],
             count: 1,
@@ -33,7 +32,6 @@ class InvoiceForm extends Component {
             saveInvoiceCheck: false,
             saveInvoiceCustomerCheck: false,
             saveInvoiceProductCheck: false,
-            saveInvoiceBillNoCheck: false,
             saveInvoiceMessage: '',
             searchNameKey: '',
             searchProductKey: '',
@@ -46,7 +44,6 @@ class InvoiceForm extends Component {
         }
 
         this.handleChangeCount = this.handleChangeCount.bind(this);
-        this.handleChangeBillNo = this.handleChangeBillNo.bind(this);
         this.handleInvoiceItems = this.handleInvoiceItems.bind(this);
         this.checkItem = this.checkItem.bind(this);
         this.handleChangeSearchNameKey = this.handleChangeSearchNameKey.bind(this);
@@ -62,10 +59,6 @@ class InvoiceForm extends Component {
         { this.setState({ invoiceItems: [] }) }
     }
 
-    handleChangeBillNo(e) {
-        this.setState({ billNo: e.target.value })
-        this.setState({ saveInvoiceBillNoCheck: true })
-    }
 
     handleChangeSearchNameKey(e) {
         this.setState({ searchCustomerKey: false })
@@ -148,31 +141,19 @@ class InvoiceForm extends Component {
 
 
     saveInvoice = () => {
-        if (this.state.saveInvoiceCustomerCheck === false && this.state.invoiceItems.length === 0 && this.state.saveInvoiceBillNoCheck === false) {
+        if (this.state.saveInvoiceCustomerCheck === false && this.state.invoiceItems.length === 0) {
             this.setState({ saveInvoiceCheck: true })
-            this.setState({ saveInvoiceMessage: "Please set Product Details, Customer, and Bill Number to proceed" })
-        } else if (this.state.saveInvoiceCustomerCheck === true && (this.state.invoiceItems.length === 0 && this.state.saveInvoiceBillNoCheck === false)) {
-            this.setState({ saveInvoiceCheck: true })
-            this.setState({ saveInvoiceMessage: "Please set Product Details and Bill Number to proceed" })
-        } else if (this.state.saveInvoiceBillNoCheck === true && (this.state.saveInvoiceCustomerCheck === false && this.state.invoiceItems.length === 0)) {
-            this.setState({ saveInvoiceCheck: true })
-            this.setState({ saveInvoiceMessage: "Please set Customer and Product Details to proceed" })
-        } else if (this.state.invoiceItems.length !== 0 && (this.state.saveInvoiceCustomerCheck === false && this.state.saveInvoiceBillNoCheck === false)) {
-            this.setState({ saveInvoiceCheck: true })
-            this.setState({ saveInvoiceMessage: "Please set Customer Details and Bill Number to proceed" })
-        } else if ((this.state.invoiceItems.length !== 0 && this.state.saveInvoiceCustomerCheck === true) && this.state.saveInvoiceBillNoCheck === false) {
-            this.setState({ saveInvoiceCheck: true })
-            this.setState({ saveInvoiceMessage: "Please set Bill Number to proceed" })
-        } else if ((this.state.saveInvoiceBillNoCheck === true && this.state.saveInvoiceCustomerCheck === true) && this.state.invoiceItems.length === 0) {
+            this.setState({ saveInvoiceMessage: "Please set Product Details, and Customer to proceed" })
+        } else if (this.state.saveInvoiceCustomerCheck === true && this.state.invoiceItems.length === 0) {
             this.setState({ saveInvoiceCheck: true })
             this.setState({ saveInvoiceMessage: "Please set Product Details to proceed" })
-        } else if ((this.state.saveInvoiceBillNoCheck === true && this.state.invoiceItems.length !== 0) && this.state.saveInvoiceCustomerCheck === false) {
+        } else if (this.state.invoiceItems.length !== 0 && this.state.saveInvoiceCustomerCheck === false) {
             this.setState({ saveInvoiceCheck: true })
             this.setState({ saveInvoiceMessage: "Please set Customer Details to proceed" })
         } else {
             this.props.history.push({
                 pathname: '/app/shop/invoice/create/save',
-                state: [this.state.invoiceItems, this.state.total, this.state.customer, this.state.billNo]
+                state: [this.state.invoiceItems, this.state.total, this.state.customer]
 
             })
         }
@@ -234,20 +215,11 @@ class InvoiceForm extends Component {
                     <div className="container-fluid">
                         <div className="row ">
                             <div className="col-12">
-                                <div className="row">
-                                    <div className='col-2 '>
-                                        <h6>Bill No</h6>
-                                    </div>
-                                    <div className='col-4'>
-                                        <InputFormGroup labelClassName="mb-2" label="" inputclassname="form-control form-control-sm" onChange={this.handleChangeBillNo} placeholder="Enter Bill No" />
-                                    </div>
-                                </div>
                                 <div className="row p-1">
                                     <div className='col-12 '>
                                         <hr />
                                     </div>
                                 </div>
-
                             </div>
                             <div className="col-6 border-right">
                                 <div className="row">
