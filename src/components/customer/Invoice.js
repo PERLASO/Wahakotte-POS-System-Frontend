@@ -49,9 +49,13 @@ class Invoice extends React.Component {
         paidAmount: this.state.paidAmount
       };
 
+      {data.productsList.map((data, index) => {
+        data.qty = data.count
+      })}
 
       console.log(data)
       console.log(this.state.invoiceItems)
+
       setInvoice(data).then((c) => {
         console.log(c)
         if (c === 'success') {
@@ -183,7 +187,7 @@ class Invoice extends React.Component {
               {this.state.invoiceItems.map((invoiceItem, index) => {
                 return (
                   <tr key={index}>
-                    <td>{invoiceItem.id}</td>
+                    <td>{index+1}</td>
                     <td>{invoiceItem.itemCode}</td>
                     <td>{invoiceItem.name}</td>
                     <td>{invoiceItem.count}</td>
