@@ -257,7 +257,7 @@ class InvoiceForm extends Component {
                                     </div>
                                     <div className="col-6">
                                         <div className="form-group">
-                                            <input type="submit" className="btn btn-sm btn-success" value="Search" onClick={this.onSearchCustomerClick} />
+                                            <input type="submit" className="btn btn-sm btn-success px-5" value="Search" onClick={this.onSearchCustomerClick} />
                                         </div>
                                     </div>
                                     <div className="col-12">

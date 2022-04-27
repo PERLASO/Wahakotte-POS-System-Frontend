@@ -48,7 +48,9 @@ class ProductForm extends Component {
     this.setState({ buyingprice: event.target.value });
   }
   handleChangeMeasurement(event) {
+
     this.setState({ measurement: event.target.value });
+    console.log(event.target.value);
   }
   handleSubmit(event) {
     event.preventDefault();
@@ -142,36 +144,25 @@ class ProductForm extends Component {
                     label="Buying Price(LKR)"
                   />
                 </div>
-                {/* <div className="col-6">
-                                    <InputFormGroup labelClassName="mb-2" required={true} onChange={this.handleChangeMeasurement} label="Measurement" />
-                                </div> */}
                 <div className="col-6 ">
-                  <SelectFormGroup
-                    labelClassName="mb-2"
-                    selectClassName="form-control"
-                    required={true}
+                  <label className="mb-2 ">Measurement</label>
+                  <select
+                    className="form-control"
+                    required
                     onChange={this.handleChangeMeasurement}
-                    label="Measurement"
-                    selectData={[
-                      { id: "ROLL", name: "ROLL" },
-                      { id: "CUP", name: "CUP" },
-                      { id: "BOT", name: "BOT" },
-                      { id: "RIM", name: "RIM" },
-                      { id: "DOZ", name: "DOZ" },
-                      { id: "BUN", name: "BUN" },
-                      { id: "PIEC", name: "PIEC" },
-                      { id: "BOX", name: "BOX" },
-                      { id: "KG", name: "KG" },
-                    ]}
-                  />
+                  >
+                    <option  id= "ROLL"  name= "ROLL"  value = "ROLL">ROLL</option>
+                    <option  id= "CUP"  name= "CUP"  value = "CUP">CUP</option>
+                    <option  id= "BOT"  name= "BOT"  value = "BOT">BOT</option>
+                    <option  id= "RIM"  name= "RIM"  value = "RIM">RIM</option>
+                    <option  id= "DOZ"  name= "DOZ"  value = "DOZ">DOZ</option>
+                    <option  id= "BUN"  name= "BUN"  value = "BUN">BUN</option>
+                    <option  id= "PIEC"  name= "PIEC"  value = "PIEC">PIEC</option>
+                    <option  id= "BOX"  name= "BOX"  value = "BOX">BOX</option>
+                    <option  id= "KG"  name= "KG"  value = "KG">KG</option>
+                  </select>
+                  
                 </div>
-
-                {/* <div className="col-12">
-                                    <div className="form-group form-check">
-                                        <input type="checkbox" className="form-check-input" id="publicOnCreation"/>
-                                        <label className="form-check-label" for="publicOnCreation">Make public on creation</label>
-                                    </div>
-                                </div> */}
 
                 <div className="col-12 mt-3">
                   <div className="form-group">

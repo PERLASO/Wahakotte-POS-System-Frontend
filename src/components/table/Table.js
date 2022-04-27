@@ -22,6 +22,7 @@ class Table extends Component{
                 <tbody>
                     {
                         this.props.tableData.map((data, index) => {
+                          
                             return (
                             <tr key={index}>
                                 {

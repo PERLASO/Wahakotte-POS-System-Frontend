@@ -27,4 +27,3 @@ export const setProduct = async function (data) {
     
     return await deleteApi(`Product/${data}`);
   }
-

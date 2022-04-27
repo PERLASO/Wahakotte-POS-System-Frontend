@@ -8,7 +8,7 @@ import { getProductList } from "../../context/Product";
 class ProductList extends Component{
     constructor(props){
         super(props);
-        this.columnList = ["S/N","ItemCode", "Name", "Description", "QTY", "Selling Price(LKR)", "Val. of QTY(LKR)","Action"];
+        this.columnList = ["S/N","ItemCode", "Name", "Description", "QTY", "Selling Price(LKR)", "Unit","Val. of QTY(LKR)","Action"];
         this.tableData = [
             {"id": 1, "name": "KP", "category": "කපුරු පෙති", "price": "238.00", "stock": 20},
         ]
