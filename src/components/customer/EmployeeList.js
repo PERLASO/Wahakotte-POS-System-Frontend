@@ -12,6 +12,7 @@ class EmployeeList extends Component{
         super(props);
         this.state = {
             customers : [],
+            customerbyshortname:[],
             searchNameKey: '',
             searchKey: false,
             isLoading:true,
@@ -47,7 +48,7 @@ class EmployeeList extends Component{
                 if (res.data.isDeleted) {
                     this.setState({ searchKey: true })
                 } else {
-                    this.setState({customers: res.data})
+                    this.setState({customerbyshortname: res.data})
                     this.setState({searchCustomer: true})
                 }
             } catch (error) {
@@ -89,7 +90,12 @@ class EmployeeList extends Component{
                     </div>
                 </div>
                 <div className="list-table">
-                <Table className="table table-striped" columnList={this.columnList} tableData={this.state.customers} actionLinkPrefix=""></Table>
+                    {this.state.searchCustomer && 
+                    <Table className="table table-striped" columnList={this.columnList} tableData={this.state.customerbyshortname} actionLinkPrefix=""></Table>
+                    }
+                    {!this.state.searchCustomer && 
+                     <Table className="table table-striped" columnList={this.columnList} tableData={this.state.customers} actionLinkPrefix=""></Table>
+                    }
            </div>
             </div>
         ) 
