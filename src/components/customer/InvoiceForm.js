@@ -3,7 +3,7 @@ import AnchorTag from "../../components/Anchortag";
 import Button from "../Button";
 import InputFormGroup from "../input/InputFormGroup";
 import { getProductList, getSingleProductByShortcode } from "../../context/Product";
-import { getAllCustomers, getCustomer } from "../../context/Customer";
+import { getAllCustomers, getCustomerByShortname } from "../../context/Customer";
 import { withRouter } from 'react-router-dom';
 
 
@@ -40,6 +40,7 @@ class InvoiceForm extends Component {
             searchCustomerKey: false,
             searchKey: false,
             searchProduct: false,
+            searchCustomer: false,
             total: 0,
 
         }
@@ -69,6 +70,7 @@ class InvoiceForm extends Component {
     handleChangeSearchNameKey(e) {
         this.setState({ searchCustomerKey: false })
         this.setState({ searchNameKey: e.target.value })
+        this.setState({searchCustomer: false})
     }
 
     handleChangeSearchProductKey(e) {
@@ -178,16 +180,16 @@ class InvoiceForm extends Component {
 
     onSearchCustomerClick = () => {
         this.setState({ saveInvoiceCheck: false })
-        getCustomer(this.state.searchNameKey).then(res => {
+        getCustomerByShortname(this.state.searchNameKey).then(res => {
             try {
                 if (res.data.isDeleted) {
                     this.setState({ searchCustomerKey: true })
                 } else {
-
-                    this.setState({ customer: res.data })
+                    this.setState({ customer: res.data[0] })
                     this.setState({ customerName: this.state.customer.name })
                     this.setState({ customerArea: this.state.customer.area })
                     this.setState({ saveInvoiceCustomerCheck: true })
+                    this.setState({searchCustomer: true})
                 }
             } catch (error) {
                 this.setState({ searchCustomerKey: true })
@@ -266,21 +268,41 @@ class InvoiceForm extends Component {
                                         {this.state.searchCustomerKey && <div><h6 className="text-danger">User Not Found!</h6></div>}
                                     </div>
                                 </div>
+                                {this.state.searchCustomer && 
                                 <div className="row">
-                                    <div className="col-6">
-                                        <div className="form-group">
-                                            <label>Customer Name</label>
-                                            <input type="text" className="form-control" value={this.state.customerName} readOnly />
-                                        </div>
+                                <div className="col-6">
+                                    <div className="form-group">
+                                        <label>Customer Name</label>
+                                        <input type="text" className="form-control" value={this.state.customerName} readOnly />
                                     </div>
-                                    <div className="col-6">
-                                        <div className="form-group">
-                                            <label >Area</label>
-                                            <input type="text" className="form-control" value={this.state.customerArea} readOnly />
-                                        </div>
-                                    </div>
-
                                 </div>
+                                <div className="col-6">
+                                    <div className="form-group">
+                                        <label >Area</label>
+                                        <input type="text" className="form-control" value={this.state.customerArea} readOnly />
+                                    </div>
+                                </div>
+
+                            </div>
+                                }
+                                {!this.state.searchCustomer && 
+                                <div className="row">
+                                <div className="col-6">
+                                    <div className="form-group">
+                                        <label>Customer Name</label>
+                                        <input type="text" className="form-control" value='Customer Name' readOnly />
+                                    </div>
+                                </div>
+                                <div className="col-6">
+                                    <div className="form-group">
+                                        <label >Area</label>
+                                        <input type="text" className="form-control" value='Customer Area' readOnly />
+                                    </div>
+                                </div>
+
+                            </div>
+                                }
+                                
                             </div>
                             <div className="col-6">
 

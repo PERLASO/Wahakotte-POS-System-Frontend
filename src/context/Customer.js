@@ -9,6 +9,11 @@ export const getCustomer = async function (data) {
     return await get(`Customer/${data}`);
 };
 
+export const getCustomerByShortname = async function (data) {
+ 
+    return await get(`Customer/getcustomerbysc/${data}`);
+};
+
 export const updateCustomer = async function(data){
     return await put(`Customer`, data);
 }
