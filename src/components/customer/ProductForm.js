@@ -67,6 +67,8 @@ class ProductForm extends Component {
       isDeleted: false,
     };
 
+    console.log(data);
+
     setProduct(data).then((c) => {
       if (c.data === true) {
         alert("Product Added!");

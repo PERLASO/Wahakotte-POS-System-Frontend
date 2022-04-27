@@ -1,22 +1,71 @@
 import React from "react";
-import {Helmet} from "react-helmet";
+import { Helmet } from "react-helmet";
+import { setInvoice } from "../../context/Invoice";
 
 class Invoice extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      invoiceItems: props.props[0],
-      total: props.props[1],
-      customer: props.props[2],
-      billNo: props.props[3],
+      invoiceItems: props.location.state[0],
+      total: props.location.state[1],
+      customer: props.location.state[2],
+      paidAmount:0,
       checkSaved: false,
+      status: '',
+      checkStatus: true,
+      statusMessage: 'Set Invoice Status to Proceed',
+      data:{}
     };
 
+    this.handleStatus = this.handleStatus.bind(this);
+    this.handlePaidAmount = this.handlePaidAmount.bind(this);
+
     const current = new Date();
-    this.date = `${current.getDate()}/${
-      current.getMonth() + 1
-    }/${current.getFullYear()}`;
+    this.date = `${current.getDate()}/${current.getMonth() + 1
+      }/${current.getFullYear()}`;
   }
+
+  handleStatus(e) {
+    this.setState({ status: e.target.value })
+    this.setState({ checkStatus: true })
+  }
+
+  handlePaidAmount(e){
+    this.setState({paidAmount: e.target.value})
+  }
+
+  saveInvoice = () => {
+    if (this.state.status.length<=0) {
+      this.setState({checkStatus: false})
+    } else if (this.state.status.length>=0 && (this.state.status=='HYBRID' || this.state.status=='CASH') && this.state.paidAmount==0) {
+      this.setState({checkStatus: false})
+      this.setState({statusMessage: "Please input Paid Amount to proceed"})
+    }else {
+      let data = {
+        customerID : this.state.customer.id,
+        productsList: this.state.invoiceItems,
+        invoiceStatus: this.state.status,
+        totalInvoicePrice: this.state.total,
+        paidAmount: this.state.paidAmount
+      };
+
+
+      console.log(data)
+      console.log(this.state.invoiceItems)
+      setInvoice(data).then((c) => {
+        console.log(c)
+        if (c === 'success') {
+          alert("Invoice Saved!");
+          this.props.history.push(`/app/shop/invoice/list`);
+        } else {
+          alert("failed !");
+        }
+      });
+    }
+
+  }
+
+
   render() {
     return (
       <div className="container ">
@@ -39,17 +88,6 @@ class Invoice extends React.Component {
                 </div>
               </div>
               <div className="row p-1">
-                <div className="col">Bill No</div>
-                <div className="col">
-                  <input
-                    type="text"
-                    className="form-control"
-                    value={this.state.billNo}
-                    readOnly
-                  />
-                </div>
-              </div>
-              <div className="row p-1">
                 <div className="col">Customer ID</div>
                 <div className="col">
                   <input
@@ -57,6 +95,34 @@ class Invoice extends React.Component {
                     className="form-control"
                     value={this.state.customer.id}
                     readOnly
+                  />
+                </div>
+              </div>
+              <div className="row p-1">
+                <div className="col"> Set Status</div>
+                <div className="col">
+                  <div className="form">
+                    <select
+                      className="form-control"
+                      required
+                      onChange={this.handleStatus}>
+                        <option value='Set Status' selected>Set Status</option>
+                      <option value='CASH'>CASH</option>
+                      <option value='HYBRID'>HYBRID</option>
+                      <option vlaue='CREDIT'>CREDIT</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div className="row p-1">
+                <div className="col">Paid Amount</div>
+                <div className="col">
+                  <input
+                    type="text"
+                    className="form-control"
+                    value={this.state.paidAmount}
+                    onChange={this.handlePaidAmount}
                   />
                 </div>
               </div>
@@ -95,6 +161,9 @@ class Invoice extends React.Component {
                   />
                 </div>
               </div>
+              <div className="row p-1">
+                <div className="col text-danger"> {!this.state.checkStatus && this.state.statusMessage}</div>
+              </div>
             </div>
           </div>
         </div>
@@ -131,13 +200,10 @@ class Invoice extends React.Component {
             </div>
           </div>
 
-          <div id="customer-signature" className="col-12 pb-10 page-footer">
-            <div className="text-left font-weight-bold">
-              Customer Signature : .......................
-            </div>
-          </div>
+
+          <button className="btn btn-success" onClick={this.saveInvoice}> Save Invoice </button>
           <Helmet>
-          <script >{`
+            <script >{`
         
           var oRows = document.getElementById('invoice-table').getElementsByTagName('tr');
           var iRowCount = oRows.length;
@@ -152,7 +218,7 @@ class Invoice extends React.Component {
         </div>
       </div>
 
-      
+
     );
   }
 }

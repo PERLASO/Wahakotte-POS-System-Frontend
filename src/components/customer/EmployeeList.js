@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import { getAllCustomers, getCustomer } from "../../context/Customer";
+import { getAllCustomers, getCustomerByShortname } from "../../context/Customer";
 import AnchorTag from "../../components/Anchortag";
 import InputFormGroup from "../../components/input/InputFormGroup";
 
@@ -12,9 +12,11 @@ class EmployeeList extends Component{
         super(props);
         this.state = {
             customers : [],
+            customerbyshortname:[],
             searchNameKey: '',
             searchKey: false,
-            isLoading:true
+            isLoading:true,
+            searchCustomer:false
         }
         this.columnList = ["ID", "Name", "Short Name", "Address", "Area", "Phone Number", "Action"];
         this.handleChangeSearchNameKey = this.handleChangeSearchNameKey.bind(this);            
@@ -23,6 +25,7 @@ class EmployeeList extends Component{
     handleChangeSearchNameKey(e){
         this.setState({searchKey: false})
         this.setState({searchNameKey: e.target.value})
+        this.setState({searchCustomer: false})
     }
 
     handleChangeSearchAreaKey(e){
@@ -40,22 +43,18 @@ class EmployeeList extends Component{
 
 
     onSearchClick = () => {
-        getCustomer(this.state.searchNameKey).then(res => {
+        getCustomerByShortname(this.state.searchNameKey).then(res => {
             try {
-                if(res.data.isDeleted){
-                    this.setState({searchKey: true})
-                }else{
-                    this.setState({customers: [res.data]})
-                   
+                if (res.data.isDeleted) {
+                    this.setState({ searchKey: true })
+                } else {
+                    this.setState({customerbyshortname: res.data})
+                    this.setState({searchCustomer: true})
                 }
-                
             } catch (error) {
-                this.setState({searchKey: true})
+                this.setState({ searchKey: true })
             }
-            
-            
         })
-
     }
 
 
@@ -79,7 +78,7 @@ class EmployeeList extends Component{
                         <p><b>Search a Customer</b></p>
                     </div>
                     <div className="col-4">
-                        <InputFormGroup labelClassName="mb-2" label="" inputclassname="form-control form-control-sm"  onChange={this.handleChangeSearchNameKey} placeholder="Customer ID"/>
+                        <InputFormGroup labelClassName="mb-2" label="" inputclassname="form-control form-control-sm"  onChange={this.handleChangeSearchNameKey} placeholder="Customer Short Name"/>
                     </div>       
                     <div className="col-2">
                         <div className="form-group">
@@ -91,7 +90,12 @@ class EmployeeList extends Component{
                     </div>
                 </div>
                 <div className="list-table">
-                <Table className="table table-striped" columnList={this.columnList} tableData={this.state.customers} actionLinkPrefix=""></Table>
+                    {this.state.searchCustomer && 
+                    <Table className="table table-striped" columnList={this.columnList} tableData={this.state.customerbyshortname} actionLinkPrefix=""></Table>
+                    }
+                    {!this.state.searchCustomer && 
+                     <Table className="table table-striped" columnList={this.columnList} tableData={this.state.customers} actionLinkPrefix=""></Table>
+                    }
            </div>
             </div>
         ) 
