@@ -48,22 +48,22 @@ class Invoice extends React.Component {
         totalInvoicePrice: this.state.total,
         paidAmount: this.state.paidAmount
       };
-      
+
+      {data.productsList.map((data, index) => {
+        data.qty = data.count
+      })}
+
       console.log(data)
       console.log(this.state.invoiceItems)
-      setInvoice(data).then((res) => {
-        console.log(res)
-        // if (res.data != null) {
-        //   alert("Invoice Saved!");
 
-        //   this.props.history.push({
-        //     pathname: `/app/shop/invoice/create/save/print`,
-        //     state: [this.state.invoiceItems, this.state.total, this.state.customer, this.state.status, this.state.paidAmount]
-        //   }
-        //     );
-        // } else {
-        //   alert("failed !");
-        // }
+      setInvoice(data).then((c) => {
+        console.log(c)
+        if (c === 'success') {
+          alert("Invoice Saved!");
+          this.props.history.push(`/app/shop/invoice/list`);
+        } else {
+          alert("failed !");
+        }
       });
     }
 
@@ -196,7 +196,7 @@ class Invoice extends React.Component {
               {this.state.invoiceItems.map((invoiceItem, index) => {
                 return (
                   <tr key={index}>
-                    <td>{invoiceItem.id}</td>
+                    <td>{index+1}</td>
                     <td>{invoiceItem.itemCode}</td>
                     <td>{invoiceItem.name}</td>
                     <td>{invoiceItem.count}</td>
