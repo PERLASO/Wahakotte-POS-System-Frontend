@@ -23,9 +23,9 @@ class DashboardPage extends Component {
 
   render() {
     return (
-      <div className="admin-content mx-auto">
+      <div className="admin-content mx-auto w-75">
         <PageHeader headerText="Welcome to Dashboard" />
-        <div className="w-75">
+        <div className="w-100">
           <div className="container-fluid">
             <div className="row">
               <div className="col-4">

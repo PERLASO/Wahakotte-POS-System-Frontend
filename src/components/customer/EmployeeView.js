@@ -36,11 +36,11 @@ class EmployeeView extends Component{
 
     render(){
         return (
-            <div className="admin-content mx-auto">
+            <div className="admin-content mx-auto w-50">
                 <div className="w-100 mb-5">
                     <h4>Employee Details</h4>
                 </div>
-                <div className="w-75">
+                <div className="w-100">
                     <form>
                         <div className="container-fluid">
                             <div className="row">
