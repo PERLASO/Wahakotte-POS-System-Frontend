@@ -51,19 +51,19 @@ class Invoice extends React.Component {
       
       console.log(data)
       console.log(this.state.invoiceItems)
-      setInvoice(data).then((c) => {
-        console.log(c)
-        if (c === 'success') {
-          alert("Invoice Saved!");
+      setInvoice(data).then((res) => {
+        console.log(res)
+        // if (res.data != null) {
+        //   alert("Invoice Saved!");
 
-          this.props.history.push({
-            pathname: `/app/shop/invoice/create/save/print`,
-            state: [this.state.invoiceItems, this.state.total, this.state.customer, this.state.status, this.state.paidAmount]
-          }
-            );
-        } else {
-          alert("failed !");
-        }
+        //   this.props.history.push({
+        //     pathname: `/app/shop/invoice/create/save/print`,
+        //     state: [this.state.invoiceItems, this.state.total, this.state.customer, this.state.status, this.state.paidAmount]
+        //   }
+        //     );
+        // } else {
+        //   alert("failed !");
+        // }
       });
     }
 
