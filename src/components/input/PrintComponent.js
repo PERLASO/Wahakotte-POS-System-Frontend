@@ -22,7 +22,7 @@ export default function PrintComponent(props) {
 
   return (
     <div>
-      <div className="float-right">
+      <div>
         <ReactToPrint className="pb-12"
           trigger={() => (
             <button className="btn btn-info invoice-print-btn"> Print Invoice</button>
@@ -43,7 +43,7 @@ export default function PrintComponent(props) {
            `
           }
         />
-         <button className="btn btn-warning " onClick={() => history.push('/app/shop/invoice/list')}> View Invoice List</button>
+         <button className="btn btn-warning invoice-print-btn ml-5" onClick={() => history.push('/app/shop/invoice/list')}> View Invoice List</button>
          <InvoicePrint ref={(el) => (componentRef = el)} props={data}  date={today}/>
       </div>
     </div>

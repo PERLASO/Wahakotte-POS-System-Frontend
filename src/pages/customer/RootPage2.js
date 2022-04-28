@@ -17,7 +17,7 @@ class CustomerRootPage2 extends Component {
   render() {
     return (
       <div>
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark p-3">
+        <nav className="navbar navbar-expand-lg navbar-dark bg-dark p-3 ">
           <Link className="navbar-brand px-3" to="/">
             Wijerathne Marketing Service
           </Link>

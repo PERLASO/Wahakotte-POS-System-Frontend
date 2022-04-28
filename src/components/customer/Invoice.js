@@ -78,7 +78,7 @@ class Invoice extends React.Component {
       <div className="container ">
         <div className="row">
           <div className="col-12 pb-1">
-            <button className="btn btn-success float-right" onClick={this.saveInvoice}> Save Invoice </button>
+            <button className="btn btn-success float-right invoice-print-btn" onClick={this.saveInvoice}> Save Invoice </button>
           </div>
           <div className="col-12 pb-1">
             <h4 className="text-center">Wijerathna Marketing Service</h4>

@@ -347,7 +347,7 @@ class InvoiceForm extends Component {
                             </div>
                             
                         </div>
-                        <div className="row invoice-product-add-table ">
+                        <div className="row invoice-product-add-table">
                             <table className="table ">
                                 <thead className="thead-dark">
                                     <tr>
