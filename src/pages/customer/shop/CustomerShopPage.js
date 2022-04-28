@@ -17,6 +17,7 @@ import ProductEdit from "../../../components/customer/ProductEdit";
 import EmployeeEdit from "../../../components/customer/EmployeeEdit";
 import InvoicePrint from "../../../components/customer/InvoicePrint";
 import Invoice from '../../../components/customer/Invoice'
+import PrintComponent from "../../../components/input/PrintComponent";
 
 
 class CustomerShopPage extends Component{
@@ -45,7 +46,7 @@ class CustomerShopPage extends Component{
                 <Route exact path={`${this.props.match.path}/invoice/list`} component={InvoiceList}/>
                 <Route exact path={`${this.props.match.path}/invoice/create`} component={InvoiceForm}/>
                 <Route exact path={`${this.props.match.path}/invoice/create/save`} component={Invoice}/>
-                <Route exact path={`${this.props.match.path}/invoice/create/save/print`} component={InvoicePrint}/>
+                <Route exact path={`${this.props.match.path}/invoice/create/save/print`} component={PrintComponent}/>
             </Switch>
             
         </div>
