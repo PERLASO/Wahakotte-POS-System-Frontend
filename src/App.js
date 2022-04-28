@@ -12,6 +12,7 @@ import RootPage from "./pages/admin/RootPage";
 import CustomerRootPage from "./pages/customer/RootPage";
 import { shortcutKeys } from "./shortcutKeysConfig.js";
 import Mousetrap from "mousetrap";
+import CustomerRootPage2 from "./pages/customer/RootPage2";
 
 function App() {
   useEffect(() => {
@@ -34,7 +35,7 @@ function App() {
           <Route exact path="/">
             <Redirect to="/app/dashboard" />
           </Route>
-          <Route path="/app" component={CustomerRootPage}></Route>
+          <Route path="/app" component={CustomerRootPage2}></Route>
           <Route exact path="/login" component={AuthPage}></Route>
           <Route exact path="/registration" component={AuthPage}></Route>
           <Route
@@ -48,6 +49,9 @@ function App() {
           <Route exact path="" component={NotFoundPage} />
         </Switch>
       </Router>
+      <div className="copyright-note">
+        <p>copyright ©2022 all rights reserved <a href="http://perlaso.com/"> PERLASO</a></p>
+      </div>
     </div>
   );
 }

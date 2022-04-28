@@ -1,6 +1,12 @@
 .list-table {
   display: block;
-  height: 28rem;
+  height: 30rem;
+  overflow-y: scroll;
+  scrollbar-width: none;
+}
+.invoice-product-add-table {
+  display: block;
+  height: 30rem;
   overflow-y: scroll;
   scrollbar-width: none;
 }
@@ -32,4 +38,16 @@
 
 .capitalize-input{
   text-transform:uppercase;
+}
+
+.copyright-note{
+  bottom: 0;
+  padding-left:2%;
+  position: fixed;
+}
+
+
+grid-container {
+  display: grid;
+  grid-gap: 10px;
 }
