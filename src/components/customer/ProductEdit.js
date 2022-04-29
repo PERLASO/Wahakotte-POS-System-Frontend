@@ -100,15 +100,14 @@ class ProductEdit extends Component {
 
     }
     
-
     render() {
         return (
-            <div className="admin-content mx-auto">
+            <div className="admin-content mx-auto w-50">
                 <div className="w-100 mb-5">
-                    <AnchorTag link="/app/shop/product/list" className="btn btn-primary float-right" itemValue="Back to Product List"></AnchorTag>
+                    <AnchorTag link="/app/shop/product/list" className="btn btn-primary float-right " itemValue="Back to Product List"></AnchorTag>
                     <h4>Edit Product</h4>
                 </div>
-                <div className="w-75">
+                <div className="w-100">
                     <form onSubmit={this.handleSubmit}>
                         <div className="container-fluid">
                             <div className="row">

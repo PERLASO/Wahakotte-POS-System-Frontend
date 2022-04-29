@@ -23,9 +23,9 @@ class DashboardPage extends Component {
 
   render() {
     return (
-      <div className="admin-content mx-auto">
+      <div className="admin-content mx-auto w-75">
         <PageHeader headerText="Welcome to Dashboard" />
-        <div className="w-75">
+        <div className="w-100">
           <div className="container-fluid">
             <div className="row">
               <div className="col-4">
@@ -33,7 +33,15 @@ class DashboardPage extends Component {
                   <p>
                     <b>Total Products</b>
                   </p>
-                  <p>{this.state.data.totalProducts} </p>
+                  <h3>{this.state.data.totalProducts} </h3>
+                </div>
+              </div>
+              <div className="col-4">
+                <div className="dash-summary-cell">
+                  <p>
+                    <b>Total Customers</b>
+                  </p>
+                  <h3>{this.state.data.totalCustomers}</h3>
                 </div>
               </div>
               <div className="col-4">
@@ -41,15 +49,25 @@ class DashboardPage extends Component {
                   <p>
                     <b>Total Invoices</b>
                   </p>
-                  <p>{this.state.data.totalInvoices}</p>
+                  <h3>{this.state.data.totalInvoices}</h3>
+                </div>
+              </div>
+            </div>
+            <div className="row pt-5">
+              <div className="col-4">
+                <div className="dash-summary-cell">
+                  <p>
+                    <b>Today : Total Invoices</b>
+                  </p>
+                  <h3>{this.state.data.totalInvoices} </h3>
                 </div>
               </div>
               <div className="col-4">
                 <div className="dash-summary-cell">
                   <p>
-                    <b>Total Sell Today</b>
+                    <b>Today : Total Sales</b>
                   </p>
-                  <p>{this.state.data.totalSellToday}</p>
+                  <h3>{this.state.data.totalSellToday}</h3>
                 </div>
               </div>
             </div>

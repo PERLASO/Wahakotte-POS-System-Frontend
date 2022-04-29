@@ -82,12 +82,12 @@ class EmployeeEdit extends Component {
 
     render() { 
         return (
-            <div className="admin-content mx-auto">
+            <div className="admin-content mx-auto w-50">
                 <div className="w-100 mb-5">
                     <AnchorTag link="/app/shop/employee/list" className="btn btn-primary float-right" itemValue="Back to Employee List"></AnchorTag>
                     <h4>Edit Employee Details</h4>
                 </div>
-                <div className="w-75">
+                <div className="w-100">
                     <form onSubmit={this.handleSubmit}>
                         <div className="container-fluid">
                             <div className="row">

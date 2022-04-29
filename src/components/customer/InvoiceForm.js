@@ -207,7 +207,7 @@ class InvoiceForm extends Component {
         return (
             <div className="admin-content mx-auto">
                 {this.state.invoiceItems == null && this.handleInvoiceItems}
-                <div className="w-100 mb-5">
+                <div className="w-100 ">
                     <AnchorTag link="/app/shop/invoice/list" className="btn btn-sm btn-primary float-right" itemValue="Back to Invoice List"></AnchorTag>
                     <h4>Create Invoice</h4>
                 </div>
@@ -221,7 +221,7 @@ class InvoiceForm extends Component {
                                     </div>
                                 </div>
                             </div>
-                            <div className="col-6 border-right">
+                            <div className="col-3 border-right">
                                 <div className="row">
                                     <div className="col-12">
                                         <h6 className="text-center"><b>Set Customer Details</b></h6>
@@ -229,7 +229,7 @@ class InvoiceForm extends Component {
                                 </div>
                                 <div className="row">
                                     <div className="col-6">
-                                        <InputFormGroup labelClassName="mb-2" label="" inputclassname="form-control form-control-sm" onChange={this.handleChangeSearchNameKey} placeholder="Customer Short Name" />
+                                        <InputFormGroup id="customer-short-name-input" labelClassName="mb-2" label="" inputclassname="form-control form-control-sm" onChange={this.handleChangeSearchNameKey} placeholder="Customer Short Name" />
                                     </div>
                                     <div className="col-6">
                                         <div className="form-group">
@@ -276,7 +276,10 @@ class InvoiceForm extends Component {
                                 }
                                 
                             </div>
-                            <div className="col-6">
+                            <div className=" col-2">
+
+                            </div>
+                            <div className="col-7">
 
                                 <div className="col-12">
                                     {/* <Table className="table table-stripped" allowAction={false} columnList={this.invoiceColumnList} tableData={this.state.invoiceItems} actionLinkPrefix=""></Table> */}
@@ -332,23 +335,20 @@ class InvoiceForm extends Component {
                             </div>
                         </div>
                         <div className="row">
-                            <div className="col-12">
-                                <h6 className="text-center"><b>Set Products Details</b></h6>
-                            </div>
-                        </div>
-                        <div className="row">
                             <div className="col-3">
                                 <InputFormGroup labelClassName="sr-only" inputclassname="form-control  form-control-sm" placeholder="Product Code" onChange={this.handleChangeSearchProductKey} />
                             </div>
                             <div className="col-2">
                                 <Button className="btn btn-sm btn-success w-75" text="Search" onClick={this.onSearchProductClick} />
                             </div>
+                                <h6 className="text-center"><b>Set Products Details</b></h6>
                             <div className="col-12">
                                 {this.state.searchKey && <div><h6 className="text-danger">Product Not Found!</h6></div>}
                             </div>
+                            
                         </div>
-                        <div className="row">
-                            <table className="table">
+                        <div className="row invoice-product-add-table">
+                            <table className="table ">
                                 <thead className="thead-dark">
                                     <tr>
                                         {this.columnList.map((field, index) => {
@@ -361,7 +361,7 @@ class InvoiceForm extends Component {
                                 {this.state.searchProduct &&
                                     this.state.productData.map((data, index) => {
                                         return (
-                                            <tbody key={index}>
+                                            <tbody  key={index}>
                                                 <tr>
                                                     <td>{data.id}</td>
                                                     <td>{data.itemCode}</td>

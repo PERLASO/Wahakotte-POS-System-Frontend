@@ -1,8 +1,22 @@
+.logo-img{
+  height: 3rem;
+  z-index: 10;
+  padding-left: 2rem;
+}
+
+
 .list-table {
   display: block;
-  height: 28rem;
+  height: 30rem;
   overflow-y: scroll;
   scrollbar-width: none;
+}
+.invoice-product-add-table {
+  display: block;
+  height: 20rem;
+  overflow-y: scroll;
+  width: 100%;
+
 }
 
 .list-table th {
@@ -25,11 +39,27 @@
   padding-right:60px;
   font-weight: bold;
 }
+
 .invoice-print-btn{
+  margin-left: 5%;
   height:5rem;
+  width: 8rem;
   font-size: 15px;
 }
+.create-invoice-btn{
+  height:5rem;
+  width: 8rem;
+  font-size: 15px;
+}
+
 
 .capitalize-input{
   text-transform:uppercase;
 }
+
+.copyright-note{
+  bottom: 0;
+  padding-left:2%;
+  position: fixed;
+}
+
