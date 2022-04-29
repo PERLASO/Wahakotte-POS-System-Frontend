@@ -9,11 +9,11 @@ class Invoice extends React.Component {
       invoiceItems: props.location.state[0],
       total: props.location.state[1],
       customer: props.location.state[2],
-      paidAmount: 0,
+      paidAmount: -1,
       checkSaved: false,
       status: '',
       checkStatus: true,
-      statusMessage: 'Set Invoice Status to Proceed',
+      statusMessage: 'Enter paid amount to proceed',
       data: {}
     };
 
@@ -31,7 +31,21 @@ class Invoice extends React.Component {
   }
 
   handlePaidAmount(e) {
-    this.setState({ paidAmount: e.target.value })
+    var val = e.target.value;
+    this.setState({ paidAmount: val })
+    this.setState({ checkStatus: true })
+
+    if(val == this.state.total){
+      document.getElementById("select-status").selectedIndex = "1";
+      this.setState({ status:"CASH" });
+    }else if(val == 0){
+      document.getElementById("select-status").selectedIndex = "0";
+      this.setState({ status:"CREDIT" });
+    }
+    else{
+      document.getElementById("select-status").selectedIndex = "2";
+      this.setState({ status:"HYBRID" });
+    }
   }
 
   saveInvoice = () => {
@@ -117,15 +131,17 @@ class Invoice extends React.Component {
                 <div className="col">
                   <div className="form">
                     <select
+                    id="select-status"
                       className="form-control"
+                      readOnly
+                      disabled
                       required
                       onChange={this.handleStatus}
                       defaultValue='Set Status'
                     >
-                      <option value='Set Status'>Set Status</option>
+                      <option vlaue='CREDIT'>CREDIT</option>
                       <option value='CASH'>CASH</option>
                       <option value='HYBRID'>HYBRID</option>
-                      <option vlaue='CREDIT'>CREDIT</option>
                     </select>
                   </div>
                 </div>

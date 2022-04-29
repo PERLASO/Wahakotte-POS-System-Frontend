@@ -18,6 +18,10 @@ class InvoicePrint extends React.Component {
   }
 
   render() {
+    var dateObj = new Date();
+var month = dateObj.getUTCMonth(); //months from 1-12
+var day = dateObj.getUTCDate();
+
     return (
       <div>
         <div>
@@ -46,7 +50,8 @@ class InvoicePrint extends React.Component {
                       <input
                         type="text"
                         className="form-control"
-                        value={this.state.billNo}
+                       // value={this.state.billNo }
+                       value ={"BL" + this.state.customer.shortCode + day+"." + month}
                         readOnly
                       />
                     </div>
