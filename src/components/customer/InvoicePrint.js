@@ -3,7 +3,6 @@ import ReactToPrint from "react-to-print";
 import Invoice from "./Invoice";
 import Helmet from "react-helmet";
 
-
 class InvoicePrint extends React.Component {
   constructor(props) {
     super(props);
@@ -14,10 +13,9 @@ class InvoicePrint extends React.Component {
       status: this.props.props[2],
       total: this.props.props[3],
       paidAmount: this.props.props[4],
-      billNo: this.props.props[5]
-    }
+      billNo: this.props.props[5],
+    };
   }
-
 
   render() {
     return (
@@ -59,7 +57,7 @@ class InvoicePrint extends React.Component {
                       <input
                         type="text"
                         className="form-control"
-                        value={this.state.customer.id}
+                        value={this.state.customer.shortCode}
                         readOnly
                       />
                     </div>
@@ -136,16 +134,36 @@ class InvoicePrint extends React.Component {
                         <td>{invoiceItem.name}</td>
                         <td>{invoiceItem.count}</td>
                         <td>{invoiceItem.sellingPrice}.00</td>
-                        <td>{invoiceItem.count * invoiceItem.sellingPrice}.00</td>
+                        <td>
+                          {invoiceItem.count * invoiceItem.sellingPrice}.00
+                        </td>
                       </tr>
                     );
                   })}
                 </tbody>
               </table>
-
-
-              <Helmet>
-                <script >{`
+            </div>
+            
+            <div className="justify-content-right page-footer bg-danger">
+              <div className="col-md-12  pb-14 pr-12 grand-total ">
+                <div className="text-right font-weight-bold ">
+                <div class="row w-25 float-right">
+                    <div class="col">Net Total : </div>
+                    <div class="col">{this.state.total}.00</div>
+                    <div class="w-100"></div>
+                    <div class="col">Cash :</div>
+                    <div class="col"> {this.state.paidAmount}.00</div>
+                    <div class="w-100"></div>
+                    <div class="col">Balance :</div>
+                    <div class="col"> { this.state.paidAmount - this.state.total}.00</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <Helmet>
+                <script>{`
         
           var oRows = document.getElementById('invoice-table').getElementsByTagName('tr');
           var iRowCount = oRows.length;
@@ -156,27 +174,6 @@ class InvoicePrint extends React.Component {
         
     `}</script>
               </Helmet>
-
-            </div>
-            <div className="justify-content-right ">
-              <div id="grand-total" className="col-md-12  pb-14 pr-12 grand-total page-footer">
-                <div className="text-right font-weight- ">
-                  Net Total - {this.state.total}.00
-                </div>
-              </div>
-              <div id="grand-total" className="col-md-12  pb-14 pr-12 grand-total page-footer">
-                <div className="text-right font-weight- ">
-                  Cash - {this.state.paidAmount}.00
-                </div>
-              </div>
-              <div id="grand-total" className="col-md-12  pb-14 pr-12 grand-total page-footer">
-                <div className="text-right font-weight- ">
-                  Balance -{this.state.total - this.state.paidAmount}.00
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     );
   }
