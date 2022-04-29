@@ -78,7 +78,7 @@ class EmployeeList extends Component{
                         <p><b>Search a Customer</b></p>
                     </div>
                     <div className="col-4">
-                        <InputFormGroup labelClassName="mb-2" label="" inputclassname="form-control form-control-sm"  onChange={this.handleChangeSearchNameKey} placeholder="Customer Short Name"/>
+                        <InputFormGroup id="customer-short-name-input" labelClassName="mb-2" label="" inputclassname="form-control form-control-sm"  onChange={this.handleChangeSearchNameKey} placeholder="Customer Short Name"/>
                     </div>       
                     <div className="col-2">
                         <div className="form-group">

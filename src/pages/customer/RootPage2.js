@@ -7,6 +7,7 @@ import DashboardPage from "../../pages/customer/Dashboard";
 import CustomerShopPage from "../customer/shop/CustomerShopPage";
 import ProfileBasePage from "../customer/profile/ProfileBasePage";
 import NavLiTag from "../../components/navigation/NavListTag";
+import logo from '.../../../public/logo.png';
 
 class CustomerRootPage2 extends Component {
   constructor(props) {
@@ -17,7 +18,8 @@ class CustomerRootPage2 extends Component {
   render() {
     return (
       <div>
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark p-3 ">
+        <nav className="navbar navbar-expand-lg navbar-dark bg-dark p-3 pr-lg-5">
+          <img src={logo} className="logo-img"/>
           <Link className="navbar-brand px-3" to="/">
             Wijerathne Marketing Service
           </Link>
@@ -60,12 +62,13 @@ class CustomerRootPage2 extends Component {
                   className="list-group-item list-group-item-action"
                   itemValue="Invoices"
                 ></AnchorTag>
+                <AnchorTag
+                  link="/app/shop/invoice/create"
+                  className="list-group-item list-group-item-action bg-warning font-weight-bold"
+                  itemValue=" Crt-Inv"
+                ></AnchorTag>
+
               </div>
-              <NavLiTag
-                link="/"
-                className="nav-link"
-                itemValue="Home"
-              ></NavLiTag>
               <NavLiTag
                 link="/login"
                 className="nav-link"
