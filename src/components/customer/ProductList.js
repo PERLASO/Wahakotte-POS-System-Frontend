@@ -61,14 +61,14 @@ class ProductList extends Component{
         if(this.state.isLoading===true){
             return(
                 <div>
-                     <AnchorTag link="/app/shop/product/create" className="btn btn-sm btn-warning" itemValue="Create Product"></AnchorTag>    
+                     <AnchorTag link="/app/shop/product/create" className="btn  btn-warning" itemValue="Create Product"></AnchorTag>    
                 </div>     
             )
         }
         return (
             <div className="admin-content mx-auto">
                 <div className="w-100 mb-3">
-                    <AnchorTag link="/app/shop/product/create" className="btn btn-sm btn-warning float-right" itemValue="Create Product"></AnchorTag>
+                    <AnchorTag link="/app/shop/product/create" className="btn  btn-warning float-right" itemValue="Create Product"></AnchorTag>
                     <h4>Product List</h4>
                 </div>
                 <div className="row mb-2">

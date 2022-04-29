@@ -208,7 +208,7 @@ class InvoiceForm extends Component {
             <div className="admin-content mx-auto">
                 {this.state.invoiceItems == null && this.handleInvoiceItems}
                 <div className="w-100 ">
-                    <AnchorTag link="/app/shop/invoice/list" className="btn btn-sm btn-primary float-right" itemValue="Back to Invoice List"></AnchorTag>
+                    <AnchorTag link="/app/shop/invoice/list" className="btn btn-primary float-right" itemValue="Back to Invoice List"></AnchorTag>
                     <h4>Create Invoice</h4>
                 </div>
                 <div className="w-200">

@@ -29,7 +29,6 @@ function App() {
       }
       return false;
     });
-
   }, []);
 
   return (
@@ -54,7 +53,7 @@ function App() {
         </Switch>
       </Router>
       <div className="copyright-note">
-        <p>copyright ©2022 all rights reserved <a href="http://perlaso.com/"> PERLASO</a></p>
+        <p>copyright ©2022 all rights reserved <a href="http://perlaso.com/" target="_blank"> PERLASO</a></p>
       </div>
      < Helmet>
      <script>

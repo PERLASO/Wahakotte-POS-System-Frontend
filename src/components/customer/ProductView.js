@@ -117,8 +117,8 @@ class ProductView extends Component {
                                         <AnchorTag className="btn btn-warning mr-5" itemValue="Back to List" link="/app/shop/product/list" />
                                         
                                     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
-                            Product delete
-                                       </button>
+                                       Product delete
+                                    </button>
                                     </div>
 
                                 </div>
@@ -133,7 +133,6 @@ class ProductView extends Component {
 
 
                     <div className="col-6 mt-4">
-
                         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">

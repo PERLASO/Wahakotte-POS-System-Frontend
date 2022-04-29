@@ -48,7 +48,6 @@ class ProductForm extends Component {
     this.setState({ buyingprice: event.target.value });
   }
   handleChangeMeasurement(event) {
-
     this.setState({ measurement: event.target.value });
     console.log(event.target.value);
   }
@@ -81,16 +80,16 @@ class ProductForm extends Component {
 
   render() {
     return (
-      <div className="admin-content mx-auto">
-        <div className="w-100 mb-5">
-          <AnchorTag
-            link="/app/shop/product/list"
-            className="btn btn-primary float-right"
-            itemValue="Back to Product List"
-          ></AnchorTag>
-          <h4>Create Product</h4>
-        </div>
-        <div className="w-75">
+      <div className="admin-content mx-auto w-50">
+        <div className="w-100">
+          <div className="w-100 mb-2">
+            <AnchorTag
+              link="/app/shop/product/list"
+              className="btn btn-primary float-right"
+              itemValue="Back to Product List"
+            ></AnchorTag>
+            <h4>Create Product</h4>
+          </div>
           <form onSubmit={this.handleSubmit}>
             <div className="container-fluid">
               <div className="row">
@@ -153,17 +152,34 @@ class ProductForm extends Component {
                     required
                     onChange={this.handleChangeMeasurement}
                   >
-                    <option  id= "ROLL"  name= "ROLL"  value = "ROLL">ROLL</option>
-                    <option  id= "CUP"  name= "CUP"  value = "CUP">CUP</option>
-                    <option  id= "BOT"  name= "BOT"  value = "BOT">BOT</option>
-                    <option  id= "RIM"  name= "RIM"  value = "RIM">RIM</option>
-                    <option  id= "DOZ"  name= "DOZ"  value = "DOZ">DOZ</option>
-                    <option  id= "BUN"  name= "BUN"  value = "BUN">BUN</option>
-                    <option  id= "PIEC"  name= "PIEC"  value = "PIEC">PIEC</option>
-                    <option  id= "BOX"  name= "BOX"  value = "BOX">BOX</option>
-                    <option  id= "KG"  name= "KG"  value = "KG">KG</option>
+                    <option id="ROLL" name="ROLL" value="ROLL">
+                      ROLL
+                    </option>
+                    <option id="CUP" name="CUP" value="CUP">
+                      CUP
+                    </option>
+                    <option id="BOT" name="BOT" value="BOT">
+                      BOT
+                    </option>
+                    <option id="RIM" name="RIM" value="RIM">
+                      RIM
+                    </option>
+                    <option id="DOZ" name="DOZ" value="DOZ">
+                      DOZ
+                    </option>
+                    <option id="BUN" name="BUN" value="BUN">
+                      BUN
+                    </option>
+                    <option id="PIEC" name="PIEC" value="PIEC">
+                      PIEC
+                    </option>
+                    <option id="BOX" name="BOX" value="BOX">
+                      BOX
+                    </option>
+                    <option id="KG" name="KG" value="KG">
+                      KG
+                    </option>
                   </select>
-                  
                 </div>
 
                 <div className="col-12 mt-3">
