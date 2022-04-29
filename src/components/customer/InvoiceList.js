@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import AnchorTag from "../../components/Anchortag";
 import Table from "../../components/table/Table";
+import { getInvoiceList } from "../../context/Invoice";
 import InputFormGroup from "../input/InputFormGroup";
 
 
@@ -10,30 +11,35 @@ class InvoiceList extends Component{
         super(props);
         this.columnList = ["ID", "Customer", "Invoice ID", "Total", "Paid", "Date", "Action"];
         
-        this.tableData = [
-            {"id": 1, "customer": "Md Nazmul Hasan", "invoice_id": "201256", "total": "238.00", "is_paid": "Yes", "date": "20th July, 2021"},
-            {"id": 2, "customer": "Farzana Yesmin", "invoice_id": "201256", "total": "980.00", "is_paid": "Yes", "date": "8th July, 2021"},
-            {"id": 3, "customer": "Amit Shah", "invoice_id": "201256", "total": "305.00", "is_paid": "Yes", "date": "11th May, 2021"},
-            {"id": 4, "customer": "Md Farhan Kabir", "invoice_id": "201256", "total": "139.00", "is_paid": "No", "date": "1st April, 2021"},
-        ]
+        
 
         this.state = {
             isLoading:true,
-            data: []
+            data: [],
+            tableData : []
           }
     }
 
-    
+    componentDidMount(){
+        getInvoiceList().then(c => {
+            console.log(c.data)
+            if(c != undefined){
+                this.setState({isLoading:false})
+                this.setState({tableData:c.data})
+            }
+        })
+    }
+
 
 
     render(){
-        // if(this.state.isLoading===true){
-        //     return(
-        //         <div>
-        //              <AnchorTag link="/app/shop/invoice/create" className="btn btn-sm btn-warning" itemValue="Create Invocie"></AnchorTag>
-        //         </div>
-        //     )
-        // }
+        if(this.state.isLoading===true){
+            return(
+                <div>
+                     <AnchorTag link="/app/shop/invoice/create" className="btn btn-sm btn-warning" itemValue="Create Invocie"></AnchorTag>
+                </div>
+            )
+        }
         return (
             <div className="admin-content mx-auto">
                 <div className="w-100 mb-3">
@@ -57,7 +63,7 @@ class InvoiceList extends Component{
                     </div>
                 </div>
                 <div className="list-table">
-                <Table className="table table-striped " columnList={this.columnList} tableData={this.tableData} actionLinkPrefix=""></Table>
+                <Table className="table table-striped " columnList={this.columnList} tableData={this.state.tableData} actionLinkPrefix=""></Table>
                 </div>
             </div>
         ) 
