@@ -35,7 +35,7 @@ export default function PrintComponent(props) {
            @media print {
             div.page-footer {
             position: fixed;
-            bottom:0mm;
+            bottom:5mm;
             width: 100%;
             height: 50px;
             page-break-after: always;
