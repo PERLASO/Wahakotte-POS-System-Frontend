@@ -63,14 +63,14 @@ class EmployeeList extends Component{
         if(this.state.isLoading===true){
             return(
                 <div>
-                     <AnchorTag link="/app/shop/employee/create" className="btn btn-sm btn-warning" itemValue="Create Customer"></AnchorTag>   
+                     <AnchorTag link="/app/shop/employee/create" className="btn  btn-warning" itemValue="Create Customer"></AnchorTag>   
                 </div>     
             )
         }
         return (
             <div className="admin-content mx-auto">
                 <div className="w-100 mb-3">
-                    <AnchorTag link="/app/shop/employee/create" className="btn btn-sm btn-warning float-right" itemValue="Create Customer"></AnchorTag>
+                    <AnchorTag link="/app/shop/employee/create" className="btn btn-warning float-right" itemValue="Create Customer"></AnchorTag>
                     <h4>Customer List</h4>
                 </div>
                 <div className="row mb-2">

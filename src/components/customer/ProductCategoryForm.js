@@ -10,12 +10,12 @@ class ProductCategoryForm extends Component{
 
     render(){
         return (
-            <div className="admin-content mx-auto">
+            <div className="admin-content mx-auto ">
                 <div className="w-100 mb-5">
                     <AnchorTag link="/app/shop/product-category/list" className="btn btn-primary float-right" itemValue="Back to Category List"></AnchorTag>
                     <h4>Create Product Category</h4>
                 </div>
-                <div className="w-75">
+                <div className="w-100">
                     <form>
                         <div className="container-fluid">
                             <div className="row">
