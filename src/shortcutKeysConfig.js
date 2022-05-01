@@ -1,6 +1,6 @@
 export const shortcutKeys = {
-   SK01: 'alt+1', //
-   SK02: 'alt+2', //
+   SK01: '1', //
+   SK02: '2', //
    SK03: 'alt+3', //
    SK04: 'alt+4', //
    SK05: 'alt+5', //

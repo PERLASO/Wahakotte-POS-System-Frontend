@@ -8,7 +8,7 @@ class InputText extends Component{
 
 
     render(){
-        return <input type="text" onChange={this.props.onChange} className={this.props.className} required={this.props.required} placeholder={this.props.placeholder} defaultValue={this.props.value} ref={this.props.ref}/>
+        return <input type="text" id={this.props.id} onChange={this.props.onChange} className={this.props.className} required={this.props.required} placeholder={this.props.placeholder} defaultValue={this.props.value} ref={this.props.ref}/>
     }
 }
 

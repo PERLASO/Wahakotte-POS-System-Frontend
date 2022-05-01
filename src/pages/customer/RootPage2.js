@@ -69,11 +69,11 @@ class CustomerRootPage2 extends Component {
                 ></AnchorTag>
 
               </div>
-              <NavLiTag
+              {/* <NavLiTag
                 link="/login"
                 className="nav-link"
                 itemValue="Logout"
-              ></NavLiTag>
+              ></NavLiTag> */}
             </ul>
           </div>
         </nav>

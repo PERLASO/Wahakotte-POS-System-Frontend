@@ -152,21 +152,24 @@ var day = dateObj.getUTCDate();
             <div className="justify-content-right page-footer bg-danger">
               <div className="col-md-12  pb-14 pr-12 grand-total ">
                 <div className="text-right font-weight-bold ">
-                <div class="row w-25 float-right">
-                    <div class="col">Net Total : </div>
-                    <div class="col">{this.state.total}.00</div>
+                  <div className="w-50 float-right">
+                  <div class="row w-75 float-right">
+                    <div class="col"><h4>Net Total :</h4></div>
+                    <div class="col"><h4>{this.state.total}.00</h4></div>
                     <div class="w-100"></div>
-                    <div class="col">Cash :</div>
-                    <div class="col"> {this.state.paidAmount}.00</div>
+                    <div class="col"><h4>Cash :</h4></div>
+                    <div class="col"> <h4>{this.state.paidAmount}.00</h4></div>
                     <div class="w-100"></div>
-                    <div class="col">Balance :</div>
-                    <div class="col"> { this.state.paidAmount - this.state.total}.00</div>
+                    <div class="col"><h4>Balance :</h4></div>
+                    <div class="col"><h4> { this.state.paidAmount - this.state.total}.00</h4></div>
+                  </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+
         <Helmet>
                 <script>{`
         

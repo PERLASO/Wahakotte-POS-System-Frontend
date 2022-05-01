@@ -19,7 +19,6 @@ class Invoice extends React.Component {
 
     this.handleStatus = this.handleStatus.bind(this);
     this.handlePaidAmount = this.handlePaidAmount.bind(this);
-
     const current = new Date();
     this.date = `${current.getDate()}/${current.getMonth() + 1
       }/${current.getFullYear()}`;

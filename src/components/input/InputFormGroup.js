@@ -19,14 +19,12 @@ class InputFormGroup extends Component{
 
     renderInputText(){
         if(this.props.isReadOnly == true){
-            return <input type="text" className={this.props.inputclassname} placeholder={this.props.placeholder} defaultValue={this.props.value} readOnly/>
+            return <input type="text" id={this.props.inputid} className={this.props.inputclassname} placeholder={this.props.placeholder} defaultValue={this.props.value} readOnly/>
         }
         else{
-            return <InputText required={this.props.required} className={this.props.inputclassname} onChange={this.props.onChange} placeholder={this.props.placeholder} value={this.props.value} ref={this.props.ref}/>
+            return <InputText id={this.props.inputid} required={this.props.required} className={this.props.inputclassname} onChange={this.props.onChange} placeholder={this.props.placeholder} value={this.props.value} ref={this.props.ref}/>
         }
     }
-
-
     render(){
         return (
             <div className="form-group">

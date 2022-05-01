@@ -50,7 +50,10 @@ class InvoiceForm extends Component {
         this.handleChangeSearchProductKey = this.handleChangeSearchProductKey.bind(this);
         this.handleYes = this.handleYes.bind(this);
     }
-
+    onSubmitHndl = e => {
+        e.preventDefault();
+        this.setState({ error: "Some error" });
+      };
     handleChangeCount(e) {
         this.setState({ count: e.target.value })
     }
@@ -227,9 +230,11 @@ class InvoiceForm extends Component {
                                         <h6 className="text-center"><b>Set Customer Details</b></h6>
                                     </div>
                                 </div>
+                                <form onSubmit={this.onSubmitHndl} className="w-100 d-flex">
+
                                 <div className="row">
                                     <div className="col-6">
-                                        <InputFormGroup id="customer-short-name-input" labelClassName="mb-2" label="" inputclassname="form-control form-control-sm" onChange={this.handleChangeSearchNameKey} placeholder="Customer Short Name" />
+                                        <InputFormGroup inputid="list-search-data" labelClassName="mb-2" label="" inputclassname="form-control form-control-sm" onChange={this.handleChangeSearchNameKey} placeholder="Customer Short Name" />
                                     </div>
                                     <div className="col-6">
                                         <div className="form-group">
@@ -240,6 +245,7 @@ class InvoiceForm extends Component {
                                         {this.state.searchCustomerKey && <div><h6 className="text-danger">User Not Found!</h6></div>}
                                     </div>
                                 </div>
+                                </form>
                                 {this.state.searchCustomer && 
                                 <div className="row">
                                 <div className="col-6">
@@ -334,19 +340,22 @@ class InvoiceForm extends Component {
                                 <hr />
                             </div>
                         </div>
-                        <div className="row">
+                        <form onSubmit={this.onSubmitHndl} className="w-100 d-flex">
+                        <div className="row w-100">
                             <div className="col-3">
-                                <InputFormGroup labelClassName="sr-only" inputclassname="form-control  form-control-sm" placeholder="Product Code" onChange={this.handleChangeSearchProductKey} />
+                                <InputFormGroup inputid="invoice-search-product" labelClassName="sr-only" inputclassname="form-control  form-control-sm" placeholder="Product Code" onChange={this.handleChangeSearchProductKey} />
                             </div>
                             <div className="col-2">
                                 <Button className="btn btn-sm btn-success w-75" text="Search" onClick={this.onSearchProductClick} />
                             </div>
+            
                                 <h6 className="text-center"><b>Set Products Details</b></h6>
                             <div className="col-12">
                                 {this.state.searchKey && <div><h6 className="text-danger">Product Not Found!</h6></div>}
                             </div>
                             
                         </div>
+                        </form>
                         <div className="row invoice-product-add-table">
                             <table className="table ">
                                 <thead className="thead-dark">

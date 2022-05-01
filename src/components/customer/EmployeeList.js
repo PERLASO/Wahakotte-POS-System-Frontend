@@ -19,8 +19,14 @@ class EmployeeList extends Component{
             searchCustomer:false
         }
         this.columnList = ["ID", "Name", "Short Name", "Address", "Area", "Phone Number", "Action"];
-        this.handleChangeSearchNameKey = this.handleChangeSearchNameKey.bind(this);            
+        this.handleChangeSearchNameKey = this.handleChangeSearchNameKey.bind(this);  
+        
+      
     }
+    onSubmitHndl = e => {
+        e.preventDefault();
+        this.setState({ error: "Some error" });
+      };
 
     handleChangeSearchNameKey(e){
         this.setState({searchKey: false})
@@ -67,6 +73,7 @@ class EmployeeList extends Component{
                 </div>     
             )
         }
+
         return (
             <div className="admin-content mx-auto">
                 <div className="w-100 mb-3">
@@ -77,14 +84,19 @@ class EmployeeList extends Component{
                     <div className="col-4">
                         <p><b>Search a Customer</b></p>
                     </div>
-                    <div className="col-4">
-                        <InputFormGroup id="customer-short-name-input" labelClassName="mb-2" label="" inputclassname="form-control form-control-sm"  onChange={this.handleChangeSearchNameKey} placeholder="Customer Short Name"/>
-                    </div>       
+                  <form onSubmit={this.onSubmitHndl} className="w-100 d-flex">
+                  <div className="col-4">
+                        <InputFormGroup inputid="list-search-data"  labelClassName="mb-2" label="" inputclassname="form-control form-control-sm"  onChange={this.handleChangeSearchNameKey} placeholder="Customer Short Name"/>
+                    </div>    
+                    {/* <input type="text" id="customer-short-name-input"/>    */}
                     <div className="col-2">
                         <div className="form-group">
                             <input type="submit" className="btn btn-sm btn-success" value="Search" onClick={this.onSearchClick}/>
                         </div>
                     </div>
+                  </form>
+
+     
                     <div className="col-8">
                     {this.state.searchKey && <div><h6 className="text-danger">User Not Found!</h6></div>}
                     </div>
