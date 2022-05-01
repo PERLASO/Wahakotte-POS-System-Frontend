@@ -11,7 +11,7 @@ class AuthPage extends Component{
         super(props)
         this.currentUrl = this.props.location.pathname;
     }
-
+  
     render(){
         if(this.props.location.pathname == "/login"){
             return <LoginForm></LoginForm>
