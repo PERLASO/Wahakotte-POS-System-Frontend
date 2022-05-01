@@ -38,7 +38,7 @@ function App() {
       }
       return false;
     });
-  }, []);
+  },[]);
 
   return (
     <div className="App">
