@@ -10,7 +10,7 @@ import moment from 'moment/moment.js';
 class InvoiceList extends Component {
     constructor(props) {
         super(props);
-        this.columnList = ["BillNo", "Customer ID", "Status", "Total", "Credit", "Date", "Action"];
+        this.columnList = ["BillNo", "Customer Name", "Status", "Total", "Credit", "Date", "Action"];
         this.state = {
             isLoading: true,
             data: [],
@@ -173,7 +173,7 @@ class InvoiceList extends Component {
                             return (
                                 <tbody key={index}>
                                     <tr>
-                                        <td>{data.id}</td>
+                                        <td>{data.id}</td> 
                                         <td>{data.customer.name}</td>
                                         <td>{data.status}</td>
                                         <td>{data.total}</td>
@@ -191,7 +191,7 @@ class InvoiceList extends Component {
                             return (
                                 <tbody key={index}>
                                     <tr>
-                                        <td>{data.id}</td>
+                                        {/* <td>{data.id}</td> */}
                                         <td>{data.customer.id}</td>
                                         <td>{data.status}</td>
                                         <td>{data.total}</td>
