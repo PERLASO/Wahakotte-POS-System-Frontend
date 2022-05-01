@@ -19,13 +19,22 @@ function App() {
   useEffect(() => {
 
     Mousetrap.bind(shortcutKeys.SK01, function () {
-      const input = document.getElementById("customer-short-name-input"); 
+      const input = document.getElementById("list-search-data"); 
       const input2 = document.getElementsByTagName("body"); 
       if (typeof input != "undefined" && input != null) {
         
         input.setSelectionRange(0, 0);
         input.focus();
+      }
+      return false;
+    });
+    Mousetrap.bind(shortcutKeys.SK02, function () {
+      const input = document.getElementById("invoice-search-product"); 
+      const input2 = document.getElementsByTagName("body"); 
+      if (typeof input != "undefined" && input != null) {
         
+        input.setSelectionRange(0, 0);
+        input.focus();
       }
       return false;
     });
@@ -55,30 +64,6 @@ function App() {
       <div className="copyright-note">
         <p>copyright ©2022 all rights reserved <a href="http://perlaso.com/" target="_blank"> PERLASO</a></p>
       </div>
-     < Helmet>
-     <script>
-       {
-         `
-         document.addEventListener('keydown', (event) => {
-          const keyName = event.key;
-        
-          if (keyName === 'Control') {
-            // do not alert when only Control key is pressed.
-            return;
-          }
-        
-      //    if (event.ctrlKey) {
-            // Even though event.key is not 'Control' (e.g., 'a' is pressed),
-            // event.ctrlKey may be true if Ctrl key is pressed at the same time.
-        //    alert('Combination of ctrlKey + ');
-         // } else {
-          //  alert('Key pressed ');
-         // }
-        }, false);
-         `
-       }
-     </script>
-     </Helmet> 
     </div>
 
   );

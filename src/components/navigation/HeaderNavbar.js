@@ -28,7 +28,7 @@ class HeaderNavBar extends Component{
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav ml-auto">
                             <NavLiTag link="/" className="nav-link" itemValue="Home"></NavLiTag>
-                            <NavLiTag link="/login" className="nav-link" itemValue="Logout"></NavLiTag>
+                            {/* <NavLiTag link="/login" className="nav-link" itemValue="Logout"></NavLiTag> */}
                         </ul>
                     </div>
                 </nav>

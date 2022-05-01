@@ -26,6 +26,11 @@ class ProductList extends Component{
 
     }
 
+    onSubmitHndl = e => {
+        e.preventDefault();
+        this.setState({ error: "Some error" });
+      };
+
     handleChangeSearchProductKey(e) {
         this.setState({ searchKey: false })
         this.setState({ searchProductKey: e.target.value })
@@ -75,14 +80,16 @@ class ProductList extends Component{
                     <div className="ol-12">
                         <p><b>Search Product</b></p>
                     </div>
+                    <form onSubmit={this.onSubmitHndl} className="w-100 d-flex">
                     <div className="col-2">
-                        <InputFormGroup labelClassName="mb-2" label="" inputclassname="form-control form-control-sm" placeholder="Product Code" onChange={this.handleChangeSearchProductKey}/>
+                        <InputFormGroup inputid="list-search-data" labelClassName="mb-2" label="" inputclassname="form-control form-control-sm" placeholder="Product Code" onChange={this.handleChangeSearchProductKey}/>
                     </div>
                     <div className="col-2">
                         <div className="form-group">
                             <input type="submit" className="w-100 btn btn-sm btn-success" value="Search" onClick={this.onSearchProductClick}/>
                         </div>
                     </div>
+                    </form>
                 </div>
                 <div className="list-table">
                     {this.state.searchProduct && <Table className="table table-striped " columnList={this.columnList} tableData={this.state.productData} actionLinkPrefix=""></Table> }
