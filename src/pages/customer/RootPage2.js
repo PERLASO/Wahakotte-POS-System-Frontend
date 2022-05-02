@@ -7,7 +7,7 @@ import DashboardPage from "../../pages/customer/Dashboard";
 import CustomerShopPage from "../customer/shop/CustomerShopPage";
 import ProfileBasePage from "../customer/profile/ProfileBasePage";
 import NavLiTag from "../../components/navigation/NavListTag";
-import logo from '.../../../public/logo.png';
+import logo from '../../images/logo.png';
 
 class CustomerRootPage2 extends Component {
   constructor(props) {
