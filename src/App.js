@@ -40,12 +40,22 @@ function App() {
     });
   },[]);
 
+  let redirect ;
+
+  if(localStorage.getItem('loginState') === 'true'){
+    redirect =  <Redirect to="/app/dashboard" />
+  }
+  else{
+    redirect =  <Redirect to="/login" />
+  }
+
+
   return (
     <div className="App">
       <Router>
         <Switch>
           <Route exact path="/">
-            <Redirect to="/app/dashboard" />
+           {redirect}
           </Route>
           <Route path="/app" component={CustomerRootPage2}></Route>
           <Route exact path="/login" component={AuthPage}></Route>

@@ -21,8 +21,6 @@ export const removeTokens = () => {
   localStorage.removeItem('role');
   localStorage.removeItem('token');
   
-  console.log("logout");
-  
 };
 
 export const getAccessToken = () => localStorage.getItem('token');

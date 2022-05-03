@@ -20,6 +20,7 @@ export default function LoginForm(props) {
         let data = { userName, password}
        login(data).then(res => {
          if(res.data){
+         localStorage.setItem("loginState", true)
           history.push("/app/dashboard");
          }else{
               seterror("User Name or Password is incorrect")
