@@ -41,7 +41,7 @@ export default function LoginForm(props) {
                             <input type="password" className="form-control" id="password" placeholder="Enter Password here" onChange={(e)=> setpassword(e.target.value)}/>
                         </div>
                         <div className="form-group">
-                            <button className="btn btn-info w-100 mt-2">Login</button>
+                            <button className="btn btn-warning w-100 mt-2">Login</button>
                         </div>
                         <div className=" alert-danger">{error}</div>
                         <div className="secBreak mb-0">
