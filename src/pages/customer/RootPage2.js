@@ -15,6 +15,10 @@ class CustomerRootPage2 extends Component {
     this.userRole = "owner";
   }
 
+  logout(){
+    localStorage.setItem("loginState", false);
+  }
+
   render() {
     return (
       <div>
@@ -67,13 +71,15 @@ class CustomerRootPage2 extends Component {
                   className="list-group-item list-group-item-action bg-warning font-weight-bold"
                   itemValue=" Crt-Inv"
                 ></AnchorTag>
-
               </div>
-              {/* <NavLiTag
-                link="/login"
-                className="nav-link"
-                itemValue="Logout"
-              ></NavLiTag> */}
+
+              <Link
+                to="/login"
+                className="nav-link "
+                onClick={this.logout}
+              >
+                Logout
+              </Link>
             </ul>
           </div>
         </nav>
