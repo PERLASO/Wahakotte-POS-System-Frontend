@@ -38,6 +38,15 @@ function App() {
       }
       return false;
     });
+    Mousetrap.bind(shortcutKeys.SKreturn, function () {
+      const input = document.getElementById("proceed"); 
+
+      if (typeof input != "undefined" && input != null) {
+        
+        input.click();
+      }
+      return false;
+    });
   },[]);
 
   let redirect ;

@@ -25,7 +25,7 @@ export default function PrintComponent(props) {
       <div>
         <ReactToPrint className="pb-12"
           trigger={() => (
-            <button className="btn btn-info invoice-print-btn"> Print Invoice</button>
+            <button id="proceed" className="btn btn-info invoice-print-btn"> Print Invoice</button>
           )}
           content={() => componentRef}
 
@@ -35,7 +35,7 @@ export default function PrintComponent(props) {
            @media print {
             div.page-footer {
             position: fixed;
-            bottom:5mm;
+            bottom:15mm;
             width: 100%;
             height: 50px;
             page-break-after: always;

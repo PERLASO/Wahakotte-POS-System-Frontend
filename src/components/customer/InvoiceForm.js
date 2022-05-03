@@ -200,6 +200,7 @@ class InvoiceForm extends Component {
   };
 
   onSearchCustomerClick = () => {
+    document.getElementById("list-search-data").blur();
     this.setState({ saveInvoiceCheck: false });
     getCustomerByShortname(this.state.searchNameKey).then((res) => {
       try {
@@ -403,6 +404,7 @@ class InvoiceForm extends Component {
                 <div className="col-6">
                   <div className="form-group">
                     <Button
+                    id="proceed"
                       className="btn btn-sm btn-warning w-100"
                       text="Proceed"
                       onClick={this.saveInvoice}

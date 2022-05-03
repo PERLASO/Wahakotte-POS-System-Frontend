@@ -4,6 +4,7 @@ export const shortcutKeys = {
    SK03: 'alt+3', //
    SK04: 'alt+4', //
    SK05: 'alt+5', //
+   SKreturn: 'return'
    };
 
 
