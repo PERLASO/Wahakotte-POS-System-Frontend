@@ -62,7 +62,7 @@ export default function PasswordResetForm() {
                     <input type="password" className="form-control" onChange={(e) => {setconfirmPassword(e.target.value)}} />
                 </div>
                 <div className="form-group">
-                    <button className="btn btn-info w-100 mt-2">Reset Password</button>
+                    <button className="btn btn-warning w-100 mt-2">Reset Password</button>
                 </div>
                 <div className=" alert-danger">{error}</div>
                 <div className="secBreak mb-0">
