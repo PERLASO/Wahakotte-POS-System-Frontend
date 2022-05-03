@@ -23,6 +23,10 @@ class Invoice extends React.Component {
     this.date = `${current.getDate()}/${current.getMonth() + 1
       }/${current.getFullYear()}`;
   }
+  onSubmitHndl = e => {
+    e.preventDefault();
+    this.setState({ error: "Some error" });
+  };
 
   handleStatus(e) {
     this.setState({ status: e.target.value })
@@ -91,7 +95,7 @@ class Invoice extends React.Component {
       <div className="container ">
         <div className="row"> 
           <div className="col-12 pb-1">
-            <button className="btn btn-success float-right invoice-print-btn" onClick={this.saveInvoice}> Save Invoice </button>
+            <button id="proceed" className="btn btn-success float-right invoice-print-btn" onClick={this.saveInvoice}> Save Invoice </button>
           </div>
           <div className="col-12 pb-1">
             <h4 className="text-center">Wijerathna Marketing Service</h4>
@@ -149,12 +153,17 @@ class Invoice extends React.Component {
               <div className="row p-1">
                 <div className="col">Paid Amount</div>
                 <div className="col">
+
+                  <form type="submit" onSubmit={this.onSubmitHndl}>
                   <input
+                  id="list-search-data"
                     type="text"
                     className="form-control"
                     value={this.state.paidAmount}
                     onChange={this.handlePaidAmount}
                   />
+                  </form>
+                 
                 </div>
               </div>
             </div>

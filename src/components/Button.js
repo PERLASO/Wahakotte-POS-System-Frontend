@@ -8,7 +8,7 @@ class Button extends Component{
 
 
     render(){
-        return <button className={this.props.className} data-target={this.props.dataTarget} data-toggle={this.props.dataToggle} onClick={this.props.onClick}>{this.props.text}</button>
+        return <button id={this.props.id} className={this.props.className} data-target={this.props.dataTarget} data-toggle={this.props.dataToggle} onClick={this.props.onClick}>{this.props.text}</button>
     }
 }
 
