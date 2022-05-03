@@ -16,6 +16,7 @@ export const getInvoice = async function (data) {
 
 
 export const getInvoiceByCustomer = async function (data) {
+  console.log(data);
   return await get(`api/Invoice/GetSingleInvoiceByshortcode/${data}`);
 }
 
