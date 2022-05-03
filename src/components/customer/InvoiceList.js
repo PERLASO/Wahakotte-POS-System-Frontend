@@ -69,11 +69,13 @@ class InvoiceList extends Component {
 
     OnSearchCustomerClick = () =>{
         getInvoiceByCustomer(this.state.customerCode).then(res => {
+            console.log(this.state.customerCode)
+            console.log(res.data)
             try {
                 if (res.data.isDeleted) {
                     this.setState({ searchKey: true })
                 } else {   
-                    this.setState({customerInvoices : [res.data]})
+                    this.setState({customerInvoices : res.data})
                     this.setState({searchCustomer: true})
                     console.log(this.state.customerInvoices)
                 }
@@ -157,7 +159,6 @@ class InvoiceList extends Component {
                     </div>
                 </div>
                 <div className="list-table">
-                    {console.log(this.state.tableData)}
                     <table className="table ">
                         <thead className="thead-dark">
                             <tr>
@@ -169,7 +170,7 @@ class InvoiceList extends Component {
                             </tr>
                         </thead>
 
-                        {!this.state.searchCustomer && !this.state.searchDate && this.state.tableData.map((data, index) => {
+                        {!this.state.searchCustomer  && this.state.tableData.map((data, index) => {
                             return (
                                 <tbody key={index}>
                                     <tr>
@@ -187,30 +188,12 @@ class InvoiceList extends Component {
                                 </tbody>
                             )
                         })}
-                        {this.state.searchCustomer && !this.state.searchDate && this.state.customerInvoices.map((data, index) => {
+                        {this.state.searchCustomer && this.state.customerInvoices.map((data, index) => {
                             return (
                                 <tbody key={index}>
                                     <tr>
-                                        {/* <td>{data.id}</td> */}
-                                        <td>{data.customer.id}</td>
-                                        <td>{data.status}</td>
-                                        <td>{data.total}</td>
-                                        <td>{data.balancetobepaid}</td>
-                                        <td>{moment(data.createdDate).format('L')}</td>
-                                        <td>
-                                            <button className="button-add btn btn-info" onClick={() => this.onClickView(data.id)} >View</button>
-
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            )
-                        })}
-                        {!this.state.searchCustomer && this.state.searchDate && this.state.customerInvoices.map((data, index) => {
-                            return (
-                                <tbody key={index}>
-                                    <tr>
-                                        <td>{data.id}</td>
-                                        <td>{data.customer.id}</td>
+                                         <td>{data.id}</td> 
+                                        <td>{data.customer.name}</td>
                                         <td>{data.status}</td>
                                         <td>{data.total}</td>
                                         <td>{data.balancetobepaid}</td>
@@ -222,6 +205,7 @@ class InvoiceList extends Component {
                                 </tbody>
                             )
                         })}
+                       
                     </table>
                 </div>
             </div>
