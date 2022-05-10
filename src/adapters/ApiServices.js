@@ -48,7 +48,7 @@ export const get = async function (url, params = {}) {
     
     let header = await getHeaderInfo();
     try {
-        let resp = await axios.get( env_var.BASE_URL +url, { ...header });
+        let resp = await axios.get( 'https://wahakotte-pos-system-backend.azurewebsites.net/' +url, { ...header });
         
         return handleResponse(resp);
     } catch (err) {
@@ -81,7 +81,7 @@ export const put = async function (url,body) {
     let header = await getHeaderInfo();
 
     try {
-        let resp = await axios.put(env_var.BASE_URL + url, body, header);
+        let resp = await axios.put('https://wahakotte-pos-system-backend.azurewebsites.net/', body, header);
 
         return handleResponse(resp);
     } catch (err) {
@@ -93,7 +93,7 @@ export const deleteApi = async function (url,params = {}) {
     let header = await getHeaderInfo();
 
     try {
-        let resp = await axios.delete(env_var.BASE_URL + url, header);
+        let resp = await axios.delete('https://wahakotte-pos-system-backend.azurewebsites.net/' + url, header);
 
         return handleResponse(resp);
     } catch (err) {
@@ -107,7 +107,7 @@ export const postImage = async function (url, body) {
     var formData = new FormData();
     formData.append('file', body);
     try {
-        let resp = await axios.put(env_var.BASE_URL + url, formData, header);
+        let resp = await axios.put('https://wahakotte-pos-system-backend.azurewebsites.net/' + url, formData, header);
         return handleResponse(resp);
     } catch (err) {
         throw handleResponse(err.response)
