@@ -5,7 +5,6 @@ export const getAllCustomers = async function () {
 }
 
 export const getCustomer = async function (data) {
- 
     return await get(`Customer/${data}`);
 };
 
