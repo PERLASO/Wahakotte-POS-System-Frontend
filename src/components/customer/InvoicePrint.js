@@ -134,7 +134,7 @@ var day = dateObj.getUTCDate();
                   {this.state.invoiceItems.map((invoiceItem, index) => {
                     return (
                       <tr key={index}>
-                        <td>{invoiceItem.id}</td>
+                        <td>{index}</td>
                         <td>{invoiceItem.itemCode}</td>
                         <td>{invoiceItem.name}</td>
                         <td>{invoiceItem.count}</td>

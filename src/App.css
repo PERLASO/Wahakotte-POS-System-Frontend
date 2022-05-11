@@ -11,6 +11,12 @@
   overflow-y: scroll;
   scrollbar-width: none;
 }
+.list-table-invoice-view {
+  display: block;
+  height: 15rem;
+  overflow-y: scroll;
+  scrollbar-width: none;
+}
 .list-table-invoice-create {
   display: block;
   height: 10rem;

@@ -85,8 +85,9 @@ export default function InvoiceView(props) {
                                     <input type="text" className="form-control" value={moment(date).format('L')} readOnly/>
                                 </div>
                             </div>
-                            <div className="col-12">
                             <label className="mb-2">Product List</label>
+                            <div className="col-12 list-table-invoice-view">
+                            
                                 <table className='table'>
                                 <thead className="thead-dark">
                                     <tr>
