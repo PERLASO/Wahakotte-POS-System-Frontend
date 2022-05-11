@@ -355,9 +355,9 @@ class InvoiceForm extends Component {
                   </div>
                 )}
               </div>
-              <div className=" col-2"></div>
-              <div className="col-7">
-                <div className="col-12">
+              <div className=" col-1"></div>
+              <div className="col-8">
+                <div className="col-12 list-table-invoice-create">
                   {/* <Table className="table table-stripped" allowAction={false} columnList={this.invoiceColumnList} tableData={this.state.invoiceItems} actionLinkPrefix=""></Table> */}
                   <table className="table">
                     <thead className="thead-dark">
