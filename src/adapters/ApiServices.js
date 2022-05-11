@@ -81,7 +81,7 @@ export const put = async function (url,body) {
     let header = await getHeaderInfo();
 
     try {
-        let resp = await axios.put('https://wahakotte-pos-backend.azurewebsites.net/', body, header);
+        let resp = await axios.put('https://wahakotte-pos-backend.azurewebsites.net/'+ url, body, header);
 
         return handleResponse(resp);
     } catch (err) {
