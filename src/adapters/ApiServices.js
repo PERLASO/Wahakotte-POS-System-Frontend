@@ -21,7 +21,7 @@ const handleResponse = (response) => {
 export const post = async function (url, body) {
     let header = await getHeaderInfo();
     try {
-        let resp = await axios.post(env_var.BASE_URL + url, body, header);
+        let resp = await axios.post("https://wahakotte-pos-backend.azurewebsites.net/" + url, body, header);
         return handleResponse(resp);
     } catch (err) {
         return handleResponse(err.response)
@@ -34,7 +34,7 @@ export const post = async function (url, body) {
 export const loginpost = async function (url, body) {
 
     try {
-        let resp = await axios.post(env_var.BASE_URL +url, body);
+        let resp = await axios.post("https://wahakotte-pos-backend.azurewebsites.net/" +url, body);
         setTokens(resp.data);
         return handleResponse(resp);
     } catch (err) {
