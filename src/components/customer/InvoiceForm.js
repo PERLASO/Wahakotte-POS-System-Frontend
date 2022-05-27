@@ -109,7 +109,13 @@ class InvoiceForm extends Component {
     let updateItem = this.state.invoiceItems[index]
     updateItem.sellingPrice = e.target.value
     this.state.invoiceItems[index] = updateItem
+    let tot = 0;
+    for (let i = 0; i < this.state.invoiceItems.length; i++) {
+      tot = tot + this.state.invoiceItems[i].sellingPrice*this.state.invoiceItems[i].count
   }
+  this.setState({total:tot})
+}
+ 
 
   componentDidMount() {
     getProductList().then((c) => {
