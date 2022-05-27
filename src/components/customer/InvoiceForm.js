@@ -77,7 +77,7 @@ class InvoiceForm extends Component {
     e.preventDefault();
     this.setState({ error: "Some error" });
   };
-  
+
   handleChangeCount(e) {
     this.setState({ count: e.target.value });
   }
@@ -105,17 +105,17 @@ class InvoiceForm extends Component {
     this.setState({ itemcheckYes: true });
   }
 
-  handlePriceChange(e,index){
+  handlePriceChange(e, index) {
     let updateItem = this.state.invoiceItems[index]
     updateItem.sellingPrice = e.target.value
     this.state.invoiceItems[index] = updateItem
     let tot = 0;
     for (let i = 0; i < this.state.invoiceItems.length; i++) {
-      tot = tot + this.state.invoiceItems[i].sellingPrice*this.state.invoiceItems[i].count
+      tot = tot + this.state.invoiceItems[i].sellingPrice * this.state.invoiceItems[i].count
+    }
+    this.setState({ total: tot })
   }
-  this.setState({total:tot})
-}
- 
+
 
   componentDidMount() {
     getProductList().then((c) => {
@@ -179,7 +179,6 @@ class InvoiceForm extends Component {
   };
 
   saveInvoice = () => {
-    console.log(this.state.invoiceItems)
     if (
       this.state.saveInvoiceCustomerCheck === false &&
       this.state.invoiceItems.length === 0
@@ -241,8 +240,6 @@ class InvoiceForm extends Component {
         } else {
           this.setState({ productData: res.data });
           this.setState({ searchProduct: true });
-          console.log(this.state.data);
-          console.log(this.state.productData);
         }
       } catch (error) {
         this.setState({ searchKey: true });
@@ -315,7 +312,6 @@ class InvoiceForm extends Component {
                     )}
                   </div>
                 </div>
-
                 {this.state.searchCustomer && (
                   <div className="row">
                     <div className="col-6">
@@ -391,7 +387,7 @@ class InvoiceForm extends Component {
                             <td>{invoiceItem.name}</td>
                             <td>{invoiceItem.description}</td>
                             <td>{invoiceItem.count}</td>
-                            <td><input type="text" className="form-control" id="price" placeholder={invoiceItem.sellingPrice} onChange={(e) => this.handlePriceChange(e,index)}/></td>
+                            <td><input type="text" className="form-control" id="price" placeholder={invoiceItem.sellingPrice} onChange={(e) => this.handlePriceChange(e, index)} /></td>
                             <td>
                               {invoiceItem.count * invoiceItem.sellingPrice}.00
                             </td>
@@ -418,7 +414,7 @@ class InvoiceForm extends Component {
                 <div className="col-6">
                   <div className="form-group">
                     <Button
-                    id="proceed"
+                      id="proceed"
                       className="btn btn-sm btn-warning w-100"
                       text="Proceed"
                       onClick={this.saveInvoice}
