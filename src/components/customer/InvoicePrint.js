@@ -125,6 +125,7 @@ var day = dateObj.getUTCDate();
                     <th>S/N</th>
                     <th>ItemCode</th>
                     <th>Name</th>
+                    <th>Measurement</th>
                     <th>QTY</th>
                     <th>Price (LKR)</th>
                     <th>Total (LKR)</th>
@@ -137,6 +138,7 @@ var day = dateObj.getUTCDate();
                         <td>{index}</td>
                         <td>{invoiceItem.itemCode}</td>
                         <td>{invoiceItem.name}</td>
+                        <td>{invoiceItem.measurement}</td>
                         <td>{invoiceItem.count}</td>
                         <td>{invoiceItem.sellingPrice}.00</td>
                         <td>

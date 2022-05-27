@@ -70,6 +70,7 @@ class InvoiceForm extends Component {
     this.handleChangeSearchProductKey =
       this.handleChangeSearchProductKey.bind(this);
     this.handleYes = this.handleYes.bind(this);
+    this.handlePriceChange = this.handlePriceChange.bind(this);
   }
 
   onSubmitHndl = (e) => {
@@ -102,6 +103,12 @@ class InvoiceForm extends Component {
   handleYes() {
     this.setState({ itemcheck: false });
     this.setState({ itemcheckYes: true });
+  }
+
+  handlePriceChange(e,index){
+    let updateItem = this.state.invoiceItems[index]
+    updateItem.sellingPrice = e.target.value
+    this.state.invoiceItems[index] = updateItem
   }
 
   componentDidMount() {
@@ -166,6 +173,7 @@ class InvoiceForm extends Component {
   };
 
   saveInvoice = () => {
+    console.log(this.state.invoiceItems)
     if (
       this.state.saveInvoiceCustomerCheck === false &&
       this.state.invoiceItems.length === 0
@@ -377,7 +385,7 @@ class InvoiceForm extends Component {
                             <td>{invoiceItem.name}</td>
                             <td>{invoiceItem.description}</td>
                             <td>{invoiceItem.count}</td>
-                            <td>{invoiceItem.sellingPrice}.00</td>
+                            <td><input type="text" className="form-control" id="price" placeholder={invoiceItem.sellingPrice} onChange={(e) => this.handlePriceChange(e,index)}/></td>
                             <td>
                               {invoiceItem.count * invoiceItem.sellingPrice}.00
                             </td>
@@ -473,7 +481,7 @@ class InvoiceForm extends Component {
                           <td>{data.name}</td>
                           <td>{data.description}</td>
                           <td>{data.qty}</td>
-                          <td>{data.sellingPrice}.00</td>
+                          <td>{data.sellingPrice}</td>
                           <td>{data.measurement}</td>
 
                           <td>
