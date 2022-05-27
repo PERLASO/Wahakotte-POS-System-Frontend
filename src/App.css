@@ -119,3 +119,7 @@
 .react-switch-label:active .react-switch-button {
   width: 60px;
 }
+
+.aradana-font{
+  font-family: 'aradana' !important;
+}

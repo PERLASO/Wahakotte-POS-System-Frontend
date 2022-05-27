@@ -9,7 +9,7 @@ class TdTag extends Component{
 
     render(){
         if(this.props.isLinked=="false"){
-            return <td scope="col">{this.props.value}</td>
+            return <td scope="col" className={this.props.className}>{this.props.value}</td>
         }
         else{
             return (

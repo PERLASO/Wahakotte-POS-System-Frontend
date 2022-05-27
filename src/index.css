@@ -7,6 +7,11 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+@font-face {
+  font-family: 'aradana';
+  src: local('MyFont'), url(fonts/M_ARADAN.TTF) format('woff');
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;

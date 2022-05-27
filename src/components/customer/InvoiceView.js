@@ -106,7 +106,7 @@ export default function InvoiceView(props) {
                                                 <tr key={index}>
                                                     <td>{invoiceItem.id}</td>
                                                     <td>{invoiceItem.product.itemCode}</td>
-                                                    <td>{invoiceItem.product.name}</td>
+                                                    <td className='aradana-font'>{invoiceItem.product.name}</td>
                                                     <td>{invoiceItem.product.description}</td>
                                                     <td>{invoiceItem.qty}</td>
                                                     <td>{invoiceItem.sellingPrice}.00</td>

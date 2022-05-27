@@ -98,7 +98,7 @@ class ProductForm extends Component {
                     labelClassName="mb-2"
                     required={true}
                     onChange={this.handleChangeName}
-                    inputclassname="form-control"
+                    inputclassname="form-control aradana-font"
                     label="Name"
                   />
                 </div>

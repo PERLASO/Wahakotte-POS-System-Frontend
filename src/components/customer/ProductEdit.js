@@ -19,7 +19,6 @@ class ProductEdit extends Component {
             qty: null,
             buyingprice: null,
             measurement: ''
-
         };
 
         this.handleChangeName = this.handleChangeName.bind(this);
@@ -112,7 +111,7 @@ class ProductEdit extends Component {
                         <div className="container-fluid">
                             <div className="row">
                                 <div className="col-12">
-                                    <InputFormGroup labelClassName="mb-2" onChange={this.handleChangeName} value={this.state.name} inputclassname="form-control" label="Name" />
+                                    <InputFormGroup labelClassName="mb-2" onChange={this.handleChangeName} value={this.state.name} inputclassname="form-control aradana-font" label="Name" />
                                 </div>
                                 <div className="col-12">
                                     <InputFormGroup labelClassName="mb-2" onChange={this.handleChangeItemCode} value={this.state.itemcode} inputclassname="form-control" label="Item Code" />

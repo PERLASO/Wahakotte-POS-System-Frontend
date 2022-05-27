@@ -58,7 +58,7 @@ class ProductView extends Component {
                                 <div className="col-12">
                                     <div className="form-group">
                                         <label className="mb-2">Name</label>
-                                        <input type="text" className="form-control" value={this.state.data.name} readOnly />
+                                        <input type="text" className="form-control aradana-font" value={this.state.data.name} readOnly />
                                     </div>
                                 </div>
                                 <div className="col-12">

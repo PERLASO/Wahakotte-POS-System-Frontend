@@ -92,8 +92,8 @@ class ProductList extends Component{
                     </form>
                 </div>
                 <div className="list-table">
-                    {this.state.searchProduct && <Table className="table table-striped " columnList={this.columnList} tableData={this.state.productData} actionLinkPrefix=""></Table> }
-               {!this.state.searchProduct &&  <Table className="table table-striped " columnList={this.columnList} tableData={this.state.data} actionLinkPrefix=""></Table>}
+                    {this.state.searchProduct && <Table className="table table-striped " columnList={this.columnList} tableData={this.state.productData} actionLinkPrefix="" tableType="product"></Table> }
+                    {!this.state.searchProduct &&  <Table className="table table-striped " columnList={this.columnList} tableData={this.state.data} actionLinkPrefix="" tableType="product"></Table>}
                 </div>
             </div>
         ) 

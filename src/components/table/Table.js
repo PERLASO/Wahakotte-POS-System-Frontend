@@ -14,7 +14,6 @@ class Table extends Component{
         }
     }
 
-
     render(){
         return (
             <table className={this.props.className}>
@@ -27,7 +26,13 @@ class Table extends Component{
                             <tr key={index}>
                                 {
                                     Object.keys(data).map((key, index) => {
-                                        return <TdTag key={index} value={data[key]} isLinked="false"></TdTag>
+                                        if(this.props.tableType == "product" && index == 2 ){
+                                            return <TdTag key={index} value={data[key]} isLinked="false" className="aradana-font" ></TdTag>
+                                        }
+                                        else{
+                                            return <TdTag key={index} value={data[key]} isLinked="false" ></TdTag>
+                                        }
+                                        
                                     })
                                 }
 

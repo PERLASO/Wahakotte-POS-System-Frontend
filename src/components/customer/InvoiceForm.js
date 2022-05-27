@@ -374,7 +374,7 @@ class InvoiceForm extends Component {
                           <tr key={index}>
                             <td>{invoiceItem.id}</td>
                             <td>{invoiceItem.itemCode}</td>
-                            <td>{invoiceItem.name}</td>
+                            <td className="aradana-font">{invoiceItem.name}</td>
                             <td>{invoiceItem.description}</td>
                             <td>{invoiceItem.count}</td>
                             <td>{invoiceItem.sellingPrice}.00</td>
@@ -470,7 +470,7 @@ class InvoiceForm extends Component {
                         <tr>
                           <td>{data.id}</td>
                           <td>{data.itemCode}</td>
-                          <td>{data.name}</td>
+                          <td className="aradana-font">{data.name}</td>
                           <td>{data.description}</td>
                           <td>{data.qty}</td>
                           <td>{data.sellingPrice}.00</td>
@@ -508,7 +508,7 @@ class InvoiceForm extends Component {
                         <tr>
                           <td>{data.id}</td>
                           <td>{data.itemCode}</td>
-                          <td>{data.name}</td>
+                          <td className="aradana-font">{data.name}</td>
                           <td>{data.description}</td>
                           <td>{data.qty}</td>
                           <td>{data.sellingPrice}.00</td>
