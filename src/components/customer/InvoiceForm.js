@@ -11,6 +11,7 @@ import {
   getCustomerByShortname,
 } from "../../context/Customer";
 import { withRouter } from "react-router-dom";
+import Helmet from "react-helmet";
 
 class InvoiceForm extends Component {
   constructor(props) {
@@ -73,10 +74,11 @@ class InvoiceForm extends Component {
     this.handlePriceChange = this.handlePriceChange.bind(this);
   }
 
-  onSubmitHndl = (e) => {
+  onSubmitHndl = (e) => {     
     e.preventDefault();
     this.setState({ error: "Some error" });
   };
+
 
   handleChangeCount(e) {
     this.setState({ count: e.target.value });
@@ -106,16 +108,18 @@ class InvoiceForm extends Component {
   }
 
   handlePriceChange(e, index) {
-    let updateItem = this.state.invoiceItems[index]
-    updateItem.sellingPrice = e.target.value
-    this.state.invoiceItems[index] = updateItem
+    let updateItem = this.state.invoiceItems[index];
+    updateItem.sellingPrice = e.target.value;
+    this.state.invoiceItems[index] = updateItem;
     let tot = 0;
     for (let i = 0; i < this.state.invoiceItems.length; i++) {
-      tot = tot + this.state.invoiceItems[i].sellingPrice * this.state.invoiceItems[i].count
+      tot =
+        tot +
+        this.state.invoiceItems[i].sellingPrice *
+          this.state.invoiceItems[i].count;
     }
-    this.setState({ total: tot })
+    this.setState({ total: tot });
   }
-
 
   componentDidMount() {
     getProductList().then((c) => {
@@ -387,7 +391,22 @@ class InvoiceForm extends Component {
                             <td className="aradana-font">{invoiceItem.name}</td>
                             <td>{invoiceItem.description}</td>
                             <td>{invoiceItem.count}</td>
-                            <td><input type="text" className="form-control" id="price" placeholder={invoiceItem.sellingPrice} onChange={(e) => this.handlePriceChange(e, index)} /></td>
+                            <td>
+                                <input
+                                  type="text"
+                                  className="form-control"
+                                  id="price"
+                                  placeholder={invoiceItem.sellingPrice}
+                                  onChange={(e) =>
+                                    this.handlePriceChange(e, index)
+                                  }
+                                  onKeyUp={(ev) => {
+                                    if (ev.key === "Enter") {
+                                      ev.target.blur();
+                                    }
+                                  }}
+                                />
+                            </td>
                             <td>
                               {invoiceItem.count * invoiceItem.sellingPrice}.00
                             </td>
@@ -552,7 +571,15 @@ class InvoiceForm extends Component {
             </div>
           </div>
         </div>
+        <Helmet>
+                <script>{`
+        
+        document.getElementById("list-search-data").focus();
+        
+    `}</script>
+              </Helmet>
       </div>
+      
     );
   }
 }
