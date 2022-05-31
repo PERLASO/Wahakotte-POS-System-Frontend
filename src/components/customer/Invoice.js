@@ -36,8 +36,10 @@ class Invoice extends React.Component {
 
   handlePaidAmount(e) {
     var val = e.target.value;
-    this.setState({ paidAmount: val });
-    this.setState({ checkStatus: true });
+    if(!isNaN(val)){
+      this.setState({ paidAmount: val });
+      this.setState({ checkStatus: true });
+    }
 
     if (val == this.state.total) {
       document.getElementById("select-status").selectedIndex = "1";
@@ -173,7 +175,7 @@ class Invoice extends React.Component {
                 <div className="col">
                   <form type="submit" onSubmit={this.onSubmitHndl}>
                     <input
-                      id="list-search-data"
+                      id="paid-ammount"
                       type="number"
                       className="form-control"
                       value={this.state.paidAmount}
@@ -265,7 +267,7 @@ class Invoice extends React.Component {
         <Helmet>
           <script>{`
         
-        document.getElementById("list-search-data").focus();
+        document.getElementById("paid-ammount").focus();
         
     `}</script>
         </Helmet>

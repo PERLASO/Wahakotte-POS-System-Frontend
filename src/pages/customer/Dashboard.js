@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import Switch from "../../components/input/Switch";
 import PageHeader from "../../components/PageHeader";
 import { getDashboardData } from "../../context/Dashboard";
+import { shortcutKeys } from "../../shortcutKeysConfig";
+const Mousetrap = require("mousetrap");
 
 
 class DashboardPage extends Component {
@@ -16,6 +18,7 @@ class DashboardPage extends Component {
     };
   }
   componentDidMount() {
+    Mousetrap.bind('s', () => this.setState({value:!this.state.value}));
     getDashboardData().then((c) => {
       if (c != undefined) {
         this.setState({ isLoading: false });
@@ -25,6 +28,7 @@ class DashboardPage extends Component {
   }
 
   render() {
+
     let todaySummery;
 
     if (this.state.value) {
@@ -56,7 +60,7 @@ class DashboardPage extends Component {
     </div>;
     } 
 
-    return (
+    return ( 
       <div className="admin-content mx-auto w-75">
         <PageHeader headerText="Welcome to Dashboard" />
         <div className="w-100">
