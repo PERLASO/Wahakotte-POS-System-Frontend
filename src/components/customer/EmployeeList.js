@@ -26,6 +26,7 @@ class EmployeeList extends Component {
       "Address",
       "Area",
       "Phone Number",
+      "Credit Balance",
       "Action",
     ];
     this.handleChangeSearchNameKey = this.handleChangeSearchNameKey.bind(this);

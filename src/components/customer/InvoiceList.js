@@ -10,7 +10,7 @@ import moment from 'moment/moment.js';
 class InvoiceList extends Component {
     constructor(props) {
         super(props);
-        this.columnList = ["BillNo", "Customer Name", "Status", "Total", "Credit", "Date", "Action"];
+        this.columnList = ["BillNo", "Customer Name", "Status", "Total", "Credit Balance", "Date", "Action"];
         this.state = {
             isLoading: true,
             data: [],

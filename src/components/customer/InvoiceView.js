@@ -26,7 +26,7 @@ export default function InvoiceView(props) {
                 setcustomer(c.data.customer.shortCode)
                 setstatus(c.data.status)
                 settotal(c.data.total)
-                setcredit(c.data.credit)
+                setcredit(c.data.balancetobepaid)
                 setdate(c.data.createdDate)
                 setproductList(c.data.invoiceProducts)   
             }
@@ -75,7 +75,7 @@ export default function InvoiceView(props) {
                             </div>
                             <div className="col-6">
                                 <div className="form-group">
-                                    <label className="mb-2">Credit</label>
+                                    <label className="mb-2">Credit balance</label>
                                     <input type="text" className="form-control" value={credit} readOnly/>
                                 </div>
                             </div>
