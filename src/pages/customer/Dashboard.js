@@ -45,8 +45,16 @@ class DashboardPage extends Component {
           <h3>RS: {this.state.data.totalSellToday}.00</h3>
         </div>
       </div>
+      <div className="col-4">
+        <div className="dash-summary-cell">
+          <p>
+            <b>Today : Profit</b>
+          </p>
+          <h3>RS: {this.state.data.profitToday}.00</h3>
+        </div>
+      </div>
     </div>;
-    }
+    } 
 
     return (
       <div className="admin-content mx-auto w-75">
