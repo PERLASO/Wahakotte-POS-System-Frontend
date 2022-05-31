@@ -223,9 +223,9 @@ class Invoice extends React.Component {
               {this.state.invoiceItems.map((invoiceItem, index) => {
                 return (
                   <tr key={index}>
-                    <td>{index+1}</td>
+                    <td>{index+1}</td> 
                     <td>{invoiceItem.itemCode}</td>
-                    <td>{invoiceItem.name}</td>
+                    <td className="aradana-font">{invoiceItem.name}</td>
                     <td>{invoiceItem.count}</td>
                     <td>{invoiceItem.sellingPrice}.00</td>
                     <td>{invoiceItem.count * invoiceItem.sellingPrice}.00</td>
