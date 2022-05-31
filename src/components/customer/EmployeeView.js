@@ -69,16 +69,11 @@ class EmployeeView extends Component{
                                 </div>
                                 <div className="col-6">
                                     <div className="form-group">
-                                        <label className="mb-2">Phone Number</label>
-                                        <input type="text" className="form-control" value={this.state.data.phoneNumber} readOnly/>
+                                        <label className="mb-2">Credit Balance</label>
+                                        <input type="text" className="form-control" value={this.state.data.creditBalance} readOnly/>
                                     </div>
                                 </div>
-                                {/* <div className="col-6">
-                                    <div className="form-group">
-                                        <label className="mb-2">Joined At</label>
-                                        <input type="text" className="form-control" value="20th April, 2021" readOnly/>
-                                    </div>
-                                </div> */}
+ 
 
                                 <div className="col-6 mt-4">
                                     <div className="form-group">
