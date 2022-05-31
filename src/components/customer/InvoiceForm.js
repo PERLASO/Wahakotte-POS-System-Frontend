@@ -577,7 +577,7 @@ class InvoiceForm extends Component {
         document.getElementById("list-search-data").focus();
         
     `}</script>
-              </Helmet>
+              </Helmet> 
       </div>
       
     );

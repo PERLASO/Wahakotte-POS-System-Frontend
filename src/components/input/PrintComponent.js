@@ -31,14 +31,15 @@ export default function PrintComponent(props) {
 
           documentTitle= {data[3] +"-"+ data[2].name+ "-"  + year +"."+ month + "."+ date}
           pageStyle ={
-           ` @page { size: auto; margin: margin: 10mm ; !important; }
+           ` @page { size: auto; margin: 5mm ; !important;}
            @media print {
             div.page-footer {
-            position: fixed;
+            position: fixed; 
             bottom:15mm;
             width: 100%;
             height: 50px;
             page-break-after: always;
+            }
             }
            `
           }

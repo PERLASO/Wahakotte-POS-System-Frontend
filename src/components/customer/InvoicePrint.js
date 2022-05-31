@@ -19,20 +19,20 @@ class InvoicePrint extends React.Component {
 
   render() {
     var dateObj = new Date();
-var month = dateObj.getUTCMonth(); //months from 1-12
-var day = dateObj.getUTCDate();
+    var month = dateObj.getUTCMonth(); //months from 1-12
+    var day = dateObj.getUTCDate();
 
     return (
       <div>
         <div>
-          <div className="container ">
-            <h4 className="text-center">Wijerathna Marketing Service</h4>
-            <div className="col-12 pb-4">
+          <div className="container p-5">
+            <h3 className="text-center">Wijerathna Marketing Service</h3>
+            <div className="col-12">
               <hr />
             </div>
             <div className="container">
-              <div className="row pb-3 h5">
-                <div className="col mb-3">
+              <div className="row h5">
+                <div className="col">
                   <div className="row p-1">
                     <div className="col">Date</div>
                     <div className="col">
@@ -50,8 +50,14 @@ var day = dateObj.getUTCDate();
                       <input
                         type="text"
                         className="form-control"
-                       // value={this.state.billNo }
-                       value ={"BL" + this.state.customer.shortCode + day+"." + month}
+                        // value={this.state.billNo }
+                        value={
+                          "BL" +
+                          this.state.customer.shortCode +
+                          day +
+                          "." +
+                          month
+                        }
                         readOnly
                       />
                     </div>
@@ -67,7 +73,7 @@ var day = dateObj.getUTCDate();
                       />
                     </div>
                   </div>
-                  <div className="row p-1">
+                  {/* <div className="row p-1 invisible">
                     <div className="col"> Status</div>
                     <div className="col">
                       <div className="form">
@@ -79,7 +85,7 @@ var day = dateObj.getUTCDate();
                         />
                       </div>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
                 <div className="col">
                   <div className="row p-1">
@@ -118,31 +124,59 @@ var day = dateObj.getUTCDate();
                 </div>
               </div>
             </div>
-            <div className="row mb-100 h5">
-              <table className="table" id="invoice-table">
+            <div className="row h5">
+              <table className="w-100" id="invoice-table">
                 <thead className="thead-dark">
-                  <tr className="h6">
-                    <th>S/N</th>
-                    <th>ItemCode</th>
-                    <th>Name</th>
-                    <th>Measurement</th>
-                    <th>QTY</th>
-                    <th>Price (LKR)</th>
-                    <th>Total (LKR)</th>
+                  <tr className="h6 body-row ">
+                    <th>
+                      <h5 className="font-weight-bold mb-2 mt-2">S/N</h5>
+                    </th>
+                    <th>
+                      <h5 className="font-weight-bold">ItemCode</h5>
+                    </th>
+                    <th>
+                      <h5 className="font-weight-bold">Name</h5>
+                    </th>
+                    <th>
+                      <h5 className="font-weight-bold">Measurement</h5>
+                    </th>
+                    <th>
+                      <h5 className="font-weight-bold">QTY</h5>
+                    </th>
+                    <th>
+                      <h5 className="font-weight-bold">Price (LKR)</h5>
+                    </th>
+                    <th>
+                      <h5 className="font-weight-bold">Total (LKR)</h5>
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
                   {this.state.invoiceItems.map((invoiceItem, index) => {
                     return (
-                      <tr key={index}>
-                        <td>{index}</td>
-                        <td>{invoiceItem.itemCode}</td>
-                        <td>{invoiceItem.name}</td>
-                        <td>{invoiceItem.measurement}</td>
-                        <td>{invoiceItem.count}</td>
-                        <td>{invoiceItem.sellingPrice}.00</td>
+                      <tr className="font" key={index}>
                         <td>
-                          {invoiceItem.count * invoiceItem.sellingPrice}.00
+                          <h5>{index + 1}</h5>
+                        </td>
+                        <td>
+                          <h5>{invoiceItem.itemCode}</h5>
+                        </td>
+                        <td>
+                          <h5>{invoiceItem.name}</h5>
+                        </td>
+                        <td>
+                          <h5>{invoiceItem.measurement}</h5>
+                        </td>
+                        <td>
+                          <h5>{invoiceItem.count}</h5>
+                        </td>
+                        <td>
+                          <h5>{invoiceItem.sellingPrice}.00</h5>
+                        </td>
+                        <td>
+                          <h5>
+                            {invoiceItem.count * invoiceItem.sellingPrice}.00
+                          </h5>
                         </td>
                       </tr>
                     );
@@ -150,21 +184,47 @@ var day = dateObj.getUTCDate();
                 </tbody>
               </table>
             </div>
-            
-            <div className="justify-content-right page-footer bg-danger">
-              <div className="col-md-12  pb-14 pr-12 grand-total ">
-                <div className="text-right font-weight-bold ">
-                  <div className="w-50 float-right">
-                  <div class="row w-75 float-right">
-                    <div class="col"><h4>Net Total :</h4></div>
-                    <div class="col"><h4>{this.state.total}.00</h4></div>
-                    <div class="w-100"></div>
-                    <div class="col"><h4>Cash :</h4></div>
-                    <div class="col"> <h4>{this.state.paidAmount}.00</h4></div>
-                    <div class="w-100"></div>
-                    <div class="col"><h4>Balance :</h4></div>
-                    <div class="col"><h4> { this.state.paidAmount - this.state.total}.00</h4></div>
+
+            <div className="justify-content-right page-footer">
+              <div className="col-12  pb-14 pr-12 grand-total ">
+                <div className="d-flex">
+                  <div className="text-left font-weight-bold col-4 pt-4">
+                    <h4>............................</h4>
+                    <h5>Customer Signature</h5>  
                   </div>
+                  <div className="text-right font-weight-bold ">
+                    <div className="w-75 float-right">
+                      <div className="row w-75 float-right">
+                        <div className="col">
+                          <h4 className="font-weight-bold">Net Total :</h4>
+                        </div>
+                        <div className="col">
+                          <h4 className="font-weight-bold">
+                            {this.state.total}.00
+                          </h4>
+                        </div>
+                        <div className="w-100"></div>
+                        <div className="col">
+                          <h5 className="font-weight-bold">Cash :</h5>
+                        </div>
+                        <div className="col">
+                          {" "}
+                          <h5 className="font-weight-bold">
+                            {this.state.paidAmount}.00
+                          </h5>
+                        </div>
+                        <div className="w-100"></div>
+                        <div className="col">
+                          <h5 className="font-weight-bold">Balance :</h5>
+                        </div>
+                        <div className="col">
+                          <h5 className="font-weight-bold">
+                            {" "}
+                            {this.state.paidAmount - this.state.total}.00
+                          </h5>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -173,7 +233,7 @@ var day = dateObj.getUTCDate();
         </div>
 
         <Helmet>
-                <script>{`
+          <script>{`
         
           var oRows = document.getElementById('invoice-table').getElementsByTagName('tr');
           var iRowCount = oRows.length;
@@ -183,7 +243,7 @@ var day = dateObj.getUTCDate();
          }
         
     `}</script>
-              </Helmet>
+        </Helmet>
       </div>
     );
   }
