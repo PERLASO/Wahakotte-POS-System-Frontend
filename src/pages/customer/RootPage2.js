@@ -67,6 +67,7 @@ class CustomerRootPage2 extends Component {
                   itemValue="Invoices"
                 ></AnchorTag>
                 <AnchorTag
+                id="create-invoice-button"
                   link="/app/shop/invoice/create"
                   className="list-group-item list-group-item-action bg-warning font-weight-bold"
                   itemValue=" Crt-Inv"
