@@ -16,7 +16,7 @@ class ProductForm extends Component {
       sellingprice: 0,
       qty: 0,
       buyingprice: 0,
-      measurement: "",
+      measurement: "ROLL",
     };
 
     this.handleChangeName = this.handleChangeName.bind(this);
