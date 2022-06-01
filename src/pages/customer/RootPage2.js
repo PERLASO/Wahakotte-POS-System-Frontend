@@ -43,6 +43,7 @@ class CustomerRootPage2 extends Component {
             <ul className="navbar-nav ml-auto">
               <div className="d-flex flex-row pr-5">
                 <AnchorTag
+                id="goto-dashboard-btn"
                   link={`${this.props.match.path}/dashboard`}
                   liClassName=""
                   className="list-group-item list-group-item-action"
@@ -50,6 +51,7 @@ class CustomerRootPage2 extends Component {
                 ></AnchorTag>
                 {/* <AnchorTag link={`${this.props.match.path}/shop/view`} liClassName="" className="list-group-item list-group-item-action" itemValue="Shop"></AnchorTag> */}
                 <AnchorTag
+                  id="goto-customer-btn"
                   link={`${this.props.match.path}/shop/employee/list`}
                   liClassName=""
                   className="list-group-item list-group-item-action"
@@ -57,17 +59,19 @@ class CustomerRootPage2 extends Component {
                 ></AnchorTag>
                 {/* <AnchorTag link={`${this.props.match.path}/shop/product-category/list`} liClassName="" className="list-group-item list-group-item-action" itemValue="Product Category"></AnchorTag> */}
                 <AnchorTag
+                id="goto-product-btn"
                   link={`${this.props.match.path}/shop/product/list`}
                   className="list-group-item list-group-item-action"
                   itemValue="Products"
                 ></AnchorTag>
                 <AnchorTag
+                  id="goto-invoice-btn"
                   link={`${this.props.match.path}/shop/invoice/list`}
                   className="list-group-item list-group-item-action"
                   itemValue="Invoices"
                 ></AnchorTag>
                 <AnchorTag
-                id="create-invoice-button"
+                id="create-invoice-btn"
                   link="/app/shop/invoice/create"
                   className="list-group-item list-group-item-action bg-warning font-weight-bold"
                   itemValue=" Crt-Inv"

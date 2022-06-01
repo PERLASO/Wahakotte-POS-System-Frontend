@@ -47,9 +47,45 @@ function App() {
       }
       return false;
     });
-    Mousetrap.bind(shortcutKeys.SK05, function () {
+    Mousetrap.bind(shortcutKeys.createInvoice, function () {
   
-      const input = document.getElementById("create-invoice-button");
+      const input = document.getElementById("create-invoice-btn");
+      if (typeof input != "undefined" && input != null) {
+        
+        input.click();
+      }
+      return false;
+    });
+    Mousetrap.bind(shortcutKeys.dashboard, function () {
+  
+      const input = document.getElementById("goto-dashboard-btn");
+      if (typeof input != "undefined" && input != null) {
+        
+        input.click();
+      }
+      return false;
+    });
+    Mousetrap.bind(shortcutKeys.customer, function () {
+  
+      const input = document.getElementById("goto-customer-btn");
+      if (typeof input != "undefined" && input != null) {
+        
+        input.click();
+      }
+      return false;
+    });
+    Mousetrap.bind(shortcutKeys.product, function () {
+  
+      const input = document.getElementById("goto-product-btn");
+      if (typeof input != "undefined" && input != null) {
+        
+        input.click();
+      }
+      return false;
+    });
+    Mousetrap.bind(shortcutKeys.invoice, function () {
+  
+      const input = document.getElementById("goto-invoice-btn");
       if (typeof input != "undefined" && input != null) {
         
         input.click();
