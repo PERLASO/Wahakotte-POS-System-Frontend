@@ -91,9 +91,9 @@ class InvoiceForm extends Component {
   }
 
   handleChangeSearchNameKey(e) {
-    this.setState({ searchCustomerKey: false });
-    this.setState({ searchNameKey: e.target.value });
-    this.setState({ searchCustomer: false });
+      this.setState({ searchCustomerKey: false });
+      this.setState({ searchNameKey: e.target.value });
+      this.setState({ searchCustomer: false });
   }
 
   handleChangeSearchProductKey(e) {
@@ -161,6 +161,12 @@ class InvoiceForm extends Component {
         });
       }
       this.setState({ saveInvoiceCheck: false });
+      let itemSearchField = document.getElementById("invoice-search-product")
+      itemSearchField.focus();
+      itemSearchField.value = '';
+      this.setState({ searchKey: false });
+      this.setState({ searchProductKey: "" });
+      this.setState({ searchProduct: false });
     };
   }
 
@@ -229,6 +235,7 @@ class InvoiceForm extends Component {
           this.setState({ customerArea: this.state.customer.area });
           this.setState({ saveInvoiceCustomerCheck: true });
           this.setState({ searchCustomer: true });
+          document.getElementById("invoice-search-product").focus();
         }
       } catch (error) {
         this.setState({ searchCustomerKey: true });
@@ -244,6 +251,7 @@ class InvoiceForm extends Component {
         } else {
           this.setState({ productData: res.data });
           this.setState({ searchProduct: true });
+          document.getElementById("search-result-item-qty").focus();
         }
       } catch (error) {
         this.setState({ searchKey: true });
@@ -508,6 +516,7 @@ class InvoiceForm extends Component {
                           <td>
                             <form onSubmit={this.checkItem(data)}>
                               <input
+                                id="search-result-item-qty"
                                 className="sm"
                                 type="number"
                                 placeholder="1"
