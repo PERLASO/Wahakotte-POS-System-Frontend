@@ -220,6 +220,17 @@ class Invoice extends React.Component {
                 </div>
               </div>
               <div className="row p-1">
+                <div className="col">Grand Total</div>
+                <div className="col">
+                  <input
+                    type="text"
+                    className="form-control"
+                    value={'RS : '+this.state.total + ".00"} 
+                    readOnly
+                  />
+                </div>
+              </div>
+              <div className="row p-1">
                 <div className="col text-danger">
                   {" "}
                   {!this.state.checkStatus && this.state.statusMessage}
