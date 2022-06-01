@@ -48,7 +48,12 @@ function App() {
       return false;
     });
     Mousetrap.bind(shortcutKeys.SK05, function () {
-      document.getElementById("create-invoice-button").click();
+  
+      const input = document.getElementById("create-invoice-button");
+      if (typeof input != "undefined" && input != null) {
+        
+        input.click();
+      }
       return false;
     });
   },[]);
