@@ -23,7 +23,7 @@ class InvoicePrint extends React.Component {
     var day = dateObj.getUTCDate();
 
     return (
-      <div>
+      <div >
         <div>
           <div className="container p-5">
             <h3 className="text-center">Wijerathna Marketing Service</h3>
