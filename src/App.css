@@ -70,12 +70,12 @@
 }
 
 .copyright-note{
+  width: 75%;
   bottom: 0;
-  padding-left:2%;
+  margin: auto;
   position: fixed;
+  text-align: center;
 }
-
-
 
 /* toggel button */
 

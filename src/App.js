@@ -125,9 +125,6 @@ function App() {
           <Route exact path="" component={NotFoundPage} />
         </Switch>
       </Router>
-      <div className="copyright-note">
-        <p>copyright ©2022 all rights reserved <a href="http://perlaso.com/" target="_blank"> PERLASO</a></p>
-      </div>
     </div>
 
   );
