@@ -17,7 +17,7 @@ import Helmet from "react-helmet";
 
 function App() {
   useEffect(() => {
-
+  
     Mousetrap.bind(shortcutKeys.SK01, function () {
       const input = document.getElementById("list-search-data"); 
       const input2 = document.getElementsByTagName("body"); 
@@ -41,6 +41,15 @@ function App() {
     Mousetrap.bind(shortcutKeys.SKreturn, function () {
       const input = document.getElementById("proceed"); 
 
+      if (typeof input != "undefined" && input != null) {
+        
+        input.click();
+      }
+      return false;
+    });
+    Mousetrap.bind(shortcutKeys.SK05, function () {
+  
+      const input = document.getElementById("create-invoice-button");
       if (typeof input != "undefined" && input != null) {
         
         input.click();

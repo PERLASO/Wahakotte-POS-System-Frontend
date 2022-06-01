@@ -9,7 +9,7 @@ class AnchorTag extends Component{
 
     render(){
         return (
-            <Link className={this.props.className} to={this.props.link}>{this.props.itemValue}</Link>
+            <Link id={this.props.id} className={this.props.className} to={this.props.link}>{this.props.itemValue}</Link>
         )
         
     }
