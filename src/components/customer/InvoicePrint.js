@@ -16,14 +16,14 @@ class InvoicePrint extends React.Component {
       billNo: this.props.props[5],
     };
   }
-  
+
   render() {
     var dateObj = new Date();
     var month = dateObj.getUTCMonth(); //months from 1-12
     var day = dateObj.getUTCDate();
 
     return (
-      <div style={{zoom:"100%"}}>
+      <div >
         <div>
           <div className="container p-5">
             <h3 className="text-center">Wijerathna Marketing Service</h3>
