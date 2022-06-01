@@ -9,6 +9,7 @@ import {
 import InputFormGroup from "../input/InputFormGroup";
 import moment from "moment/moment.js";
 import Switch from "../../components/input/Switch";
+const Mousetrap = require("mousetrap");
 
 class InvoiceList extends Component {
   constructor(props) {
@@ -65,6 +66,7 @@ class InvoiceList extends Component {
   }
 
   componentDidMount() {
+    Mousetrap.bind("s", () => this.onToggleFilter());
     getInvoiceList(this.state.todayList).then((c) => {
       if (c != undefined) {
         this.setState({ isLoading: false });
