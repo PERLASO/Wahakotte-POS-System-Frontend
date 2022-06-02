@@ -7,7 +7,7 @@
 
 .list-table {
   display: block;
-  height: 30rem;
+  height: 25rem;
   overflow-y: scroll;
   scrollbar-width: none;
 }
@@ -23,12 +23,23 @@
   overflow-y: scroll;
   scrollbar-width: none;
 }
+
+.list-table-invoice-create tr td ,th{
+  padding-top:3px !important;
+  padding-bottom:0px !important;
+  margin: auto !important;
+}
 .invoice-product-add-table {
   display: block;
-  height: 20rem;
+  height: 35vh;
   overflow-y: scroll;
   width: 100%;
+}
 
+.invoice-product-add-table tr td{
+    padding-top:3px !important;
+    padding-bottom:0px !important;
+    margin: auto !important;
 }
 
 .list-table th {
