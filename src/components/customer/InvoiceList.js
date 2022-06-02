@@ -66,7 +66,7 @@ class InvoiceList extends Component {
   }
 
   componentDidMount() {
-    Mousetrap.bind("s", () => this.onToggleFilter());
+    Mousetrap.bind("s", () => this.onToggleFilterForShortcut());
     getInvoiceList(this.state.todayList).then((c) => {
       if (c != undefined) {
         this.setState({ isLoading: false });
@@ -115,8 +115,16 @@ class InvoiceList extends Component {
 
   onToggleFilter =() =>{
     this.setState({ todayList: !this.state.todayList });
-    console.log(!this.state.todayList)
     getInvoiceList(!this.state.todayList).then((c) => {
+        if (c != undefined) {
+          this.setState({ isLoading: false });
+          this.setState({ tableData: c.data });
+        }
+      });
+  };
+  onToggleFilterForShortcut =() =>{
+    this.setState({ todayList: !this.state.todayList });
+    getInvoiceList(this.state.todayList).then((c) => {
         if (c != undefined) {
           this.setState({ isLoading: false });
           this.setState({ tableData: c.data });
