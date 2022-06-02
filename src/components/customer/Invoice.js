@@ -107,7 +107,7 @@ class Invoice extends React.Component {
     return (
       <div className="container ">
         <div className="row">
-          <div className="col-12 pb-1">
+          <div className="col-12 ">
             <button
               id="proceed"
               className="btn btn-success float-right invoice-print-btn"
@@ -117,16 +117,16 @@ class Invoice extends React.Component {
               Save Invoice{" "}
             </button>
           </div>
-          <div className="col-12 pb-1">
+          <div className="col-12">
             <h4 className="text-center">Wijerathna Marketing Service</h4>
           </div>
         </div>
-        <div className="col-12 pb-4">
+        <div className="col-12">
           <hr />
         </div>
         <div className="container">
-          <div className="row pb-3 h6">
-            <div className="col mb-3">
+          <div className="row h6">
+            <div className="col">
               <div className="row p-1">
                 <div className="col">Date</div>
                 <div className="col">
