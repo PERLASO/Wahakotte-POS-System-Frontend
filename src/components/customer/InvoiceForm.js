@@ -81,7 +81,7 @@ class InvoiceForm extends Component {
 
 
   handleChangeCount(e) {
-    this.setState({ count: e.target.value });
+      this.setState({ count: e.target.value });
   }
 
   handleInvoiceItems() {
@@ -167,6 +167,7 @@ class InvoiceForm extends Component {
       this.setState({ searchKey: false });
       this.setState({ searchProductKey: "" });
       this.setState({ searchProduct: false });
+      this.setState({ count: 1 });
     };
   }
 
@@ -520,6 +521,7 @@ class InvoiceForm extends Component {
                                 className="sm"
                                 type="number"
                                 placeholder="1"
+                                defaultValue={1}
                                 inputclassname="form-control"
                                 min={1}
                                 max={data.qty}
@@ -558,6 +560,7 @@ class InvoiceForm extends Component {
                                 className="sm"
                                 type="number"
                                 placeholder="1"
+                                defaultValue={1}
                                 inputclassname="form-control"
                                 min={1}
                                 max={data.qty}
