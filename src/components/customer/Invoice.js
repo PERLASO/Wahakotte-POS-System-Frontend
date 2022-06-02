@@ -84,7 +84,7 @@ class Invoice extends React.Component {
       setInvoice(data).then((c) => {
         console.log(c);
         if (c !== null) {
-          alert("Invoice Saved!");
+        //  alert("Invoice Saved!");
           this.props.history.push({
             pathname: `/app/shop/invoice/create/save/print`,
             state: [
@@ -180,6 +180,12 @@ class Invoice extends React.Component {
                       className="form-control"
                       value={this.state.paidAmount}
                       onChange={this.handlePaidAmount}
+                      onKeyUp={(ev) => {
+                        if (ev.key === "Enter") {
+                          ev.target.blur(); 
+                           this.saveInvoice();
+                        }
+                      }}
                     />
                   </form>
                 </div>

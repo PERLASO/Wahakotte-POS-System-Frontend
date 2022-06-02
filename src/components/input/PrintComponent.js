@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { useHistory } from "react-router-dom";
 import ReactToPrint from "react-to-print";
 import InvoiceForm from "../customer/InvoiceForm";
@@ -19,6 +19,10 @@ export default function PrintComponent(props) {
 
     let today = year+'/'+month+'/'+date;
 
+    useEffect(() => {
+      document.getElementById('proceed').click();
+    }, [])
+    
 
   return (
     <div>
