@@ -138,7 +138,7 @@ class InvoicePrint extends React.Component {
                       <h5 style={{fontSize:"24px"}} className="font-weight-bold">Name</h5>
                     </th>
                     <th>
-                      <h5 style={{fontSize:"24px"}} className="font-weight-bold">Measurement</h5>
+                      <h5 style={{fontSize:"24px"}} className="font-weight-bold"></h5>
                     </th>
                     <th>
                       <h5 style={{fontSize:"24px"}} className="font-weight-bold">QTY</h5>
@@ -161,14 +161,14 @@ class InvoicePrint extends React.Component {
                         <td>
                           <h5 style={{fontSize:"24px"}}>{invoiceItem.itemCode}</h5>
                         </td>
-                        <td>
-                          <h5 style={{fontSize:"24px"}}>{invoiceItem.name}</h5>
+                        <td >
+                          <h5 className="font-weight-bold " style={{fontSize:"24px"}}>{invoiceItem.name}</h5>
                         </td>
                         <td>
                           <h5 style={{fontSize:"24px"}}>{invoiceItem.measurement}</h5>
                         </td>
                         <td>
-                          <h5 style={{fontSize:"24px"}}>{invoiceItem.count}</h5>
+                          <h5 className="pl-3" style={{fontSize:"24px"}}>{invoiceItem.count}</h5>
                         </td>
                         <td>
                           <h5 style={{fontSize:"24px"}}>{invoiceItem.sellingPrice}.00</h5>
@@ -198,13 +198,18 @@ class InvoicePrint extends React.Component {
         </Helmet>
             </div>
             <div className="justify-content-right page-footer" id="invoice-footer">
-              <div className="col-12  pb-14 pr-12  ">
-                <div className="d-flex">
+              <div className="col-12  pb-14 pr-12 justify-content-between d-flex">
                   <div className="text-left font-weight-bold col-4 pt-4">
                     <h4>............................</h4>
                     <h5>Customer Signature</h5>  
                   </div>
-                  <div className="text-right font-weight-bold ">
+                  <div className=" font-weight-bold col-4 pt-4 ">
+                    <div className="d-flex">
+                    <h3>Grand Total : </h3>  
+                    <h3 className="pl-1"> {this.state.total}.00</h3>  
+                    </div>
+                  
+                  {/* <div className="text-right font-weight-bold bg-danger ">
                     <div className="w-75 float-right">
                       <div className="row w-75 float-right">
                         <div className="col">
@@ -226,7 +231,7 @@ class InvoicePrint extends React.Component {
                           </h5>
                         </div>
                         <div className="w-100"></div>
-                        <div className="col">
+                        <div className="col ">
                           <h5 className="font-weight-bold">Balance :</h5>
                         </div>
                         <div className="col">
@@ -237,7 +242,7 @@ class InvoicePrint extends React.Component {
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
