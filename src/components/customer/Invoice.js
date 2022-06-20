@@ -9,9 +9,9 @@ class Invoice extends React.Component {
       invoiceItems: props.location.state[0],
       total: props.location.state[1],
       customer: props.location.state[2],
-      paidAmount: -1,
+      paidAmount: props.location.state[1],
       checkSaved: false,
-      status: "",
+      status: "CASH",
       checkStatus: true,
       statusMessage: "Enter paid amount to proceed",
       data: {},
@@ -23,14 +23,17 @@ class Invoice extends React.Component {
     this.date = `${current.getDate()}/${
       current.getMonth() + 1
     }/${current.getFullYear()}`;
+   this.handleStatus();
+    this.saveInvoice();
   }
   onSubmitHndl = (e) => {
     e.preventDefault();
     this.setState({ error: "Some error" });
   };
 
-  handleStatus(e) {
-    this.setState({ status: e.target.value });
+  handleStatus() {
+ //   this.setState({ status: e.target.value });
+ this.setState({ status: "CASH" });
     this.setState({ checkStatus: true });
   }
 
@@ -110,7 +113,7 @@ class Invoice extends React.Component {
           <div className="col-12 ">
             <button
               id="proceed"
-              className="btn btn-success float-right invoice-print-btn"
+              className="btn btn-success float-right invoice-print-btn d-none"
               onClick={this.saveInvoice}
             >
               {" "}
@@ -160,7 +163,7 @@ class Invoice extends React.Component {
                       disabled
                       required
                       onChange={this.handleStatus}
-                      defaultValue="Set Status"
+                      defaultValue={this.state.status}
                     >
                       <option vlaue="CREDIT">CREDIT</option>
                       <option value="CASH">CASH</option>
@@ -179,7 +182,7 @@ class Invoice extends React.Component {
                       type="number"
                       className="form-control"
                       value={this.state.paidAmount}
-                      onChange={this.handlePaidAmount}
+                    //  onChange={this.handlePaidAmount}
                       onKeyUp={(ev) => {
                         if (ev.key === "Enter") {
                           ev.target.blur(); 
@@ -276,7 +279,7 @@ class Invoice extends React.Component {
             id="grand-total"
             className="col-md-12  pb-14 pr-12 grand-total page-footer"
           >
-            <div className="text-right font-weight- ">
+            <div className="text-right font-weight-bold ">
               Grand Total - Rs.{this.state.total}.00
             </div>
           </div>
