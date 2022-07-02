@@ -4,6 +4,7 @@ import Table from "../../components/table/Table";
 import InputFormGroup from "../../components/input/InputFormGroup";
 import SelectFormGroup from "../../components/input/SelectFormGroup";
 import { getProductList, getSingleProductByShortcode } from "../../context/Product";
+import InputWithSuggestionProductCode from "../input/InputWithSuggestionProductCode";
 
 class ProductList extends Component{
     constructor(props){
@@ -33,7 +34,7 @@ class ProductList extends Component{
 
     handleChangeSearchProductKey(e) {
         this.setState({ searchKey: false })
-        this.setState({ searchProductKey: e.target.value })
+        this.setState({ searchProductKey: e })
         this.setState({ searchProduct: false })
     }
 
@@ -82,7 +83,8 @@ class ProductList extends Component{
                     </div>
                     <form onSubmit={this.onSubmitHndl} className="w-100 d-flex">
                     <div className="col-2">
-                        <InputFormGroup inputid="list-search-data" labelClassName="mb-2" label="" inputclassname="form-control form-control-sm" placeholder="Product Code" onChange={this.handleChangeSearchProductKey}/>
+                        {/* <InputFormGroup inputid="list-search-data" labelClassName="mb-2" label="" inputclassname="form-control form-control-sm" placeholder="Product Code" onChange={this.handleChangeSearchProductKey}/> */}
+                        <InputWithSuggestionProductCode fieldType= "productCode" action={this.handleChangeSearchProductKey} placeholder="search by code" inputId="invoice-search-product" inputclassname="form-control  form-control-sm mb-1"/>
                     </div>
                     <div className="col-2">
                         <div className="form-group">

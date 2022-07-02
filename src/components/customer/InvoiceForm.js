@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import AnchorTag from "../../components/Anchortag";
 import Button from "../Button";
 import InputFormGroup from "../input/InputFormGroup";
+import InputWithSuggestionProductCode  from '../input/InputWithSuggestionProductCode';
+import InputWithSuggestionProductName  from '../input/InputWithSuggestionProductName';
 import {
   getProductList,
   getSingleProductByShortcode,
@@ -97,9 +99,8 @@ class InvoiceForm extends Component {
   }
 
   handleChangeSearchProductKey(e) {
-    this.setState({ searchKey: false });
-    this.setState({ searchProductKey: e.target.value });
-    this.setState({ searchProduct: false });
+    this.setState({ searchKey: false , searchProductKey: e ,searchProduct: false},
+       ()=>this.onSearchProductClick());
   }
 
   handleYes() {
@@ -224,6 +225,7 @@ class InvoiceForm extends Component {
   };
 
   onSearchCustomerClick = () => {
+    debugger
     document.getElementById("list-search-data").blur();
     this.setState({ saveInvoiceCheck: false });
     getCustomerByShortname(this.state.searchNameKey).then((res) => {
@@ -236,7 +238,11 @@ class InvoiceForm extends Component {
           this.setState({ customerArea: this.state.customer.area });
           this.setState({ saveInvoiceCustomerCheck: true });
           this.setState({ searchCustomer: true });
-          document.getElementById("invoice-search-product").focus();
+          var productField =  document.getElementById("invoice-search-product");
+          
+          if(productField != undefined){
+            productField.focus();
+          }
         }
       } catch (error) {
         this.setState({ searchCustomerKey: true });
@@ -455,9 +461,9 @@ class InvoiceForm extends Component {
             </div>
             <form onSubmit={this.onSubmitHndl} className="w-100 d-flex">
               <div className="row w-100">
-                <div className="col-3">
+                {/* <div className="col-3">
                   <InputFormGroup
-                    inputid="invoice-search-product"
+                     inputid="invoice-search-product"
                     labelClassName="sr-only"
                     inputclassname="form-control  form-control-sm"
                     placeholder="Product Code"
@@ -470,9 +476,12 @@ class InvoiceForm extends Component {
                     text="Search"
                     onClick={this.onSearchProductClick}
                   />
-                </div>
-
-                <h6 className="text-center">
+                </div> */}
+                {/* <InputWithSuggestion productKey = {this.state.searchProductKey} inputId="invoice-search-product"  placeholder="Product Code" inputclassname="form-control  form-control-sm"  InputOnChange={this.handleChangeSearchProductKey} ></InputWithSuggestion> */}
+              <div className="d-flex">
+              <InputWithSuggestionProductCode fieldType= "productCode" action={this.handleChangeSearchProductKey} placeholder="search by code" inputId="invoice-search-product" inputclassname="form-control  form-control-sm mb-1"/>
+              </div>
+                <h6 className="ml-4">
                   <b>Set Products Details</b>
                 </h6>
                 <div className="col-12">
