@@ -13,6 +13,10 @@ export const getSingleProductByShortcode = async function (data) {
  
   return await get(`Product/GetSingleProductByshortcode/${data}`);
 };
+export const getProductsSuggesionsByShortcode = async function (data) {
+ 
+  return await get(`Product/GetSingleProductAutoByshortcode/${data}`);
+};
 
 export const setProduct = async function (data) {
     console.log(data);

@@ -100,7 +100,7 @@ class ProductView extends Component {
 
                                 <div className="col-6">
                                     <div className="form-group">
-                                        <label className="mb-2">Stock Value(LKR)</label>
+                                        <label className="mb-2">Stock Value : <sm className="text-secondary">qty x buying Price</sm>  </label>
                                         <input type="text" className="form-control" value={this.state.data.stockValue} readOnly />
                                     </div>
                                 </div>
