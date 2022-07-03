@@ -11,7 +11,6 @@ const handleResponse = (response) => {
         // window.location.reload();
     }
     if (response.data.status !== 'OK') {
-        // console.log(response.data)
         //window.location.reload();
         return response.data;
     }
@@ -52,30 +51,9 @@ export const get = async function (url, params = {}) {
         
         return handleResponse(resp);
     } catch (err) {
-      //  throw handleResponse(err.response)
       console.log("not get")
     }
 };
-
-// export const get = async function (url: any, params: any = {}) {
-//     console.log("x");
-//     console.log(url)
-//     let token = await getAccessToken();
-//     console.log(token);
-    
-//         axios({
-//             method: 'get',
-//             url: url,
-//             headers: {
-//                 'Content-Type': 'application/json',
-//                 'Authorization': `Bearer ${token}`,
-//             },
-            
-//         }).then(function (response) {
-//              console.log(response);
-//         })
-         
-// };
 
 export const put = async function (url,body) {
     let header = await getHeaderInfo();

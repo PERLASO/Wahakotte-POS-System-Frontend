@@ -50,7 +50,6 @@ class ProductForm extends Component {
   }
   handleChangeMeasurement(event) {
     this.setState({ measurement: event.target.value });
-    console.log(event.target.value);
   }
   handleSubmit(event) {
     event.preventDefault();
@@ -67,7 +66,6 @@ class ProductForm extends Component {
       isDeleted: false,
     };
 
-    console.log(data);
 
     setProduct(data).then((c) => {
       if (c.data === true) {

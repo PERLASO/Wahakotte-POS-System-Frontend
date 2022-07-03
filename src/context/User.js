@@ -1,7 +1,6 @@
 import { get,post,put,deleteApi } from '../adapters/ApiServices';
 
 export const login = async function (data) {
-    console.log(data);
     return await post(`api/User/login`,data);
   }
 

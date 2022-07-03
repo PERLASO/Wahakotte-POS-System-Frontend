@@ -41,7 +41,6 @@ class InputWithSuggestionCustomerName extends Component {
         return data.shortCode.match(regex)
       })
     }
-    console.log('matchs', matches)
     this.setState({sugessions: matches})
     this.setState({text: text})
     this.props.action(text);

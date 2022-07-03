@@ -34,7 +34,6 @@ class InputWithSuggestionCustomerCode extends Component {
     });
   }
   onChangeHandler(text){
-    debugger
     let matches =[]
     if(text.length > 0){
       matches = this.state.loadedData.filter(data =>{
@@ -42,7 +41,6 @@ class InputWithSuggestionCustomerCode extends Component {
         return data.shortCode.match(regex)
       })
     }
-    console.log('matchs', matches)
     this.setState({sugessions: matches})
     this.setState({text: text})
     this.props.action(text);

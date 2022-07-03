@@ -81,11 +81,7 @@ class Invoice extends React.Component {
         });
       }
 
-      console.log(data);
-      console.log(this.state.invoiceItems);
-
       setInvoice(data).then((c) => {
-        console.log(c);
         if (c !== null) {
         //  alert("Invoice Saved!");
           this.props.history.push({
