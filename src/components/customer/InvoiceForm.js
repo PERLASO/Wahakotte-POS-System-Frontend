@@ -11,10 +11,13 @@ import {
 } from "../../context/Product";
 import {
   getAllCustomers,
+  getCustomerByName,
   getCustomerByShortname,
 } from "../../context/Customer";
 import { withRouter } from "react-router-dom";
 import Helmet from "react-helmet";
+import InputWithSuggestionCustomerCode from "../input/InputWithSuggestionCustomerCode";
+import InputWithSuggestionCustomerName from "../input/InputWithSuggestionCustomerName";
 
 class InvoiceForm extends Component {
   constructor(props) {
@@ -38,6 +41,7 @@ class InvoiceForm extends Component {
       saveInvoiceProductCheck: false,
       saveInvoiceMessage: "",
       searchNameKey: "",
+      searchCustomerName:"",
       searchProductKey: "",
       searchCustomerKey: false,
       searchKey: false,
@@ -72,6 +76,7 @@ class InvoiceForm extends Component {
     this.handleInvoiceItems = this.handleInvoiceItems.bind(this);
     this.checkItem = this.checkItem.bind(this);
     this.handleChangeSearchNameKey = this.handleChangeSearchNameKey.bind(this);
+    this.handleChangeSearchCustomerName = this.handleChangeSearchCustomerName.bind(this);
     this.handleChangeSearchProductKey =
       this.handleChangeSearchProductKey.bind(this);
     this.handleChangeSearchProductName =
@@ -100,9 +105,12 @@ class InvoiceForm extends Component {
   }
 
   handleChangeSearchNameKey(e) {
-    this.setState({ searchCustomerKey: false });
-    this.setState({ searchNameKey: e.target.value });
-    this.setState({ searchCustomer: false });
+    this.setState({ searchCustomerKey: false ,searchNameKey: e ,searchCustomer: false},
+      ()=> this.onSearchCustomerClick());
+  }
+  handleChangeSearchCustomerName(e) {
+    this.setState({ searchCustomerKey: false ,searchCustomerName: e ,searchCustomer: false},
+      ()=> this.onSearchCustomerClickByName());
   }
 
   handleChangeSearchProductKey(e) {
@@ -241,7 +249,7 @@ class InvoiceForm extends Component {
   };
 
   onSearchCustomerClick = () => {
-    document.getElementById("list-search-data").blur();
+    //document.getElementById("list-search-data").blur();
     this.setState({ saveInvoiceCheck: false });
     getCustomerByShortname(this.state.searchNameKey).then((res) => {
       try {
@@ -254,7 +262,33 @@ class InvoiceForm extends Component {
           this.setState({ saveInvoiceCustomerCheck: true });
           this.setState({ searchCustomer: true });
           var productField = document.getElementById("invoice-search-product");
+          document.getElementById("list-search-data-by-name").value='';
 
+          if (productField != undefined) {
+            productField.focus();
+          }
+        }
+      } catch (error) {
+        this.setState({ searchCustomerKey: true });
+      }
+    });
+  };
+  onSearchCustomerClickByName = () => {
+    debugger
+    //document.getElementById("list-search-data").blur();
+    this.setState({ saveInvoiceCheck: false });
+    getCustomerByName(this.state.searchCustomerName).then((res) => {
+      try {
+        if (res.data.isDeleted) {
+          this.setState({ searchCustomerKey: true });
+        } else {
+          this.setState({ customer: res.data[0] });
+          this.setState({ customerName: this.state.customer.name });
+          this.setState({ customerArea: this.state.customer.area });
+          this.setState({ saveInvoiceCustomerCheck: true });
+          this.setState({ searchCustomer: true });
+          var productField = document.getElementById("invoice-search-product");
+          document.getElementById("list-search-data").value='';
           if (productField != undefined) {
             productField.focus();
           }
@@ -332,24 +366,10 @@ class InvoiceForm extends Component {
                 <div className="row">
                   <form onSubmit={this.onSubmitHndl} className="w-100 d-flex">
                     <div className="col-6">
-                      <InputFormGroup
-                        inputid="list-search-data"
-                        labelClassName="mb-2"
-                        label=""
-                        inputclassname="form-control form-control-sm"
-                        onChange={this.handleChangeSearchNameKey}
-                        placeholder="Short Name"
-                      />
+                      <InputWithSuggestionCustomerCode inputId="list-search-data" placeholder="search by code" action={this.handleChangeSearchNameKey} inputclassname="form-control form-control-sm"/>
                     </div>
                     <div className="col-6">
-                      <div className="form-group">
-                        <input
-                          type="submit"
-                          className="btn btn-sm btn-success w-100"
-                          value="Search"
-                          onClick={this.onSearchCustomerClick}
-                        />
-                      </div>
+                      <InputWithSuggestionCustomerName inputId="list-search-data-by-name" placeholder="search by name" action={this.handleChangeSearchCustomerName} inputclassname="form-control form-control-sm"/>
                     </div>
                   </form>
                   <div className="col-12">
