@@ -20,7 +20,6 @@ export default function InvoiceView(props) {
     useEffect(() => {
         
         getInvoice(props.match.params.id).then(c => {
-            console.log(c.data)
             if (c !== undefined) {
                 setdata(c.data.id)
                 setcustomer(c.data.customer.shortCode)

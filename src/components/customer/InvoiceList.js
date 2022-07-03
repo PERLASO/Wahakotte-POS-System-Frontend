@@ -111,7 +111,6 @@ class InvoiceList extends Component {
           } else {
             this.setState({ customerInvoices: res.data });
             this.setState({ searchCustomer: true });
-            console.log(this.state.customerInvoices);
           }
         } catch (error) {
           this.setState({ searchKey: true });
@@ -128,7 +127,6 @@ class InvoiceList extends Component {
           } else {
             this.setState({ customerInvoices: res.data });
             this.setState({ searchCustomer: true });
-            console.log(this.state.customerInvoices);
           }
         } catch (error) {
           this.setState({ searchKey: true });
@@ -145,7 +143,6 @@ class InvoiceList extends Component {
         } else {
           this.setState({ dateInvoices: [res.data] });
           this.setState({ searchCustomer: true });
-          console.log(this.state.dateInvoices);
         }
       } catch (error) {
         this.setState({ searchKey: true });

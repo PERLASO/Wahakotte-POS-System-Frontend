@@ -166,7 +166,6 @@ class InvoiceForm extends Component {
       this.setState({ itemId: data.id });
 
       if (this.isItemExist(data.id)) {
-        console.log("item exists");
         let total = 0;
         this.state.invoiceItems.find((el) => {
           if (el.id === data.id) {
@@ -274,7 +273,6 @@ class InvoiceForm extends Component {
     });
   };
   onSearchCustomerClickByName = () => {
-    debugger
     //document.getElementById("list-search-data").blur();
     this.setState({ saveInvoiceCheck: false });
     getCustomerByName(this.state.searchCustomerName).then((res) => {
@@ -570,7 +568,7 @@ class InvoiceForm extends Component {
                   <input
                     type="checkbox"
                     className="form-check-input"
-                    Checked={this.state.buyingPriceVisible}
+                    checked={this.state.buyingPriceVisible}
                     onChange={() => this.handlebuyingPriceVisible()}
                   />
                 </div>
@@ -587,7 +585,6 @@ class InvoiceForm extends Component {
                 </thead>
                 {this.state.searchProduct &&
                   this.state.productData.map((data, index) => {
-                    console.log(data);
                     return (
                       <tbody key={index}>
                         <tr>

@@ -63,7 +63,6 @@ class EmployeeList extends Component {
   componentDidMount() {
     getAllCustomers().then((res) => {
       this.setState({ isLoading: false });
-      console.log(res.data);
       this.setState({ customers: res.data });
     });
   }

@@ -7,8 +7,7 @@ class DataNameList extends React.Component {
       const suggestionsNames = this.props.suggestions;
       return (
         <datalist id="suggestions-list-name">
-          {suggestionsNames.map(function(sugession,i) {
-                  console.log(sugession.name)   
+          {suggestionsNames.map(function(sugession,i) { 
             return <option key={i} value={sugession.name}/>
           })}
 
@@ -43,7 +42,7 @@ class InputWithSuggestionProductName extends Component {
         return data.name.match(regex)
       })
     }
-    console.log('matchs', matches)
+  
     this.setState({sugessionsNames: matches})
     this.setState({textName: text})
     this.props.action(text);

@@ -40,7 +40,6 @@ class InputWithSuggestionProductCode extends Component {
         return data.itemCode.match(regex)
       })
     }
-    console.log('matchs', matches)
     this.setState({sugessions: matches})
     this.setState({text: text})
     this.props.action(text);

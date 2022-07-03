@@ -19,9 +19,6 @@ class ProductView extends Component {
         getSingleProduct(this.props.match.params.productId).then(c => {
             if (c !== undefined) {
                 this.setState({ data: c.data })
-                console.log(this.state.data);
-
-
             }
 
         });
@@ -38,7 +35,6 @@ class ProductView extends Component {
             }
 
         })
-        // console.log("deleted")
         // this.props.history.push(`/app/shop/product/list`);
 
     }

@@ -24,7 +24,6 @@ export const getProductsSuggesionsByShortcode = async function (data) {
 };
 
 export const setProduct = async function (data) {
-    console.log(data);
     return await post(`Product`,data);
   }
 
