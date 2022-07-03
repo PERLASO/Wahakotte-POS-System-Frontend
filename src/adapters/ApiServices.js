@@ -21,7 +21,7 @@ const handleResponse = (response) => {
 export const post = async function (url, body) {
     let header = await getHeaderInfo();
     try {
-        let resp = await axios.post("https://wahakotte-pos-backend.azurewebsites.net/" + url, body, header);
+        let resp = await axios.post("https://localhost:44341/" + url, body, header);
         return handleResponse(resp);
     } catch (err) {
         return handleResponse(err.response)
@@ -34,7 +34,7 @@ export const post = async function (url, body) {
 export const loginpost = async function (url, body) {
 
     try {
-        let resp = await axios.post("https://wahakotte-pos-backend.azurewebsites.net/" +url, body);
+        let resp = await axios.post("https://localhost:44341/" +url, body);
         setTokens(resp.data);
         return handleResponse(resp);
     } catch (err) {
@@ -48,7 +48,7 @@ export const get = async function (url, params = {}) {
     
     let header = await getHeaderInfo();
     try {
-        let resp = await axios.get( 'https://wahakotte-pos-backend.azurewebsites.net/' +url, { ...header });
+        let resp = await axios.get( 'https://localhost:44341/' +url, { ...header });
         
         return handleResponse(resp);
     } catch (err) {
@@ -81,7 +81,7 @@ export const put = async function (url,body) {
     let header = await getHeaderInfo();
 
     try {
-        let resp = await axios.put('https://wahakotte-pos-backend.azurewebsites.net/'+ url, body, header);
+        let resp = await axios.put('https://localhost:44341/'+ url, body, header);
 
         return handleResponse(resp);
     } catch (err) {
@@ -93,7 +93,7 @@ export const deleteApi = async function (url,params = {}) {
     let header = await getHeaderInfo();
 
     try {
-        let resp = await axios.delete('https://wahakotte-pos-backend.azurewebsites.net/' + url, header);
+        let resp = await axios.delete('https://localhost:44341/' + url, header);
 
         return handleResponse(resp);
     } catch (err) {
@@ -107,7 +107,7 @@ export const postImage = async function (url, body) {
     var formData = new FormData();
     formData.append('file', body);
     try {
-        let resp = await axios.put('https://wahakotte-pos-backend.azurewebsites.net/' + url, formData, header);
+        let resp = await axios.put('https://localhost:44341/' + url, formData, header);
         return handleResponse(resp);
     } catch (err) {
         throw handleResponse(err.response)

@@ -2,11 +2,12 @@ import React, { Component } from "react";
 import AnchorTag from "../../components/Anchortag";
 import Button from "../Button";
 import InputFormGroup from "../input/InputFormGroup";
-import InputWithSuggestionProductCode  from '../input/InputWithSuggestionProductCode';
-import InputWithSuggestionProductName  from '../input/InputWithSuggestionProductName';
+import InputWithSuggestionProductCode from "../input/InputWithSuggestionProductCode";
+import InputWithSuggestionProductName from "../input/InputWithSuggestionProductName";
 import {
   getProductList,
   getSingleProductByShortcode,
+  getSingleProductByName
 } from "../../context/Product";
 import {
   getAllCustomers,
@@ -18,27 +19,6 @@ import Helmet from "react-helmet";
 class InvoiceForm extends Component {
   constructor(props) {
     super(props);
-    this.columnList = [
-      "S/N",
-      "ItemCode",
-      "Name",
-      "Description",
-      "QTY",
-      "Selling Price(LKR)",
-      "Measurement",
-      "Select Quantity",
-    ];
-    this.invoiceColumnList = [
-      "S/N",
-      "ItemCode",
-      "Name",
-      "Description",
-      "QTY",
-      "Price(LKR)",
-      "Total(LKR)",
-    ];
-    this.invoiceTableData = [];
-
     this.state = {
       isLoading: true,
       data: [],
@@ -64,7 +44,29 @@ class InvoiceForm extends Component {
       searchProduct: false,
       searchCustomer: false,
       total: 0,
+      buyingPriceVisible: false,
     };
+
+    this.columnList = [
+      "S/N",
+      "ItemCode",
+      "Name",
+      "Available QTY",
+      "Buying price",
+      "Selling Price",
+      "Measurement",
+      "Select Quantity",
+    ];
+    this.invoiceColumnList = [
+      "S/N",
+      "ItemCode",
+      "Name",
+      "Description",
+      "QTY",
+      "Price(LKR)",
+      "Total(LKR)",
+    ];
+    this.invoiceTableData = [];
 
     this.handleChangeCount = this.handleChangeCount.bind(this);
     this.handleInvoiceItems = this.handleInvoiceItems.bind(this);
@@ -72,18 +74,23 @@ class InvoiceForm extends Component {
     this.handleChangeSearchNameKey = this.handleChangeSearchNameKey.bind(this);
     this.handleChangeSearchProductKey =
       this.handleChangeSearchProductKey.bind(this);
+    this.handleChangeSearchProductName =
+      this.handleChangeSearchProductName.bind(this);
     this.handleYes = this.handleYes.bind(this);
     this.handlePriceChange = this.handlePriceChange.bind(this);
   }
 
-  onSubmitHndl = (e) => {     
+  onSubmitHndl = (e) => {
     e.preventDefault();
     this.setState({ error: "Some error" });
   };
 
-
   handleChangeCount(e) {
-      this.setState({ count: e.target.value });
+    this.setState({ count: e.target.value });
+  }
+
+  handlebuyingPriceVisible(e) {
+    this.setState({ buyingPriceVisible: !this.state.buyingPriceVisible });
   }
 
   handleInvoiceItems() {
@@ -93,14 +100,22 @@ class InvoiceForm extends Component {
   }
 
   handleChangeSearchNameKey(e) {
-      this.setState({ searchCustomerKey: false });
-      this.setState({ searchNameKey: e.target.value });
-      this.setState({ searchCustomer: false });
+    this.setState({ searchCustomerKey: false });
+    this.setState({ searchNameKey: e.target.value });
+    this.setState({ searchCustomer: false });
   }
 
   handleChangeSearchProductKey(e) {
-    this.setState({ searchKey: false , searchProductKey: e ,searchProduct: false},
-       ()=>this.onSearchProductClick());
+    this.setState(
+      { searchKey: false, searchProductKey: e, searchProduct: false },
+      () => this.onSearchProductClick()
+    );
+  }
+  handleChangeSearchProductName(e) {
+    this.setState(
+      { searchKey: false, searchProductName: e, searchProduct: false },
+      () => this.onSearchProductClickByName()
+    );
   }
 
   handleYes() {
@@ -162,9 +177,10 @@ class InvoiceForm extends Component {
         });
       }
       this.setState({ saveInvoiceCheck: false });
-      let itemSearchField = document.getElementById("invoice-search-product")
+      let itemSearchField = document.getElementById("invoice-search-product");
       itemSearchField.focus();
-      itemSearchField.value = '';
+      document.getElementById("invoice-search-product-by-name").value='';
+      itemSearchField.value = "";
       this.setState({ searchKey: false });
       this.setState({ searchProductKey: "" });
       this.setState({ searchProduct: false });
@@ -225,7 +241,6 @@ class InvoiceForm extends Component {
   };
 
   onSearchCustomerClick = () => {
-    debugger
     document.getElementById("list-search-data").blur();
     this.setState({ saveInvoiceCheck: false });
     getCustomerByShortname(this.state.searchNameKey).then((res) => {
@@ -238,9 +253,9 @@ class InvoiceForm extends Component {
           this.setState({ customerArea: this.state.customer.area });
           this.setState({ saveInvoiceCustomerCheck: true });
           this.setState({ searchCustomer: true });
-          var productField =  document.getElementById("invoice-search-product");
-          
-          if(productField != undefined){
+          var productField = document.getElementById("invoice-search-product");
+
+          if (productField != undefined) {
             productField.focus();
           }
         }
@@ -258,12 +273,31 @@ class InvoiceForm extends Component {
         } else {
           this.setState({ productData: res.data });
           this.setState({ searchProduct: true });
-          document.getElementById("search-result-item-qty").focus();
+          document.getElementById("search-result-item-selling-price").focus();
         }
       } catch (error) {
         this.setState({ searchKey: true });
       }
     });
+  };
+  onSearchProductClickByName = () => {
+    getSingleProductByName(this.state.searchProductName).then((res) => {
+      try {
+        if (res.data.isDeleted) {
+          this.setState({ searchKey: true });
+        } else {
+          this.setState({ productData: res.data });
+          this.setState({ searchProduct: true });
+          document.getElementById("search-result-item-selling-price").focus();
+        }
+      } catch (error) {
+        this.setState({ searchKey: true });
+      }
+    });
+  };
+
+  onEnterSellingPrice = () => {
+    document.getElementById("search-result-item-qty").focus();
   };
 
   render() {
@@ -285,7 +319,7 @@ class InvoiceForm extends Component {
         <div>
           <div className="container-fluid ">
             <div className="row ">
-              <hr className="col-12"/>
+              <hr className="col-12" />
               <div className="col-3 border-right">
                 <div className="row">
                   <div className="col-12">
@@ -402,20 +436,20 @@ class InvoiceForm extends Component {
                             <td>{invoiceItem.description}</td>
                             <td>{invoiceItem.count}</td>
                             <td>
-                                <input
-                                  type="text"
-                                  className="form-control"
-                                  id="price"
-                                  placeholder={invoiceItem.sellingPrice}
-                                  onChange={(e) =>
-                                    this.handlePriceChange(e, index)
+                              <input
+                                type="text"
+                                className="form-control"
+                                id="price"
+                                placeholder={invoiceItem.sellingPrice}
+                                onChange={(e) =>
+                                  this.handlePriceChange(e, index)
+                                }
+                                onKeyUp={(ev) => {
+                                  if (ev.key === "Enter") {
+                                    ev.target.blur();
                                   }
-                                  onKeyUp={(ev) => {
-                                    if (ev.key === "Enter") {
-                                      ev.target.blur();
-                                    }
-                                  }}
-                                />
+                                }}
+                              />
                             </td>
                             <td>
                               {invoiceItem.count * invoiceItem.sellingPrice}.00
@@ -457,10 +491,16 @@ class InvoiceForm extends Component {
                 )}
               </div>
             </div>
-            <div className="row" style={{height:"1px", margin:"5px", backgroundColor:"rgb(110, 110, 110,0.2)"}}>
-            </div>
+            <div
+              className="row"
+              style={{
+                height: "1px",
+                margin: "5px",
+                backgroundColor: "rgb(110, 110, 110,0.2)",
+              }}
+            ></div>
             <form onSubmit={this.onSubmitHndl} className="w-100 d-flex">
-              <div className="row w-100">
+              <div className="row w-100 d-flex">
                 {/* <div className="col-3">
                   <InputFormGroup
                      inputid="invoice-search-product"
@@ -478,18 +518,41 @@ class InvoiceForm extends Component {
                   />
                 </div> */}
                 {/* <InputWithSuggestion productKey = {this.state.searchProductKey} inputId="invoice-search-product"  placeholder="Product Code" inputclassname="form-control  form-control-sm"  InputOnChange={this.handleChangeSearchProductKey} ></InputWithSuggestion> */}
-              <div className="d-flex">
-              <InputWithSuggestionProductCode fieldType= "productCode" action={this.handleChangeSearchProductKey} placeholder="search by code" inputId="invoice-search-product" inputclassname="form-control  form-control-sm mb-1"/>
-              </div>
+                <div className="d-flex">
+                  <InputWithSuggestionProductCode
+                    fieldType="productCode"
+                    action={this.handleChangeSearchProductKey}
+                    placeholder="search by code"
+                    inputId="invoice-search-product"
+                    inputclassname="form-control  form-control-sm mb-1"
+                  />
+                  <InputWithSuggestionProductName
+                    fieldType="productName"
+                    action={this.handleChangeSearchProductName}
+                    placeholder="search by name"
+                    inputId="invoice-search-product-by-name"
+                    inputclassname="form-control  form-control-sm mb-1 ml-3"
+                  />
+                </div>
                 <h6 className="ml-4">
                   <b>Set Products Details</b>
                 </h6>
-                <div className="col-12">
+
+                <div className="col-5">
                   {this.state.searchKey && (
                     <div>
                       <h6 className="text-danger">Product Not Found!</h6>
                     </div>
                   )}
+                </div>
+                <div className="d-flex">
+                  <b>show buying Price</b>
+                  <input
+                    type="checkbox"
+                    className="form-check-input"
+                    Checked={this.state.buyingPriceVisible}
+                    onChange={() => this.handlebuyingPriceVisible()}
+                  />
                 </div>
               </div>
             </form>
@@ -504,25 +567,56 @@ class InvoiceForm extends Component {
                 </thead>
                 {this.state.searchProduct &&
                   this.state.productData.map((data, index) => {
+                    console.log(data);
                     return (
                       <tbody key={index}>
                         <tr>
                           <td>{data.id}</td>
                           <td>{data.itemCode}</td>
                           <td className="aradana-font">{data.name}</td>
-                          <td>{data.description}</td>
+                          {/* <td>{data.description}</td> */}
                           <td>{data.qty}</td>
-                          <td>{data.sellingPrice}</td>
+                          <td
+                            style={{
+                              backgroundColor: this.state.buyingPriceVisible
+                                ? "white"
+                                : "black",
+                            }}
+                          >
+                            {data.buyingPrice}
+                          </td>
+                          <td>
+                            <input
+                              id="search-result-item-selling-price"
+                              defaultValue={(
+                                Math.round(data.sellingPrice * 100) / 100
+                              ).toFixed(2)}
+                              onChange={(e) =>
+                                (data.sellingPrice = e.target.value)
+                              }
+                              onKeyUp={(ev) => {
+                                if (ev.key === "Enter") {
+                                  ev.target.blur();
+                                  this.onEnterSellingPrice();
+                                }
+                              }}
+                              className="form-control w-50"
+                            />
+                          </td>
                           <td>{data.measurement}</td>
 
                           <td>
-                            <form onSubmit={this.checkItem(data)} className="d-flex">
+                            <form
+                              onSubmit={this.checkItem(data)}
+                              className="d-flex"
+                            >
                               <input
                                 id="search-result-item-qty"
                                 type="number"
                                 placeholder="1"
                                 defaultValue={1}
-                                form-control w-50
+                                form-control
+                                w-50
                                 className="form-control w-50"
                                 min={1}
                                 max={data.qty}
@@ -550,13 +644,41 @@ class InvoiceForm extends Component {
                           <td>{data.id}</td>
                           <td>{data.itemCode}</td>
                           <td className="aradana-font">{data.name}</td>
-                          <td>{data.description}</td>
+                          {/* <td>{data.description}</td> */}
                           <td>{data.qty}</td>
-                          <td>{data.sellingPrice}.00</td>
+                          <td
+                            style={{
+                              backgroundColor: this.state.buyingPriceVisible
+                                ? "white"
+                                : "black",
+                            }}
+                          >
+                            {data.buyingPrice}
+                          </td>
+                          <td>
+                            <input
+                              defaultValue={(
+                                Math.round(data.sellingPrice * 100) / 100
+                              ).toFixed(2)}
+                              onChange={(e) =>
+                                (data.sellingPrice = e.target.value)
+                              }
+                              onKeyUp={(ev) => {
+                                if (ev.key === "Enter") {
+                                  ev.target.blur();
+                                  this.onEnterSellingPrice();
+                                }
+                              }}
+                              className="form-control w-50"
+                            />
+                          </td>
                           <td>{data.measurement}</td>
 
                           <td>
-                            <form onSubmit={this.checkItem(data)} className="d-flex">
+                            <form
+                              onSubmit={this.checkItem(data)}
+                              className="d-flex"
+                            >
                               <input
                                 type="number"
                                 placeholder="1"
@@ -584,14 +706,13 @@ class InvoiceForm extends Component {
           </div>
         </div>
         <Helmet>
-                <script>{`
+          <script>{`
         
         document.getElementById("list-search-data").focus();
         
     `}</script>
-              </Helmet> 
+        </Helmet>
       </div>
-      
     );
   }
 }

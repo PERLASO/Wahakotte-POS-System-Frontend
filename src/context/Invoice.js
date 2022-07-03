@@ -15,8 +15,11 @@ export const getInvoice = async function (data) {
 };
  
 
-export const getInvoiceByCustomer = async function (data,dayfilter) {
+export const getInvoiceByCustomerCode = async function (data,dayfilter) {
   return await get(`api/Invoice/GetSingleInvoiceByshortcode/${data}/${dayfilter}`);
+}
+export const getInvoiceByCustomerName = async function (data,dayfilter) {
+  return await get(`api/Invoice/GetSingleInvoiceByCustomerName/${data}/${dayfilter}`);
 }
 
 export const getInvoiceByDate = async function (data) {

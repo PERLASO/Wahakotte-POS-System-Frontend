@@ -2,19 +2,16 @@ import React, { Component } from "react";
 import {getProductList} from "../../context/Product";
 
 
-class DataList extends React.Component {
+class DataNameList extends React.Component {
   render(props) {
       const suggestionsNames = this.props.suggestions;
-    
-      suggestionsNames.map(function(item) {
-        console.log(item.name);
-      });
-    
       return (
-        <datalist id="suggestions-list">
+        <datalist id="suggestions-list-name">
           {suggestionsNames.map(function(sugession,i) {
+                  console.log(sugession.name)   
             return <option key={i} value={sugession.name}/>
           })}
+
         </datalist>
       );
   }
@@ -26,8 +23,8 @@ class InputWithSuggestionProductName extends Component {
     super(props);
     this.state = {
       loadedDataNames: [],
-      text: "",
-      sugessions: []
+      textName: "",
+      sugessionsNames: []
     };
   }
 
@@ -43,20 +40,21 @@ class InputWithSuggestionProductName extends Component {
     if(text.length > 0){
       matches = this.state.loadedDataNames.filter(data =>{
         const regex = new RegExp(`${text}`,"gi")
-        return data.itemCode.match(regex)
+        return data.name.match(regex)
       })
     }
     console.log('matchs', matches)
-    this.setState({sugessions: matches})
-    this.setState({text: text})
+    this.setState({sugessionsNames: matches})
+    this.setState({textName: text})
     this.props.action(text);
   }
 
 render() {
   return (
       <div>
-          <input list="suggestions-list" onChange={e=> this.onChangeHandler(e.target.value)} type="text" id={this.props.inputId} placeholder={this.props.placeholder} className={this.props.inputclassname}/>
-          <DataList suggestions={this.state.loadedDataNames} />
+          <input list="suggestions-list-name" onChange={e=> this.onChangeHandler(e.target.value)} type="text" id={this.props.inputId} placeholder={this.props.placeholder} className={this.props.inputclassname}/>
+          <DataNameList suggestions={this.state.loadedDataNames} />
+          
       </div>
   );
 }
