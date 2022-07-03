@@ -13,6 +13,11 @@ export const getSingleProductByShortcode = async function (data) {
  
   return await get(`Product/GetSingleProductByshortcode/${data}`);
 };
+export const getSingleProductByName = async function (data) {
+ 
+  return await get(`Product/GetSingleProductByname/${data}`);
+};
+
 export const getProductsSuggesionsByShortcode = async function (data) {
  
   return await get(`Product/GetSingleProductAutoByshortcode/${data}`);

@@ -3,12 +3,18 @@ import AnchorTag from "../../components/Anchortag";
 import Table from "../../components/table/Table";
 import {
   getInvoiceByCustomer,
+  getInvoiceByCustomerCode,
+  getInvoiceByCustomerName,
   getInvoiceByDate,
   getInvoiceList,
 } from "../../context/Invoice";
 import InputFormGroup from "../input/InputFormGroup";
 import moment from "moment/moment.js";
 import Switch from "../../components/input/Switch";
+import InputWithSuggestionCustomerCode from "../../components/input/InputWithSuggestionCustomerCode";
+import InputWithSuggestionCustomerName from "../../components/input/InputWithSuggestionCustomerName";
+import Helmet from "react-helmet";
+
 const Mousetrap = require("mousetrap");
 
 class InvoiceList extends Component {
@@ -30,6 +36,7 @@ class InvoiceList extends Component {
       customerInvoices: [],
       dateInvoices: [],
       customerCode: "",
+      customerName:"",
       searchCustomer: false,
       BillNo: 0,
       searchBillNo: false,
@@ -39,7 +46,10 @@ class InvoiceList extends Component {
       todayList: true,
     };
 
-    this.handleSearchCusotmer = this.handleSearchCusotmer.bind(this);
+    this.handleSearchCusotmerByCode =
+      this.handleSearchCusotmerByCode.bind(this);
+    this.handleSearchCusotmerByName =
+      this.handleSearchCusotmerByName.bind(this);
     this.handleSearchBilNo = this.handleSearchBilNo.bind(this);
     this.handleSearchDate = this.handleSearchDate.bind(this);
   }
@@ -49,10 +59,21 @@ class InvoiceList extends Component {
     this.setState({ error: "Some error" });
   };
 
-  handleSearchCusotmer(e) {
-    this.setState({ searchKey: false });
-    this.setState({ customerCode: e.target.value });
-    this.setState({ searchCustomer: false });
+  handleSearchCusotmerByCode(e) {
+    this.setState(
+      { searchKey: false, customerCode: e, searchCustomer: false },
+      () => {
+        this.OnSearchCustomerCodeClick();
+      }
+    );
+  }
+  handleSearchCusotmerByName(e) {
+    this.setState(
+      { searchKey: false, customerName: e, searchCustomer: false },
+      () => {
+        this.OnSearchCustomerNameClick();
+      }
+    );
   }
 
   handleSearchBilNo(e) {
@@ -81,20 +102,39 @@ class InvoiceList extends Component {
     });
   };
 
-  OnSearchCustomerClick = () => {
-    getInvoiceByCustomer(this.state.customerCode, this.state.todayList).then((res) => {
-      try {
-        if (res.data.isDeleted) {
+  OnSearchCustomerCodeClick = () => {
+    getInvoiceByCustomerCode(this.state.customerCode, this.state.todayList).then(
+      (res) => {
+        try {
+          if (res.data.isDeleted) {
+            this.setState({ searchKey: true });
+          } else {
+            this.setState({ customerInvoices: res.data });
+            this.setState({ searchCustomer: true });
+            console.log(this.state.customerInvoices);
+          }
+        } catch (error) {
           this.setState({ searchKey: true });
-        } else {
-          this.setState({ customerInvoices: res.data });
-          this.setState({ searchCustomer: true });
-          console.log(this.state.customerInvoices);
         }
-      } catch (error) {
-        this.setState({ searchKey: true });
       }
-    });
+    );
+  };
+  OnSearchCustomerNameClick = () => {
+    getInvoiceByCustomerName(this.state.customerName, this.state.todayList).then(
+      (res) => {
+        try {
+          if (res.data.isDeleted) {
+            this.setState({ searchKey: true });
+          } else {
+            this.setState({ customerInvoices: res.data });
+            this.setState({ searchCustomer: true });
+            console.log(this.state.customerInvoices);
+          }
+        } catch (error) {
+          this.setState({ searchKey: true });
+        }
+      }
+    );
   };
 
   onSearchDateClick = () => {
@@ -113,23 +153,23 @@ class InvoiceList extends Component {
     });
   };
 
-  onToggleFilter =() =>{
+  onToggleFilter = () => {
     this.setState({ todayList: !this.state.todayList });
     getInvoiceList(!this.state.todayList).then((c) => {
-        if (c != undefined) {
-          this.setState({ isLoading: false });
-          this.setState({ tableData: c.data });
-        }
-      });
+      if (c != undefined) {
+        this.setState({ isLoading: false });
+        this.setState({ tableData: c.data });
+      }
+    });
   };
-  onToggleFilterForShortcut =() =>{
+  onToggleFilterForShortcut = () => {
     this.setState({ todayList: !this.state.todayList });
     getInvoiceList(this.state.todayList).then((c) => {
-        if (c != undefined) {
-          this.setState({ isLoading: false });
-          this.setState({ tableData: c.data });
-        }
-      });
+      if (c != undefined) {
+        this.setState({ isLoading: false });
+        this.setState({ tableData: c.data });
+      }
+    });
   };
 
   render() {
@@ -155,24 +195,27 @@ class InvoiceList extends Component {
           <h4>Invoice List</h4>
         </div>
         <div className="row mb-2 ">
-          <div className="w-100">
-            <div className="col-5">
-              <label>Search Invoice By Customer Short Name</label>
-            </div>
-            <div className="d-flex ">
+          <div className="w-100 d-flex">
             <form onSubmit={this.onSubmitHndl} className="d-flex  pt-3">
-              <div className="col-12">
-                {/* <input className="form-control form-control-sm" placeholder="Customer Short Name" onChange={this.handleSearchCusotmer}></input> */}
-                <InputFormGroup
-                  inputid="list-search-data"
-                  labelClassName="mb-2"
-                  label=""
-                  inputclassname="form-control form-control"
-                  placeholder="Customer Short Name"
-                  onChange={this.handleSearchCusotmer}
+              <div>
+                <InputWithSuggestionCustomerCode
+                  fieldType="CustomerCode"
+                  action={this.handleSearchCusotmerByCode}
+                  placeholder="search by code"
+                  inputId="list-search-data"
+                  inputclassname="form-control form-control-sm mb-1"
                 />
               </div>
-              <div className="col-2">
+              <div className="ml-3">
+                <InputWithSuggestionCustomerName
+                  fieldType="CustomerCode"
+                  action={this.handleSearchCusotmerByName}
+                  placeholder="search by name"
+                  inputId="list-search-data"
+                  inputclassname="form-control form-control-sm mb-1"
+                />
+              </div>
+              {/* <div className="col-2">
                 <div className="form-group d-flex">
                   <input
                     type="submit"
@@ -181,18 +224,15 @@ class InvoiceList extends Component {
                     onClick={this.OnSearchCustomerClick}
                   />
                 </div>
-              </div>
+              </div> */}
             </form>
             <div className="d-flex justify-content-around ml-5 pl-5 float-right">
               <h5 className="pt-4 pr-3 ml-5">Only today invoices</h5>
               <Switch
                 isOn={this.state.todayList}
                 onColor="#fac94d"
-                handleToggle={
-                    () => this.onToggleFilter()
-                }
+                handleToggle={() => this.onToggleFilter()}
               ></Switch>
-            </div>
             </div>
           </div>
           {/* <div className="col-5">
@@ -217,7 +257,7 @@ class InvoiceList extends Component {
                             <input type="submit" className="btn btn-sm btn-success" value="Search" onClick={this.onSearchDateClick} />
                         </div>
                     </div> */}
-          <div className="col-8">
+          <div className="col-4">
             {this.state.searchKey && (
               <div>
                 <h6 className="text-danger">Invoice Not Found!</h6>
@@ -240,7 +280,7 @@ class InvoiceList extends Component {
                 return (
                   <tbody key={index}>
                     <tr>
-                      <td>{index +1}</td>
+                      <td>{index + 1}</td>
                       <td>{data.customer.name}</td>
                       <td>{data.status}</td>
                       <td>{data.total}</td>
@@ -283,6 +323,13 @@ class InvoiceList extends Component {
               })}
           </table>
         </div>
+        <Helmet>
+          <script>{`
+        
+        document.getElementById("list-search-data").focus();
+        
+    `}</script>
+        </Helmet>
       </div>
     );
   }

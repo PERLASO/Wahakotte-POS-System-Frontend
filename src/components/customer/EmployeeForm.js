@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import AnchorTag from "../../components/Anchortag";
 import { setCustomer } from "../../context/Customer";
 import InputFormGroup from "../input/InputFormGroup";
+import Helmet from "react-helmet";
 
 
 
@@ -79,7 +80,7 @@ class EmployeeForm extends Component{
                         <div className="container-fluid">
                             <div className="row">
                                 <div className="col-12">
-                                    <InputFormGroup labelClassName="mb-2" onChange={this.handleChangeEmpName} required={true}  inputclassname="form-control" label="Name" />
+                                    <InputFormGroup inputid="customer-create-name" labelClassName="mb-2" onChange={this.handleChangeEmpName} required={true}  inputclassname="form-control" label="Name" />
                                 </div>
                                 <div className="col-12">
                                     <InputFormGroup  labelClassName="mb-2" onChange={this.handleChangeShortCode} required={true}  inputclassname="form-control capitalize-input" label="Short Name"  />
@@ -107,7 +108,13 @@ class EmployeeForm extends Component{
                     </form>
                     
                 </div>
-
+                <Helmet>
+          <script>{`
+        
+        document.getElementById("customer-create-name").focus();
+        
+    `}</script>
+        </Helmet>
             </div>
         ) 
     }

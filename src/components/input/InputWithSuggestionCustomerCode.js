@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { getAllCustomers, getCustomer } from "../../context/Customer";
 import {getProductList} from "../../context/Product";
 
 
@@ -6,16 +7,16 @@ class DataList extends React.Component {
   render(props) {
       const suggestions = this.props.suggestions;
       return (
-        <datalist id="suggestions-list">
+        <datalist id="suggestions-list-customer-code">
           {suggestions.map(function(sugession,i) {
-            return <option key={i} value={sugession.itemCode}/>
+            return <option key={i} value={sugession.shortCode}/>
           })}
         </datalist>
       );
   }
 }
 
-class InputWithSuggestionProductCode extends Component {
+class InputWithSuggestionCustomerCode extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -26,18 +27,19 @@ class InputWithSuggestionProductCode extends Component {
   }
 
   componentDidMount() {
-    getProductList().then((c) => {
+    getAllCustomers().then((c) => {
       if (c != undefined) {
         this.setState({ loadedData: c.data });
       }
     });
   }
   onChangeHandler(text){
+    debugger
     let matches =[]
     if(text.length > 0){
       matches = this.state.loadedData.filter(data =>{
         const regex = new RegExp(`${text}`,"gi")
-        return data.itemCode.match(regex)
+        return data.shortCode.match(regex)
       })
     }
     console.log('matchs', matches)
@@ -49,11 +51,11 @@ class InputWithSuggestionProductCode extends Component {
 render() {
   return (
       <div>
-          <input list="suggestions-list" onChange={e=> this.onChangeHandler(e.target.value)} type="text" id={this.props.inputId} placeholder={this.props.placeholder} className={this.props.inputclassname}/>
+          <input list="suggestions-list-customer-code" onChange={e=> this.onChangeHandler(e.target.value)} type="text" id={this.props.inputId} placeholder={this.props.placeholder} className={this.props.inputclassname}/>
           <DataList suggestions={this.state.loadedData} />
       </div>
   );
 }
  }
 
-export default InputWithSuggestionProductCode;
+export default InputWithSuggestionCustomerCode;

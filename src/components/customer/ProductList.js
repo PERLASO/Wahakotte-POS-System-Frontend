@@ -3,27 +3,28 @@ import AnchorTag from "../../components/Anchortag";
 import Table from "../../components/table/Table";
 import InputFormGroup from "../../components/input/InputFormGroup";
 import SelectFormGroup from "../../components/input/SelectFormGroup";
-import { getProductList, getSingleProductByShortcode } from "../../context/Product";
+import { getProductList, getSingleProductByName, getSingleProductByShortcode } from "../../context/Product";
 import InputWithSuggestionProductCode from "../input/InputWithSuggestionProductCode";
+import InputWithSuggestionCustomerName from "../input/InputWithSuggestionProductName";
+import Helmet from "react-helmet";
 
 class ProductList extends Component{
     constructor(props){
         super(props);
         this.columnList = ["S/N","ItemCode", "Name", "Description", "QTY", "Selling Price(LKR)", "Unit","Val. of QTY(LKR)","Action"];
-        this.tableData = [
-            {"id": 1, "name": "KP", "category": "කපුරු පෙති", "price": "238.00", "stock": 20},
-        ]
-
+        this.tableData = [ ]
         this.state = {
             isLoading:true,
             data: [],
             searchProductKey: '',
+            searchProductName: '',
             searchKey: false,
             productData: [],
             searchProduct: false,
           }
 
           this.handleChangeSearchProductKey = this.handleChangeSearchProductKey.bind(this);
+          this.handleChangeSearchProductName = this.handleChangeSearchProductName.bind(this);
 
     }
 
@@ -33,9 +34,18 @@ class ProductList extends Component{
       };
 
     handleChangeSearchProductKey(e) {
-        this.setState({ searchKey: false })
-        this.setState({ searchProductKey: e })
-        this.setState({ searchProduct: false })
+        this.setState({ searchKey: false,  searchProductKey: e , searchProduct: false },
+            () => {
+                this.onSearchProductClick();
+              }
+        )  
+    }
+    handleChangeSearchProductName(e) {
+        this.setState({ searchKey: false,  searchProductName: e , searchProduct: false },
+            () => {
+                this.onSearchProductNameClick();
+              }
+        )  
     }
 
     componentDidMount(){
@@ -50,6 +60,20 @@ class ProductList extends Component{
 
     onSearchProductClick = () => {
         getSingleProductByShortcode(this.state.searchProductKey).then(res => {
+            try {
+                if (res.data.isDeleted) {
+                    this.setState({ searchKey: true })
+                } else {
+                    this.setState({ productData: res.data })
+                    this.setState({ searchProduct: true })
+                }
+            } catch (error) {
+                this.setState({ searchKey: true })
+            }
+        })
+    }
+    onSearchProductNameClick = () => {
+        getSingleProductByName(this.state.searchProductName).then(res => {
             try {
                 if (res.data.isDeleted) {
                     this.setState({ searchKey: true })
@@ -82,21 +106,32 @@ class ProductList extends Component{
                         <p><b>Search Product</b></p>
                     </div>
                     <form onSubmit={this.onSubmitHndl} className="w-100 d-flex">
-                    <div className="col-2">
+                    <div className="col-4">
                         {/* <InputFormGroup inputid="list-search-data" labelClassName="mb-2" label="" inputclassname="form-control form-control-sm" placeholder="Product Code" onChange={this.handleChangeSearchProductKey}/> */}
-                        <InputWithSuggestionProductCode fieldType= "productCode" action={this.handleChangeSearchProductKey} placeholder="search by code" inputId="invoice-search-product" inputclassname="form-control  form-control-sm mb-1"/>
+                        <InputWithSuggestionProductCode fieldType= "productCode" action={this.handleChangeSearchProductKey} placeholder="search by code" inputId="list-search-data" inputclassname="form-control  form-control-sm mb-1"/>
                     </div>
-                    <div className="col-2">
+                    <div className="col-4">
+                        {/* <InputFormGroup inputid="list-search-data" labelClassName="mb-2" label="" inputclassname="form-control form-control-sm" placeholder="Product Code" onChange={this.handleChangeSearchProductKey}/> */}
+                        <InputWithSuggestionCustomerName fieldType= "productName" action={this.handleChangeSearchProductName} placeholder="search by name" inputId="list-search-data-product-name" inputclassname="form-control  form-control-sm mb-1"/>
+                    </div>
+                    {/* <div className="col-2">
                         <div className="form-group">
                             <input type="submit" className="w-100 btn btn-sm btn-success" value="Search" onClick={this.onSearchProductClick}/>
                         </div>
-                    </div>
+                    </div> */}
                     </form>
                 </div>
                 <div className="list-table">
                     {this.state.searchProduct && <Table className="table table-striped " columnList={this.columnList} tableData={this.state.productData} actionLinkPrefix="" tableType="product"></Table> }
                     {!this.state.searchProduct &&  <Table className="table table-striped " columnList={this.columnList} tableData={this.state.data} actionLinkPrefix="" tableType="product"></Table>}
                 </div>
+                <Helmet>
+          <script>{`
+        
+        document.getElementById("list-search-data").focus();
+        
+    `}</script>
+        </Helmet>
             </div>
         ) 
     }

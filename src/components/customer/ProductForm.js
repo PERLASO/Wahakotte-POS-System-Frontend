@@ -5,6 +5,7 @@ import TextAreaFormGroup from "../input/TextAreaFormGroup";
 import SelectFormGroup from "../input/SelectFormGroup";
 import InputNumberGroup from "../input/InputNumberGroup";
 import { setProduct } from "../../context/Product";
+import Helmet from "react-helmet";
 
 class ProductForm extends Component {
   constructor(props) {
@@ -95,6 +96,7 @@ class ProductForm extends Component {
               <div className="row">
                 <div className="col-12">
                   <InputFormGroup
+                    inputid="product-create-name" 
                     labelClassName="mb-2"
                     required={true}
                     onChange={this.handleChangeName}
@@ -200,6 +202,13 @@ class ProductForm extends Component {
             </div>
           </form>
         </div>
+        <Helmet>
+          <script>{`
+        
+        document.getElementById("product-create-name").focus();
+        
+    `}</script>
+        </Helmet>
       </div>
     );
   }

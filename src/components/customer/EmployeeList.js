@@ -2,11 +2,15 @@ import React, { Component } from "react";
 import {
   getAllCustomers,
   getCustomerByShortname,
+  getCustomerByName
 } from "../../context/Customer";
 import AnchorTag from "../../components/Anchortag";
 import InputFormGroup from "../../components/input/InputFormGroup";
 
 import Table from "../../components/table/Table";
+import InputWithSuggestionCustomerCode from "../input/InputWithSuggestionCustomerCode";
+import InputWithSuggestionCustomerName from "../input/InputWithSuggestionCustomerName";
+import Helmet from "react-helmet";
 
 class EmployeeList extends Component {
   constructor(props) {
@@ -15,6 +19,7 @@ class EmployeeList extends Component {
       customers: [],
       customerbyshortname: [],
       searchNameKey: "",
+      searchName: "",
       searchKey: false,
       isLoading: true,
       searchCustomer: false,
@@ -29,17 +34,26 @@ class EmployeeList extends Component {
       "Credit Balance",
       "Action",
     ];
-    this.handleChangeSearchNameKey = this.handleChangeSearchNameKey.bind(this);
+    this.handleChangeSearchCustomerCode = this.handleChangeSearchCustomerCode.bind(this);
+    this.handleChangeSearchCustomerName = this.handleChangeSearchCustomerName.bind(this);
   }
   onSubmitHndl = (e) => {
     e.preventDefault();
     this.setState({ error: "Some error" });
   };
 
-  handleChangeSearchNameKey(e) {
-    this.setState({ searchKey: false });
-    this.setState({ searchNameKey: e.target.value });
-    this.setState({ searchCustomer: false });
+  handleChangeSearchCustomerCode(e) {
+    this.setState({ searchKey: false, searchNameKey: e , searchCustomer: false },
+      () => {
+        this.onSearchClickCode();
+      });
+  }
+
+  handleChangeSearchCustomerName(e) {
+    this.setState({ searchKey: false, searchName: e , searchCustomer: false },
+      () => {
+        this.onSearchClickName();
+      });
   }
 
   handleChangeSearchAreaKey(e) {
@@ -54,8 +68,23 @@ class EmployeeList extends Component {
     });
   }
 
-  onSearchClick = () => {
+  onSearchClickCode = () => {
     getCustomerByShortname(this.state.searchNameKey).then((res) => {
+      try {
+        if (res.data.isDeleted) {
+          this.setState({ searchKey: true });
+        } else {
+          this.setState({ customerbyshortname: res.data });
+          this.setState({ searchCustomer: true });
+        }
+      } catch (error) {
+        this.setState({ searchKey: true });
+      }
+    });
+  };
+
+  onSearchClickName = () => {
+    getCustomerByName(this.state.searchName).then((res) => {
       try {
         if (res.data.isDeleted) {
           this.setState({ searchKey: true });
@@ -96,21 +125,25 @@ class EmployeeList extends Component {
           <div className="col-4">
             <p>
               <b>Search a Customer</b>
-            </p>
+            </p> 
           </div>
           <form onSubmit={this.onSubmitHndl} className="w-100 d-flex">
             <div className="col-4">
-              <InputFormGroup
-                inputid="list-search-data"
-                 labelClassName="mb-2"
-                label=""
-                inputclassname="form-control form-control-sm"
-                onChange={this.handleChangeSearchNameKey}
-                placeholder="Customer Short Name"
-              />
+              <InputWithSuggestionCustomerCode fieldType="CustomerCode"
+                    action={this.handleChangeSearchCustomerCode}
+                    placeholder="search by code"
+                    inputId="list-search-data"
+                    inputclassname="form-control  form-control-sm mb-1"/>
+            </div>
+            <div className="col-4">
+              <InputWithSuggestionCustomerName fieldType="CustomerCode"
+                    action={this.handleChangeSearchCustomerName}
+                    placeholder="search by name"
+                    inputId="list-search-data-customer-name"
+                    inputclassname="form-control  form-control-sm mb-1"/>
             </div>
             {/* <input type="text" id="customer-short-name-input"/>    */}
-            <div className="col-2">
+            {/* <div className="col-2">
               <div className="form-group">
                 <input
                   type="submit"
@@ -119,7 +152,7 @@ class EmployeeList extends Component {
                   onClick={this.onSearchClick}
                 />
               </div>
-            </div>
+            </div> */}
           </form>
 
           <div className="col-8">
@@ -148,6 +181,13 @@ class EmployeeList extends Component {
             ></Table>
           )}
         </div>
+        <Helmet>
+          <script>{`
+        
+        document.getElementById("list-search-data").focus();
+        
+    `}</script>
+        </Helmet>
       </div>
     );
   }
