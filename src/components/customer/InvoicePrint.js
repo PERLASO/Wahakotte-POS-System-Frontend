@@ -175,11 +175,6 @@ class InvoicePrint extends React.Component {
                         </td>
                         <td>
                           <h5 style={{fontSize:"24px"}}>
-                            {invoiceItem.count * invoiceItem.sellingPrice}.00
-                          </h5>
-                        </td>
-                        <td>
-                          <h5 style={{fontSize:"24px"}}>
                             {(Math.round(invoiceItem.count * invoiceItem.sellingPrice * 100) / 100).toFixed(2)}
                           </h5>
                         </td>

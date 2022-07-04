@@ -45,7 +45,7 @@ class DashboardPage extends Component {
               <p>
                 <b>Today : Total sales</b>
               </p>
-              <h3>RS: {this.state.data.totalSellToday}.00</h3>
+              <h3>RS: {(Math.round(this.state.data.totalSellToday * 100) / 100).toFixed(2)}</h3>
             </div>
           </div>
           <div className="col-4">
@@ -53,7 +53,7 @@ class DashboardPage extends Component {
               <p>
                 <b>Today : Profit</b>
               </p>
-              <h3>RS: {this.state.data.profitToday}.00</h3>
+              <h3>RS: {(Math.round(this.state.data.profitToday * 100) / 100).toFixed(2)}</h3>
             </div>
           </div>
         </div>
