@@ -150,7 +150,7 @@ class InvoicePrint extends React.Component {
                       <h5 style={{fontSize:"24px"}} className="font-weight-bold">Total (LKR)</h5>
                     </th>
                   </tr>
-                </thead>
+                </thead> 
                 <tbody>
                   {this.state.invoiceItems.map((invoiceItem, index) => {
                     return (
@@ -171,11 +171,16 @@ class InvoicePrint extends React.Component {
                           <h5 className="pl-3" style={{fontSize:"24px"}}>{invoiceItem.count}</h5>
                         </td>
                         <td>
-                          <h5 style={{fontSize:"24px"}}>{invoiceItem.sellingPrice}.00</h5>
+                          <h5 style={{fontSize:"24px"}}>{ (Math.round(invoiceItem.sellingPrice * 100) / 100).toFixed(2)}</h5>
                         </td>
                         <td>
                           <h5 style={{fontSize:"24px"}}>
                             {invoiceItem.count * invoiceItem.sellingPrice}.00
+                          </h5>
+                        </td>
+                        <td>
+                          <h5 style={{fontSize:"24px"}}>
+                            {(Math.round(invoiceItem.count * invoiceItem.sellingPrice * 100) / 100).toFixed(2)}
                           </h5>
                         </td>
                       </tr>
