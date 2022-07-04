@@ -28,6 +28,7 @@ class Table extends Component {
             return (
               <tr key={index}>
                 {Object.keys(data).map((key, index) => {
+                  debugger
                   if (this.props.tableType == "product" && index == 2) {
                     return (
                       <TdTag
@@ -39,14 +40,27 @@ class Table extends Component {
                     );
                   } else {
                     if (key != "buyingPrice") {
-                      return (
-                        <TdTag
+                      let valueDecimal =  (Math.round(data.buyingPrice * 100) / 100).toFixed(2)
+                      if(key == "sellingPrice" || key == "stockValue"){
+                        return(
+                          <TdTag
                           key={index}
-                          value={data[key]}
+                          value={valueDecimal}
                           isLinked="false"
                         ></TdTag>
-                      );
+                        )
+                      }
+                      else{
+                        return (
+                          <TdTag
+                            key={index}
+                            value={data[key]}
+                            isLinked="false"
+                          ></TdTag>
+                        );
+                      }
                     }
+                    
                   }
                 })}
                 {this.renderAction(data)}
