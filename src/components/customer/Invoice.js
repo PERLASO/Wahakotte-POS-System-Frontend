@@ -230,7 +230,7 @@ class Invoice extends React.Component {
                   <input
                     type="text"
                     className="form-control"
-                    value={'RS : '+this.state.total + ".00"} 
+                    value={'RS : '+(Math.round(this.state.total * 100) / 100).toFixed(2)} 
                     readOnly
                   />
                 </div>
@@ -264,8 +264,10 @@ class Invoice extends React.Component {
                     <td>{invoiceItem.itemCode}</td>
                     <td className="aradana-font">{invoiceItem.name}</td>
                     <td>{invoiceItem.count}</td>
-                    <td>{invoiceItem.sellingPrice}.00</td>
-                    <td>{invoiceItem.count * invoiceItem.sellingPrice}.00</td>
+                    <td>
+                    {(Math.round(invoiceItem.sellingPrice * 100) / 100).toFixed(2)}</td>
+                    <td>
+                    {(Math.round(invoiceItem.count * invoiceItem.sellingPrice * 100) / 100).toFixed(2)}</td>
                   </tr>
                 );
               })}
@@ -276,7 +278,7 @@ class Invoice extends React.Component {
             className="col-md-12  pb-14 pr-12 grand-total page-footer"
           >
             <div className="text-right font-weight-bold ">
-              Grand Total - Rs.{this.state.total}.00
+              Grand Total - Rs.{(Math.round(this.state.total * 100) / 100).toFixed(2)}
             </div>
           </div>
         </div>

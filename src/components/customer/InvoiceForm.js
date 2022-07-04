@@ -470,7 +470,7 @@ class InvoiceForm extends Component {
                               />
                             </td>
                             <td>
-                              {invoiceItem.count * invoiceItem.sellingPrice}.00
+                              {(Math.round(invoiceItem.count * invoiceItem.sellingPrice * 100) / 100).toFixed(2)}
                             </td>
                             <td>
                               <button

@@ -69,13 +69,13 @@ export default function InvoiceView(props) {
                             <div className="col-6">
                                 <div className="form-group">
                                     <label className="mb-2">Total</label>
-                                    <input type="text" className="form-control" value={total} readOnly/>
+                                    <input type="text" className="form-control" value={(Math.round(total * 100) / 100).toFixed(2)} readOnly/>
                                 </div>
                             </div>
                             <div className="col-6">
                                 <div className="form-group">
                                     <label className="mb-2">Credit balance</label>
-                                    <input type="text" className="form-control" value={credit} readOnly/>
+                                    <input type="text" className="form-control" value={(Math.round(credit * 100) / 100).toFixed(2)} readOnly/>
                                 </div>
                             </div>
                             <div className="col-6">
@@ -107,9 +107,10 @@ export default function InvoiceView(props) {
                                                     <td>{invoiceItem.product.itemCode}</td>
                                                     <td className='aradana-font'>{invoiceItem.product.name}</td>
                                                     <td>{invoiceItem.product.description}</td>
-                                                    <td>{invoiceItem.qty}</td>
-                                                    <td>{invoiceItem.sellingPrice}.00</td>
-                                                    <td>{invoiceItem.qty * invoiceItem.sellingPrice}.00</td>
+                                                    <td>{invoiceItem.qty}</td>          
+                                                    <td>{(Math.round(invoiceItem.sellingPrice * 100) / 100).toFixed(2)}</td>
+                                                    <td> {(Math.round(invoiceItem.qty * invoiceItem.sellingPrice * 100) / 100).toFixed(2)}</td>
+                                                   
                                                 </tr>
                                             )
                                         })
