@@ -175,11 +175,6 @@ class InvoicePrint extends React.Component {
                         </td>
                         <td>
                           <h5 style={{fontSize:"24px"}}>
-                            {invoiceItem.count * invoiceItem.sellingPrice}.00
-                          </h5>
-                        </td>
-                        <td>
-                          <h5 style={{fontSize:"24px"}}>
                             {(Math.round(invoiceItem.count * invoiceItem.sellingPrice * 100) / 100).toFixed(2)}
                           </h5>
                         </td>
@@ -211,7 +206,7 @@ class InvoicePrint extends React.Component {
                   <div className=" font-weight-bold col-4 pt-4 ">
                     <div className="d-flex">
                     <h3>Grand Total : </h3>  
-                    <h3 className="pl-1"> {this.state.total}.00</h3>  
+                    <h3 className="pl-1"> {(Math.round(this.state.total * 100) / 100).toFixed(2)}</h3>  
                     </div>
                   
                   {/* <div className="text-right font-weight-bold bg-danger ">

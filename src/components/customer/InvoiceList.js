@@ -36,7 +36,7 @@ class InvoiceList extends Component {
       customerInvoices: [],
       dateInvoices: [],
       customerCode: "",
-      customerName:"",
+      customerName: "",
       searchCustomer: false,
       BillNo: 0,
       searchBillNo: false,
@@ -103,36 +103,38 @@ class InvoiceList extends Component {
   };
 
   OnSearchCustomerCodeClick = () => {
-    getInvoiceByCustomerCode(this.state.customerCode, this.state.todayList).then(
-      (res) => {
-        try {
-          if (res.data.isDeleted) {
-            this.setState({ searchKey: true });
-          } else {
-            this.setState({ customerInvoices: res.data });
-            this.setState({ searchCustomer: true });
-          }
-        } catch (error) {
+    getInvoiceByCustomerCode(
+      this.state.customerCode,
+      this.state.todayList
+    ).then((res) => {
+      try {
+        if (res.data.isDeleted) {
           this.setState({ searchKey: true });
+        } else {
+          this.setState({ customerInvoices: res.data });
+          this.setState({ searchCustomer: true });
         }
+      } catch (error) {
+        this.setState({ searchKey: true });
       }
-    );
+    });
   };
   OnSearchCustomerNameClick = () => {
-    getInvoiceByCustomerName(this.state.customerName, this.state.todayList).then(
-      (res) => {
-        try {
-          if (res.data.isDeleted) {
-            this.setState({ searchKey: true });
-          } else {
-            this.setState({ customerInvoices: res.data });
-            this.setState({ searchCustomer: true });
-          }
-        } catch (error) {
+    getInvoiceByCustomerName(
+      this.state.customerName,
+      this.state.todayList
+    ).then((res) => {
+      try {
+        if (res.data.isDeleted) {
           this.setState({ searchKey: true });
+        } else {
+          this.setState({ customerInvoices: res.data });
+          this.setState({ searchCustomer: true });
         }
+      } catch (error) {
+        this.setState({ searchKey: true });
       }
-    );
+    });
   };
 
   onSearchDateClick = () => {
@@ -280,7 +282,7 @@ class InvoiceList extends Component {
                       <td>{index + 1}</td>
                       <td>{data.customer.name}</td>
                       <td>{data.status}</td>
-                      <td>{data.total}</td>
+                      <td>{(Math.round(data.total * 100) / 100).toFixed(2)}</td>
                       <td>{data.balancetobepaid}</td>
                       <td>{moment(data.createdDate).format("L")}</td>
                       <td>

@@ -470,7 +470,7 @@ class InvoiceForm extends Component {
                               />
                             </td>
                             <td>
-                              {invoiceItem.count * invoiceItem.sellingPrice}.00
+                              {(Math.round(invoiceItem.count * invoiceItem.sellingPrice * 100) / 100).toFixed(2)}
                             </td>
                             <td>
                               <button
@@ -600,7 +600,9 @@ class InvoiceForm extends Component {
                                 : "black",
                             }}
                           >
-                            {data.buyingPrice}
+                            {(
+                                Math.round(data.buyingPrice * 100) / 100
+                              ).toFixed(2)}
                           </td>
                           <td>
                             <input
@@ -670,7 +672,9 @@ class InvoiceForm extends Component {
                                 : "black",
                             }}
                           >
-                            {data.buyingPrice}
+                            {(
+                                Math.round(data.buyingPrice * 100) / 100
+                              ).toFixed(2)}
                           </td>
                           <td>
                             <input
