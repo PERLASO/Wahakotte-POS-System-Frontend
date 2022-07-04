@@ -5,6 +5,7 @@ import { setInvoice } from "../../context/Invoice";
 class Invoice extends React.Component {
   constructor(props) {
     super(props);
+    debugger
     this.state = {
       invoiceItems: props.location.state[0],
       total: props.location.state[1],
@@ -16,7 +17,6 @@ class Invoice extends React.Component {
       statusMessage: "Enter paid amount to proceed",
       data: {},
     };
-
     this.handleStatus = this.handleStatus.bind(this);
     this.handlePaidAmount = this.handlePaidAmount.bind(this);
     const current = new Date();
@@ -57,6 +57,7 @@ class Invoice extends React.Component {
   }
 
   saveInvoice = () => {
+    debugger
     if (this.state.status.length <= 0) {
       this.setState({ checkStatus: false });
     } else if (
@@ -110,7 +111,7 @@ class Invoice extends React.Component {
             <button
               id="proceed"
               className="btn btn-success float-right invoice-print-btn d-none"
-              onClick={this.saveInvoice}
+            //  onClick={this.saveInvoice}
             >
               {" "}
               Save Invoice{" "}
@@ -182,7 +183,7 @@ class Invoice extends React.Component {
                       onKeyUp={(ev) => {
                         if (ev.key === "Enter") {
                           ev.target.blur(); 
-                           this.saveInvoice();
+                        //   this.saveInvoice();
                         }
                       }}
                     />

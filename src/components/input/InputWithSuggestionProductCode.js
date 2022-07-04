@@ -45,10 +45,26 @@ class InputWithSuggestionProductCode extends Component {
     this.props.action(text);
   }
 
+  onPressEnter(){
+    if(this.props.onPressEnter  !== undefined){
+      this.props.onPressEnter();
+    }
+  }
 render() {
   return (
       <div>
-          <input list="suggestions-list" onChange={e=> this.onChangeHandler(e.target.value)} type="text" id={this.props.inputId} placeholder={this.props.placeholder} className={this.props.inputclassname}/>
+          <input list="suggestions-list" 
+          onChange={e=> this.onChangeHandler(e.target.value)} 
+          type="text" id={this.props.inputId} 
+          placeholder={this.props.placeholder} 
+          className={this.props.inputclassname}
+          onKeyUp={(ev) => {
+            if (ev.key === "Enter") {
+              this.onPressEnter();
+              ev.preventDefault();
+              return false;
+            }
+          }}/>
           <DataList suggestions={this.state.loadedData} />
       </div>
   );
