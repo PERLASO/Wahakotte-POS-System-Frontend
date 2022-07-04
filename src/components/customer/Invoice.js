@@ -24,8 +24,12 @@ class Invoice extends React.Component {
       current.getMonth() + 1
     }/${current.getFullYear()}`;
    this.handleStatus();
+  }
+
+  componentDidMount(){
     this.saveInvoice();
   }
+
   onSubmitHndl = (e) => {
     e.preventDefault();
     this.setState({ error: "Some error" });
