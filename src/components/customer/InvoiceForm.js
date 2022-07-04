@@ -582,14 +582,9 @@ class InvoiceForm extends Component {
                     </div>
                   )}
                 </div>
-                <div className="d-flex">
-                  <b>show buying Price</b>
-                  <input
-                    type="checkbox"
-                    className="form-check-input"
-                    checked={this.state.buyingPriceVisible}
-                    onChange={() => this.handlebuyingPriceVisible()}
-                  />
+                <div className="form-group form-check">
+                    <input type="checkbox" class="form-check-input" id="Check1"  checked={this.state.buyingPriceVisible} onClick={() => this.handlebuyingPriceVisible()}/>
+                    <label className="form-check-label text-primary" for="Check1">Show Buying Price</label>
                 </div>
               </div>
             </form>
@@ -688,8 +683,8 @@ class InvoiceForm extends Component {
                             style={{
                               backgroundColor: this.state.buyingPriceVisible
                                 ? "white"
-                                : "black",
-                            }}
+                                : "black", color:"black"
+                            } }
                           >
                             {(
                                 Math.round(data.buyingPrice * 100) / 100
