@@ -106,23 +106,25 @@ class InvoiceForm extends Component {
 
   handleChangeSearchNameKey(e) {
     this.setState({ searchCustomerKey: false ,searchNameKey: e ,searchCustomer: false},
-      ()=> this.onSearchCustomerClick());
+      //()=> this.onSearchCustomerClick()
+      );
   }
   handleChangeSearchCustomerName(e) {
     this.setState({ searchCustomerKey: false ,searchCustomerName: e ,searchCustomer: false},
-      ()=> this.onSearchCustomerClickByName());
+      //()=> this.onSearchCustomerClickByName()
+      );
   }
 
   handleChangeSearchProductKey(e) {
     this.setState(
       { searchKey: false, searchProductKey: e, searchProduct: false },
-      () => this.onSearchProductClick()
+      //() => this.onSearchProductClick()
     );
   }
   handleChangeSearchProductName(e) {
     this.setState(
       { searchKey: false, searchProductName: e, searchProduct: false },
-      () => this.onSearchProductClickByName()
+     // () => this.onSearchProductClickByName()
     );
   }
 
@@ -214,6 +216,7 @@ class InvoiceForm extends Component {
   };
 
   saveInvoice = () => {
+    debugger
     if (
       this.state.saveInvoiceCustomerCheck === false &&
       this.state.invoiceItems.length === 0
@@ -331,6 +334,10 @@ class InvoiceForm extends Component {
   onEnterSellingPrice = () => {
     document.getElementById("search-result-item-qty").focus();
   };
+  onEnterSellingPriceAllTable = (a) => {
+    debugger
+ document.getElementById("search-result-item-qty-"+a).focus();
+  };
 
   render() {
     if (this.state.isLoading === true) {
@@ -364,10 +371,20 @@ class InvoiceForm extends Component {
                 <div className="row">
                   <form onSubmit={this.onSubmitHndl} className="w-100 d-flex">
                     <div className="col-6">
-                      <InputWithSuggestionCustomerCode inputId="list-search-data" placeholder="search by code" action={this.handleChangeSearchNameKey} inputclassname="form-control form-control-sm"/>
+                      <InputWithSuggestionCustomerCode 
+                      inputId="list-search-data" 
+                      placeholder="search by code" 
+                      onPressEnter={this.onSearchCustomerClick}
+                      action={this.handleChangeSearchNameKey} 
+                      inputclassname="form-control form-control-sm"/>
                     </div>
                     <div className="col-6">
-                      <InputWithSuggestionCustomerName inputId="list-search-data-by-name" placeholder="search by name" action={this.handleChangeSearchCustomerName} inputclassname="form-control form-control-sm"/>
+                      <InputWithSuggestionCustomerName
+                       inputId="list-search-data-by-name"
+                        placeholder="search by name" 
+                        action={this.handleChangeSearchCustomerName} 
+                        inputclassname="form-control form-control-sm"
+                        onPressEnter={this.onSearchCustomerClickByName}/>
                     </div>
                   </form>
                   <div className="col-12">
@@ -540,6 +557,7 @@ class InvoiceForm extends Component {
                   <InputWithSuggestionProductCode
                     fieldType="productCode"
                     action={this.handleChangeSearchProductKey}
+                    onPressEnter={this.onSearchProductClick}
                     placeholder="search by code"
                     inputId="invoice-search-product"
                     inputclassname="form-control  form-control-sm mb-1"
@@ -547,6 +565,7 @@ class InvoiceForm extends Component {
                   <InputWithSuggestionProductName
                     fieldType="productName"
                     action={this.handleChangeSearchProductName}
+                    onPressEnter={this.onSearchProductClickByName}
                     placeholder="search by name"
                     inputId="invoice-search-product-by-name"
                     inputclassname="form-control  form-control-sm mb-1 ml-3"
@@ -563,14 +582,9 @@ class InvoiceForm extends Component {
                     </div>
                   )}
                 </div>
-                <div className="d-flex">
-                  <b>show buying Price</b>
-                  <input
-                    type="checkbox"
-                    className="form-check-input"
-                    checked={this.state.buyingPriceVisible}
-                    onChange={() => this.handlebuyingPriceVisible()}
-                  />
+                <div className="form-group form-check">
+                    <input type="checkbox" class="form-check-input" id="Check1"  checked={this.state.buyingPriceVisible} onClick={() => this.handlebuyingPriceVisible()}/>
+                    <label className="form-check-label text-primary" for="Check1">Show Buying Price</label>
                 </div>
               </div>
             </form>
@@ -669,8 +683,8 @@ class InvoiceForm extends Component {
                             style={{
                               backgroundColor: this.state.buyingPriceVisible
                                 ? "white"
-                                : "black",
-                            }}
+                                : "black", color:"black"
+                            } }
                           >
                             {(
                                 Math.round(data.buyingPrice * 100) / 100
@@ -687,7 +701,7 @@ class InvoiceForm extends Component {
                               onKeyUp={(ev) => {
                                 if (ev.key === "Enter") {
                                   ev.target.blur();
-                                  this.onEnterSellingPrice();
+                                  this.onEnterSellingPriceAllTable(index.toString());
                                 }
                               }}
                               className="form-control w-50"
@@ -701,6 +715,7 @@ class InvoiceForm extends Component {
                               className="d-flex"
                             >
                               <input
+                              id={"search-result-item-qty-"+index.toString()}
                                 type="number"
                                 placeholder="1"
                                 defaultValue={1}
