@@ -216,7 +216,6 @@ class InvoiceForm extends Component {
   };
 
   saveInvoice = () => {
-    debugger
     if (
       this.state.saveInvoiceCustomerCheck === false &&
       this.state.invoiceItems.length === 0
@@ -335,7 +334,6 @@ class InvoiceForm extends Component {
     document.getElementById("search-result-item-qty").focus();
   };
   onEnterSellingPriceAllTable = (a) => {
-    debugger
  document.getElementById("search-result-item-qty-"+a).focus();
   };
 

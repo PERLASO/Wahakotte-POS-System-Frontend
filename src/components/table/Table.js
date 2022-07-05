@@ -27,8 +27,7 @@ class Table extends Component {
           {this.props.tableData.map((data, index) => {
             return (
               <tr key={index}>
-                {Object.keys(data).map((key, index) => {
-                  debugger
+                {Object.keys(data).map((key, index) => {                  
                   if (this.props.tableType == "product" && index == 2) {
                     return (
                       <TdTag
