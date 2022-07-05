@@ -53,17 +53,17 @@ class EmployeeForm extends Component{
             area : this.state.area,
             phoneNumber:this.state.phoneNumber,
         }
-
         setCustomer(data).then( res => {
             if(res.data == true){
                 alert("Customer Added");
                 this.props.history.push(`/app/shop/employee/list`)
-            }else{
-                alert("Failed")
+            }else if(res.message == "short-code-already-exist"){
+                alert("Sorry Short Code already exist")
+            }
+            else{
+                alert("Somthing went wrong try again!")
             }
         })
-        
-        
     }
 
 

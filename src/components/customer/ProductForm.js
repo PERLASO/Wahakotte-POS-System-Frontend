@@ -71,6 +71,8 @@ class ProductForm extends Component {
       if (c.data === true) {
         alert("Product Added!");
         this.props.history.push(`/app/shop/product/list`);
+      }else if(c.message == "short-code-already-exist"){
+        alert("Sorry Short Code already exist")
       } else {
         alert("failed !");
       }

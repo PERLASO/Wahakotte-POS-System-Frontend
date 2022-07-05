@@ -5,7 +5,6 @@ import { setInvoice } from "../../context/Invoice";
 class Invoice extends React.Component {
   constructor(props) {
     super(props);
-    debugger
     this.state = {
       invoiceItems: props.location.state[0],
       total: props.location.state[1],
@@ -61,7 +60,6 @@ class Invoice extends React.Component {
   }
 
   saveInvoice = () => {
-    debugger
     if (this.state.status.length <= 0) {
       this.setState({ checkStatus: false });
     } else if (
