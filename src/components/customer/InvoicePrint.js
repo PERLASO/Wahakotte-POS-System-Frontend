@@ -13,7 +13,7 @@ class InvoicePrint extends React.Component {
       status: this.props.props[2],
       total: this.props.props[3],
       paidAmount: this.props.props[4],
-      billNo: this.props.props[5],
+    // billNo: this.props.props[5],
     };
   }
 

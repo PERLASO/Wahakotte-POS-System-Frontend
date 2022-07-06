@@ -224,7 +224,7 @@ class InvoiceForm extends Component {
       this.setState({
         saveInvoiceMessage:
           "Please set Product Details, and Customer to proceed",
-      });
+      }); 
     } else if (
       this.state.saveInvoiceCustomerCheck === true &&
       this.state.invoiceItems.length === 0
@@ -242,9 +242,10 @@ class InvoiceForm extends Component {
         saveInvoiceMessage: "Please set Customer Details to proceed",
       });
     } else {
+      let wantToSaveInvoice = true;
       this.props.history.push({
         pathname: "/app/shop/invoice/create/save",
-        state: [this.state.invoiceItems, this.state.total, this.state.customer],
+        state: [this.state.invoiceItems, this.state.total, this.state.customer,wantToSaveInvoice],
       });
     }
   };

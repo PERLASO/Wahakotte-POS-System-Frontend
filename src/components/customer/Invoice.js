@@ -9,6 +9,7 @@ class Invoice extends React.Component {
       invoiceItems: props.location.state[0],
       total: props.location.state[1],
       customer: props.location.state[2],
+      wantToSave:props.location.state[3],
       paidAmount: props.location.state[1],
       checkSaved: false,
       status: "CASH",
@@ -84,24 +85,39 @@ class Invoice extends React.Component {
         });
       }
 
-      setInvoice(data).then((c) => {
-        if (c !== null) {
-        //  alert("Invoice Saved!");
-          this.props.history.push({
-            pathname: `/app/shop/invoice/create/save/print`,
-            state: [
-              this.state.customer,
-              this.state.invoiceItems,
-              this.state.status,
-              this.state.total,
-              this.state.paidAmount,
-              c,
-            ],
-          });
-        } else {
-          alert("failed !");
-        }
-      });
+      if(this.state.wantToSave){
+        setInvoice(data).then((c) => {
+          if (c !== null) {
+          //  alert("Invoice Saved!");
+            this.props.history.push({
+              pathname: `/app/shop/invoice/create/save/print`,
+              state: [
+                this.state.customer,
+                this.state.invoiceItems,
+                this.state.status,
+                this.state.total,
+                this.state.paidAmount,
+                c,
+              ],
+            });
+          } else {
+            alert("failed !");
+          }
+        });
+      }
+      else{
+        this.props.history.push({
+          pathname: `/app/shop/invoice/create/save/print`,
+          state: [
+            this.state.customer,
+            this.state.invoiceItems,
+            this.state.status,
+            this.state.total,
+            this.state.paidAmount,
+          //  c,
+          ],
+        });
+      }
     }
   };
 
