@@ -85,7 +85,7 @@ export default function InvoiceView(props) {
                                 <div className="form-group ml-3">
                                 <Button
                       id="proceed"
-                      className="btn btn-primary w-100"
+                      className="btn btn-primary w-100 d-none"
                       text="Print Invoice"
                       onClick={printInvoice}
                     />
