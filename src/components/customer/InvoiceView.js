@@ -16,7 +16,6 @@ export default function InvoiceView(props) {
 
 
     let columnList = ["S/N", "ItemCode", "Name", "Description", "QTY", 'Price(LKR)', "Total(LKR)"];
-    let invoiceItems; 
 
     useEffect(() => {
         
@@ -50,12 +49,10 @@ export default function InvoiceView(props) {
                 "sellingPrice": 0,
                 "stockValue": 0
             }
-            
-            debugger
            Product.buyingPrice = item.product.buyingPrice;
            Product.count = item.qty;
            Product.description = item.product.description;
-           Product.itemCode = item.product.id;
+           Product.itemCode = item.product.itemCode;
            Product.measurement = item.product.measurement;
            Product.name = item.product.name;
            Product.qty = item.product.qty;
