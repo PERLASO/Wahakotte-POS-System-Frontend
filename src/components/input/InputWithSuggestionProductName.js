@@ -8,7 +8,7 @@ class DataNameList extends React.Component {
       return (
         <datalist id="suggestions-list-name">
           {suggestionsNames.map(function(sugession,i) { 
-            return <option key={i} value={sugession.name}/>
+            return <option key={i} value={sugession.description}/>
           })}
 
         </datalist>
