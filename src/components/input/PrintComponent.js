@@ -21,6 +21,7 @@ export default function PrintComponent(props) {
 
     useEffect(() => {
       document.getElementById('proceed').click();
+      
     }, [])
     
 

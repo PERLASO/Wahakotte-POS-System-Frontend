@@ -68,33 +68,13 @@ class EmployeeList extends Component {
   }
 
   onSearchClickCode = () => {
-    getCustomerByShortname(this.state.searchNameKey).then((res) => {
-      try {
-        if (res.data.isDeleted) {
-          this.setState({ searchKey: true });
-        } else {
-          this.setState({ customerbyshortname: res.data });
-          this.setState({ searchCustomer: true });
-        }
-      } catch (error) {
-        this.setState({ searchKey: true });
-      }
-    });
+    this.setState({customerbyshortname: this.state.customers.filter(data =>data.shortCode.startsWith(this.state.searchNameKey.toUpperCase()))});
+    this.setState({ searchCustomer: true });
   };
 
   onSearchClickName = () => {
-    getCustomerByName(this.state.searchName).then((res) => {
-      try {
-        if (res.data.isDeleted) {
-          this.setState({ searchKey: true });
-        } else {
-          this.setState({ customerbyshortname: res.data });
-          this.setState({ searchCustomer: true });
-        }
-      } catch (error) {
-        this.setState({ searchKey: true });
-      }
-    });
+    this.setState({customerbyshortname: this.state.customers.filter(data =>data.name.startsWith(this.state.searchName))});
+    this.setState({ searchCustomer: true });
   };
 
   render() {
@@ -128,11 +108,19 @@ class EmployeeList extends Component {
           </div>
           <form onSubmit={this.onSubmitHndl} className="w-100 d-flex">
             <div className="col-4">
+            {/* <InputFormGroup
+                inputid="list-search-data"
+                labelClassName="mb-2"
+                label=""
+                inputclassname="form-control form-control-sm capitalize-input"
+                onChange={this.handleChangeSearchCustomerCode}
+                placeholder="search by code"
+              /> */}
               <InputWithSuggestionCustomerCode fieldType="CustomerCode"
                     action={this.handleChangeSearchCustomerCode}
                     placeholder="search by code"
                     inputId="list-search-data"
-                    inputclassname="form-control  form-control-sm mb-1"/>
+                    inputclassname="form-control form-control-sm mb-1"/>
             </div>
             <div className="col-4">
               <InputWithSuggestionCustomerName fieldType="CustomerCode"

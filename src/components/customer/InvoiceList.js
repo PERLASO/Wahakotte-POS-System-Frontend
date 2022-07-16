@@ -92,6 +92,7 @@ class InvoiceList extends Component {
       if (c != undefined) {
         this.setState({ isLoading: false });
         this.setState({ tableData: c.data });
+        
       }
     });
   }
@@ -103,38 +104,43 @@ class InvoiceList extends Component {
   };
 
   OnSearchCustomerCodeClick = () => {
-    getInvoiceByCustomerCode(
-      this.state.customerCode,
-      this.state.todayList
-    ).then((res) => {
-      try {
-        if (res.data.isDeleted) {
-          this.setState({ searchKey: true });
-        } else {
-          this.setState({ customerInvoices: res.data });
-          this.setState({ searchCustomer: true });
-        }
-      } catch (error) {
-        this.setState({ searchKey: true });
-      }
-    });
+    // getInvoiceByCustomerCode(
+    //   this.state.customerCode,
+    //   this.state.todayList
+    // ).then((res) => {
+    //   try {
+    //     if (res.data.isDeleted) {
+    //       this.setState({ searchKey: true });
+    //     } else {
+    //       this.setState({ customerInvoices: res.data });
+    //       this.setState({ searchCustomer: true });
+    //     }
+    //   } catch (error) {
+    //     this.setState({ searchKey: true });
+    //   }
+    // });
+    this.setState({customerInvoices: this.state.tableData.filter(data =>data.customer.shortCode.startsWith(this.state.customerCode.toUpperCase()))});
+    this.setState({searchCustomer: true });
   };
+
   OnSearchCustomerNameClick = () => {
-    getInvoiceByCustomerName(
-      this.state.customerName,
-      this.state.todayList
-    ).then((res) => {
-      try {
-        if (res.data.isDeleted) {
-          this.setState({ searchKey: true });
-        } else {
-          this.setState({ customerInvoices: res.data });
-          this.setState({ searchCustomer: true });
-        }
-      } catch (error) {
-        this.setState({ searchKey: true });
-      }
-    });
+    // getInvoiceByCustomerName(
+    //   this.state.customerName,
+    //   this.state.todayList
+    // ).then((res) => {
+    //   try {
+    //     if (res.data.isDeleted) {
+    //       this.setState({ searchKey: true });
+    //     } else {
+    //       this.setState({ customerInvoices: res.data });
+    //       this.setState({ searchCustomer: true });
+    //     }
+    //   } catch (error) {
+    //     this.setState({ searchKey: true });
+    //   }
+    // });
+    this.setState({customerInvoices: this.state.tableData.filter(data =>data.customer.name.startsWith(this.state.customerName))});
+    this.setState({searchCustomer: true });
   };
 
   onSearchDateClick = () => {

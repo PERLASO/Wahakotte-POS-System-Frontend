@@ -70,7 +70,7 @@ render() {
               return false;
             }
           }}/>
-          <DataNameList suggestions={this.state.loadedDataNames} />
+          {/* <DataNameList suggestions={this.state.loadedDataNames} /> */}
           
       </div>
   );

@@ -7,7 +7,7 @@ import InputWithSuggestionProductName from "../input/InputWithSuggestionProductN
 import {
   getProductList,
   getSingleProductByShortcode,
-  getSingleProductByName
+  getSingleProductByName,
 } from "../../context/Product";
 import {
   getAllCustomers,
@@ -17,7 +17,9 @@ import {
 import { withRouter } from "react-router-dom";
 import Helmet from "react-helmet";
 import InputWithSuggestionCustomerCode from "../input/InputWithSuggestionCustomerCode";
+import InputWithSuggestionCustomerCodeInvoiceCreate from "../input/InputWithSuggestionCustomerCodeInvoiceCreate";
 import InputWithSuggestionCustomerName from "../input/InputWithSuggestionCustomerName";
+import InputWithSuggestionCustomerNameInvoiceCreate from "../input/InputWithSuggestionCustomerNameInvoiceCreate";
 
 class InvoiceForm extends Component {
   constructor(props) {
@@ -26,7 +28,7 @@ class InvoiceForm extends Component {
       isLoading: true,
       data: [],
       productData: [],
-      count: 1,
+      count: 0,
       item: {},
       itemId: 1,
       invoiceItems: [],
@@ -41,7 +43,7 @@ class InvoiceForm extends Component {
       saveInvoiceProductCheck: false,
       saveInvoiceMessage: "",
       searchNameKey: "",
-      searchCustomerName:"",
+      searchCustomerName: "",
       searchProductKey: "",
       searchCustomerKey: false,
       searchKey: false,
@@ -76,7 +78,8 @@ class InvoiceForm extends Component {
     this.handleInvoiceItems = this.handleInvoiceItems.bind(this);
     this.checkItem = this.checkItem.bind(this);
     this.handleChangeSearchNameKey = this.handleChangeSearchNameKey.bind(this);
-    this.handleChangeSearchCustomerName = this.handleChangeSearchCustomerName.bind(this);
+    this.handleChangeSearchCustomerName =
+      this.handleChangeSearchCustomerName.bind(this);
     this.handleChangeSearchProductKey =
       this.handleChangeSearchProductKey.bind(this);
     this.handleChangeSearchProductName =
@@ -105,26 +108,43 @@ class InvoiceForm extends Component {
   }
 
   handleChangeSearchNameKey(e) {
-    this.setState({ searchCustomerKey: false ,searchNameKey: e ,searchCustomer: false},
+    this.setState(
+      { searchCustomerKey: false, searchNameKey: e, searchCustomer: false }
       //()=> this.onSearchCustomerClick()
-      );
+    );
   }
   handleChangeSearchCustomerName(e) {
-    this.setState({ searchCustomerKey: false ,searchCustomerName: e ,searchCustomer: false},
+    this.setState(
+      { searchCustomerKey: false, searchCustomerName: e, searchCustomer: false }
       //()=> this.onSearchCustomerClickByName()
-      );
+    );
   }
 
   handleChangeSearchProductKey(e) {
     this.setState(
       { searchKey: false, searchProductKey: e, searchProduct: false },
-      //() => this.onSearchProductClick()
+      () => {
+        this.setState({
+          productData: this.state.data.filter((data) =>
+            data.itemCode.startsWith(this.state.searchProductKey.toUpperCase())
+          ),
+        });
+        this.setState({ searchProduct: true });
+      }
     );
   }
+
   handleChangeSearchProductName(e) {
     this.setState(
       { searchKey: false, searchProductName: e, searchProduct: false },
-     // () => this.onSearchProductClickByName()
+      () => {
+        this.setState({
+          productData: this.state.data.filter((data) =>
+            data.description.startsWith(this.state.searchProductName)
+          ),
+        });
+        this.setState({ searchProduct: true });
+      }
     );
   }
 
@@ -163,38 +183,38 @@ class InvoiceForm extends Component {
   }
 
   checkItem(data) {
-    return async (e) => {
-      e.preventDefault();
-      this.setState({ itemId: data.id });
+      return async (e) => {
+        e.preventDefault();
+        this.setState({ itemId: data.id });
 
-      if (this.isItemExist(data.id)) {
-        let total = 0;
-        this.state.invoiceItems.find((el) => {
-          if (el.id === data.id) {
-            el["count"] = this.state.count;
-          }
-          total = total + el.count * el.sellingPrice;
+        if (this.isItemExist(data.id)) {
+          let total = 0;
+          this.state.invoiceItems.find((el) => {
+            if (el.id === data.id) {
+              el["count"] = this.state.count;
+            }
+            total = total + el.count * el.sellingPrice;
 
-          this.setState({ total: total });
-        });
-      } else {
-        data["count"] = parseInt(this.state.count);
-        await this.setState({ item: data });
-        this.state.invoiceItems.push(this.state.item);
-        this.setState({
-          total: this.state.total + data.count * data.sellingPrice,
-        });
-      }
-      this.setState({ saveInvoiceCheck: false });
-      let itemSearchField = document.getElementById("invoice-search-product");
-      itemSearchField.focus();
-      document.getElementById("invoice-search-product-by-name").value='';
-      itemSearchField.value = "";
-      this.setState({ searchKey: false });
-      this.setState({ searchProductKey: "" });
-      this.setState({ searchProduct: false });
-      this.setState({ count: 1 });
-    };
+            this.setState({ total: total });
+          });
+        } else {
+          data["count"] = parseInt(this.state.count);
+          await this.setState({ item: data });
+          this.state.invoiceItems.push(this.state.item);
+          this.setState({
+            total: this.state.total + data.count * data.sellingPrice,
+          });
+        }
+        this.setState({ saveInvoiceCheck: false });
+        let itemSearchField = document.getElementById("invoice-search-product");
+        itemSearchField.focus();
+        document.getElementById("invoice-search-product-by-name").value = "";
+        itemSearchField.value = "";
+        this.setState({ searchKey: false });
+        this.setState({ searchProductKey: "" });
+        this.setState({ searchProduct: false });
+        this.setState({ count: 0 });
+      };
   }
 
   isItemExist = (data) => {
@@ -224,7 +244,7 @@ class InvoiceForm extends Component {
       this.setState({
         saveInvoiceMessage:
           "Please set Product Details, and Customer to proceed",
-      }); 
+      });
     } else if (
       this.state.saveInvoiceCustomerCheck === true &&
       this.state.invoiceItems.length === 0
@@ -245,7 +265,12 @@ class InvoiceForm extends Component {
       let wantToSaveInvoice = true;
       this.props.history.push({
         pathname: "/app/shop/invoice/create/save",
-        state: [this.state.invoiceItems, this.state.total, this.state.customer,wantToSaveInvoice],
+        state: [
+          this.state.invoiceItems,
+          this.state.total,
+          this.state.customer,
+          wantToSaveInvoice,
+        ],
       });
     }
   };
@@ -264,7 +289,7 @@ class InvoiceForm extends Component {
           this.setState({ saveInvoiceCustomerCheck: true });
           this.setState({ searchCustomer: true });
           var productField = document.getElementById("invoice-search-product");
-          document.getElementById("list-search-data-by-name").value='';
+          document.getElementById("list-search-data-by-name").value = "";
 
           if (productField != undefined) {
             productField.focus();
@@ -289,7 +314,7 @@ class InvoiceForm extends Component {
           this.setState({ saveInvoiceCustomerCheck: true });
           this.setState({ searchCustomer: true });
           var productField = document.getElementById("invoice-search-product");
-          document.getElementById("list-search-data").value='';
+          document.getElementById("list-search-data").value = "";
           if (productField != undefined) {
             productField.focus();
           }
@@ -301,41 +326,43 @@ class InvoiceForm extends Component {
   };
 
   onSearchProductClick = () => {
-    getSingleProductByShortcode(this.state.searchProductKey).then((res) => {
-      try {
-        if (res.data.isDeleted) {
-          this.setState({ searchKey: true });
-        } else {
-          this.setState({ productData: res.data });
-          this.setState({ searchProduct: true });
-          document.getElementById("search-result-item-selling-price").focus();
-        }
-      } catch (error) {
-        this.setState({ searchKey: true });
-      }
-    });
+    // getSingleProductByShortcode(this.state.searchProductKey).then((res) => {
+    //   try {
+    //     if (res.data.isDeleted) {
+    //       this.setState({ searchKey: true });
+    //     } else {
+    //       this.setState({ productData: res.data });
+    //       this.setState({ searchProduct: true });
+    //       document.getElementById("search-result-item-selling-price").focus();
+    //     }
+    //   } catch (error) {
+    //     this.setState({ searchKey: true });
+    //   }
+    // });
+    document.getElementById("search-result-item-selling-price").focus();
   };
   onSearchProductClickByName = () => {
-    getSingleProductByName(this.state.searchProductName).then((res) => {
-      try {
-        if (res.data.isDeleted) {
-          this.setState({ searchKey: true });
-        } else {
-          this.setState({ productData: res.data });
-          this.setState({ searchProduct: true });
-          document.getElementById("search-result-item-selling-price").focus();
-        }
-      } catch (error) {
-        this.setState({ searchKey: true });
-      }
-    });
+    // getSingleProductByName(this.state.searchProductName).then((res) => {
+    //   try {
+    //     if (res.data.isDeleted) {
+    //       this.setState({ searchKey: true });
+    //     } else {
+    //       this.setState({ productData: res.data });
+    //       this.setState({ searchProduct: true });
+    //       document.getElementById("search-result-item-selling-price").focus();
+    //     }
+    //   } catch (error) {
+    //     this.setState({ searchKey: true });
+    //   }
+    // });
+    document.getElementById("search-result-item-selling-price").focus();
   };
 
   onEnterSellingPrice = () => {
     document.getElementById("search-result-item-qty").focus();
   };
   onEnterSellingPriceAllTable = (a) => {
- document.getElementById("search-result-item-qty-"+a).focus();
+    document.getElementById("search-result-item-qty-" + a).focus();
   };
 
   render() {
@@ -370,20 +397,22 @@ class InvoiceForm extends Component {
                 <div className="row">
                   <form onSubmit={this.onSubmitHndl} className="w-100 d-flex">
                     <div className="col-6">
-                      <InputWithSuggestionCustomerCode 
-                      inputId="list-search-data" 
-                      placeholder="search by code" 
-                      onPressEnter={this.onSearchCustomerClick}
-                      action={this.handleChangeSearchNameKey} 
-                      inputclassname="form-control form-control-sm"/>
+                      <InputWithSuggestionCustomerCodeInvoiceCreate
+                        inputId="list-search-data"
+                        placeholder="search by code"
+                        onPressEnter={this.onSearchCustomerClick}
+                        action={this.handleChangeSearchNameKey}
+                        inputclassname="form-control form-control-sm"
+                      />
                     </div>
                     <div className="col-6">
-                      <InputWithSuggestionCustomerName
-                       inputId="list-search-data-by-name"
-                        placeholder="search by name" 
-                        action={this.handleChangeSearchCustomerName} 
+                      <InputWithSuggestionCustomerNameInvoiceCreate
+                        inputId="list-search-data-by-name"
+                        placeholder="search by name"
+                        action={this.handleChangeSearchCustomerName}
                         inputclassname="form-control form-control-sm"
-                        onPressEnter={this.onSearchCustomerClickByName}/>
+                        onPressEnter={this.onSearchCustomerClickByName}
+                      />
                     </div>
                   </form>
                   <div className="col-12">
@@ -486,7 +515,13 @@ class InvoiceForm extends Component {
                               />
                             </td>
                             <td>
-                              {(Math.round(invoiceItem.count * invoiceItem.sellingPrice * 100) / 100).toFixed(2)}
+                              {(
+                                Math.round(
+                                  invoiceItem.count *
+                                    invoiceItem.sellingPrice *
+                                    100
+                                ) / 100
+                              ).toFixed(2)}
                             </td>
                             <td>
                               <button
@@ -582,8 +617,16 @@ class InvoiceForm extends Component {
                   )}
                 </div>
                 <div className="form-group form-check">
-                    <input type="checkbox" class="form-check-input" id="Check1"  checked={this.state.buyingPriceVisible} onClick={() => this.handlebuyingPriceVisible()}/>
-                    <label className="form-check-label text-primary" for="Check1">Show Buying Price</label>
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    id="Check1"
+                    checked={this.state.buyingPriceVisible}
+                    onClick={() => this.handlebuyingPriceVisible()}
+                  />
+                  <label className="form-check-label text-primary" for="Check1">
+                    Show Buying Price
+                  </label>
                 </div>
               </div>
             </form>
@@ -600,7 +643,7 @@ class InvoiceForm extends Component {
                   this.state.productData.map((data, index) => {
                     return (
                       <tbody key={index}>
-                        <tr>
+                        <tr style={{backgroundColor: this.state.invoiceItems.some(item => item.id === data.id)? "green":"white"}}>
                           <td>{data.id}</td>
                           <td>{data.itemCode}</td>
                           <td className="aradana-font">{data.name}</td>
@@ -611,11 +654,12 @@ class InvoiceForm extends Component {
                               backgroundColor: this.state.buyingPriceVisible
                                 ? "white"
                                 : "black",
+                              color: "black",
                             }}
                           >
-                            {(
-                                Math.round(data.buyingPrice * 100) / 100
-                              ).toFixed(2)}
+                            {(Math.round(data.buyingPrice * 100) / 100).toFixed(
+                              2
+                            )}
                           </td>
                           <td>
                             <input
@@ -645,14 +689,19 @@ class InvoiceForm extends Component {
                               <input
                                 id="search-result-item-qty"
                                 type="number"
-                                placeholder="1"
-                                defaultValue={1}
+                                placeholder="0"
+                                defaultValue={0}
                                 form-control
                                 w-50
                                 className="form-control w-50"
                                 min={1}
                                 max={data.qty}
                                 onChange={this.handleChangeCount}
+                                required
+                                onFocus={(e) => {
+                                  e.target.placeholder = "";
+                                  e.target.value = "";
+                                }}
                               />
                               &nbsp;
                               <button
@@ -670,9 +719,11 @@ class InvoiceForm extends Component {
 
                 {!this.state.searchProduct &&
                   this.state.data.map((data, index) => {
+                    var a = this.state.invoiceItems;
+                    debugger
                     return (
                       <tbody key={index}>
-                        <tr>
+                        <tr style={{backgroundColor: this.state.invoiceItems.some(item => item.id === data.id)? "#f78f8f":"white"}}>
                           <td>{data.id}</td>
                           <td>{data.itemCode}</td>
                           <td className="aradana-font">{data.name}</td>
@@ -682,12 +733,13 @@ class InvoiceForm extends Component {
                             style={{
                               backgroundColor: this.state.buyingPriceVisible
                                 ? "white"
-                                : "black", color:"black"
-                            } }
+                                : "black",
+                              color: "black",
+                            }}
                           >
-                            {(
-                                Math.round(data.buyingPrice * 100) / 100
-                              ).toFixed(2)}
+                            {(Math.round(data.buyingPrice * 100) / 100).toFixed(
+                              2
+                            )}
                           </td>
                           <td>
                             <input
@@ -700,7 +752,9 @@ class InvoiceForm extends Component {
                               onKeyUp={(ev) => {
                                 if (ev.key === "Enter") {
                                   ev.target.blur();
-                                  this.onEnterSellingPriceAllTable(index.toString());
+                                  this.onEnterSellingPriceAllTable(
+                                    index.toString()
+                                  );
                                 }
                               }}
                               className="form-control w-50"
@@ -714,14 +768,21 @@ class InvoiceForm extends Component {
                               className="d-flex"
                             >
                               <input
-                              id={"search-result-item-qty-"+index.toString()}
+                                id={
+                                  "search-result-item-qty-" + index.toString()
+                                }
                                 type="number"
-                                placeholder="1"
-                                defaultValue={1}
+                                placeholder="0"
+                                defaultValue={0}
                                 className="form-control w-50"
                                 min={1}
                                 max={data.qty}
                                 onChange={this.handleChangeCount}
+                                onFocus={(e) => {
+                                  e.target.placeholder = "";
+                                  e.target.value = "";
+                                }}
+                                required
                               />
                               &nbsp;
                               <button
