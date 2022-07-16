@@ -39,12 +39,22 @@ class Table extends Component {
                     );
                   } else {
                     if (key != "buyingPrice") {
-                      let valueDecimal =  (Math.round(data.buyingPrice * 100) / 100).toFixed(2)
-                      if(key == "sellingPrice" || key == "stockValue"){
+                      let sellingPriceValueDecimal =  (Math.round(data.sellingPrice * 100) / 100).toFixed(2)
+                      let stockValueDecimal =  (Math.round(data.stockValue * 100) / 100).toFixed(2)
+                      if(key == "sellingPrice"){
                         return(
                           <TdTag
                           key={index}
-                          value={valueDecimal}
+                          value={sellingPriceValueDecimal}
+                          isLinked="false"
+                        ></TdTag>
+                        )
+                      }
+                      else if(key == "stockValue"){
+                        return(
+                          <TdTag
+                          key={index}
+                          value={stockValueDecimal}
                           isLinked="false"
                         ></TdTag>
                         )
