@@ -65,7 +65,7 @@ render() {
               return false;
             }
           }}/>
-          <DataList suggestions={this.state.loadedData} />
+          {/* <DataList suggestions={this.state.loadedData} /> */}
       </div>
   );
 }

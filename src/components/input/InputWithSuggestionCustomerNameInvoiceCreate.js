@@ -16,7 +16,7 @@ class DataList extends React.Component {
   }
 }
 
-class InputWithSuggestionCustomerName extends Component {
+class InputWithSuggestionCustomerNameInvoiceCreate extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -68,10 +68,10 @@ render() {
               return false;
             }
           }}/>
-          {/* <DataList suggestions={this.state.loadedData} /> */}
+          <DataList suggestions={this.state.loadedData} />
       </div>
   );
 }
  }
 
-export default InputWithSuggestionCustomerName;
+export default InputWithSuggestionCustomerNameInvoiceCreate;

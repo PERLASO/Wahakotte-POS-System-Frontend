@@ -59,32 +59,36 @@ class ProductList extends Component{
     }
 
     onSearchProductClick = () => {
-        getSingleProductByShortcode(this.state.searchProductKey).then(res => {
-            try {
-                if (res.data.isDeleted) {
-                    this.setState({ searchKey: true })
-                } else {
-                    this.setState({ productData: res.data })
-                    this.setState({ searchProduct: true })
-                }
-            } catch (error) {
-                this.setState({ searchKey: true })
-            }
-        })
+        // getSingleProductByShortcode(this.state.searchProductKey).then(res => {
+        //     try {
+        //         if (res.data.isDeleted) {
+        //             this.setState({ searchKey: true })
+        //         } else {
+        //             this.setState({ productData: res.data })
+        //             this.setState({ searchProduct: true })
+        //         }
+        //     } catch (error) {
+        //         this.setState({ searchKey: true })
+        //     }
+        // }) 
+        this.setState({productData: this.state.data.filter(data =>data.itemCode.startsWith(this.state.searchProductKey.toUpperCase()))});
+        this.setState({ searchProduct: true })
     }
     onSearchProductNameClick = () => {
-        getSingleProductByName(this.state.searchProductName).then(res => {
-            try {
-                if (res.data.isDeleted) {
-                    this.setState({ searchKey: true })
-                } else {
-                    this.setState({ productData: res.data })
-                    this.setState({ searchProduct: true })
-                }
-            } catch (error) {
-                this.setState({ searchKey: true })
-            }
-        })
+        // getSingleProductByName(this.state.searchProductName).then(res => {
+        //     try {
+        //         if (res.data.isDeleted) {
+        //             this.setState({ searchKey: true })
+        //         } else {
+        //             this.setState({ productData: res.data })
+        //             this.setState({ searchProduct: true })
+        //         }
+        //     } catch (error) {
+        //         this.setState({ searchKey: true })
+        //     }
+        // })
+        this.setState({productData: this.state.data.filter(data =>data.description.startsWith(this.state.searchProductName))});
+        this.setState({ searchProduct: true })
     }
 
     render(){

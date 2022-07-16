@@ -49,7 +49,10 @@ class ProductForm extends Component {
     this.setState({ buyingprice: event.target.value });
   }
   handleChangeMeasurement(event) {
-    this.setState({ measurement: event.target.value });
+    debugger
+    this.setState({ measurement: event.target.value }, () => {
+      document.getElementById("submit-button").click();
+    });
   }
   handleSubmit(event) {
     event.preventDefault();
@@ -114,11 +117,12 @@ class ProductForm extends Component {
                   />
                 </div>
                 <div className="col-12">
-                  <TextAreaFormGroup
+                  <InputFormGroup
+                    labelClassName="mb-2"
                     label="Description"
-                    required={false}
+                    required={true}
+                    inputclassname="form-control"
                     onChange={this.handleChangeDescription}
-                    rows="2"
                   />
                 </div>
                 <div className="col-6">
@@ -150,11 +154,14 @@ class ProductForm extends Component {
                 <div className="col-6 ">
                   <label className="mb-2 ">Measurement</label>
                   <select
+                    id="select-field-measurement"
                     className="form-control"
                     required
                     onChange={this.handleChangeMeasurement}
                   >
-                    <option id="ROLL" name="ROLL" value="ROLL">
+                    <option>
+                    </option>
+                    <option id="ROLL" name="ROLL" value="ROLL" >
                       ROLL
                     </option>
                     <option id="CUP" name="CUP" value="CUP">
@@ -192,6 +199,7 @@ class ProductForm extends Component {
                       link="/app/shop/product/list"
                     />
                     <input
+                    id="submit-button"
                       type="submit"
                       className="btn btn-success ml-3"
                       value="Submit"
