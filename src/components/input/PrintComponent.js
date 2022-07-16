@@ -21,10 +21,10 @@ export default function PrintComponent(props) {
 
     useEffect(() => {
       document.getElementById('proceed').click();
+      document.getElementById('create-invoice-btn').click();
       
     }, [])
     
-
   return (
     <div>
       <div>

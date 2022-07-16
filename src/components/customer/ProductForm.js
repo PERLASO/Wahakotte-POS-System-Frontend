@@ -129,12 +129,10 @@ class ProductForm extends Component {
                   <InputNumberGroup
                     labelClassName="mb-2"
                     required={true}
-                    onChange={this.handleChangeSellingPrice}
-                    inputclassname="form-control"
-                    label="Selling Price(LKR)"
+                    onChange={this.handleChangeBuyingprice}
+                    label="Buying Price(LKR)"
                   />
                 </div>
-
                 <div className="col-6">
                   <InputNumberGroup
                     labelClassName="mb-2"
@@ -147,8 +145,9 @@ class ProductForm extends Component {
                   <InputNumberGroup
                     labelClassName="mb-2"
                     required={true}
-                    onChange={this.handleChangeBuyingprice}
-                    label="Buying Price(LKR)"
+                    onChange={this.handleChangeSellingPrice}
+                    inputclassname="form-control"
+                    label="Selling Price(LKR)"
                   />
                 </div>
                 <div className="col-6 ">
