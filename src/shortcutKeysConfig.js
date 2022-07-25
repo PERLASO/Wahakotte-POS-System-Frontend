@@ -3,11 +3,11 @@ export const shortcutKeys = {
    SK02: '2', //
    SK03: 'alt+3', //
    SK04: 'alt+4', //
-   createInvoice: 'c', //
-   dashboard:'d',
-   product:'p',
-   customer:'k',
-   invoice:'i',
+   createInvoice: 'a+c', //
+   dashboard:'a+d',
+   product:'a+p',
+   customer:'a+k',
+   invoice:'a+i',
    SKreturn: 'return'
    };
 

@@ -285,7 +285,7 @@ class InvoiceList extends Component {
                 return (
                   <tbody key={index}>
                     <tr>
-                      <td>{index + 1}</td>
+                      <td>{this.state.tableData.length - (index)}</td>
                       <td>{data.customer.name}</td>
                       <td>{data.status}</td>
                       <td>{(Math.round(data.total * 100) / 100).toFixed(2)}</td>
@@ -302,13 +302,13 @@ class InvoiceList extends Component {
                     </tr>
                   </tbody>
                 );
-              })}
+              }).reverse()}
             {this.state.searchCustomer &&
               this.state.customerInvoices.map((data, index) => {
                 return (
                   <tbody key={index}>
                     <tr>
-                      <td>{index + 1}</td>
+                      <td>{this.state.tableData.length - (index)}</td>
                       <td>{data.customer.name}</td>
                       <td>{data.status}</td>
                       <td>{data.total}</td>
@@ -325,7 +325,7 @@ class InvoiceList extends Component {
                     </tr>
                   </tbody>
                 );
-              })}
+              }).reverse()}
           </table>
         </div>
         <Helmet>
