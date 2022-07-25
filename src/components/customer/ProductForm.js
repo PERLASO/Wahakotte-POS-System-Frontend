@@ -49,7 +49,6 @@ class ProductForm extends Component {
     this.setState({ buyingprice: event.target.value });
   }
   handleChangeMeasurement(event) {
-    debugger
     this.setState({ measurement: event.target.value }, () => {
       document.getElementById("submit-button").click();
     });

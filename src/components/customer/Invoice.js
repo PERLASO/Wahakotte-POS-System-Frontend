@@ -281,7 +281,7 @@ class Invoice extends React.Component {
                   <tr key={index}>
                     <td>{index + 1}</td>
                     <td>{invoiceItem.itemCode}</td>
-                    <td className="aradana-font">{invoiceItem.name}</td>
+                    <td className="aradana-font bold">{invoiceItem.name}</td>
                     <td>{invoiceItem.count}</td>
                     <td>
                     {(Math.round(invoiceItem.sellingPrice * 100) / 100).toFixed(2)}</td>

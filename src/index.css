@@ -9,7 +9,7 @@ body {
 
 @font-face {
   font-family: 'aradana';
-  src: local('MyFont'), url(fonts/M_ARADAN.TTF) format('woff');
+  src: local('MyFont'), url(fonts/un-malithi.ttf) format('woff');
 }
 
 code {

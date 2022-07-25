@@ -159,9 +159,18 @@ class InvoiceForm extends Component {
     this.state.invoiceItems[index] = updateItem;
     let tot = 0;
     for (let i = 0; i < this.state.invoiceItems.length; i++) {
-      tot =
-        tot +
-        this.state.invoiceItems[i].sellingPrice *
+      tot =tot +this.state.invoiceItems[i].sellingPrice *
+          this.state.invoiceItems[i].count;
+    }
+    this.setState({ total: tot });
+  }
+  handleCountChange(e, index) {
+    let updateItem = this.state.invoiceItems[index];
+    updateItem.count = e.target.value;
+    this.state.invoiceItems[index] = updateItem;
+    let tot = 0;
+    for (let i = 0; i < this.state.invoiceItems.length; i++) {
+      tot = tot +this.state.invoiceItems[i].sellingPrice *
           this.state.invoiceItems[i].count;
     }
     this.setState({ total: tot });
@@ -495,9 +504,24 @@ class InvoiceForm extends Component {
                           <tr key={index}>
                             <td>{invoiceItem.id}</td>
                             <td>{invoiceItem.itemCode}</td>
-                            <td className="aradana-font">{invoiceItem.name}</td>
+                            <td className="aradana-font bold">{invoiceItem.name}</td>
                             <td>{invoiceItem.description}</td>
-                            <td>{invoiceItem.count}</td>
+                            <td>
+                              <input
+                                type="text"
+                                className="form-control"
+                                id="price"
+                                placeholder={invoiceItem.count}
+                                onChange={(e) =>
+                                  this.handleCountChange(e, index)
+                                }
+                                onKeyUp={(ev) => {
+                                  if (ev.key === "Enter") {
+                                    ev.target.blur();
+                                  }
+                                }}
+                              />
+                            </td>
                             <td>
                               <input
                                 type="text"
@@ -646,7 +670,7 @@ class InvoiceForm extends Component {
                         <tr style={{backgroundColor: this.state.invoiceItems.some(item => item.id === data.id)? "green":"white"}}>
                           <td>{data.id}</td>
                           <td>{data.itemCode}</td>
-                          <td className="aradana-font">{data.name}</td>
+                          <td className="aradana-font bold">{data.name}</td>
                           {/* <td>{data.description}</td> */}
                           <td>{data.qty}</td>
                           <td
@@ -720,7 +744,6 @@ class InvoiceForm extends Component {
                 {!this.state.searchProduct &&
                   this.state.data.map((data, index) => {
                     var a = this.state.invoiceItems;
-                    debugger
                     return (
                       <tbody key={index}>
                         <tr style={{backgroundColor: this.state.invoiceItems.some(item => item.id === data.id)? "#f78f8f":"white"}}>
