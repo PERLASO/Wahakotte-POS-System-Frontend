@@ -263,17 +263,17 @@ class InvoicePrint extends React.Component {
                     <td colSpan="7">
                       <div className="col-12  pb-14 pr-12 justify-content-between d-flex">
                         <div className="text-left font-weight-bold col-4 pt-4">
-                          <h4>............................</h4>
-                          <h5>Customer Signature</h5>
+                          <h4>.....................................</h4>
+                          <h4>Customer Signature</h4>
                         </div>
-                        <div className=" font-weight-bold col-4 pt-4 ">
+                        <div className=" font-weight-bold col-5 pt-4 ">
                           <div className="d-flex">
-                            <h3>Grand Total : </h3>
-                            <h3 className="pl-1">
+                            <h2  style={{fontWeight:"bold"}}>Grand Total : </h2>
+                            <h2 className="pl-1" style={{fontWeight:"bold"}}>
                               {(
                                 Math.round(this.state.total * 100) / 100
                               ).toFixed(2)}
-                            </h3>
+                            </h2>
                           </div>
                         </div>
                       </div>
