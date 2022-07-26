@@ -24,10 +24,10 @@ class Table extends Component {
       <table className={this.props.className}>
         <TableHead columnList={this.props.columnList}></TableHead>
         <tbody>
-          {this.props.tableData.map((data, index) => {
+          {this.props.tableData.map((data, index1) => {
             return (
-              <tr key={index}>
-                {Object.keys(data).map((key, index) => {                  
+              <tr key={index1}>
+                {Object.keys(data).map((key, index) => {             
                   if (this.props.tableType == "product" && index == 2) {
                     return (
                       <TdTag
@@ -37,7 +37,16 @@ class Table extends Component {
                         className="aradana-font"
                       ></TdTag>
                     );
-                  } else {
+                  } else if(this.props.tableType == "product" && index == 0){
+                    return (
+                      <TdTag
+                        key={index}
+                        value={index1+1}
+                        isLinked="false"
+                      ></TdTag>
+                    );
+                  }
+                  else {
                     if (key != "buyingPrice") {
                       let sellingPriceValueDecimal =  (Math.round(data.sellingPrice * 100) / 100).toFixed(2)
                       let stockValueDecimal =  (Math.round(data.stockValue * 100) / 100).toFixed(2)
