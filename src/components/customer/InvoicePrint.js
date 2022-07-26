@@ -28,9 +28,9 @@ class InvoicePrint extends React.Component {
       <div>
         <div>
           <div className="container pt-5 pl-5 pr-5">
-            <h2 className="text-center font-weight-bold">
+            <h1 className="text-center font-weight-bold">
               Wijerathna Marketing Service
-            </h2>
+            </h1>
             <div className="col-12">
               <hr />
             </div>
@@ -208,6 +208,9 @@ class InvoicePrint extends React.Component {
                         Total <small>(LKR)</small>
                       </h5>
                     </th>
+                  </tr>
+                  <tr>
+                    <td colSpan="7" style={{height:"20px"}}></td>
                   </tr>
                   {this.state.invoiceItems.map((invoiceItem, index) => {
                     return (
