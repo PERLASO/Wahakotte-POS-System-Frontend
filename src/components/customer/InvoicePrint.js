@@ -27,7 +27,7 @@ class InvoicePrint extends React.Component {
     return (
       <div>
         <div>
-          <div className="container p-5">
+          <div className="container pt-5 pl-5 pr-5">
             <h2 className="text-center font-weight-bold">
               Wijerathna Marketing Service
             </h2>
@@ -148,8 +148,12 @@ class InvoicePrint extends React.Component {
             </div>
             <div className="row h5">
               <table className="w-100" id="invoice-table">
-                <thead className="thead-dark">
-                  <tr className="h6 body-row border-bottom ">
+                {/* <thead className="thead-dark">
+                  
+                  <tr style={{ height: "20px" }}></tr>
+                </thead> */}
+                <tbody>
+                <tr className="h6 body-row border-bottom ">
                     <th>
                       <h5
                         style={{ fontSize: "24px" }}
@@ -205,9 +209,6 @@ class InvoicePrint extends React.Component {
                       </h5>
                     </th>
                   </tr>
-                  <tr style={{ height: "20px" }}></tr>
-                </thead>
-                <tbody>
                   {this.state.invoiceItems.map((invoiceItem, index) => {
                     return (
                       <tr key={index}>
@@ -258,15 +259,18 @@ class InvoicePrint extends React.Component {
                       </tr>
                     );
                   })}
-                  <InvoiceAdditionalRows rowsCount={this.state.invoiceItems.length}></InvoiceAdditionalRows>
                   <tr>
-                    <td colSpan="7">
-                      <div className="col-12  pb-14 pr-12 justify-content-between d-flex">
-                        <div className="text-left font-weight-bold col-4 pt-4">
+                    <td colSpan="7" style={{height:"45px"}}></td>
+                  </tr>
+                  <tr>
+                    <td colSpan="4">
+                    <div className="text-left font-weight-bold">
                           <h4>.....................................</h4>
                           <h4>Customer Signature</h4>
                         </div>
-                        <div className=" font-weight-bold col-5 pt-4 ">
+                    </td>
+                    <td colSpan="3">
+                    <div className=" font-weight-bold">
                           <div className="d-flex">
                             <h2  style={{fontWeight:"bold"}}>Grand Total : </h2>
                             <h2 className="pl-1" style={{fontWeight:"bold"}}>
@@ -275,50 +279,14 @@ class InvoicePrint extends React.Component {
                               ).toFixed(2)}
                             </h2>
                           </div>
-                        </div>
-                      </div>
-                    </td>
-                    {/* <div
-                      className="justify-content-right page-footer"
-                      id="invoice-footer">
-                      <div className="col-12  pb-14 pr-12 justify-content-between d-flex">
-                        <div className="text-left font-weight-bold col-4 pt-4">
-                          <h4>............................</h4>
-                          <h5>Customer Signature</h5>
-                        </div>
-                        <div className=" font-weight-bold col-4 pt-4 ">
-                          <div className="d-flex">
-                            <h3>Grand Total : </h3>
-                            <h3 className="pl-1">
-                              {(
-                                Math.round(this.state.total * 100) / 100
-                              ).toFixed(2)}
-                            </h3>
                           </div>
-                        </div>
-                      </div>
-                    </div> */}
+                    </td>
                   </tr>
                 </tbody>
               </table>
             </div>
           </div>
         </div>
-        {/* <Helmet>
-          <script>{`
-        debugger
-          var oRows = document.getElementById('invoice-table').getElementsByTagName('tr');
-          var iRowCount = oRows.length;
-          var footer = document.getElementById("invoice-footer")
-          if (iRowCount > 10 ) {
-            
-            footer.classList.remove('page-footer');
-            footer.style.margin = "200px auto";
-            footer.style.display = "none";
-         }
-         document.getElementById('create-invoice-btn').click();
-    `}</script>
-        </Helmet> */}
       </div>
     );
   }
