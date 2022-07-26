@@ -262,8 +262,9 @@ class InvoicePrint extends React.Component {
                       </tr>
                     );
                   })}
+                  <InvoiceAdditionalRows rowsCount={this.state.invoiceItems.length}></InvoiceAdditionalRows>
                   <tr>
-                    <td colSpan="7" style={{height:"45px"}}></td>
+                    <td colSpan="7" style={{height:"25px"}}></td>
                   </tr>
                   <tr>
                     <td colSpan="4">
@@ -274,7 +275,7 @@ class InvoicePrint extends React.Component {
                     </td>
                     <td colSpan="3">
                     <div className=" font-weight-bold">
-                          <div className="d-flex">
+                          <div className="d-flex justify-content-end pr-5">
                             <h2  style={{fontWeight:"bold"}}>Grand Total : </h2>
                             <h2 className="pl-1" style={{fontWeight:"bold"}}>
                               {(
