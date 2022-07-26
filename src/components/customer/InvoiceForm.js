@@ -669,6 +669,7 @@ class InvoiceForm extends Component {
                       <tbody key={index}>
                         <tr style={{backgroundColor: this.state.invoiceItems.some(item => item.id === data.id)? "#f78f8f":"white"}}>
                           <td>{index+1}</td>
+
                           <td>{data.itemCode}</td>
                           <td className="aradana-font bold">{data.name}</td>
                           {/* <td>{data.description}</td> */}
