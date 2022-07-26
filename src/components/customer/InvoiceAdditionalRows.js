@@ -19,10 +19,10 @@ export default class InvoiceAdditionalRows extends Component {
       ));
     }
     else {
-        let CounToRender = 35 - ((this.state.rowsCount-26) % 35 );
+        let CounToRender = (33 - ((this.state.rowsCount-26) % 33 ))-2;
     return Array.from({ length: CounToRender}, () => (
         <tr>
-            <td style={{height:"35px"}}></td>
+            <td style={{height:"45px"}}></td>
         </tr>
       ));
     }
