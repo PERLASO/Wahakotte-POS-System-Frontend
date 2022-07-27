@@ -9,7 +9,6 @@ export default class InvoiceAdditionalRows extends Component {
   }
 
   render() {
-    debugger
     if(this.state.rowsCount < 27) {
     let CounToRender = 23 - this.state.rowsCount;
     return Array.from({ length: CounToRender}, () => (

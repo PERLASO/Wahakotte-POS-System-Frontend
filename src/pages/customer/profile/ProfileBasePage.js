@@ -9,7 +9,6 @@ class ProfileBasePage extends Component{
         super(props);
     }
 
-
     render(){
         return (
             <div className="w-100">

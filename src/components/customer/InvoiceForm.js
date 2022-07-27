@@ -140,7 +140,7 @@ class InvoiceForm extends Component {
       () => {
         this.setState({
           productData: this.state.data.filter((data) =>
-            data.description.startsWith(this.state.searchProductName)
+            data.description.toLowerCase().startsWith(this.state.searchProductName.toLowerCase())
           ),
         });
         this.setState({ searchProduct: true });
@@ -189,6 +189,10 @@ class InvoiceForm extends Component {
         this.setState({ customerData: c.data });
       }
     });
+    const SavedInvoiceItems = JSON.parse(localStorage.getItem("invoiceItems"));
+    if (SavedInvoiceItems != null) {
+      this.setState({ invoiceItems: SavedInvoiceItems });
+    }
   }
 
   checkItem(data) {
@@ -207,7 +211,7 @@ class InvoiceForm extends Component {
             this.setState({ total: total });
           });
         } else {
-          data["count"] = parseInt(this.state.count);
+          data["count"] = parseFloat(this.state.count);
           await this.setState({ item: data });
           this.state.invoiceItems.push(this.state.item);
           this.setState({
@@ -223,6 +227,7 @@ class InvoiceForm extends Component {
         this.setState({ searchProductKey: "" });
         this.setState({ searchProduct: false });
         this.setState({ count: 0 });
+        localStorage.setItem("invoiceItems", JSON.stringify(this.state.invoiceItems));
       };
   }
 
@@ -282,6 +287,7 @@ class InvoiceForm extends Component {
         ],
       });
     }
+    localStorage.removeItem("invoiceItems");
   };
 
   onSearchCustomerClick = () => {
@@ -382,8 +388,9 @@ class InvoiceForm extends Component {
       <div className="admin-content mx-auto">
         {this.state.invoiceItems == null && this.handleInvoiceItems}
         <div className="w-100 d-flex justify-content-between">
-          <h4>Create Invoice</h4>
-          <h4>Total : {this.state.total}</h4>
+          <h4 className="font-weight-bold">Create Invoice</h4>
+          <h4>No of Items Added : {this.state.invoiceItems.length}</h4>
+          <h4>Total : {( Math.round(this.state.total * 100) / 100).toFixed(2)}</h4> 
           <AnchorTag
             link="/app/shop/invoice/list"
             className="btn btn-primary"
@@ -502,13 +509,13 @@ class InvoiceForm extends Component {
                       {this.state.invoiceItems.map((invoiceItem, index) => {
                         return (
                           <tr key={index}>
-                            <td>{invoiceItem.id}</td>
+                            <td>{index+1}</td>
                             <td>{invoiceItem.itemCode}</td>
                             <td className="aradana-font bold">{invoiceItem.name}</td>
                             <td>{invoiceItem.description}</td>
                             <td>
                               <input
-                                type="text"
+                                type="number"
                                 className="form-control"
                                 id="price"
                                 placeholder={invoiceItem.count}
@@ -561,7 +568,7 @@ class InvoiceForm extends Component {
                       })}
                       <tr>
                         <td>Total</td>
-                        <td>{this.state.total}</td>
+                        <td>{(Math.round(this.state.total * 100) / 100 ).toFixed(2)}</td>
                       </tr>
                     </tbody>
                   </table>
@@ -714,12 +721,13 @@ class InvoiceForm extends Component {
                               <input
                                 id="search-result-item-qty"
                                 type="number"
-                                placeholder="0"
-                                defaultValue={0}
+                                placeholder=""
+                                //defaultValue={0}
                                 form-control
                                 w-50
                                 className="form-control w-50"
-                                min={1}
+                                step=".01"
+                                min={0.01}
                                 max={data.qty}
                                 onChange={this.handleChangeCount}
                                 required
@@ -796,10 +804,11 @@ class InvoiceForm extends Component {
                                   "search-result-item-qty-" + index.toString()
                                 }
                                 type="number"
-                                placeholder="0"
-                                defaultValue={0}
+                                placeholder=""
+                               // defaultValue={0}
                                 className="form-control w-50"
-                                min={1}
+                                step=".01"
+                                min={0.01}
                                 max={data.qty}
                                 onChange={this.handleChangeCount}
                                 onFocus={(e) => {

@@ -33,14 +33,11 @@ class InputWithSuggestionCustomerCodeInvoiceCreate extends Component {
     });
   }
   onChangeHandler(text) {
-    let matches = [];
-    if (text.length > 0) {
-      matches = this.state.loadedData.filter((data) => {
-        const regex = new RegExp(`^p`, "gi");
-        return data.shortCode.match("p");
-      });
+
+    if (text.length > 0) {  
+      this.setState({sugessions: this.state.loadedData.filter(data =>data.shortCode.toLowerCase().startsWith(text.toLowerCase()))})
     }
-    this.setState({ sugessions: matches });
+    
     this.setState({ text: text });
     this.props.action(text);
   }
@@ -69,7 +66,7 @@ class InputWithSuggestionCustomerCodeInvoiceCreate extends Component {
             }
           }}
         />
-        <DataList suggestions={this.state.loadedData} /> 
+        <DataList suggestions={this.state.sugessions} /> 
       </div>
     );
   }

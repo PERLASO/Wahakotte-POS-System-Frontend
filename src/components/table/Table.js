@@ -25,6 +25,7 @@ class Table extends Component {
         <TableHead columnList={this.props.columnList}></TableHead>
         <tbody>
           {this.props.tableData.map((data, index1) => {
+            console.log(this.props.tableData);
             return (
               <tr key={index1}>
                 {Object.keys(data).map((key, index) => {             
@@ -37,7 +38,7 @@ class Table extends Component {
                         className="aradana-font"
                       ></TdTag>
                     );
-                  } else if(this.props.tableType == "product" && index == 0){
+                  } else if(index == 0){
                     return (
                       <TdTag
                         key={index}
@@ -47,14 +48,22 @@ class Table extends Component {
                     );
                   }
                   else {
-                    if (key != "buyingPrice") {
                       let sellingPriceValueDecimal =  (Math.round(data.sellingPrice * 100) / 100).toFixed(2)
                       let stockValueDecimal =  (Math.round(data.stockValue * 100) / 100).toFixed(2)
+                      let buyingPriceValueDecimal =  (Math.round(data.buyingPrice * 100) / 100).toFixed(2)
                       if(key == "sellingPrice"){
                         return(
                           <TdTag
                           key={index}
                           value={sellingPriceValueDecimal}
+                          isLinked="false"
+                        ></TdTag>
+                        )
+                      }else if(key == "buyingPrice"){
+                        return(
+                          <TdTag
+                          key={index}
+                          value={buyingPriceValueDecimal}
                           isLinked="false"
                         ></TdTag>
                         )
@@ -77,8 +86,6 @@ class Table extends Component {
                           ></TdTag>
                         );
                       }
-                    }
-                    
                   }
                 })}
                 {this.renderAction(data)}
