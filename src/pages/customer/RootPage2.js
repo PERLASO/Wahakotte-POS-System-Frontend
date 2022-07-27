@@ -8,6 +8,8 @@ import CustomerShopPage from "../customer/shop/CustomerShopPage";
 import ProfileBasePage from "../customer/profile/ProfileBasePage";
 import NavLiTag from "../../components/navigation/NavListTag";
 import logo from '../../images/logo.png';
+import 'font-awesome/css/font-awesome.min.css';
+import Setting from "../settings/Setting";
 
 class CustomerRootPage2 extends Component {
   constructor(props) {
@@ -17,6 +19,7 @@ class CustomerRootPage2 extends Component {
 
   logout(){
     localStorage.setItem("loginState", false);
+    localStorage.clear();
   }
 
   render() {
@@ -85,6 +88,12 @@ class CustomerRootPage2 extends Component {
               >
                 Logout
               </Link>
+              <Link
+                to={"/app/setting"}
+                className="nav-link "
+              >
+                <i className="fa fa-gears" aria-hidden=""></i>
+              </Link>
             </ul>
           </div>
         </nav>
@@ -101,6 +110,10 @@ class CustomerRootPage2 extends Component {
             <Route
               path={`${this.props.match.path}/profile`}
               component={ProfileBasePage}
+            />
+            <Route
+              path={`${this.props.match.path}/setting`}
+              component={Setting}
             />
           </Switch>
         </div>

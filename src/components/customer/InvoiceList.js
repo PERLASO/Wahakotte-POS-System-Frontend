@@ -139,7 +139,7 @@ class InvoiceList extends Component {
     //     this.setState({ searchKey: true });
     //   }
     // });
-    this.setState({customerInvoices: this.state.tableData.filter(data =>data.customer.name.startsWith(this.state.customerName))});
+    this.setState({customerInvoices: this.state.tableData.filter(data =>data.customer.name.toLowerCase().startsWith(this.state.customerName.toLowerCase()))});
     this.setState({searchCustomer: true });
   };
 

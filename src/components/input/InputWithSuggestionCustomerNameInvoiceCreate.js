@@ -34,16 +34,17 @@ class InputWithSuggestionCustomerNameInvoiceCreate extends Component {
     });
   }
   onChangeHandler(text){
-    let matches =[]
-    if(text.length > 0){
-      matches = this.state.loadedData.filter(data =>{
-        const regex = new RegExp(`${text}`,"gi")
-        return data.shortCode.match("^p");
-      })
-    }
-    this.setState({sugessions: matches})
+  //  let matches =[]
+     if(text.length > 0){
+      // matches = this.state.loadedData.filter(data =>{
+       // const regex = new RegExp(`${text}`,"gi")
+        // return data.shortCode.match("^p"); })
+    this.setState({sugessions: this.state.loadedData.filter(data =>data.name.toLowerCase().startsWith(text.toLowerCase()))})
+     }
+   // this.setState({sugessions: matches})
     this.setState({text: text})
     this.props.action(text);
+    console.log(this.state.sugessions)
   }
 
   onPressEnter(){
@@ -68,7 +69,7 @@ render() {
               return false;
             }
           }}/>
-          <DataList suggestions={this.state.loadedData} />
+          <DataList suggestions={this.state.sugessions} />
       </div>
   );
 }

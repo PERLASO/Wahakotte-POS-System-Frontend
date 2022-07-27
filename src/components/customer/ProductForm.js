@@ -6,6 +6,7 @@ import SelectFormGroup from "../input/SelectFormGroup";
 import InputNumberGroup from "../input/InputNumberGroup";
 import { setProduct } from "../../context/Product";
 import Helmet from "react-helmet";
+import { getMeasurementList, setMeasurement ,updateMeasurement} from "../../context/Setting";
 
 class ProductForm extends Component {
   constructor(props) {
@@ -18,6 +19,7 @@ class ProductForm extends Component {
       qty: 0,
       buyingprice: 0,
       measurement: "ROLL",
+      measurements: [],
     };
 
     this.handleChangeName = this.handleChangeName.bind(this);
@@ -30,6 +32,14 @@ class ProductForm extends Component {
 
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+
+  componentDidMount() {
+    getMeasurementList().then((res) => {
+      this.setState({ measurements: res.data });
+      console.log(this.state.measurements);
+    });
+  }
+
   handleChangeName(event) {
     this.setState({ name: event.target.value });
   }
@@ -130,7 +140,7 @@ class ProductForm extends Component {
                     required={true}
                     onChange={this.handleChangeBuyingprice}
                     label="Buying Price(LKR)"
-                  />
+                  /> 
                 </div>
                 <div className="col-6">
                   <InputNumberGroup
@@ -159,33 +169,12 @@ class ProductForm extends Component {
                   >
                     <option>
                     </option>
-                    <option id="ROLL" name="ROLL" value="ROLL" >
-                      ROLL
-                    </option>
-                    <option id="CUP" name="CUP" value="CUP">
-                      CUP
-                    </option>
-                    <option id="BOT" name="BOT" value="BOT">
-                      BOT
-                    </option>
-                    <option id="RIM" name="RIM" value="RIM">
-                      RIM
-                    </option>
-                    <option id="DOZ" name="DOZ" value="DOZ">
-                      DOZ
-                    </option>
-                    <option id="BUN" name="BUN" value="BUN">
-                      BUN
-                    </option>
-                    <option id="PIEC" name="PIEC" value="PIEC">
-                      PIEC
-                    </option>
-                    <option id="BOX" name="BOX" value="BOX">
-                      BOX
-                    </option>
-                    <option id="KG" name="KG" value="KG">
-                      KG
-                    </option>
+                    {this.state.measurements.map((item, index) => {
+                return (
+                  <option>{item.name}</option>
+                );
+              })}
+                  
                   </select>
                 </div>
 

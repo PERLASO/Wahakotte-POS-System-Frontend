@@ -81,6 +81,7 @@ class ProductEdit extends Component {
             }
         })
     }
+    
     componentDidMount() {
 
         getSingleProduct(this.props.match.params.productId).then(c => {

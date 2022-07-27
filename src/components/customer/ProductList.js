@@ -11,7 +11,7 @@ import Helmet from "react-helmet";
 class ProductList extends Component{
     constructor(props){
         super(props);
-        this.columnList = ["S/N","ItemCode", "Name", "Description", "QTY", "Selling Price(LKR)", "Unit","Val. of QTY(LKR)","Action"];
+        this.columnList = ["S/N","ItemCode", "Name", "Description", "QTY","Buying Price(LKR)", "Selling Price(LKR)", "Unit","Val. of QTY(LKR)","Action"];
         this.tableData = [ ]
         this.state = {
             isLoading:true,
@@ -87,7 +87,7 @@ class ProductList extends Component{
         //         this.setState({ searchKey: true })
         //     }
         // })
-        this.setState({productData: this.state.data.filter(data =>data.description.startsWith(this.state.searchProductName))});
+        this.setState({productData: this.state.data.filter(data =>data.description.toLowerCase().startsWith(this.state.searchProductName.toLowerCase()))});
         this.setState({ searchProduct: true })
     }
 

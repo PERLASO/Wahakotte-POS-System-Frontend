@@ -73,7 +73,7 @@ class EmployeeList extends Component {
   };
 
   onSearchClickName = () => {
-    this.setState({customerbyshortname: this.state.customers.filter(data =>data.name.startsWith(this.state.searchName))});
+    this.setState({customerbyshortname: this.state.customers.filter(data =>data.name.toLowerCase().startsWith(this.state.searchName.toLowerCase()))});
     this.setState({ searchCustomer: true });
   };
 
