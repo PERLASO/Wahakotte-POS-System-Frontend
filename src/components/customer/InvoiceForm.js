@@ -190,8 +190,10 @@ class InvoiceForm extends Component {
       }
     });
     const SavedInvoiceItems = JSON.parse(localStorage.getItem("invoiceItems"));
+    const InvoiceTotal = JSON.parse(localStorage.getItem("InvoiceTotal"));
     if (SavedInvoiceItems != null) {
       this.setState({ invoiceItems: SavedInvoiceItems });
+      this.setState({ total: InvoiceTotal });
     }
   }
 
@@ -226,9 +228,10 @@ class InvoiceForm extends Component {
         this.setState({ searchKey: false });
         this.setState({ searchProductKey: "" });
         this.setState({ searchProduct: false });
-        this.setState({ count: 0 });
+        this.setState({ count: 0 });   
         localStorage.setItem("invoiceItems", JSON.stringify(this.state.invoiceItems));
-      };
+        localStorage.setItem("InvoiceTotal", JSON.stringify(this.state.total));
+      }
   }
 
   isItemExist = (data) => {
@@ -288,6 +291,7 @@ class InvoiceForm extends Component {
       });
     }
     localStorage.removeItem("invoiceItems");
+    localStorage.removeItem("InvoiceTotal");
   };
 
   onSearchCustomerClick = () => {
