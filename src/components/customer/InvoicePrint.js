@@ -148,12 +148,33 @@ class InvoicePrint extends React.Component {
             </div>
             <div className="row h5">
               <table className="w-100" id="invoice-table">
-                {/* <thead className="thead-dark">
-                  
-                  <tr style={{ height: "20px" }}></tr>
-                </thead> */}
+              <thead className="thead-dark">
+                  <tr className="h6 body-row border-bottom ">
+                    <th>
+                      <h5 style={{fontSize:"24px"}} className="font-weight-bold mb-2 mt-2">S/N</h5>
+                    </th>
+                    <th>
+                      <h5 style={{fontSize:"24px"}} className="font-weight-bold">ItemCode</h5>
+                    </th>
+                    <th>
+                      <h5 style={{fontSize:"24px"}} className="font-weight-bold">Name</h5>
+                    </th>
+                    <th>
+                      <h5 style={{fontSize:"24px"}} className="font-weight-bold"></h5>
+                    </th>
+                    <th>
+                      <h5 style={{fontSize:"24px"}} className="font-weight-bold">QTY</h5>
+                    </th>
+                    <th>
+                      <h5 style={{fontSize:"24px"}} className="font-weight-bold">Price (LKR)</h5>
+                    </th>
+                    <th>
+                      <h5 style={{fontSize:"24px"}} className="font-weight-bold">Total (LKR)</h5>
+                    </th>
+                  </tr>
+                </thead> 
                 <tbody>
-                <tr className="h6 body-row border-bottom ">
+                {/* <tr className="h6 body-row border-bottom ">
                     <th>
                       <h5
                         style={{ fontSize: "24px" }}
@@ -208,7 +229,7 @@ class InvoicePrint extends React.Component {
                         Total <small>(LKR)</small>
                       </h5>
                     </th>
-                  </tr>
+                  </tr> */}
                   <tr>
                     <td colSpan="7" style={{height:"20px"}}></td>
                   </tr>
