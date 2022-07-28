@@ -121,14 +121,14 @@ class ProductEdit extends Component {
                                     <TextAreaFormGroup label="Description" onChange={this.handleChangeDescription} value={this.state.description} rows="2" />
                                 </div>
                                 <div className="col-6">
-                                    <InputNumberGroup labelClassName="mb-2" onChange={this.handleChangeSellingPrice} value={this.state.sellingprice} inputclassname="form-control" label="Selling Price(LKR)" />
+                                    <InputNumberGroup labelClassName="mb-2" onChange={this.handleChangeBuyingprice} value={this.state.buyingprice} label="Buying Price(LKR)" />
                                 </div>
 
                                 <div className="col-6">
                                     <InputNumberGroup labelClassName="mb-2" onChange={this.handleChangeQty} value={this.state.qty} label="Qty." />
                                 </div>
                                 <div className="col-6">
-                                    <InputNumberGroup labelClassName="mb-2" onChange={this.handleChangeBuyingprice} value={this.state.buyingprice} label="Buying Price(LKR)" />
+                                    <InputNumberGroup labelClassName="mb-2" onChange={this.handleChangeSellingPrice} value={this.state.sellingprice} inputclassname="form-control" label="Selling Price(LKR)" />
                                 </div>
                                 <div className="col-6">
                                     <InputFormGroup labelClassName="mb-2" onChange={this.handleChangeMeasurement} value={this.state.measurement} label="Measurement" />
