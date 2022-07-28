@@ -45,7 +45,6 @@ export default class UpdateMesurements extends Component {
         alert("Measurement Added!");
         getMeasurementList().then((res) => {
             this.setState({ measurements: res.data });
-            console.log(res.data);
           });
       } else {
         alert("Failed! Try again");
@@ -66,7 +65,6 @@ export default class UpdateMesurements extends Component {
             alert("Success !");
             getMeasurementList().then((res) => {
                 this.setState({ measurements: res.data });
-                console.log(res.data);
               });
             
         } else {

@@ -237,10 +237,10 @@ class InvoicePrint extends React.Component {
                     return (
                       <tr key={index}>
                         <td style={{ height: "45px" }}>
-                          <h5 style={{ fontSize: "25px" }}>{index + 1}</h5>
+                          <h5 className="font-weight-bold" style={{ fontSize: "25px" }}>{index + 1}</h5>
                         </td>
                         <td>
-                          <h5 style={{ fontSize: "25px" }}>
+                          <h5 className="font-weight-bold" style={{ fontSize: "25px" }}>
                             {invoiceItem.itemCode}
                           </h5>
                         </td>
@@ -253,24 +253,24 @@ class InvoicePrint extends React.Component {
                           </h5>
                         </td>
                         <td>
-                          <h5 style={{ fontSize: "25px" }}>
+                          <h5 className="font-weight-bold" style={{ fontSize: "25px" }}>
                             {invoiceItem.measurement}
                           </h5>
                         </td>
                         <td>
-                          <h5 className="pl-3" style={{ fontSize: "25px" }}>
+                          <h5 className="pl-3 font-weight-bold" style={{ fontSize: "25px" }}>
                             {invoiceItem.count}
                           </h5>
                         </td>
                         <td>
-                          <h5 style={{ fontSize: "25px" }}>
+                          <h5 className="font-weight-bold" style={{ fontSize: "25px" }}>
                             {(
                               Math.round(invoiceItem.sellingPrice * 100) / 100
                             ).toFixed(2)}
                           </h5>
                         </td>
                         <td>
-                          <h5 style={{ fontSize: "25px" }}>
+                          <h5 style={{ fontSize: "25px" }} className="font-weight-bold">
                             {(
                               Math.round(
                                 invoiceItem.count *

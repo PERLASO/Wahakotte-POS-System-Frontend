@@ -5,9 +5,11 @@ import { getProductList } from "../../context/Product";
 class DataList extends React.Component {
   render(props) {
     const suggestions = this.props.suggestions;
+    console.log(suggestions);
     return (
       <datalist id="suggestions-list-customer-code">
         {suggestions.map(function (sugession, i) {
+          console.log(suggestions)
           return <option key={i} value={sugession.shortCode} />;
         })}
       </datalist>
@@ -32,9 +34,11 @@ class InputWithSuggestionCustomerCodeInvoiceCreate extends Component {
       }
     });
   }
-  onChangeHandler(text) {
 
+  onChangeHandler(text) {
     if (text.length > 0) {  
+      debugger
+      var abs  =  this.state.loadedData.filter(data =>data.shortCode.toLowerCase().startsWith(text.toLowerCase()));
       this.setState({sugessions: this.state.loadedData.filter(data =>data.shortCode.toLowerCase().startsWith(text.toLowerCase()))})
     }
     

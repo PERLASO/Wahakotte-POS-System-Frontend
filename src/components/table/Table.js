@@ -25,7 +25,6 @@ class Table extends Component {
         <TableHead columnList={this.props.columnList}></TableHead>
         <tbody>
           {this.props.tableData.map((data, index1) => {
-            console.log(this.props.tableData);
             return (
               <tr key={index1}>
                 {Object.keys(data).map((key, index) => {             
