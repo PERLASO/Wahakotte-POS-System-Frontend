@@ -684,7 +684,9 @@ class InvoiceForm extends Component {
                           <td>{data.itemCode}</td>
                           <td className="aradana-font bold">{data.name}</td>
                           {/* <td>{data.description}</td> */}
-                          <td>{data.qty}</td>
+                          <td>{data.qty}
+                          
+                          </td>
                           <td
                             style={{
                               backgroundColor: this.state.buyingPriceVisible
@@ -726,19 +728,17 @@ class InvoiceForm extends Component {
                                 id="search-result-item-qty"
                                 type="number"
                                 placeholder=""
-                                //defaultValue={0}
-                                form-control
-                                w-50
+                               // defaultValue={0}
                                 className="form-control w-50"
-                                step=".01"
-                                min={0.01}
+                                step=".001"
+                                min={0.001}
                                 max={data.qty}
                                 onChange={this.handleChangeCount}
-                                required
                                 onFocus={(e) => {
                                   e.target.placeholder = "";
                                   e.target.value = "";
                                 }}
+                                required
                               />
                               &nbsp;
                               <button
@@ -811,8 +811,8 @@ class InvoiceForm extends Component {
                                 placeholder=""
                                // defaultValue={0}
                                 className="form-control w-50"
-                                step=".01"
-                                min={0.01}
+                                step=".001"
+                                min={0.001}
                                 max={data.qty}
                                 onChange={this.handleChangeCount}
                                 onFocus={(e) => {
