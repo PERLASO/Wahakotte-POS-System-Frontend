@@ -30,21 +30,17 @@ class InputWithSuggestionCustomerNameInvoiceCreate extends Component {
     getAllCustomers().then((c) => {
       if (c != undefined) {
         this.setState({ loadedData: c.data });
+        console.log(c.data);
       }
     });
   }
   onChangeHandler(text){
-  //  let matches =[]
      if(text.length > 0){
-      // matches = this.state.loadedData.filter(data =>{
-       // const regex = new RegExp(`${text}`,"gi")
-        // return data.shortCode.match("^p"); })
-    this.setState({sugessions: this.state.loadedData.filter(data =>data.name.toLowerCase().startsWith(text.toLowerCase()))})
+      var abc = this.state.loadedData.filter(data =>data.name.toLowerCase().startsWith(text.toLowerCase()));
+    this.setState({sugessions: abc})
      }
-   // this.setState({sugessions: matches})
     this.setState({text: text})
     this.props.action(text);
-    console.log(this.state.sugessions)
   }
 
   onPressEnter(){

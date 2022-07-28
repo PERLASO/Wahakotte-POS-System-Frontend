@@ -193,10 +193,11 @@ class Invoice extends React.Component {
                 <div className="col">
                   <form type="submit" onSubmit={this.onSubmitHndl}>
                     <input
+                      readonly
                       id="paid-ammount"
                       type="number"
                       className="form-control"
-                      value={this.state.paidAmount}
+                      value={Math.round(this.state.paidAmount*100)/100 }
                     //  onChange={this.handlePaidAmount}
                       onKeyUp={(ev) => {
                         if (ev.key === "Enter") {
@@ -301,13 +302,6 @@ class Invoice extends React.Component {
             </div>
           </div>
         </div>
-        <Helmet>
-          <script>{`
-        
-        document.getElementById("paid-ammount").focus();
-        
-    `}</script>
-        </Helmet>
       </div>
     );
   }

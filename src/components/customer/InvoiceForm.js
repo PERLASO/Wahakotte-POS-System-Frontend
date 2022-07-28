@@ -252,6 +252,13 @@ class InvoiceForm extends Component {
     this.setState({ total: this.state.total - total });
   };
 
+  clearInvoice=()=>{
+    this.setState({ invoiceItems: [] });
+    this.setState({ total: 0 });
+    localStorage.removeItem("invoiceItems");
+    localStorage.removeItem("InvoiceTotal");
+  }
+
   saveInvoice = () => {
     if (
       this.state.saveInvoiceCustomerCheck === false &&
@@ -578,14 +585,22 @@ class InvoiceForm extends Component {
                   </table>
                 </div>
 
-                <div className="col-6">
-                  <div className="form-group">
+                <div className="col-12">
+                  <div className="form-group d-flex justify-content-between">
                     <Button
                       id="proceed"
-                      className="btn btn-sm btn-warning w-100"
+                      className="btn btn-sm btn-warning w-50"
                       text="Proceed"
                       onClick={this.saveInvoice}
                     />
+                    <div className="w-25 d-flex justify-content-end">
+                    <Button
+                      id="proceed"
+                      className="btn btn-sm btn-danger w-50"
+                      text="Clear"
+                      onClick={this.clearInvoice}
+                    />
+                    </div>
                   </div>
                 </div>
                 {this.state.saveInvoiceCheck && (

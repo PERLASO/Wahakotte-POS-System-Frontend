@@ -36,7 +36,6 @@ class ProductForm extends Component {
   componentDidMount() {
     getMeasurementList().then((res) => {
       this.setState({ measurements: res.data });
-      console.log(this.state.measurements);
     });
   }
 
