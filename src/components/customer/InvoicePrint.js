@@ -28,7 +28,13 @@ class InvoicePrint extends React.Component {
       <div>
         <div>
           <div className="container pt-5 pl-5 pr-5">
-            <h1 className="text-center font-weight-bold">
+            
+            <div className="row h5">
+              <table className="w-100" id="invoice-table">
+              <thead className="thead-dark">
+                <tr>
+                  <th colSpan="7">
+                  <h1 className="text-center font-weight-bold">
               Wijerathna Marketing Service
             </h1>
             <div className="col-12">
@@ -86,19 +92,6 @@ class InvoicePrint extends React.Component {
                       />
                     </div>
                   </div>
-                  {/* <div className="row p-1 invisible">
-                    <div className="col"> Status</div>
-                    <div className="col">
-                      <div className="form">
-                        <input
-                          type="text"
-                          className="form-control"
-                          value={this.state.status}
-                          readOnly
-                        />
-                      </div>
-                    </div>
-                  </div> */}
                 </div>
                 <div className="col">
                   <div className="row ">
@@ -146,9 +139,8 @@ class InvoicePrint extends React.Component {
                 </div>
               </div>
             </div>
-            <div className="row h5">
-              <table className="w-100" id="invoice-table">
-              <thead className="thead-dark">
+                  </th>
+                </tr>
                   <tr className="h6 body-row border-bottom ">
                     <th>
                       <h5 style={{fontSize:"24px"}} className="font-weight-bold mb-2 mt-2">S/N</h5>
@@ -174,62 +166,6 @@ class InvoicePrint extends React.Component {
                   </tr>
                 </thead> 
                 <tbody>
-                {/* <tr className="h6 body-row border-bottom ">
-                    <th>
-                      <h5
-                        style={{ fontSize: "24px" }}
-                        className="font-weight-bold"
-                      >
-                        S/N
-                      </h5>
-                    </th>
-                    <th>
-                      <h5
-                        style={{ fontSize: "24px" }}
-                        className="font-weight-bold"
-                      >
-                        ItemCode
-                      </h5>
-                    </th>
-                    <th>
-                      <h5
-                        style={{ fontSize: "24px" }}
-                        className="font-weight-bold"
-                      >
-                        Name
-                      </h5>
-                    </th>
-                    <th>
-                      <h5
-                        style={{ fontSize: "24px" }}
-                        className="font-weight-bold"
-                      ></h5>
-                    </th>
-                    <th>
-                      <h5
-                        style={{ fontSize: "24px" }}
-                        className="font-weight-bold"
-                      >
-                        QTY
-                      </h5>
-                    </th>
-                    <th>
-                      <h5
-                        style={{ fontSize: "24px" }}
-                        className="font-weight-bold"
-                      >
-                        Price <small>(LKR)</small>
-                      </h5>
-                    </th>
-                    <th>
-                      <h5
-                        style={{ fontSize: "24px" }}
-                        className="font-weight-bold"
-                      >
-                        Total <small>(LKR)</small>
-                      </h5>
-                    </th>
-                  </tr> */}
                   <tr>
                     <td colSpan="7" style={{height:"20px"}}></td>
                   </tr>
