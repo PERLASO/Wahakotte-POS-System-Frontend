@@ -61,7 +61,7 @@ export default class UpdateMesurements extends Component {
         id: this.state.id,
         name: this.state.MeasurementNameToUpdate.toUpperCase(),
     }
-
+    if(this.state.MeasurementNameToUpdate.length > 0){
     updateMeasurement(data).then(c => {
         if (c.data === true) {
             alert("Success !");
@@ -73,6 +73,7 @@ export default class UpdateMesurements extends Component {
             alert("Update failed !");
         }
     })
+  }
 }
 
   render() {
@@ -128,6 +129,7 @@ export default class UpdateMesurements extends Component {
                         className="form-control text-uppercase"
                         defaultValue={item.name}
                         id="measurement"
+                        
                         required={true} 
                         onChange={(e) => this.setState({ MeasurementNameToUpdate: e.target.value , id: item.id})}
                       />
