@@ -11,8 +11,6 @@ export const shortcutKeys = {
    SKreturn: 'return'
    };
 
-
-
 //    SUPPORTED KEYS
 // For modifier keys you can use shift, ctrl, alt, or meta.
 

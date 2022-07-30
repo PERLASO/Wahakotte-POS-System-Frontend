@@ -36,20 +36,25 @@ export default class UpdateMesurements extends Component {
   handleSubmit(event) {
     event.preventDefault();
 
-    let data = {
-      name: this.state.MeasurementName.toUpperCase(),
-    };
-
-    setMeasurement(data).then((c) => {
-      if (c.data === true) {
-        alert("Measurement Added!");
-        getMeasurementList().then((res) => {
-            this.setState({ measurements: res.data });
-          });
-      } else {
-        alert("Failed! Try again");
-      }
-    });
+    if (this.state.MeasurementName.length <= 15) {
+      let data = {
+        name: this.state.MeasurementName.toUpperCase(),
+      };
+  
+      setMeasurement(data).then((c) => {
+        if (c.data === true) {
+          alert("Measurement Added!");
+          getMeasurementList().then((res) => {
+              this.setState({ measurements: res.data });
+            });
+        } else {
+          alert("Failed! Try again");
+        }
+      });
+    }
+    else{
+      alert("Measurement name is too long!");
+    }
   }
 
   handleUpdateSubmit = (event) => {
@@ -84,6 +89,16 @@ export default class UpdateMesurements extends Component {
                 Add
             </button>
         </form>
+        {this.state.measurements.length > 12 && this.state.measurements.length != 15 ? (
+                <div class="alert alert-warning" role="alert">
+                  You can only add more {15 - this.state.measurements.length} measurements  
+                </div>
+        ): null}
+        {this.state.measurements.length == 15 ? (
+                <div class="alert alert-danger" role="alert">
+                  Maximum number of measurements reached! 
+                </div>
+        ): null}
 
         <div
           className="vh-70 container-fluid overflow-auto"

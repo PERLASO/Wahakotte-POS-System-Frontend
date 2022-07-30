@@ -596,7 +596,7 @@ class InvoiceForm extends Component {
                     <div className="w-25 d-flex justify-content-end">
                     <Button
                       id="proceed"
-                      className="btn btn-sm btn-danger w-50"
+                      className="btn btn-sm btn-warning w-50"
                       text="Clear"
                       onClick={this.clearInvoice}
                     />
