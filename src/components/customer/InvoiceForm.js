@@ -352,35 +352,10 @@ class InvoiceForm extends Component {
   };
 
   onSearchProductClick = () => {
-    // getSingleProductByShortcode(this.state.searchProductKey).then((res) => {
-    //   try {
-    //     if (res.data.isDeleted) {
-    //       this.setState({ searchKey: true });
-    //     } else {
-    //       this.setState({ productData: res.data });
-    //       this.setState({ searchProduct: true });
-    //       document.getElementById("search-result-item-selling-price").focus();
-    //     }
-    //   } catch (error) {
-    //     this.setState({ searchKey: true });
-    //   }
-    // });
     document.getElementById("search-result-item-selling-price").focus();
   };
   onSearchProductClickByName = () => {
-    // getSingleProductByName(this.state.searchProductName).then((res) => {
-    //   try {
-    //     if (res.data.isDeleted) {
-    //       this.setState({ searchKey: true });
-    //     } else {
-    //       this.setState({ productData: res.data });
-    //       this.setState({ searchProduct: true });
-    //       document.getElementById("search-result-item-selling-price").focus();
-    //     }
-    //   } catch (error) {
-    //     this.setState({ searchKey: true });
-    //   }
-    // });
+
     document.getElementById("search-result-item-selling-price").focus();
   };
 

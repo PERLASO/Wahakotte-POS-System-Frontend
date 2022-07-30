@@ -7,6 +7,7 @@ import InputNumberGroup from "../input/InputNumberGroup";
 import { setProduct } from "../../context/Product";
 import Helmet from "react-helmet";
 import { getMeasurementList, setMeasurement ,updateMeasurement} from "../../context/Setting";
+import { getNumbereOfProducts} from "../../context/Product";
 
 class ProductForm extends Component {
   constructor(props) {
@@ -20,6 +21,7 @@ class ProductForm extends Component {
       buyingprice: 0,
       measurement: "ROLL",
       measurements: [],
+      numberOfProducts: 0,
     };
 
     this.handleChangeName = this.handleChangeName.bind(this);
@@ -36,6 +38,10 @@ class ProductForm extends Component {
   componentDidMount() {
     getMeasurementList().then((res) => {
       this.setState({ measurements: res.data });
+    });
+    getNumbereOfProducts().then((res) => {
+      this.setState({ numberOfProducts: res.data });
+      console.log(res.data);
     });
   }
 
@@ -64,6 +70,8 @@ class ProductForm extends Component {
   }
   handleSubmit(event) {
     event.preventDefault();
+
+    if(this.state.numberOfProducts < 1000){
     let stock = this.state.buyingprice * this.state.qty;
     let data = {
       name: this.state.name,
@@ -89,6 +97,7 @@ class ProductForm extends Component {
       }
     });
   }
+}
 
   render() {
     return (
@@ -102,6 +111,16 @@ class ProductForm extends Component {
             ></AnchorTag>
             <h4>Create Product</h4>
           </div>
+          {this.state.numberOfProducts > 990 ?  (
+                <div class="alert alert-warning" role="alert">
+                  You can only add more {1000 - this.state.numberOfProducts} measurements  
+                </div>
+        ): null}
+        {this.state.numberOfProducts == 1000 ? (
+                <div class="alert alert-danger" role="alert">
+                  Maximum number of products reached! Can not add more products  
+                </div>
+        ): null}
           <form onSubmit={this.handleSubmit}>
             <div className="container-fluid">
               <div className="row">
