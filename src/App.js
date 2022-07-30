@@ -18,7 +18,7 @@ import Helmet from "react-helmet";
 function App() {
   useEffect(() => {
   
-    Mousetrap.bind(shortcutKeys.SK01, function () {
+    Mousetrap.bind(shortcutKeys.SK01, function (e) {
       const input = document.getElementById("list-search-data"); 
       const input2 = document.getElementsByTagName("body"); 
       if (typeof input != "undefined" && input != null) {
@@ -28,7 +28,8 @@ function App() {
       }
       return false;
     });
-    Mousetrap.bind(shortcutKeys.SK02, function () {
+
+    Mousetrap.bind(shortcutKeys.SK02, function (e) {
       const input = document.getElementById("invoice-search-product"); 
       const input2 = document.getElementsByTagName("body"); 
       if (typeof input != "undefined" && input != null) {
@@ -38,7 +39,8 @@ function App() {
       }
       return false;
     });
-    Mousetrap.bind(shortcutKeys.SKreturn, function () {
+
+    Mousetrap.bind(shortcutKeys.SKreturn, function (e) {
       const input = document.getElementById("proceed"); 
 
       if (typeof input != "undefined" && input != null) {
@@ -47,7 +49,13 @@ function App() {
       }
       return false;
     });
-    Mousetrap.bind(shortcutKeys.createInvoice, function () {
+
+    Mousetrap.bind(shortcutKeys.createInvoice, function (e) {
+      if(e.preventDefault){
+        e.preventDefault();
+      }else{
+        e.returnValue = false
+      }
   
       const input = document.getElementById("create-invoice-btn");
       if (typeof input != "undefined" && input != null) {
@@ -56,8 +64,13 @@ function App() {
       }
       return false;
     });
-    Mousetrap.bind(shortcutKeys.dashboard, function () {
-  
+
+    Mousetrap.bind(shortcutKeys.dashboard, function (e) {
+      if(e.preventDefault){
+        e.preventDefault();
+      }else{
+        e.returnValue = false
+      }
       const input = document.getElementById("goto-dashboard-btn");
       if (typeof input != "undefined" && input != null) {
         
@@ -65,7 +78,13 @@ function App() {
       }
       return false;
     });
-    Mousetrap.bind(shortcutKeys.customer, function () {
+    
+    Mousetrap.bind(shortcutKeys.customer, function (e) {
+      if(e.preventDefault){
+        e.preventDefault();
+      }else{
+        e.returnValue = false
+      }
   
       const input = document.getElementById("goto-customer-btn");
       if (typeof input != "undefined" && input != null) {
@@ -74,7 +93,14 @@ function App() {
       }
       return false;
     });
-    Mousetrap.bind(shortcutKeys.product, function () {
+
+    Mousetrap.bind(shortcutKeys.product, function (e) {
+
+      if(e.preventDefault){
+        e.preventDefault();
+      }else{
+        e.returnValue = false
+      }
   
       const input = document.getElementById("goto-product-btn");
       if (typeof input != "undefined" && input != null) {
@@ -83,7 +109,13 @@ function App() {
       }
       return false;
     });
-    Mousetrap.bind(shortcutKeys.invoice, function () {
+    
+    Mousetrap.bind(shortcutKeys.invoice, function (e) {
+      if(e.preventDefault){
+        e.preventDefault();
+      }else{
+        e.returnValue = false
+      }
   
       const input = document.getElementById("goto-invoice-btn");
       if (typeof input != "undefined" && input != null) {
