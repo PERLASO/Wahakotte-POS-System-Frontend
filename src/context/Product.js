@@ -8,6 +8,9 @@ export const getSingleProduct = async function (data) {
  
     return await get(`Product/${data}`);
 };
+export const getNumbereOfProducts = async function () {
+    return await get(`Product/GetNumberOfProducts`);
+};
 
 export const getSingleProductByShortcode = async function (data) {
  

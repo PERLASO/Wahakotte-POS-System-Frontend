@@ -3,6 +3,7 @@ import AnchorTag from "../../components/Anchortag";
 import { setCustomer } from "../../context/Customer";
 import InputFormGroup from "../input/InputFormGroup";
 import Helmet from "react-helmet";
+import { getNumbereOfCustomers} from "../../context/Customer";
 
 
 
@@ -15,6 +16,7 @@ class EmployeeForm extends Component{
             address: '',
             area : '',
             phoneNumber: '',
+            numbereOfCustomers: 0,
         };
 
         this.handleChangeEmpName = this.handleChangeEmpName.bind(this);
@@ -24,6 +26,14 @@ class EmployeeForm extends Component{
         this.handleChangePhoneNumber = this.handleChangePhoneNumber.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
+
+    componentDidMount() {
+        getNumbereOfCustomers().then((res) => {
+          this.setState({ numbereOfCustomers: res.data });
+          console.log(res.data);
+        });
+    }
+    
 
     handleChangeEmpName(e){
         this.setState({empName:e.target.value})
@@ -46,6 +56,7 @@ class EmployeeForm extends Component{
 
     handleSubmit (event){
         event.preventDefault();
+        if(this.state.numbereOfCustomers < 800){
         let data = {
             name: this.state.empName,
             shortCode: this.state.shortCode,
@@ -65,8 +76,7 @@ class EmployeeForm extends Component{
             }
         })
     }
-
-
+}
 
     render(){
         return (
@@ -75,6 +85,16 @@ class EmployeeForm extends Component{
                     <AnchorTag link="/app/shop/employee/list" className="btn btn-primary float-right" itemValue="Back to Customer List"></AnchorTag>
                     <h4>Create Customer </h4>
                 </div>
+                {this.state.numbereOfCustomers > 790 ?  (
+                <div class="alert alert-warning" role="alert">
+                  You can only add more {800 - this.state.numbereOfCustomers} customers  
+                </div>
+        ): null}
+        {this.state.numbereOfCustomers == 800 ? (
+                <div class="alert alert-danger" role="alert">
+                  Maximum number of customers reached! Cannot add more customers  
+                </div>
+        ): null}
                 <div className="w-100">
                     <form onSubmit={this.handleSubmit}>
                         <div className="container-fluid">

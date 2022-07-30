@@ -7,6 +7,9 @@ export const getAllCustomers = async function () {
 export const getCustomer = async function (data) {
     return await get(`Customer/${data}`);
 };
+export const getNumbereOfCustomers = async function () {
+    return await get(`Customer/numberOfCustomers`);
+};
 
 export const getCustomerByShortname = async function (data) {
  
