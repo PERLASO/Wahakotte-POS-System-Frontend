@@ -94,13 +94,12 @@ export default class UpdateMesurements extends Component {
   render() {
     return (
       <div className="p-3 pl-5">
-        <h3>Update Measurements List</h3>
-
+        <h3 className="pb-2">Update Measurements List</h3>
         <form className="form-inline" onSubmit={this.handleSubmit}>
           <input
             type="text"
             class="form-control"
-            placeholder="Enter Measurement"
+            placeholder="Enter New Measurement"
             required={true}
             onChange={this.handleChangeName}
           />
