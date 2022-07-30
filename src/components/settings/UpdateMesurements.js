@@ -34,8 +34,9 @@ export default class UpdateMesurements extends Component {
 
 
   handleSubmit(event) {
+    debugger
     event.preventDefault();
-    if (this.state.measurements.length <= 15) {
+    if (this.state.measurements.length <= 14) {
       let data = {
         name: this.state.MeasurementName.toUpperCase(),
       };
