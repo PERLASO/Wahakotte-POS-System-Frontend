@@ -1,8 +1,4 @@
-import React, { useState } from "react";
-import ReactToPrint from "react-to-print";
-import Invoice from "./Invoice";
-import Helmet from "react-helmet";
-import { render } from "react-dom";
+import React from "react";
 import InvoiceAdditionalRows from "./InvoiceAdditionalRows";
 
 class InvoicePrint extends React.Component {
@@ -15,7 +11,6 @@ class InvoicePrint extends React.Component {
       status: this.props.props[2],
       total: this.props.props[3],
       paidAmount: this.props.props[4],
-      // billNo: this.props.props[5],
     };
   }
 
@@ -66,7 +61,6 @@ class InvoicePrint extends React.Component {
                         style={{ fontSize: "25px" }}
                         type="text"
                         className="form-control input-lg"
-                        // value={this.state.billNo }
                         value={
                           "BL" +
                           this.state.customer.shortCode +

@@ -28,14 +28,12 @@ class ProductView extends Component {
 
         deleteProduct(this.props.match.params.productId).then(c => {
             if (c.data === true) {
-                // alert("Product deleted!");
                 this.props.history.push(`/app/shop/product/list`);
             } else {
                 alert("failed !");
             }
 
         })
-        // this.props.history.push(`/app/shop/product/list`);
 
     }
 

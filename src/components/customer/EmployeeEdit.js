@@ -51,7 +51,6 @@ class EmployeeEdit extends Component {
   componentDidMount() {
     getCustomer(this.props.match.params.employeeId).then((res) => {
       if (res != undefined) {
-        //this.setState({id: res.data.id});
         this.setState({ name: res.data.name });
         this.setState({ shortCode: res.data.shortCode });
         this.setState({ address: res.data.address });

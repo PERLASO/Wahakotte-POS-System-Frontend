@@ -61,6 +61,7 @@ class DashboardPage extends Component {
     }
 
     return (
+      <div>
       <div className="admin-content mx-auto w-75">
         <PageHeader headerText="Welcome to Dashboard" />
         <div className="w-100">
@@ -104,7 +105,8 @@ class DashboardPage extends Component {
             {todaySummery}
           </div>
         </div>
-        <div className="copyright-note">
+      </div>
+      <div className="copyright-note">
           <p>
             copyright ©2022 all rights reserved{" "}
             <a href="http://perlaso.com/" target="_blank">

@@ -36,7 +36,6 @@ class Invoice extends React.Component {
   };
 
   handleStatus() {
- //   this.setState({ status: e.target.value });
  this.setState({ status: "CASH" });
     this.setState({ checkStatus: true });
   }
@@ -88,7 +87,6 @@ class Invoice extends React.Component {
       if(this.state.wantToSave){
         setInvoice(data).then((c) => {
           if (c !== null) {
-          //  alert("Invoice Saved!");
             this.props.history.push({
               pathname: `/app/shop/invoice/create/save/print`,
               state: [
@@ -114,7 +112,6 @@ class Invoice extends React.Component {
             this.state.status,
             this.state.total,
             this.state.paidAmount,
-          //  c,
           ],
         });
       }
@@ -129,7 +126,6 @@ class Invoice extends React.Component {
             <button
               id="proceed"
               className="btn btn-success float-right invoice-print-btn d-none"
-            //  onClick={this.saveInvoice}
             >
               {" "}
               Save Invoice{" "}
@@ -198,11 +194,9 @@ class Invoice extends React.Component {
                       type="number"
                       className="form-control"
                       value={Math.round(this.state.paidAmount*100)/100 }
-                    //  onChange={this.handlePaidAmount}
                       onKeyUp={(ev) => {
                         if (ev.key === "Enter") {
                           ev.target.blur(); 
-                        //   this.saveInvoice();
                         }
                       }}
                     />
