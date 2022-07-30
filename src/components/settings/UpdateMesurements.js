@@ -35,8 +35,7 @@ export default class UpdateMesurements extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-
-    if (this.state.MeasurementName.length <= 15) {
+    if (this.state.measurements.length <= 15) {
       let data = {
         name: this.state.MeasurementName.toUpperCase(),
       };
@@ -51,9 +50,6 @@ export default class UpdateMesurements extends Component {
           alert("Failed! Try again");
         }
       });
-    }
-    else{
-      alert("Measurement name is too long!");
     }
   }
 
