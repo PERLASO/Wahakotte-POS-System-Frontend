@@ -77,7 +77,8 @@ export default class UpdateMesurements extends Component {
     }
   };
 
-  handleDelete=(id)=> { 
+  handleDelete=(event, id)=> { 
+    event.preventDefault();
       deleteMeasurement(id).then((c) => {
         if(c.data === true) {
           alert("Measurement Deteted !");
@@ -171,7 +172,7 @@ export default class UpdateMesurements extends Component {
                       <button
                         type="button"
                         class="btn btn-danger ml-2"
-                        onClick={this.handleDelete(item.id)}
+                        onClick={event => this.handleDelete(event ,item.id)}
                       >
                         Delete
                       </button>
