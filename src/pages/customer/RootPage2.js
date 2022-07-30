@@ -92,7 +92,7 @@ class CustomerRootPage2 extends Component {
                 to={"/app/setting"}
                 className="nav-link "
               >
-                <i className="fa fa-gears" aria-hidden=""></i>
+                <i className="fa fa-gears fa-lg" aria-hidden=""></i>
               </Link>
             </ul>
           </div>

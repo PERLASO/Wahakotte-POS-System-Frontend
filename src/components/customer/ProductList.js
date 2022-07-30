@@ -1,9 +1,7 @@
 import React, {Component} from "react";
 import AnchorTag from "../../components/Anchortag";
 import Table from "../../components/table/Table";
-import InputFormGroup from "../../components/input/InputFormGroup";
-import SelectFormGroup from "../../components/input/SelectFormGroup";
-import { getProductList, getSingleProductByName, getSingleProductByShortcode } from "../../context/Product";
+import { getProductList } from "../../context/Product";
 import InputWithSuggestionProductCode from "../input/InputWithSuggestionProductCode";
 import InputWithSuggestionCustomerName from "../input/InputWithSuggestionProductName";
 import Helmet from "react-helmet";
@@ -59,34 +57,10 @@ class ProductList extends Component{
     }
 
     onSearchProductClick = () => {
-        // getSingleProductByShortcode(this.state.searchProductKey).then(res => {
-        //     try {
-        //         if (res.data.isDeleted) {
-        //             this.setState({ searchKey: true })
-        //         } else {
-        //             this.setState({ productData: res.data })
-        //             this.setState({ searchProduct: true })
-        //         }
-        //     } catch (error) {
-        //         this.setState({ searchKey: true })
-        //     }
-        // }) 
         this.setState({productData: this.state.data.filter(data =>data.itemCode.startsWith(this.state.searchProductKey.toUpperCase()))});
         this.setState({ searchProduct: true })
     }
     onSearchProductNameClick = () => {
-        // getSingleProductByName(this.state.searchProductName).then(res => {
-        //     try {
-        //         if (res.data.isDeleted) {
-        //             this.setState({ searchKey: true })
-        //         } else {
-        //             this.setState({ productData: res.data })
-        //             this.setState({ searchProduct: true })
-        //         }
-        //     } catch (error) {
-        //         this.setState({ searchKey: true })
-        //     }
-        // })
         this.setState({productData: this.state.data.filter(data =>data.description.toLowerCase().startsWith(this.state.searchProductName.toLowerCase()))});
         this.setState({ searchProduct: true })
     }

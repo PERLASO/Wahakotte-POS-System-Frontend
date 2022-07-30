@@ -13,7 +13,6 @@ export default function PasswordResetForm() {
     const history = useHistory();
 
     useEffect(() => {
-        //password doesn't match error handle
         if (!(newPassword === "" || confirmPassword === "") && newPassword !== confirmPassword)
             seterror("Password doesn`t match");
         else seterror("");

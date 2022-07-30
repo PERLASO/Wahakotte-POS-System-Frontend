@@ -104,41 +104,11 @@ class InvoiceList extends Component {
   };
 
   OnSearchCustomerCodeClick = () => {
-    // getInvoiceByCustomerCode(
-    //   this.state.customerCode,
-    //   this.state.todayList
-    // ).then((res) => {
-    //   try {
-    //     if (res.data.isDeleted) {
-    //       this.setState({ searchKey: true });
-    //     } else {
-    //       this.setState({ customerInvoices: res.data });
-    //       this.setState({ searchCustomer: true });
-    //     }
-    //   } catch (error) {
-    //     this.setState({ searchKey: true });
-    //   }
-    // });
     this.setState({customerInvoices: this.state.tableData.filter(data =>data.customer.shortCode.startsWith(this.state.customerCode.toUpperCase()))});
     this.setState({searchCustomer: true });
   };
 
   OnSearchCustomerNameClick = () => {
-    // getInvoiceByCustomerName(
-    //   this.state.customerName,
-    //   this.state.todayList
-    // ).then((res) => {
-    //   try {
-    //     if (res.data.isDeleted) {
-    //       this.setState({ searchKey: true });
-    //     } else {
-    //       this.setState({ customerInvoices: res.data });
-    //       this.setState({ searchCustomer: true });
-    //     }
-    //   } catch (error) {
-    //     this.setState({ searchKey: true });
-    //   }
-    // });
     this.setState({customerInvoices: this.state.tableData.filter(data =>data.customer.name.toLowerCase().startsWith(this.state.customerName.toLowerCase()))});
     this.setState({searchCustomer: true });
   };

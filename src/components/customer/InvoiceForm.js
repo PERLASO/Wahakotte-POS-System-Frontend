@@ -110,13 +110,11 @@ class InvoiceForm extends Component {
   handleChangeSearchNameKey(e) {
     this.setState(
       { searchCustomerKey: false, searchNameKey: e, searchCustomer: false }
-      //()=> this.onSearchCustomerClick()
     );
   }
   handleChangeSearchCustomerName(e) {
     this.setState(
       { searchCustomerKey: false, searchCustomerName: e, searchCustomer: false }
-      //()=> this.onSearchCustomerClickByName()
     );
   }
 
@@ -302,7 +300,6 @@ class InvoiceForm extends Component {
   };
 
   onSearchCustomerClick = () => {
-    //document.getElementById("list-search-data").blur();
     this.setState({ saveInvoiceCheck: false });
     getCustomerByShortname(this.state.searchNameKey).then((res) => {
       try {
@@ -327,7 +324,6 @@ class InvoiceForm extends Component {
     });
   };
   onSearchCustomerClickByName = () => {
-    //document.getElementById("list-search-data").blur();
     this.setState({ saveInvoiceCheck: false });
     getCustomerByName(this.state.searchCustomerName).then((res) => {
       try {
@@ -718,7 +714,6 @@ class InvoiceForm extends Component {
                                 id="search-result-item-qty"
                                 type="number"
                                 placeholder=""
-                               // defaultValue={0}
                                 className="form-control w-50"
                                 step=".001"
                                 min={0.001}
@@ -799,7 +794,6 @@ class InvoiceForm extends Component {
                                 }
                                 type="number"
                                 placeholder=""
-                               // defaultValue={0}
                                 className="form-control w-50"
                                 step=".001"
                                 min={0.001}

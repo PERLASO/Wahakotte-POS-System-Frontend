@@ -1,6 +1,5 @@
  import React, { useState, useEffect } from "react";
 import { useHistory, Link } from "react-router-dom";
-//import { useGlobalState } from "../../GlobalState";
 import '../../style/forms.css'
 import {login} from '../../context/User'
 
@@ -9,9 +8,6 @@ export default function LoginForm(props) {
     const [userName, setname] = useState('');
     const [password, setpassword] = useState('');
     const [error, seterror] = useState('');
-
-    // let username = useGlobalState('username')[0];
-    // let pass = useGlobalState('password')[0];
   
     const history = useHistory();
    
