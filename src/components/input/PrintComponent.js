@@ -21,8 +21,6 @@ export default function PrintComponent(props) {
 
     useEffect(() => {
       document.getElementById('proceed').click();
-      document.getElementById('create-invoice-btn').click();
-      
     }, [])
     
   return (
@@ -32,6 +30,11 @@ export default function PrintComponent(props) {
           trigger={() => (
             <button id="proceed" className="btn btn-info invoice-print-btn"> Print Invoice</button>
           )}
+
+          onAfterPrint={() => {
+            document.getElementById('create-invoice-btn').click();
+          }}
+          
           content={() => componentRef}
 
           documentTitle= {data[3] +"-"+ data[2].name+ "-"  + year +"."+ month + "."+ date}
