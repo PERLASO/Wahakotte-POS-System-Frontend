@@ -229,6 +229,8 @@ class InvoiceForm extends Component {
         this.setState({ count: 0 });   
         localStorage.setItem("invoiceItems", JSON.stringify(this.state.invoiceItems));
         localStorage.setItem("InvoiceTotal", JSON.stringify(this.state.total));
+        let scroll_to_bottom = document.getElementById('auto-scroll-table');
+		    scroll_to_bottom.scrollTop = scroll_to_bottom.scrollHeight;
       }
   }
 
@@ -476,7 +478,7 @@ class InvoiceForm extends Component {
               </div>
 
               <div className="col-9">
-                <div className="col-12 list-table-invoice-create">
+                <div className="col-12 list-table-invoice-create" id="auto-scroll-table">
                   {/* <Table className="table table-stripped" allowAction={false} columnList={this.invoiceColumnList} tableData={this.state.invoiceItems} actionLinkPrefix=""></Table> */}
                   <table className="table">
                     <thead className="thead-dark">
