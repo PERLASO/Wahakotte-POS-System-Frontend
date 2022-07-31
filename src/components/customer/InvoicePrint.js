@@ -36,7 +36,7 @@ class InvoicePrint extends React.Component {
               <hr />
             </div>
             <div className="container">
-              <div className="row h5">
+              <div className="row h5 font-weight-bold">
                 <div className="col">
                   <div className="row">
                     <div className="col pt-2" style={{ fontSize: "25px" }}>
@@ -44,7 +44,7 @@ class InvoicePrint extends React.Component {
                     </div>
                     <div className="col">
                       <input
-                        style={{ fontSize: "25px" }}
+                        style={{ fontSize: "25px", fontWeight: "bold" }}
                         type="text"
                         className="form-control input-lg "
                         value={this.state.date}
@@ -58,7 +58,7 @@ class InvoicePrint extends React.Component {
                     </div>
                     <div className="col">
                       <input
-                        style={{ fontSize: "25px" }}
+                        style={{ fontSize: "25px" , fontWeight: "bold" }}
                         type="text"
                         className="form-control input-lg"
                         value={
@@ -73,12 +73,12 @@ class InvoicePrint extends React.Component {
                     </div>
                   </div>
                   <div className="row ">
-                    <div className="col pt-2" style={{ fontSize: "25px" }}>
+                    <div className="col pt-2" style={{ fontSize: "25px", fontWeight: "bold"  }}>
                       Customer ID
                     </div>
                     <div className="col">
                       <input
-                        style={{ fontSize: "25px" }}
+                        style={{ fontSize: "25px" , fontWeight: "bold" }}
                         type="text"
                         className="form-control input-lg"
                         value={this.state.customer.shortCode}
@@ -94,7 +94,7 @@ class InvoicePrint extends React.Component {
                     </div>
                     <div className="col">
                       <input
-                        style={{ fontSize: "25px" }}
+                        style={{ fontSize: "25px", fontWeight: "bold"  }}
                         type="text"
                         className="form-control input-lg"
                         value={this.state.customer.name}
@@ -108,7 +108,7 @@ class InvoicePrint extends React.Component {
                     </div>
                     <div className="col">
                       <input
-                        style={{ fontSize: "25px" }}
+                        style={{ fontSize: "25px" , fontWeight: "bold" }}
                         type="text"
                         className="form-control input-lg"
                         value={this.state.customer.area}
@@ -122,10 +122,10 @@ class InvoicePrint extends React.Component {
                     </div>
                     <div className="col">
                       <input
-                        style={{ fontSize: "25px" }}
+                        style={{ fontSize: "25px", fontWeight: "bold"  }}
                         type="text"
                         className="form-control input-lg"
-                        value={this.state.customer.phoneNumber}
+                        value={this.state.customer.phoneNumber }
                         readOnly
                       />
                     </div>

@@ -169,7 +169,7 @@ export default function InvoiceView(props) {
               </div>
               <div className="col-12 list-table-invoice-view">
                 <table className="table">
-                  <thead className="thead-dark">
+                  <thead className="thead-dark sticky-top">
                     <tr>
                       {columnList.map((field, index) => {
                         return <th key={index}>{field}</th>;
