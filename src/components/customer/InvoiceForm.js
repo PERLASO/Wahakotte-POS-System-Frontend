@@ -50,7 +50,7 @@ class InvoiceForm extends Component {
       searchProduct: false,
       searchCustomer: false,
       total: 0,
-      buyingPriceVisible: false,
+      buyingPriceVisible: true,
     };
 
     this.columnList = [
