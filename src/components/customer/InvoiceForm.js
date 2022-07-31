@@ -481,7 +481,7 @@ class InvoiceForm extends Component {
                 <div className="col-12 list-table-invoice-create" id="auto-scroll-table">
                   {/* <Table className="table table-stripped" allowAction={false} columnList={this.invoiceColumnList} tableData={this.state.invoiceItems} actionLinkPrefix=""></Table> */}
                   <table className="table">
-                    <thead className="thead-dark">
+                    <thead className="thead-dark sticky-top">
                       <tr>
                         {this.invoiceColumnList.map((value, index) => {
                           return <th key={index}>{value}</th>;
@@ -654,8 +654,8 @@ class InvoiceForm extends Component {
               </div>
             </form>
             <div className="row invoice-product-add-table">
-              <table className="table ">
-                <thead className="thead-dark fixed">
+              <table className="table">
+                <thead className="thead-dark sticky-top">
                   <tr>
                     {this.columnList.map((field, index) => {
                       return <th key={index}>{field}</th>;
