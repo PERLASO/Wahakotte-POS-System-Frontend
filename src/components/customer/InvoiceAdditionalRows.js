@@ -9,7 +9,7 @@ export default class InvoiceAdditionalRows extends Component {
   }
 
   render() {
-     let CounToRender = 23 - (this.state.rowsCount % 26) ;
+    let CounToRender = 21 - (this.state.rowsCount % 27) ;
      return Array.from({ length: CounToRender}, () => (
          <tr>
              <td style={{height:"45px"}}></td>
