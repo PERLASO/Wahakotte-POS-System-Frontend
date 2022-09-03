@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import AnchorTag from "../../components/Anchortag";
 import Table from "../../components/table/Table";
+import Button from "../Button";
 import {
   getInvoiceByCustomer,
   getInvoiceByCustomerCode,
@@ -92,7 +93,6 @@ class InvoiceList extends Component {
       if (c != undefined) {
         this.setState({ isLoading: false });
         this.setState({ tableData: c.data });
-        
       }
     });
   }
@@ -104,13 +104,25 @@ class InvoiceList extends Component {
   };
 
   OnSearchCustomerCodeClick = () => {
-    this.setState({customerInvoices: this.state.tableData.filter(data =>data.customer.shortCode.startsWith(this.state.customerCode.toUpperCase()))});
-    this.setState({searchCustomer: true });
+    this.setState({
+      customerInvoices: this.state.tableData.filter((data) =>
+        data.customer.shortCode.startsWith(
+          this.state.customerCode.toUpperCase()
+        )
+      ),
+    });
+    this.setState({ searchCustomer: true });
   };
 
   OnSearchCustomerNameClick = () => {
-    this.setState({customerInvoices: this.state.tableData.filter(data =>data.customer.name.toLowerCase().startsWith(this.state.customerName.toLowerCase()))});
-    this.setState({searchCustomer: true });
+    this.setState({
+      customerInvoices: this.state.tableData.filter((data) =>
+        data.customer.name
+          .toLowerCase()
+          .startsWith(this.state.customerName.toLowerCase())
+      ),
+    });
+    this.setState({ searchCustomer: true });
   };
 
   onSearchDateClick = () => {
@@ -162,9 +174,16 @@ class InvoiceList extends Component {
     return (
       <div className="admin-content mx-auto w-75">
         <div className="w-100 mb-3">
+          {/* <div className="ml-5">
+          <Button             
+              className="btn btn-danger float-right"
+              text="Clear"
+                     // onClick={this.clearInvoice}
+      />
+          </div> */}
           <AnchorTag
             link="/app/shop/invoice/create"
-            className="btn btn-warning float-right"
+            className="btn btn-warning float-right mr-5"
             itemValue="Create Invocie"
           ></AnchorTag>
           <h4>Invoice List</h4>
@@ -251,51 +270,59 @@ class InvoiceList extends Component {
             </thead>
 
             {!this.state.searchCustomer &&
-              this.state.tableData.map((data, index) => {
-                return (
-                  <tbody key={index}>
-                    <tr>
-                      <td>{this.state.tableData.length - (index)}</td>
-                      <td>{data.customer.name}</td>
-                      <td>{data.status}</td>
-                      <td>{(Math.round(data.total * 100) / 100).toFixed(2)}</td>
-                      <td>{data.balancetobepaid}</td>
-                      <td>{moment(data.createdDate).format("L")}</td>
-                      <td>
-                        <button
-                          className="button-add btn btn-info"
-                          onClick={() => this.onClickView(data.id)}
-                        >
-                          View
-                        </button>
-                      </td>
-                    </tr>
-                  </tbody>
-                );
-              }).reverse()}
+              this.state.tableData
+                .map((data, index) => {
+                  return (
+                    <tbody key={index}>
+                      <tr>
+                        <td>{this.state.tableData.length - index}</td>
+                        <td>{data.customer.name}</td>
+                        <td>{data.status}</td>
+                        <td>
+                          {(Math.round(data.total * 100) / 100).toFixed(2)}
+                        </td>
+                        <td>{data.balancetobepaid}</td>
+                        <td>{moment(data.createdDate).format("L")}</td>
+                        <td>
+                          <button
+                            className="button-add btn btn-info"
+                            onClick={() => this.onClickView(data.id)}
+                          >
+                            View
+                          </button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  );
+                })
+                .reverse()}
             {this.state.searchCustomer &&
-              this.state.customerInvoices.map((data, index) => {
-                return (
-                  <tbody key={index}>
-                    <tr>
-                      <td>{this.state.tableData.length - (index)}</td>
-                      <td>{data.customer.name}</td>
-                      <td>{data.status}</td>
-                      <td>{data.total}</td>
-                      <td>{data.balancetobepaid}</td>
-                      <td>{moment(data.createdDate).format("L")}</td>
-                      <td>
-                        <button
-                          className="button-add btn btn-info"
-                          onClick={() => this.onClickView(data.id)}
-                        >
-                          View
-                        </button>
-                      </td>
-                    </tr>
-                  </tbody>
-                );
-              }).reverse()}
+              this.state.customerInvoices
+                .map((data, index) => {
+                  return (
+                    <div>
+                      <tbody key={index}>
+                        <tr>
+                          <td>{this.state.tableData.length - index}</td>
+                          <td>{data.customer.name}</td>
+                          <td>{data.status}</td>
+                          <td>{data.total}</td>
+                          <td>{data.balancetobepaid}</td>
+                          <td>{moment(data.createdDate).format("L")}</td>
+                          <td>
+                            <button
+                              className="button-add btn btn-info"
+                              onClick={() => this.onClickView(data.id)}
+                            >
+                              View
+                            </button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </div>
+                  );
+                })
+                .reverse()}
           </table>
         </div>
         <Helmet>

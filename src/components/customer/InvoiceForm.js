@@ -189,9 +189,23 @@ class InvoiceForm extends Component {
     });
     const SavedInvoiceItems = JSON.parse(localStorage.getItem("invoiceItems"));
     const InvoiceTotal = JSON.parse(localStorage.getItem("InvoiceTotal"));
+    const SavedInvoiceCustomerName = localStorage.getItem("InvoiceCustomerName");
+    const SavedInvoiceCustomerArea = localStorage.getItem("InvoiceCustomerArea");
+    const CustomerData = JSON.parse(localStorage.getItem("CustomerData"));
+
     if (SavedInvoiceItems != null) {
       this.setState({ invoiceItems: SavedInvoiceItems });
       this.setState({ total: InvoiceTotal });
+    }
+    if (SavedInvoiceCustomerName != null) {
+          this.setState({ customer: CustomerData });
+          this.setState({ customerName: SavedInvoiceCustomerName });
+          this.setState({ customerArea: SavedInvoiceCustomerArea });
+          this.setState({ saveInvoiceCustomerCheck: true });
+          this.setState({ searchCustomer: true });
+
+          localStorage.setItem("InvoiceCustomerName", SavedInvoiceCustomerName);
+          localStorage.setItem("InvoiceCustomerArea", SavedInvoiceCustomerArea);
     }
   }
 
@@ -299,6 +313,9 @@ class InvoiceForm extends Component {
     }
     localStorage.removeItem("invoiceItems");
     localStorage.removeItem("InvoiceTotal");
+    localStorage.removeItem("InvoiceCustomerName");
+    localStorage.removeItem("InvoiceCustomerArea");
+    localStorage.removeItem("CustomerData");
   };
 
   onSearchCustomerClick = () => {
@@ -313,6 +330,11 @@ class InvoiceForm extends Component {
           this.setState({ customerArea: this.state.customer.area });
           this.setState({ saveInvoiceCustomerCheck: true });
           this.setState({ searchCustomer: true });
+
+          localStorage.setItem("CustomerData", JSON.stringify(res.data[0]));
+          localStorage.setItem("InvoiceCustomerName", this.state.customer.name);
+          localStorage.setItem("InvoiceCustomerArea", this.state.customer.area);
+
           var productField = document.getElementById("invoice-search-product");
           document.getElementById("list-search-data-by-name").value = "";
 
@@ -337,6 +359,11 @@ class InvoiceForm extends Component {
           this.setState({ customerArea: this.state.customer.area });
           this.setState({ saveInvoiceCustomerCheck: true });
           this.setState({ searchCustomer: true });
+          
+          localStorage.setItem("CustomerData", JSON.stringify(res.data[0]));
+          localStorage.setItem("InvoiceCustomerName", this.state.customer.name);
+          localStorage.setItem("InvoiceCustomerArea", this.state.customer.area);
+
           var productField = document.getElementById("invoice-search-product");
           document.getElementById("list-search-data").value = "";
           if (productField != undefined) {
