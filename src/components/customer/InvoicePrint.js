@@ -16,7 +16,7 @@ class InvoicePrint extends React.Component {
 
   render() {
     var dateObj = new Date();
-    var month = dateObj.getUTCMonth(); //months from 1-12
+    var month = dateObj.getUTCMonth() + 1; //months from 1-12
     var day = dateObj.getUTCDate();
 
     return (
@@ -171,25 +171,25 @@ class InvoicePrint extends React.Component {
                     </th>
                   </tr>
                   <tr className="h6 body-row border-bottom ">
-                    <th>
+                    <th style={{width:"10px"}}>
                       <h5
-                        style={{ fontSize: "24px" }}
+                        style={{ fontSize: "24px"}}
                         className="font-weight-bold mb-2 mt-2"
                       >
                         S/N
                       </h5>
                     </th>
-                    <th>
+                    {/* <th>
                       <h5
                         style={{ fontSize: "24px" }}
                         className="font-weight-bold"
                       >
                         ItemCode
                       </h5>
-                    </th>
+                    </th> */}
                     <th>
                       <h5
-                        style={{ fontSize: "24px" }}
+                        style={{ fontSize: "24px", width: "230px" }}
                         className="font-weight-bold"
                       >
                         Name
@@ -242,14 +242,14 @@ class InvoicePrint extends React.Component {
                             {index + 1}
                           </h5>
                         </td>
-                        <td>
+                        {/* <td>
                           <h5
                             className="font-weight-bold"
                             style={{ fontSize: "25px" }}
                           >
                             {invoiceItem.itemCode}
                           </h5>
-                        </td>
+                        </td> */}
                         <td>
                           <h5
                             className="font-weight-bold aradana-font"

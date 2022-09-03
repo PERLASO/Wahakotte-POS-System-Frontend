@@ -5,10 +5,9 @@ import InvoiceForm from "../customer/InvoiceForm";
 import InvoicePrint from "../customer/InvoicePrint";
 
 export default function PrintComponent(props) {
-
     let newDate = new Date()
     let date = newDate.getDate().toString();
-    let month = newDate.getMonth().toString();
+    let month = (newDate.getMonth() +1).toString();
     let year = newDate.getFullYear().toString();
 
     let componentRef = useRef();

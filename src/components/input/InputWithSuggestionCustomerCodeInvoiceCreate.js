@@ -37,7 +37,6 @@ class InputWithSuggestionCustomerCodeInvoiceCreate extends Component {
 
   onChangeHandler(text) {
     if (text.length > 0) {  
-      debugger
       var abs  =  this.state.loadedData.filter(data =>data.shortCode.toLowerCase().startsWith(text.toLowerCase()));
       this.setState({sugessions: this.state.loadedData.filter(data =>data.shortCode.toLowerCase().startsWith(text.toLowerCase()))})
     }
