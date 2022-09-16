@@ -161,8 +161,14 @@ class InvoiceForm extends Component {
           this.state.invoiceItems[i].count;
     }
     this.setState({ total: tot });
+
+    const SavedInvoiceItems = JSON.parse(localStorage.getItem("invoiceItems"));
+    SavedInvoiceItems[index].sellingPrice = e.target.value;
+
+        localStorage.setItem("invoiceItems", JSON.stringify(SavedInvoiceItems));
+        localStorage.setItem("InvoiceTotal", JSON.stringify(tot));
   }
-  handleCountChange(e, index) {
+handleCountChange(e, index) {
     let updateItem = this.state.invoiceItems[index];
     updateItem.count = e.target.value;
     this.state.invoiceItems[index] = updateItem;
@@ -172,7 +178,13 @@ class InvoiceForm extends Component {
           this.state.invoiceItems[i].count;
     }
     this.setState({ total: tot });
-  }
+
+    const SavedInvoiceItems = JSON.parse(localStorage.getItem("invoiceItems"));
+    SavedInvoiceItems[index].count = e.target.value;
+
+        localStorage.setItem("invoiceItems", JSON.stringify(SavedInvoiceItems));
+        localStorage.setItem("InvoiceTotal", JSON.stringify(tot));
+}
 
   componentDidMount() {
     getProductList().then((c) => {
@@ -264,6 +276,15 @@ class InvoiceForm extends Component {
     });
     this.setState({ invoiceItems: items });
     this.setState({ total: this.state.total - total });
+    const SavedInvoiceItems = JSON.parse(localStorage.getItem("invoiceItems"));
+    SavedInvoiceItems.find((el) => {
+      if (el.id == id) {
+        SavedInvoiceItems.splice(SavedInvoiceItems.indexOf(el), 1);
+        localStorage.setItem("invoiceItems", JSON.stringify(SavedInvoiceItems));
+        var InvoiceTotal = JSON.parse(localStorage.getItem("InvoiceTotal")) - total;
+        localStorage.setItem("InvoiceTotal", JSON.stringify(InvoiceTotal));
+      }
+    });
   };
 
   clearInvoice=()=>{
