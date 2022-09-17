@@ -8,7 +8,9 @@ class DataList extends React.Component {
     console.log(suggestions);
     return (
       <datalist id="suggestions-list-customer-code">
-        {suggestions.map(function (sugession, i) {
+        {suggestions.sort((a, b) => a.shortCode.localeCompare(b.shortCode))
+          .sort((a,b)=>a.shortCode.length-b.shortCode.length)
+          .map(function (sugession, i) {
           console.log(suggestions)
           return <option key={i} value={sugession.shortCode} />;
         })}
@@ -40,7 +42,6 @@ class InputWithSuggestionCustomerCodeInvoiceCreate extends Component {
       var abs  =  this.state.loadedData.filter(data =>data.shortCode.toLowerCase().startsWith(text.toLowerCase()));
       this.setState({sugessions: this.state.loadedData.filter(data =>data.shortCode.toLowerCase().startsWith(text.toLowerCase()))})
     }
-    
     this.setState({ text: text });
     this.props.action(text);
   }

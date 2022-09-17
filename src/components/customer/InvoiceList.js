@@ -221,7 +221,7 @@ class InvoiceList extends Component {
               </div> */}
             </form>
             <div className="d-flex justify-content-around ml-5 pl-5 float-right">
-              <h5 className="pt-4 pr-3 ml-5">Only today invoices</h5>
+              <h5 className="pt-4 pr-3 ml-5" style={{width:"15rem"}}>Invoices {this.state.todayList? "Today":"This Month"}</h5>
               <Switch
                 isOn={this.state.todayList}
                 onColor="#fac94d"

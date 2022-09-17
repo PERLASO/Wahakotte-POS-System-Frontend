@@ -19,6 +19,7 @@ class ProductList extends Component{
             searchKey: false,
             productData: [],
             searchProduct: false,
+            searchByCode: true
           }
 
           this.handleChangeSearchProductKey = this.handleChangeSearchProductKey.bind(this);
@@ -58,11 +59,11 @@ class ProductList extends Component{
 
     onSearchProductClick = () => {
         this.setState({productData: this.state.data.filter(data =>data.itemCode.startsWith(this.state.searchProductKey.toUpperCase()))});
-        this.setState({ searchProduct: true })
+        this.setState({ searchProduct: true ,searchByCode: true});
     }
     onSearchProductNameClick = () => {
         this.setState({productData: this.state.data.filter(data =>data.description.toLowerCase().startsWith(this.state.searchProductName.toLowerCase()))});
-        this.setState({ searchProduct: true })
+        this.setState({ searchProduct: true, searchByCode: false });
     }
 
     render(){
@@ -100,7 +101,15 @@ class ProductList extends Component{
                     </form>
                 </div>
                 <div className="list-table">
-                    {this.state.searchProduct && <Table className="table table-striped " columnList={this.columnList} tableData={this.state.productData} actionLinkPrefix="" tableType="product"></Table> }
+                    {this.state.searchProduct && 
+                    <Table className="table table-striped " 
+                    columnList={this.columnList} 
+                    tableData={this.state.productData
+                        .sort(this.state.searchByCode ?(a, b) => a.itemCode.localeCompare(b.itemCode) : (a, b) => a.description.localeCompare(b.description))
+                        .sort(this.state.searchByCode ? (a,b) => a.itemCode.length - b.itemCode.length :(a,b) => a.description.length - b.description.length )} 
+                    actionLinkPrefix="" 
+                    tableType="product">
+                    </Table> }
                     {!this.state.searchProduct &&  <Table className="table table-striped " columnList={this.columnList} tableData={this.state.data} actionLinkPrefix="" tableType="product"></Table>}
                 </div>
                 <Helmet>

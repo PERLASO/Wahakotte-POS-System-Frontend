@@ -49,6 +49,7 @@ class InvoiceForm extends Component {
       searchKey: false,
       searchProduct: false,
       searchCustomer: false,
+      searchByCode: true,
       total: 0,
       buyingPriceVisible: true,
     };
@@ -120,7 +121,7 @@ class InvoiceForm extends Component {
 
   handleChangeSearchProductKey(e) {
     this.setState(
-      { searchKey: false, searchProductKey: e, searchProduct: false },
+      { searchKey: false, searchProductKey: e, searchProduct: false,searchByCode:true },
       () => {
         this.setState({
           productData: this.state.data.filter((data) =>
@@ -134,7 +135,7 @@ class InvoiceForm extends Component {
 
   handleChangeSearchProductName(e) {
     this.setState(
-      { searchKey: false, searchProductName: e, searchProduct: false },
+      { searchKey: false, searchProductName: e, searchProduct: false,searchByCode:false },
       () => {
         this.setState({
           productData: this.state.data.filter((data) =>
@@ -189,6 +190,7 @@ handleCountChange(e, index) {
   componentDidMount() {
     getProductList().then((c) => {
       if (c != undefined) {
+        console.log(c.data)
         this.setState({ isLoading: false });
         this.setState({ data: c.data });
       }
@@ -550,6 +552,8 @@ handleCountChange(e, index) {
                                 type="number"
                                 className="form-control"
                                 id="price"
+                                min={0.001}
+                                max={invoiceItem.qty}
                                 placeholder={invoiceItem.count}
                                 onChange={(e) =>
                                   this.handleCountChange(e, index)
@@ -711,7 +715,7 @@ handleCountChange(e, index) {
                   </tr>
                 </thead>
                 {this.state.searchProduct &&
-                  this.state.productData.map((data, index) => {
+                  this.state.productData.sort(this.state.searchByCode ? (a,b) => a.itemCode.length - b.itemCode.length :(a,b) => a.description.length - b.description.length ).map((data, index) => {
                     return (
                       <tbody key={index}>
                         <tr style={{backgroundColor: this.state.invoiceItems.some(item => item.id === data.id)? "#f78f8f":"white"}}>
