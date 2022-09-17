@@ -23,6 +23,7 @@ class EmployeeList extends Component {
       searchKey: false,
       isLoading: true,
       searchCustomer: false,
+      searchByCode: true,
     };
     this.columnList = [
       "ID",
@@ -69,12 +70,12 @@ class EmployeeList extends Component {
 
   onSearchClickCode = () => {
     this.setState({customerbyshortname: this.state.customers.filter(data =>data.shortCode.startsWith(this.state.searchNameKey.toUpperCase()))});
-    this.setState({ searchCustomer: true });
+    this.setState({ searchCustomer: true , searchByCode: true});
   };
 
   onSearchClickName = () => {
     this.setState({customerbyshortname: this.state.customers.filter(data =>data.name.toLowerCase().startsWith(this.state.searchName.toLowerCase()))});
-    this.setState({ searchCustomer: true });
+    this.setState({ searchCustomer: true, searchByCode: false });
   };
 
   render() {
@@ -155,7 +156,9 @@ class EmployeeList extends Component {
             <Table
               className="table table-striped"
               columnList={this.columnList}
-              tableData={this.state.customerbyshortname}
+              tableData={this.state.customerbyshortname
+                .sort(this.state.searchByCode ?(a, b) => a.name.localeCompare(b.name): (a, b) => a.shortCode.localeCompare(b.shortCode))
+                .sort(this.state.searchByCode ? (a,b) => a.shortCode.length - b.shortCode.length :(a,b) => a.name.length - b.name.length )}
               actionLinkPrefix=""
             ></Table>
           )}

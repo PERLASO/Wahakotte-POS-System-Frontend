@@ -28,6 +28,8 @@ class DashboardPage extends Component {
 
   render() {
     let todaySummery;
+    const date = new Date();
+    let longMonth = date.toLocaleString('en-us', { month: 'long' });
 
     if (this.state.value) {
       todaySummery = (
@@ -86,7 +88,7 @@ class DashboardPage extends Component {
               <div className="col-4">
                 <div className="dash-summary-cell">
                   <p>
-                    <b>Total Invoices</b>
+                    <b>Total Invoices in - {longMonth}</b>
                   </p>
                   <h3>{this.state.data.totalInvoices}</h3>
                 </div>

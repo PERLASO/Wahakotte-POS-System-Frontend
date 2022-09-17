@@ -7,7 +7,8 @@ class DataList extends React.Component {
     const suggestions = this.props.suggestions;
     return (
       <datalist id="suggestions-list-customer-code">
-        {suggestions.map(function (sugession, i) {
+        {suggestions.sort((a, b) => a.shortCode.localeCompare(b.shortCode))
+          .sort((a,b)=>a.shortCode.length-b.shortCode.length).map(function (sugession, i) {
           return <option key={i} value={sugession.shortCode} />;
         })}
       </datalist>
