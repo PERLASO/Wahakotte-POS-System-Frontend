@@ -25,4 +25,7 @@ export const getInvoiceByDate = async function (data) {
   return await get(`api/Invoice/GetSingleInvoiceByCreatedDate/${data}`);
 }
 
+export const exportAllInvoice = async function () {
+  return await get(`api/Invoice/ExportAll`);
+}
 

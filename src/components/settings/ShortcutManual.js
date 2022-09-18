@@ -3,7 +3,7 @@ import React, { Component } from "react";
 export default class ShortcutManual extends Component {
   render() {
     return (
-      <div className="p-3 pl-5 w-50">
+      <div className="p-3 pl-5 w-50" style={{backgroundColor:"#d3e7f2"}}>
         <h3 className="pb-3">Short Keys Manual</h3>
         <div>
           <table className="table h5">
