@@ -2,13 +2,16 @@ import React, { Component } from 'react'
 import ShortcutManual from '../../components/settings/ShortcutManual'
 import ToastsMessage from '../../components/settings/ToastsMessage'
 import UpdateMesurements from '../../components/settings/UpdateMesurements'
+import ExportInvoicesToExcel from "../../components/settings/ExportInvoicesToExcel";
+
 
 export default class Setting extends Component {
   render() {
     return (
       <div> 
-        <div className='d-flex'>
+        <div className='d-flex ml-4 mr-4'>
         <UpdateMesurements/>
+        <ExportInvoicesToExcel/>
         <ShortcutManual/>
         </div>
       <ToastsMessage/>
