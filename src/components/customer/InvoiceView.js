@@ -42,6 +42,7 @@ export default function InvoiceView(props) {
     let ProductListToPass = [];
 
     productList.map((item) => {
+      debugger
       let Product = {
         buyingPrice: 0,
         count: 0,
@@ -61,7 +62,7 @@ export default function InvoiceView(props) {
       Product.measurement = item.product.measurement;
       Product.name = item.product.name;
       Product.qty = item.product.qty;
-      Product.sellingPrice = item.product.sellingPrice;
+      Product.sellingPrice = item.sellingPrice;
       Product.stockValue = item.product.stockValue;
 
       ProductListToPass.push(Product);
