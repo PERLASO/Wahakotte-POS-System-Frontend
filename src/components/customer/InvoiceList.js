@@ -308,7 +308,7 @@ class InvoiceList extends Component {
                           <td>{data.status}</td>
                           <td>{data.total}</td>
                           <td>{data.balancetobepaid}</td>
-                          <td>{moment(data.createdDate).format("L")}</td>
+                          <td>{moment(data.createdDate).format("L, hhmm")}</td>
                           <td>
                             <button
                               className="button-add btn btn-info"
