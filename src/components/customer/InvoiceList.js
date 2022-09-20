@@ -282,7 +282,7 @@ class InvoiceList extends Component {
                           {(Math.round(data.total * 100) / 100).toFixed(2)}
                         </td>
                         <td>{data.balancetobepaid}</td>
-                        <td>{moment(data.createdDate).format("L")}</td>
+                        <td>{moment(data.createdDate).format("L, hh:mm a")}</td>
                         <td>
                           <button
                             className="button-add btn btn-info"
