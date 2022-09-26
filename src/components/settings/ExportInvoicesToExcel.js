@@ -1,64 +1,37 @@
 import React, { Component } from "react";
 import { CSVLink } from "react-csv-3";
-import { exportAllInvoice } from "../../context/Invoice";
+import { getProductList } from "../../context/Product";
 
 const headers = [
   { label: "Id", key: "id" },
-  { label: "CreatedDate", key: "createdDate" },
-  { label: "Customer", key: "customer" },
-  { label: "Status", key: "status" },
-  { label: "Total", key: "total" },
-  { label: "InvoiceProducts", key: "invoiceProducts" },
+  { label: "ItemCode", key: "itemCode" },
+  { label: "Name", key: "name" },
+  { label: "Description", key: "description" },
+  { label: "BuyingPrice", key: "buyingPrice" },
+  { label: "SellingPrice", key: "sellingPrice" },
+  { label: "Measurement", key: "measurement" },
+  { label: "Qty", key: "qty" },
+  { label: "StockValue", key: "stockValue" },
 ];
-
-
 const fileName = "Invoices-upto";
-
-let data = [
-  { id: 1, createdDate: "2020-12-12", customer: "Ahmed", status: "Paid", total: 100, invoiceProducts: 1},
-  { id: 1, createdDate: "2020-12-12", customer: "Ahmed", status: "Paid", total: 100, invoiceProducts: 2},
-];
-
-let data2=[];
 
 class ExportInvoicesToExcel extends Component {
   constructor(props) {
     super(props);
     this.state = {
       loading: false,
-      invoicesData: [],
+      allProducts: [],
     };
   }
-
+ 
   componentDidMount() {
-    exportAllInvoice().then((c) => {
+    getProductList().then((c) => {
       if (c != undefined) {
-        this.setState({ invoicesData: c.data }, () => {
-          this.state.invoicesData.forEach((item) => {
-            data.push({
-              id: item.id,
-              createdDate: item.createdDate,
-              customer: item.customer.name,
-              status: item.status,
-              total: item.total,
-              invoiceProducts: item.invoiceProducts[0].id,
-            });
-            for (let i = 1; i < item.invoiceProducts.length; i++) {
-              const product = item.invoiceProducts[i];
-              data.push({
-                id: "",
-                createdDate: "",
-                customer: "",
-                status: "",
-                total: "",
-                invoiceProducts: product.id,
-              });
-            }
-          });
-        });
+        this.setState({ allProducts: c.data });
       }
     });
   }
+
 
   render() {
     return (
@@ -70,15 +43,10 @@ class ExportInvoicesToExcel extends Component {
           <button
             className="btn btn-success"
             variant="contained"
-            onClick={() => {
-              debugger;
-              data2 = data;
-              console.log(data2);
-            }}
           >
             <CSVLink
               headers={headers}
-              data={data}
+              data={this.state.allProducts}
               filename={fileName}
               style={{ textDecoration: "none", color: "#fff" }}
             >
