@@ -2,24 +2,29 @@
 import { useHistory, Link } from "react-router-dom";
 import '../../style/forms.css'
 import {login} from '../../context/User'
+import LoadingOverlay from '../settings/LoadingOverlay'
 
 
 export default function LoginForm(props) {
     const [userName, setname] = useState('');
     const [password, setpassword] = useState('');
     const [error, seterror] = useState('');
+    const [loading, setLoading] = useState(false);
   
     const history = useHistory();
    
     const handleSubmit = (e) => {
+        setLoading(true);
         e.preventDefault();
         let data = { userName, password}
        login(data).then(res => {
          if(res.data){
+            setLoading(false);
          localStorage.setItem("loginState", true)
           history.push("/app/dashboard");
          }else{
-              seterror("User Name or Password is incorrect")
+            setLoading(false);
+            seterror("User Name or Password is incorrect")
           }
        })
     }
@@ -50,6 +55,7 @@ export default function LoginForm(props) {
                 </div>
 
             </div>
+            {loading ? <LoadingOverlay/> : null}
         </div>
 
   )
