@@ -15,7 +15,7 @@ const headers = [
 ];
 const fileName = "Invoices-upto";
 
-class ExportInvoicesToExcel extends Component {
+class ExportProductsToExcel extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -37,7 +37,7 @@ class ExportInvoicesToExcel extends Component {
     return (
       <div className="p-5 d-flex" style={{backgroundColor:"#d4f2d3"}}>
         <div>
-          <h2>Export All Invoices</h2>
+          <h2>Export All Products</h2>
         </div>
         <div>
           <button
@@ -59,4 +59,4 @@ class ExportInvoicesToExcel extends Component {
   }
 }
 
-export default ExportInvoicesToExcel;
+export default ExportProductsToExcel;
