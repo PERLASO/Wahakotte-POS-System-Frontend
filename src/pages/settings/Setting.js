@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import ShortcutManual from '../../components/settings/ShortcutManual'
 import ToastsMessage from '../../components/settings/ToastsMessage'
 import UpdateMesurements from '../../components/settings/UpdateMesurements'
-import ExportInvoicesToExcel from "../../components/settings/ExportInvoicesToExcel";
+import ExportProductsToExcel from "../../components/settings/ExportProductsToExcel";
 
 
 export default class Setting extends Component {
@@ -11,7 +11,7 @@ export default class Setting extends Component {
       <div> 
         <div className='d-flex ml-4 mr-4'>
         <UpdateMesurements/>
-        <ExportInvoicesToExcel/>
+        <ExportProductsToExcel/>
         <ShortcutManual/>
         </div>
       <ToastsMessage/>
